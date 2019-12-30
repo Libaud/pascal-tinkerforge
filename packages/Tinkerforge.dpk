@@ -1,0 +1,187 @@
+package Tinkerforge;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  Base58 in '..\sources\Base58.pas',
+  BlockingQueue in '..\sources\BlockingQueue.pas',
+  BrickDaemon in '..\sources\BrickDaemon.pas',
+  BrickDC in '..\sources\BrickDC.pas',
+  BrickHAT in '..\sources\BrickHAT.pas',
+  BrickHATZero in '..\sources\BrickHATZero.pas',
+  BrickIMU in '..\sources\BrickIMU.pas',
+  BrickIMUV2 in '..\sources\BrickIMUV2.pas',
+  BrickletAccelerometer in '..\sources\BrickletAccelerometer.pas',
+  BrickletAccelerometerV2 in '..\sources\BrickletAccelerometerV2.pas',
+  BrickletAirQuality in '..\sources\BrickletAirQuality.pas',
+  BrickletAmbientLight in '..\sources\BrickletAmbientLight.pas',
+  BrickletAmbientLightV2 in '..\sources\BrickletAmbientLightV2.pas',
+  BrickletAmbientLightV3 in '..\sources\BrickletAmbientLightV3.pas',
+  BrickletAnalogIn in '..\sources\BrickletAnalogIn.pas',
+  BrickletAnalogInV2 in '..\sources\BrickletAnalogInV2.pas',
+  BrickletAnalogInV3 in '..\sources\BrickletAnalogInV3.pas',
+  BrickletAnalogOut in '..\sources\BrickletAnalogOut.pas',
+  BrickletAnalogOutV2 in '..\sources\BrickletAnalogOutV2.pas',
+  BrickletAnalogOutV3 in '..\sources\BrickletAnalogOutV3.pas',
+  BrickletBarometer in '..\sources\BrickletBarometer.pas',
+  BrickletBarometerV2 in '..\sources\BrickletBarometerV2.pas',
+  BrickletCAN in '..\sources\BrickletCAN.pas',
+  BrickletCANV2 in '..\sources\BrickletCANV2.pas',
+  BrickletCO2 in '..\sources\BrickletCO2.pas',
+  BrickletCO2V2 in '..\sources\BrickletCO2V2.pas',
+  BrickletColor in '..\sources\BrickletColor.pas',
+  BrickletColorV2 in '..\sources\BrickletColorV2.pas',
+  BrickletCompass in '..\sources\BrickletCompass.pas',
+  BrickletCurrent12 in '..\sources\BrickletCurrent12.pas',
+  BrickletCurrent25 in '..\sources\BrickletCurrent25.pas',
+  BrickletDistanceIR in '..\sources\BrickletDistanceIR.pas',
+  BrickletDistanceIRV2 in '..\sources\BrickletDistanceIRV2.pas',
+  BrickletDistanceUS in '..\sources\BrickletDistanceUS.pas',
+  BrickletDistanceUSV2 in '..\sources\BrickletDistanceUSV2.pas',
+  BrickletDMX in '..\sources\BrickletDMX.pas',
+  BrickletDualButton in '..\sources\BrickletDualButton.pas',
+  BrickletDualButtonV2 in '..\sources\BrickletDualButtonV2.pas',
+  BrickletDualRelay in '..\sources\BrickletDualRelay.pas',
+  BrickletDustDetector in '..\sources\BrickletDustDetector.pas',
+  BrickletEnergyMonitor in '..\sources\BrickletEnergyMonitor.pas',
+  BrickletEPaper296x128 in '..\sources\BrickletEPaper296x128.pas',
+  BrickletGPS in '..\sources\BrickletGPS.pas',
+  BrickletGPSV2 in '..\sources\BrickletGPSV2.pas',
+  BrickletHallEffect in '..\sources\BrickletHallEffect.pas',
+  BrickletHallEffectV2 in '..\sources\BrickletHallEffectV2.pas',
+  BrickletHumidity in '..\sources\BrickletHumidity.pas',
+  BrickletHumidityV2 in '..\sources\BrickletHumidityV2.pas',
+  BrickletIndustrialAnalogOut in '..\sources\BrickletIndustrialAnalogOut.pas',
+  BrickletIndustrialAnalogOutV2 in '..\sources\BrickletIndustrialAnalogOutV2.pas',
+  BrickletIndustrialCounter in '..\sources\BrickletIndustrialCounter.pas',
+  BrickletIndustrialDigitalIn4 in '..\sources\BrickletIndustrialDigitalIn4.pas',
+  BrickletIndustrialDigitalIn4V2 in '..\sources\BrickletIndustrialDigitalIn4V2.pas',
+  BrickletIndustrialDigitalOut4 in '..\sources\BrickletIndustrialDigitalOut4.pas',
+  BrickletIndustrialDigitalOut4V2 in '..\sources\BrickletIndustrialDigitalOut4V2.pas',
+  BrickletIndustrialDual020mA in '..\sources\BrickletIndustrialDual020mA.pas',
+  BrickletIndustrialDual020mAV2 in '..\sources\BrickletIndustrialDual020mAV2.pas',
+  BrickletIndustrialDualAnalogIn in '..\sources\BrickletIndustrialDualAnalogIn.pas',
+  BrickletIndustrialDualAnalogInV2 in '..\sources\BrickletIndustrialDualAnalogInV2.pas',
+  BrickletIndustrialDualRelay in '..\sources\BrickletIndustrialDualRelay.pas',
+  BrickletIndustrialQuadRelay in '..\sources\BrickletIndustrialQuadRelay.pas',
+  BrickletIndustrialQuadRelayV2 in '..\sources\BrickletIndustrialQuadRelayV2.pas',
+  BrickletIO4 in '..\sources\BrickletIO4.pas',
+  BrickletIO4V2 in '..\sources\BrickletIO4V2.pas',
+  BrickletIO16 in '..\sources\BrickletIO16.pas',
+  BrickletIO16V2 in '..\sources\BrickletIO16V2.pas',
+  BrickletIsolator in '..\sources\BrickletIsolator.pas',
+  BrickletJoystick in '..\sources\BrickletJoystick.pas',
+  BrickletJoystickV2 in '..\sources\BrickletJoystickV2.pas',
+  BrickletLaserRangeFinder in '..\sources\BrickletLaserRangeFinder.pas',
+  BrickletLaserRangeFinderV2 in '..\sources\BrickletLaserRangeFinderV2.pas',
+  BrickletLCD16x2 in '..\sources\BrickletLCD16x2.pas',
+  BrickletLCD20x4 in '..\sources\BrickletLCD20x4.pas',
+  BrickletLCD128x64 in '..\sources\BrickletLCD128x64.pas',
+  BrickletLEDStrip in '..\sources\BrickletLEDStrip.pas',
+  BrickletLEDStripV2 in '..\sources\BrickletLEDStripV2.pas',
+  BrickletLine in '..\sources\BrickletLine.pas',
+  BrickletLinearPoti in '..\sources\BrickletLinearPoti.pas',
+  BrickletLinearPotiV2 in '..\sources\BrickletLinearPotiV2.pas',
+  BrickletLoadCell in '..\sources\BrickletLoadCell.pas',
+  BrickletLoadCellV2 in '..\sources\BrickletLoadCellV2.pas',
+  BrickletMoisture in '..\sources\BrickletMoisture.pas',
+  BrickletMotionDetector in '..\sources\BrickletMotionDetector.pas',
+  BrickletMotionDetectorV2 in '..\sources\BrickletMotionDetectorV2.pas',
+  BrickletMotorizedLinearPoti in '..\sources\BrickletMotorizedLinearPoti.pas',
+  BrickletMultiTouch in '..\sources\BrickletMultiTouch.pas',
+  BrickletMultiTouchV2 in '..\sources\BrickletMultiTouchV2.pas',
+  BrickletNFC in '..\sources\BrickletNFC.pas',
+  BrickletNFCRFID in '..\sources\BrickletNFCRFID.pas',
+  BrickletOLED64x48 in '..\sources\BrickletOLED64x48.pas',
+  BrickletOLED128x64 in '..\sources\BrickletOLED128x64.pas',
+  BrickletOLED128x64V2 in '..\sources\BrickletOLED128x64V2.pas',
+  BrickletOneWire in '..\sources\BrickletOneWire.pas',
+  BrickletOutdoorWeather in '..\sources\BrickletOutdoorWeather.pas',
+  BrickletParticulateMatter in '..\sources\BrickletParticulateMatter.pas',
+  BrickletPiezoBuzzer in '..\sources\BrickletPiezoBuzzer.pas',
+  BrickletPiezoSpeaker in '..\sources\BrickletPiezoSpeaker.pas',
+  BrickletPiezoSpeakerV2 in '..\sources\BrickletPiezoSpeakerV2.pas',
+  BrickletPTC in '..\sources\BrickletPTC.pas',
+  BrickletPTCV2 in '..\sources\BrickletPTCV2.pas',
+  BrickletRealTimeClock in '..\sources\BrickletRealTimeClock.pas',
+  BrickletRealTimeClockV2 in '..\sources\BrickletRealTimeClockV2.pas',
+  BrickletRemoteSwitch in '..\sources\BrickletRemoteSwitch.pas',
+  BrickletRemoteSwitchV2 in '..\sources\BrickletRemoteSwitchV2.pas',
+  BrickletRGBLED in '..\sources\BrickletRGBLED.pas',
+  BrickletRGBLEDButton in '..\sources\BrickletRGBLEDButton.pas',
+  BrickletRGBLEDMatrix in '..\sources\BrickletRGBLEDMatrix.pas',
+  BrickletRGBLEDV2 in '..\sources\BrickletRGBLEDV2.pas',
+  BrickletRotaryEncoder in '..\sources\BrickletRotaryEncoder.pas',
+  BrickletRotaryEncoderV2 in '..\sources\BrickletRotaryEncoderV2.pas',
+  BrickletRotaryPoti in '..\sources\BrickletRotaryPoti.pas',
+  BrickletRotaryPotiV2 in '..\sources\BrickletRotaryPotiV2.pas',
+  BrickletRS232 in '..\sources\BrickletRS232.pas',
+  BrickletRS232V2 in '..\sources\BrickletRS232V2.pas',
+  BrickletRS485 in '..\sources\BrickletRS485.pas',
+  BrickletSegmentDisplay4x7 in '..\sources\BrickletSegmentDisplay4x7.pas',
+  BrickletSegmentDisplay4x7V2 in '..\sources\BrickletSegmentDisplay4x7V2.pas',
+  BrickletSolidStateRelay in '..\sources\BrickletSolidStateRelay.pas',
+  BrickletSolidStateRelayV2 in '..\sources\BrickletSolidStateRelayV2.pas',
+  BrickletSoundIntensity in '..\sources\BrickletSoundIntensity.pas',
+  BrickletSoundPressureLevel in '..\sources\BrickletSoundPressureLevel.pas',
+  BrickletTemperature in '..\sources\BrickletTemperature.pas',
+  BrickletTemperatureIR in '..\sources\BrickletTemperatureIR.pas',
+  BrickletTemperatureIRV2 in '..\sources\BrickletTemperatureIRV2.pas',
+  BrickletTemperatureV2 in '..\sources\BrickletTemperatureV2.pas',
+  BrickletThermalImaging in '..\sources\BrickletThermalImaging.pas',
+  BrickletThermocouple in '..\sources\BrickletThermocouple.pas',
+  BrickletThermocoupleV2 in '..\sources\BrickletThermocoupleV2.pas',
+  BrickletTilt in '..\sources\BrickletTilt.pas',
+  BrickletUVLight in '..\sources\BrickletUVLight.pas',
+  BrickletUVLightV2 in '..\sources\BrickletUVLightV2.pas',
+  BrickletVoltage in '..\sources\BrickletVoltage.pas',
+  BrickletVoltageCurrent in '..\sources\BrickletVoltageCurrent.pas',
+  BrickletVoltageCurrentV2 in '..\sources\BrickletVoltageCurrentV2.pas',
+  BrickletXMC1400Breakout in '..\sources\BrickletXMC1400Breakout.pas',
+  BrickMaster in '..\sources\BrickMaster.pas',
+  BrickRED in '..\sources\BrickRED.pas',
+  BrickServo in '..\sources\BrickServo.pas',
+  BrickSilentStepper in '..\sources\BrickSilentStepper.pas',
+  BrickStepper in '..\sources\BrickStepper.pas',
+  Device in '..\sources\Device.pas',
+  DeviceAbstract in '..\sources\DeviceAbstract.pas',
+  DeviceBase in '..\sources\DeviceBase.pas',
+  DeviceTable in '..\sources\DeviceTable.pas',
+  IPConnection in '..\sources\IPConnection.pas',
+  LEConverter in '..\sources\LEConverter.pas',
+  SHAone in '..\sources\SHAone.pas',
+  ThreadedDevice in '..\sources\ThreadedDevice.pas',
+  TimedSemaphore in '..\sources\TimedSemaphore.pas',
+  TinkerforgeCommon in '..\sources\TinkerforgeCommon.pas',
+  TinkerforgeExceptions in '..\sources\TinkerforgeExceptions.pas',
+  RegisterTinkerforgePackage in 'RegisterTinkerforgePackage.pas';
+
+end.

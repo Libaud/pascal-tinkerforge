@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <Name Value="tinkerforge"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="../sources"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files Count="152">
+      <Item1>
+        <Filename Value="../sources/Base58.pas"/>
+        <UnitName Value="Base58"/>
+      </Item1>
+      <Item2>
+        <Filename Value="../sources/BlockingQueue.pas"/>
+        <UnitName Value="BlockingQueue"/>
+      </Item2>
+      <Item3>
+        <Filename Value="../sources/BrickDaemon.pas"/>
+        <UnitName Value="BrickDaemon"/>
+      </Item3>
+      <Item4>
+        <Filename Value="../sources/BrickDC.pas"/>
+        <UnitName Value="BrickDC"/>
+      </Item4>
+      <Item5>
+        <Filename Value="../sources/BrickHAT.pas"/>
+        <UnitName Value="BrickHAT"/>
+      </Item5>
+      <Item6>
+        <Filename Value="../sources/BrickHATZero.pas"/>
+        <UnitName Value="BrickHATZero"/>
+      </Item6>
+      <Item7>
+        <Filename Value="../sources/BrickIMU.pas"/>
+        <UnitName Value="BrickIMU"/>
+      </Item7>
+      <Item8>
+        <Filename Value="../sources/BrickIMUV2.pas"/>
+        <UnitName Value="BrickIMUV2"/>
+      </Item8>
+      <Item9>
+        <Filename Value="../sources/BrickletAccelerometer.pas"/>
+        <UnitName Value="BrickletAccelerometer"/>
+      </Item9>
+      <Item10>
+        <Filename Value="../sources/BrickletAccelerometerV2.pas"/>
+        <UnitName Value="BrickletAccelerometerV2"/>
+      </Item10>
+      <Item11>
+        <Filename Value="../sources/BrickletAirQuality.pas"/>
+        <UnitName Value="BrickletAirQuality"/>
+      </Item11>
+      <Item12>
+        <Filename Value="../sources/BrickletAmbientLight.pas"/>
+        <UnitName Value="BrickletAmbientLight"/>
+      </Item12>
+      <Item13>
+        <Filename Value="../sources/BrickletAmbientLightV2.pas"/>
+        <UnitName Value="BrickletAmbientLightV2"/>
+      </Item13>
+      <Item14>
+        <Filename Value="../sources/BrickletAmbientLightV3.pas"/>
+        <UnitName Value="BrickletAmbientLightV3"/>
+      </Item14>
+      <Item15>
+        <Filename Value="../sources/BrickletAnalogIn.pas"/>
+        <UnitName Value="BrickletAnalogIn"/>
+      </Item15>
+      <Item16>
+        <Filename Value="../sources/BrickletAnalogInV2.pas"/>
+        <UnitName Value="BrickletAnalogInV2"/>
+      </Item16>
+      <Item17>
+        <Filename Value="../sources/BrickletAnalogInV3.pas"/>
+        <UnitName Value="BrickletAnalogInV3"/>
+      </Item17>
+      <Item18>
+        <Filename Value="../sources/BrickletAnalogOut.pas"/>
+        <UnitName Value="BrickletAnalogOut"/>
+      </Item18>
+      <Item19>
+        <Filename Value="../sources/BrickletAnalogOutV2.pas"/>
+        <UnitName Value="BrickletAnalogOutV2"/>
+      </Item19>
+      <Item20>
+        <Filename Value="../sources/BrickletAnalogOutV3.pas"/>
+        <UnitName Value="BrickletAnalogOutV3"/>
+      </Item20>
+      <Item21>
+        <Filename Value="../sources/BrickletBarometer.pas"/>
+        <UnitName Value="BrickletBarometer"/>
+      </Item21>
+      <Item22>
+        <Filename Value="../sources/BrickletBarometerV2.pas"/>
+        <UnitName Value="BrickletBarometerV2"/>
+      </Item22>
+      <Item23>
+        <Filename Value="../sources/BrickletCAN.pas"/>
+        <UnitName Value="BrickletCAN"/>
+      </Item23>
+      <Item24>
+        <Filename Value="../sources/BrickletCANV2.pas"/>
+        <UnitName Value="BrickletCANV2"/>
+      </Item24>
+      <Item25>
+        <Filename Value="../sources/BrickletCO2.pas"/>
+        <UnitName Value="BrickletCO2"/>
+      </Item25>
+      <Item26>
+        <Filename Value="../sources/BrickletCO2V2.pas"/>
+        <UnitName Value="BrickletCO2V2"/>
+      </Item26>
+      <Item27>
+        <Filename Value="../sources/BrickletColor.pas"/>
+        <UnitName Value="BrickletColor"/>
+      </Item27>
+      <Item28>
+        <Filename Value="../sources/BrickletColorV2.pas"/>
+        <UnitName Value="BrickletColorV2"/>
+      </Item28>
+      <Item29>
+        <Filename Value="../sources/BrickletCompass.pas"/>
+        <UnitName Value="BrickletCompass"/>
+      </Item29>
+      <Item30>
+        <Filename Value="../sources/BrickletCurrent12.pas"/>
+        <UnitName Value="BrickletCurrent12"/>
+      </Item30>
+      <Item31>
+        <Filename Value="../sources/BrickletCurrent25.pas"/>
+        <UnitName Value="BrickletCurrent25"/>
+      </Item31>
+      <Item32>
+        <Filename Value="../sources/BrickletDistanceIR.pas"/>
+        <UnitName Value="BrickletDistanceIR"/>
+      </Item32>
+      <Item33>
+        <Filename Value="../sources/BrickletDistanceIRV2.pas"/>
+        <UnitName Value="BrickletDistanceIRV2"/>
+      </Item33>
+      <Item34>
+        <Filename Value="../sources/BrickletDistanceUS.pas"/>
+        <UnitName Value="BrickletDistanceUS"/>
+      </Item34>
+      <Item35>
+        <Filename Value="../sources/BrickletDistanceUSV2.pas"/>
+        <UnitName Value="BrickletDistanceUSV2"/>
+      </Item35>
+      <Item36>
+        <Filename Value="../sources/BrickletDMX.pas"/>
+        <UnitName Value="BrickletDMX"/>
+      </Item36>
+      <Item37>
+        <Filename Value="../sources/BrickletDualButton.pas"/>
+        <UnitName Value="BrickletDualButton"/>
+      </Item37>
+      <Item38>
+        <Filename Value="../sources/BrickletDualButtonV2.pas"/>
+        <UnitName Value="BrickletDualButtonV2"/>
+      </Item38>
+      <Item39>
+        <Filename Value="../sources/BrickletDualRelay.pas"/>
+        <UnitName Value="BrickletDualRelay"/>
+      </Item39>
+      <Item40>
+        <Filename Value="../sources/BrickletDustDetector.pas"/>
+        <UnitName Value="BrickletDustDetector"/>
+      </Item40>
+      <Item41>
+        <Filename Value="../sources/BrickletEnergyMonitor.pas"/>
+        <UnitName Value="BrickletEnergyMonitor"/>
+      </Item41>
+      <Item42>
+        <Filename Value="../sources/BrickletEPaper296x128.pas"/>
+        <UnitName Value="BrickletEPaper296x128"/>
+      </Item42>
+      <Item43>
+        <Filename Value="../sources/BrickletGPS.pas"/>
+        <UnitName Value="BrickletGPS"/>
+      </Item43>
+      <Item44>
+        <Filename Value="../sources/BrickletGPSV2.pas"/>
+        <UnitName Value="BrickletGPSV2"/>
+      </Item44>
+      <Item45>
+        <Filename Value="../sources/BrickletHallEffect.pas"/>
+        <UnitName Value="BrickletHallEffect"/>
+      </Item45>
+      <Item46>
+        <Filename Value="../sources/BrickletHallEffectV2.pas"/>
+        <UnitName Value="BrickletHallEffectV2"/>
+      </Item46>
+      <Item47>
+        <Filename Value="../sources/BrickletHumidity.pas"/>
+        <UnitName Value="BrickletHumidity"/>
+      </Item47>
+      <Item48>
+        <Filename Value="../sources/BrickletHumidityV2.pas"/>
+        <UnitName Value="BrickletHumidityV2"/>
+      </Item48>
+      <Item49>
+        <Filename Value="../sources/BrickletIndustrialAnalogOut.pas"/>
+        <UnitName Value="BrickletIndustrialAnalogOut"/>
+      </Item49>
+      <Item50>
+        <Filename Value="../sources/BrickletIndustrialAnalogOutV2.pas"/>
+        <UnitName Value="BrickletIndustrialAnalogOutV2"/>
+      </Item50>
+      <Item51>
+        <Filename Value="../sources/BrickletIndustrialCounter.pas"/>
+        <UnitName Value="BrickletIndustrialCounter"/>
+      </Item51>
+      <Item52>
+        <Filename Value="../sources/BrickletIndustrialDigitalIn4.pas"/>
+        <UnitName Value="BrickletIndustrialDigitalIn4"/>
+      </Item52>
+      <Item53>
+        <Filename Value="../sources/BrickletIndustrialDigitalIn4V2.pas"/>
+        <UnitName Value="BrickletIndustrialDigitalIn4V2"/>
+      </Item53>
+      <Item54>
+        <Filename Value="../sources/BrickletIndustrialDigitalOut4.pas"/>
+        <UnitName Value="BrickletIndustrialDigitalOut4"/>
+      </Item54>
+      <Item55>
+        <Filename Value="../sources/BrickletIndustrialDigitalOut4V2.pas"/>
+        <UnitName Value="BrickletIndustrialDigitalOut4V2"/>
+      </Item55>
+      <Item56>
+        <Filename Value="../sources/BrickletIndustrialDual020mA.pas"/>
+        <UnitName Value="BrickletIndustrialDual020mA"/>
+      </Item56>
+      <Item57>
+        <Filename Value="../sources/BrickletIndustrialDual020mAV2.pas"/>
+        <UnitName Value="BrickletIndustrialDual020mAV2"/>
+      </Item57>
+      <Item58>
+        <Filename Value="../sources/BrickletIndustrialDualAnalogIn.pas"/>
+        <UnitName Value="BrickletIndustrialDualAnalogIn"/>
+      </Item58>
+      <Item59>
+        <Filename Value="../sources/BrickletIndustrialDualAnalogInV2.pas"/>
+        <UnitName Value="BrickletIndustrialDualAnalogInV2"/>
+      </Item59>
+      <Item60>
+        <Filename Value="../sources/BrickletIndustrialDualRelay.pas"/>
+        <UnitName Value="BrickletIndustrialDualRelay"/>
+      </Item60>
+      <Item61>
+        <Filename Value="../sources/BrickletIndustrialQuadRelay.pas"/>
+        <UnitName Value="BrickletIndustrialQuadRelay"/>
+      </Item61>
+      <Item62>
+        <Filename Value="../sources/BrickletIndustrialQuadRelayV2.pas"/>
+        <UnitName Value="BrickletIndustrialQuadRelayV2"/>
+      </Item62>
+      <Item63>
+        <Filename Value="../sources/BrickletIO4.pas"/>
+        <UnitName Value="BrickletIO4"/>
+      </Item63>
+      <Item64>
+        <Filename Value="../sources/BrickletIO4V2.pas"/>
+        <UnitName Value="BrickletIO4V2"/>
+      </Item64>
+      <Item65>
+        <Filename Value="../sources/BrickletIO16.pas"/>
+        <UnitName Value="BrickletIO16"/>
+      </Item65>
+      <Item66>
+        <Filename Value="../sources/BrickletIO16V2.pas"/>
+        <UnitName Value="BrickletIO16V2"/>
+      </Item66>
+      <Item67>
+        <Filename Value="../sources/BrickletIsolator.pas"/>
+        <UnitName Value="BrickletIsolator"/>
+      </Item67>
+      <Item68>
+        <Filename Value="../sources/BrickletJoystick.pas"/>
+        <UnitName Value="BrickletJoystick"/>
+      </Item68>
+      <Item69>
+        <Filename Value="../sources/BrickletJoystickV2.pas"/>
+        <UnitName Value="BrickletJoystickV2"/>
+      </Item69>
+      <Item70>
+        <Filename Value="../sources/BrickletLaserRangeFinder.pas"/>
+        <UnitName Value="BrickletLaserRangeFinder"/>
+      </Item70>
+      <Item71>
+        <Filename Value="../sources/BrickletLaserRangeFinderV2.pas"/>
+        <UnitName Value="BrickletLaserRangeFinderV2"/>
+      </Item71>
+      <Item72>
+        <Filename Value="../sources/BrickletLCD16x2.pas"/>
+        <UnitName Value="BrickletLCD16x2"/>
+      </Item72>
+      <Item73>
+        <Filename Value="../sources/BrickletLCD20x4.pas"/>
+        <UnitName Value="BrickletLCD20x4"/>
+      </Item73>
+      <Item74>
+        <Filename Value="../sources/BrickletLCD128x64.pas"/>
+        <UnitName Value="BrickletLCD128x64"/>
+      </Item74>
+      <Item75>
+        <Filename Value="../sources/BrickletLEDStrip.pas"/>
+        <UnitName Value="BrickletLEDStrip"/>
+      </Item75>
+      <Item76>
+        <Filename Value="../sources/BrickletLEDStripV2.pas"/>
+        <UnitName Value="BrickletLEDStripV2"/>
+      </Item76>
+      <Item77>
+        <Filename Value="../sources/BrickletLine.pas"/>
+        <UnitName Value="BrickletLine"/>
+      </Item77>
+      <Item78>
+        <Filename Value="../sources/BrickletLinearPoti.pas"/>
+        <UnitName Value="BrickletLinearPoti"/>
+      </Item78>
+      <Item79>
+        <Filename Value="../sources/BrickletLinearPotiV2.pas"/>
+        <UnitName Value="BrickletLinearPotiV2"/>
+      </Item79>
+      <Item80>
+        <Filename Value="../sources/BrickletLoadCell.pas"/>
+        <UnitName Value="BrickletLoadCell"/>
+      </Item80>
+      <Item81>
+        <Filename Value="../sources/BrickletLoadCellV2.pas"/>
+        <UnitName Value="BrickletLoadCellV2"/>
+      </Item81>
+      <Item82>
+        <Filename Value="../sources/BrickletMoisture.pas"/>
+        <UnitName Value="BrickletMoisture"/>
+      </Item82>
+      <Item83>
+        <Filename Value="../sources/BrickletMotionDetector.pas"/>
+        <UnitName Value="BrickletMotionDetector"/>
+      </Item83>
+      <Item84>
+        <Filename Value="../sources/BrickletMotionDetectorV2.pas"/>
+        <UnitName Value="BrickletMotionDetectorV2"/>
+      </Item84>
+      <Item85>
+        <Filename Value="../sources/BrickletMotorizedLinearPoti.pas"/>
+        <UnitName Value="BrickletMotorizedLinearPoti"/>
+      </Item85>
+      <Item86>
+        <Filename Value="../sources/BrickletMultiTouch.pas"/>
+        <UnitName Value="BrickletMultiTouch"/>
+      </Item86>
+      <Item87>
+        <Filename Value="../sources/BrickletMultiTouchV2.pas"/>
+        <UnitName Value="BrickletMultiTouchV2"/>
+      </Item87>
+      <Item88>
+        <Filename Value="../sources/BrickletNFC.pas"/>
+        <UnitName Value="BrickletNFC"/>
+      </Item88>
+      <Item89>
+        <Filename Value="../sources/BrickletNFCRFID.pas"/>
+        <UnitName Value="BrickletNFCRFID"/>
+      </Item89>
+      <Item90>
+        <Filename Value="../sources/BrickletOLED64x48.pas"/>
+        <UnitName Value="BrickletOLED64x48"/>
+      </Item90>
+      <Item91>
+        <Filename Value="../sources/BrickletOLED128x64.pas"/>
+        <UnitName Value="BrickletOLED128x64"/>
+      </Item91>
+      <Item92>
+        <Filename Value="../sources/BrickletOLED128x64V2.pas"/>
+        <UnitName Value="BrickletOLED128x64V2"/>
+      </Item92>
+      <Item93>
+        <Filename Value="../sources/BrickletOneWire.pas"/>
+        <UnitName Value="BrickletOneWire"/>
+      </Item93>
+      <Item94>
+        <Filename Value="../sources/BrickletOutdoorWeather.pas"/>
+        <UnitName Value="BrickletOutdoorWeather"/>
+      </Item94>
+      <Item95>
+        <Filename Value="../sources/BrickletParticulateMatter.pas"/>
+        <UnitName Value="BrickletParticulateMatter"/>
+      </Item95>
+      <Item96>
+        <Filename Value="../sources/BrickletPiezoBuzzer.pas"/>
+        <UnitName Value="BrickletPiezoBuzzer"/>
+      </Item96>
+      <Item97>
+        <Filename Value="../sources/BrickletPiezoSpeaker.pas"/>
+        <UnitName Value="BrickletPiezoSpeaker"/>
+      </Item97>
+      <Item98>
+        <Filename Value="../sources/BrickletPiezoSpeakerV2.pas"/>
+        <UnitName Value="BrickletPiezoSpeakerV2"/>
+      </Item98>
+      <Item99>
+        <Filename Value="../sources/BrickletPTC.pas"/>
+        <UnitName Value="BrickletPTC"/>
+      </Item99>
+      <Item100>
+        <Filename Value="../sources/BrickletPTCV2.pas"/>
+        <UnitName Value="BrickletPTCV2"/>
+      </Item100>
+      <Item101>
+        <Filename Value="../sources/BrickletRealTimeClock.pas"/>
+        <UnitName Value="BrickletRealTimeClock"/>
+      </Item101>
+      <Item102>
+        <Filename Value="../sources/BrickletRealTimeClockV2.pas"/>
+        <UnitName Value="BrickletRealTimeClockV2"/>
+      </Item102>
+      <Item103>
+        <Filename Value="../sources/BrickletRemoteSwitch.pas"/>
+        <UnitName Value="BrickletRemoteSwitch"/>
+      </Item103>
+      <Item104>
+        <Filename Value="../sources/BrickletRemoteSwitchV2.pas"/>
+        <UnitName Value="BrickletRemoteSwitchV2"/>
+      </Item104>
+      <Item105>
+        <Filename Value="../sources/BrickletRGBLED.pas"/>
+        <UnitName Value="BrickletRGBLED"/>
+      </Item105>
+      <Item106>
+        <Filename Value="../sources/BrickletRGBLEDButton.pas"/>
+        <UnitName Value="BrickletRGBLEDButton"/>
+      </Item106>
+      <Item107>
+        <Filename Value="../sources/BrickletRGBLEDMatrix.pas"/>
+        <UnitName Value="BrickletRGBLEDMatrix"/>
+      </Item107>
+      <Item108>
+        <Filename Value="../sources/BrickletRGBLEDV2.pas"/>
+        <UnitName Value="BrickletRGBLEDV2"/>
+      </Item108>
+      <Item109>
+        <Filename Value="../sources/BrickletRotaryEncoder.pas"/>
+        <UnitName Value="BrickletRotaryEncoder"/>
+      </Item109>
+      <Item110>
+        <Filename Value="../sources/BrickletRotaryEncoderV2.pas"/>
+        <UnitName Value="BrickletRotaryEncoderV2"/>
+      </Item110>
+      <Item111>
+        <Filename Value="../sources/BrickletRotaryPoti.pas"/>
+        <UnitName Value="BrickletRotaryPoti"/>
+      </Item111>
+      <Item112>
+        <Filename Value="../sources/BrickletRotaryPotiV2.pas"/>
+        <UnitName Value="BrickletRotaryPotiV2"/>
+      </Item112>
+      <Item113>
+        <Filename Value="../sources/BrickletRS232.pas"/>
+        <UnitName Value="BrickletRS232"/>
+      </Item113>
+      <Item114>
+        <Filename Value="../sources/BrickletRS232V2.pas"/>
+        <UnitName Value="BrickletRS232V2"/>
+      </Item114>
+      <Item115>
+        <Filename Value="../sources/BrickletRS485.pas"/>
+        <UnitName Value="BrickletRS485"/>
+      </Item115>
+      <Item116>
+        <Filename Value="../sources/BrickletSegmentDisplay4x7.pas"/>
+        <UnitName Value="BrickletSegmentDisplay4x7"/>
+      </Item116>
+      <Item117>
+        <Filename Value="../sources/BrickletSegmentDisplay4x7V2.pas"/>
+        <UnitName Value="BrickletSegmentDisplay4x7V2"/>
+      </Item117>
+      <Item118>
+        <Filename Value="../sources/BrickletSolidStateRelay.pas"/>
+        <UnitName Value="BrickletSolidStateRelay"/>
+      </Item118>
+      <Item119>
+        <Filename Value="../sources/BrickletSolidStateRelayV2.pas"/>
+        <UnitName Value="BrickletSolidStateRelayV2"/>
+      </Item119>
+      <Item120>
+        <Filename Value="../sources/BrickletSoundIntensity.pas"/>
+        <UnitName Value="BrickletSoundIntensity"/>
+      </Item120>
+      <Item121>
+        <Filename Value="../sources/BrickletSoundPressureLevel.pas"/>
+        <UnitName Value="BrickletSoundPressureLevel"/>
+      </Item121>
+      <Item122>
+        <Filename Value="../sources/BrickletTemperature.pas"/>
+        <UnitName Value="BrickletTemperature"/>
+      </Item122>
+      <Item123>
+        <Filename Value="../sources/BrickletTemperatureIR.pas"/>
+        <UnitName Value="BrickletTemperatureIR"/>
+      </Item123>
+      <Item124>
+        <Filename Value="../sources/BrickletTemperatureIRV2.pas"/>
+        <UnitName Value="BrickletTemperatureIRV2"/>
+      </Item124>
+      <Item125>
+        <Filename Value="../sources/BrickletTemperatureV2.pas"/>
+        <UnitName Value="BrickletTemperatureV2"/>
+      </Item125>
+      <Item126>
+        <Filename Value="../sources/BrickletThermalImaging.pas"/>
+        <UnitName Value="BrickletThermalImaging"/>
+      </Item126>
+      <Item127>
+        <Filename Value="../sources/BrickletThermocouple.pas"/>
+        <UnitName Value="BrickletThermocouple"/>
+      </Item127>
+      <Item128>
+        <Filename Value="../sources/BrickletThermocoupleV2.pas"/>
+        <UnitName Value="BrickletThermocoupleV2"/>
+      </Item128>
+      <Item129>
+        <Filename Value="../sources/BrickletTilt.pas"/>
+        <UnitName Value="BrickletTilt"/>
+      </Item129>
+      <Item130>
+        <Filename Value="../sources/BrickletUVLight.pas"/>
+        <UnitName Value="BrickletUVLight"/>
+      </Item130>
+      <Item131>
+        <Filename Value="../sources/BrickletUVLightV2.pas"/>
+        <UnitName Value="BrickletUVLightV2"/>
+      </Item131>
+      <Item132>
+        <Filename Value="../sources/BrickletVoltage.pas"/>
+        <UnitName Value="BrickletVoltage"/>
+      </Item132>
+      <Item133>
+        <Filename Value="../sources/BrickletVoltageCurrent.pas"/>
+        <UnitName Value="BrickletVoltageCurrent"/>
+      </Item133>
+      <Item134>
+        <Filename Value="../sources/BrickletVoltageCurrentV2.pas"/>
+        <UnitName Value="BrickletVoltageCurrentV2"/>
+      </Item134>
+      <Item135>
+        <Filename Value="../sources/BrickletXMC1400Breakout.pas"/>
+        <UnitName Value="BrickletXMC1400Breakout"/>
+      </Item135>
+      <Item136>
+        <Filename Value="../sources/BrickMaster.pas"/>
+        <UnitName Value="BrickMaster"/>
+      </Item136>
+      <Item137>
+        <Filename Value="../sources/BrickRED.pas"/>
+        <UnitName Value="BrickRED"/>
+      </Item137>
+      <Item138>
+        <Filename Value="../sources/BrickServo.pas"/>
+        <UnitName Value="BrickServo"/>
+      </Item138>
+      <Item139>
+        <Filename Value="../sources/BrickSilentStepper.pas"/>
+        <UnitName Value="BrickSilentStepper"/>
+      </Item139>
+      <Item140>
+        <Filename Value="../sources/BrickStepper.pas"/>
+        <UnitName Value="BrickStepper"/>
+      </Item140>
+      <Item141>
+        <Filename Value="../sources/Device.pas"/>
+        <UnitName Value="Device"/>
+      </Item141>
+      <Item142>
+        <Filename Value="../sources/DeviceAbstract.pas"/>
+        <UnitName Value="DeviceAbstract"/>
+      </Item142>
+      <Item143>
+        <Filename Value="../sources/DeviceBase.pas"/>
+        <UnitName Value="DeviceBase"/>
+      </Item143>
+      <Item144>
+        <Filename Value="../sources/DeviceTable.pas"/>
+        <UnitName Value="DeviceTable"/>
+      </Item144>
+      <Item145>
+        <Filename Value="../sources/IPConnection.pas"/>
+        <UnitName Value="IPConnection"/>
+      </Item145>
+      <Item146>
+        <Filename Value="../sources/LEConverter.pas"/>
+        <UnitName Value="LEConverter"/>
+      </Item146>
+      <Item147>
+        <Filename Value="../sources/SHAone.pas"/>
+        <UnitName Value="SHAone"/>
+      </Item147>
+      <Item148>
+        <Filename Value="../sources/ThreadedDevice.pas"/>
+        <UnitName Value="ThreadedDevice"/>
+      </Item148>
+      <Item149>
+        <Filename Value="../sources/TimedSemaphore.pas"/>
+        <UnitName Value="TimedSemaphore"/>
+      </Item149>
+      <Item150>
+        <Filename Value="../sources/TinkerforgeCommon.pas"/>
+        <UnitName Value="TinkerforgeCommon"/>
+      </Item150>
+      <Item151>
+        <Filename Value="../sources/TinkerforgeExceptions.pas"/>
+        <UnitName Value="TinkerforgeExceptions"/>
+      </Item151>
+      <Item152>
+        <Filename Value="tinkerforge.pas"/>
+        <UnitName Value="Tinkerforge"/>
+      </Item152>
+    </Files>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
