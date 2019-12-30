@@ -86,8 +86,8 @@
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>Y:\Bibliotheques Externes\Tinkerforge\packages\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>Y:\Bibliotheques Externes\Tinkerforge\packages\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\sources\;Y:\Bibliotheques Externes\Tinkerforge\packages\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\sources\;Y:\Bibliotheques Externes\Tinkerforge\packages\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>tinkerforge</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
@@ -156,6 +156,9 @@
         <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
         </PackageImport>
+        <DelphiCompile Include="RegisterTinkerforgePackage.pas">
+            <BuildOrder>3</BuildOrder>
+        </DelphiCompile>
         <CppCompile Include="tinkerforge.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -163,6 +166,459 @@
             <BuildOrder>2</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <DelphiCompile Include="..\sources\Base58.pas">
+            <BuildOrder>4</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BlockingQueue.pas">
+            <BuildOrder>5</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickDaemon.pas">
+            <BuildOrder>6</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickDC.pas">
+            <BuildOrder>7</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickHAT.pas">
+            <BuildOrder>8</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickHATZero.pas">
+            <BuildOrder>9</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickIMU.pas">
+            <BuildOrder>10</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickIMUV2.pas">
+            <BuildOrder>11</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAccelerometer.pas">
+            <BuildOrder>12</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAccelerometerV2.pas">
+            <BuildOrder>13</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAirQuality.pas">
+            <BuildOrder>14</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAmbientLight.pas">
+            <BuildOrder>15</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAmbientLightV2.pas">
+            <BuildOrder>16</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAmbientLightV3.pas">
+            <BuildOrder>17</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAnalogIn.pas">
+            <BuildOrder>18</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAnalogInV2.pas">
+            <BuildOrder>19</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAnalogInV3.pas">
+            <BuildOrder>20</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAnalogOut.pas">
+            <BuildOrder>21</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAnalogOutV2.pas">
+            <BuildOrder>22</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletAnalogOutV3.pas">
+            <BuildOrder>23</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletBarometer.pas">
+            <BuildOrder>24</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletBarometerV2.pas">
+            <BuildOrder>25</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCAN.pas">
+            <BuildOrder>26</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCANV2.pas">
+            <BuildOrder>27</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCO2.pas">
+            <BuildOrder>28</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCO2V2.pas">
+            <BuildOrder>29</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletColor.pas">
+            <BuildOrder>30</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletColorV2.pas">
+            <BuildOrder>31</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCompass.pas">
+            <BuildOrder>32</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCurrent12.pas">
+            <BuildOrder>33</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletCurrent25.pas">
+            <BuildOrder>34</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDistanceIR.pas">
+            <BuildOrder>35</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDistanceIRV2.pas">
+            <BuildOrder>36</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDistanceUS.pas">
+            <BuildOrder>37</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDistanceUSV2.pas">
+            <BuildOrder>38</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDMX.pas">
+            <BuildOrder>39</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDualButton.pas">
+            <BuildOrder>40</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDualButtonV2.pas">
+            <BuildOrder>41</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDualRelay.pas">
+            <BuildOrder>42</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletDustDetector.pas">
+            <BuildOrder>43</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletEnergyMonitor.pas">
+            <BuildOrder>44</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletEPaper296x128.pas">
+            <BuildOrder>45</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletGPS.pas">
+            <BuildOrder>46</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletGPSV2.pas">
+            <BuildOrder>47</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletHallEffect.pas">
+            <BuildOrder>48</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletHallEffectV2.pas">
+            <BuildOrder>49</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletHumidity.pas">
+            <BuildOrder>50</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletHumidityV2.pas">
+            <BuildOrder>51</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialAnalogOut.pas">
+            <BuildOrder>52</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialAnalogOutV2.pas">
+            <BuildOrder>53</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialCounter.pas">
+            <BuildOrder>54</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDigitalIn4.pas">
+            <BuildOrder>55</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDigitalIn4V2.pas">
+            <BuildOrder>56</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDigitalOut4.pas">
+            <BuildOrder>57</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDigitalOut4V2.pas">
+            <BuildOrder>58</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDual020mA.pas">
+            <BuildOrder>59</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDual020mAV2.pas">
+            <BuildOrder>60</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDualAnalogIn.pas">
+            <BuildOrder>61</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDualAnalogInV2.pas">
+            <BuildOrder>62</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialDualRelay.pas">
+            <BuildOrder>63</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialQuadRelay.pas">
+            <BuildOrder>64</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIndustrialQuadRelayV2.pas">
+            <BuildOrder>65</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIO16.pas">
+            <BuildOrder>68</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIO16V2.pas">
+            <BuildOrder>69</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIO4.pas">
+            <BuildOrder>66</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIO4V2.pas">
+            <BuildOrder>67</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletIsolator.pas">
+            <BuildOrder>70</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletJoystick.pas">
+            <BuildOrder>71</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletJoystickV2.pas">
+            <BuildOrder>72</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLaserRangeFinder.pas">
+            <BuildOrder>73</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLaserRangeFinderV2.pas">
+            <BuildOrder>74</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLCD128x64.pas">
+            <BuildOrder>77</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLCD16x2.pas">
+            <BuildOrder>75</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLCD20x4.pas">
+            <BuildOrder>76</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLEDStrip.pas">
+            <BuildOrder>78</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLEDStripV2.pas">
+            <BuildOrder>79</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLine.pas">
+            <BuildOrder>80</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLinearPoti.pas">
+            <BuildOrder>81</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLinearPotiV2.pas">
+            <BuildOrder>82</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLoadCell.pas">
+            <BuildOrder>83</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletLoadCellV2.pas">
+            <BuildOrder>84</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletMoisture.pas">
+            <BuildOrder>85</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletMotionDetector.pas">
+            <BuildOrder>86</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletMotionDetectorV2.pas">
+            <BuildOrder>87</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletMotorizedLinearPoti.pas">
+            <BuildOrder>88</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletMultiTouch.pas">
+            <BuildOrder>89</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletMultiTouchV2.pas">
+            <BuildOrder>90</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletNFC.pas">
+            <BuildOrder>91</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletNFCRFID.pas">
+            <BuildOrder>92</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletOLED128x64.pas">
+            <BuildOrder>94</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletOLED128x64V2.pas">
+            <BuildOrder>95</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletOLED64x48.pas">
+            <BuildOrder>93</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletOneWire.pas">
+            <BuildOrder>96</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletOutdoorWeather.pas">
+            <BuildOrder>97</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletParticulateMatter.pas">
+            <BuildOrder>98</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletPiezoBuzzer.pas">
+            <BuildOrder>99</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletPiezoSpeaker.pas">
+            <BuildOrder>100</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletPiezoSpeakerV2.pas">
+            <BuildOrder>101</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletPTC.pas">
+            <BuildOrder>102</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletPTCV2.pas">
+            <BuildOrder>103</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRealTimeClock.pas">
+            <BuildOrder>104</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRealTimeClockV2.pas">
+            <BuildOrder>105</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRemoteSwitch.pas">
+            <BuildOrder>106</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRemoteSwitchV2.pas">
+            <BuildOrder>107</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRGBLED.pas">
+            <BuildOrder>108</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRGBLEDButton.pas">
+            <BuildOrder>109</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRGBLEDMatrix.pas">
+            <BuildOrder>110</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRGBLEDV2.pas">
+            <BuildOrder>111</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRotaryEncoder.pas">
+            <BuildOrder>112</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRotaryEncoderV2.pas">
+            <BuildOrder>113</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRotaryPoti.pas">
+            <BuildOrder>114</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRotaryPotiV2.pas">
+            <BuildOrder>115</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRS232.pas">
+            <BuildOrder>116</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRS232V2.pas">
+            <BuildOrder>117</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletRS485.pas">
+            <BuildOrder>118</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletSegmentDisplay4x7.pas">
+            <BuildOrder>119</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletSegmentDisplay4x7V2.pas">
+            <BuildOrder>120</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletSolidStateRelay.pas">
+            <BuildOrder>121</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletSolidStateRelayV2.pas">
+            <BuildOrder>122</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletSoundIntensity.pas">
+            <BuildOrder>123</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletSoundPressureLevel.pas">
+            <BuildOrder>124</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletTemperature.pas">
+            <BuildOrder>125</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletTemperatureIR.pas">
+            <BuildOrder>126</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletTemperatureIRV2.pas">
+            <BuildOrder>127</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletTemperatureV2.pas">
+            <BuildOrder>128</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletThermalImaging.pas">
+            <BuildOrder>129</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletThermocouple.pas">
+            <BuildOrder>130</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletThermocoupleV2.pas">
+            <BuildOrder>131</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletTilt.pas">
+            <BuildOrder>132</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletUVLight.pas">
+            <BuildOrder>133</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletUVLightV2.pas">
+            <BuildOrder>134</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletVoltage.pas">
+            <BuildOrder>135</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletVoltageCurrent.pas">
+            <BuildOrder>136</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletVoltageCurrentV2.pas">
+            <BuildOrder>137</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickletXMC1400Breakout.pas">
+            <BuildOrder>138</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickMaster.pas">
+            <BuildOrder>139</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickRED.pas">
+            <BuildOrder>140</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickServo.pas">
+            <BuildOrder>141</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickSilentStepper.pas">
+            <BuildOrder>142</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\BrickStepper.pas">
+            <BuildOrder>143</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\Device.pas">
+            <BuildOrder>144</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\DeviceAbstract.pas">
+            <BuildOrder>145</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\DeviceBase.pas">
+            <BuildOrder>146</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\DeviceTable.pas">
+            <BuildOrder>147</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\IPConnection.pas">
+            <BuildOrder>148</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\LEConverter.pas">
+            <BuildOrder>149</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\SHAone.pas">
+            <BuildOrder>150</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\ThreadedDevice.pas">
+            <BuildOrder>151</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\TimedSemaphore.pas">
+            <BuildOrder>152</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\TinkerforgeCommon.pas">
+            <BuildOrder>153</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\sources\TinkerforgeExceptions.pas">
+            <BuildOrder>154</BuildOrder>
+        </DelphiCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

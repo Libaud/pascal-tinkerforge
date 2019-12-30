@@ -1,0 +1,11 @@
+ORIGINS
+
+	Tinkerforge (https://www.tinkerforge.com/en/) offers various technical solutions for the Raspberry PI platform.
+	The company provides developers with various development tools and kits, including for Delphi and Lazarus (https://www.tinkerforge.com/en/doc/Software/API_Bindings_Delphi.html).
+
+	However, the source codes proposed for these tools are not integrated as components in packages. As usual. It lacks the support of C++ Builder and Codetyphon.
+	Functional objects all derive from Tobject in the original library.
+
+OBJECTIVES
+
+	The library offers an implementation of functional classes in the form of derivatives of Tcomponent.

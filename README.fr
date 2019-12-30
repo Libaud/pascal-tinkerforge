@@ -1,0 +1,11 @@
+GENESE
+
+	Tinkerforge (https://www.tinkerforge.com/en/) propose diverses solutions techniques pour la plate-forme Raspberry PI.
+	La société mets à la dispositions des développeurs divers outils et kits de développement, dont pour Delphi et Lazarus (https://www.tinkerforge.com/en/doc/Software/API_Bindings_Delphi.html).
+	
+	Cependant les codes sources proposés pour ces outils ne sont pas intégrés sous forme de composants dans des packages. A l'instar de ce qui se pratique habituellement. Il manque ainsi, le support de C++ Builder et de CodeTyphon.
+	Les objets fonctionnels dérivent tous de TObject dans la librairie d'origine. 
+	
+OBJECTIFES
+
+	La librairie propose une implémentation des classes fonctionnelles sous forme de dérivés de TComponent. 
