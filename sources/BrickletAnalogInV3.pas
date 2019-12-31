@@ -26,7 +26,7 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletAnalogInV3 = class;
-  TBrickletAnalogInV3NotifyVoltage = procedure(aSender: TBrickletAnalogInV3; const voltage: word) of object;
+  TBrickletAnalogInV3NotifyVoltage = procedure(aSender: TBrickletAnalogInV3; const aVoltage: word) of object;
 
   /// <summary>
   ///  Measures DC voltage between 0V and 42V
@@ -82,12 +82,14 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetVoltageCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: word; const max: word); virtual;
+    procedure SetVoltageCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean;
+                                              const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletAnalogInV3.TBrickletAnalogInV3.SetVoltageCallbackConfiguration"/>.
     /// </summary>
-    procedure GetVoltageCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: word; out max: word); virtual;
+    procedure GetVoltageCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char;
+                                              out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the oversampling between 32x and 16384x. The Bricklet
@@ -103,7 +105,7 @@ type
     ///  oversampling the reaction time increases (changes in voltage will be
     ///  measured faster).
     /// </summary>
-    procedure SetOversampling(const oversampling: byte); virtual;
+    procedure SetOversampling(const aOversampling: byte); virtual;
 
     /// <summary>
     ///  Returns the oversampling value as set by <see cref="BrickletAnalogInV3.TBrickletAnalogInV3.SetOversampling"/>.
@@ -120,12 +122,12 @@ type
     ///  the Bricklet. The calibration will be saved internally and only
     ///  has to be done once.
     /// </summary>
-    procedure SetCalibration(const offset: smallint; const multiplier: word; const divisor: word); virtual;
+    procedure SetCalibration(const aOffset: smallint; const aMultiplier: word; const aDivisor: word); virtual;
 
     /// <summary>
     ///  Returns the calibration as set by <see cref="BrickletAnalogInV3.TBrickletAnalogInV3.SetCalibration"/>.
     /// </summary>
-    procedure GetCalibration(out offset: smallint; out multiplier: word; out divisor: word); virtual;
+    procedure GetCalibration(out aOffset: smallint; out aMultiplier: word; out aDivisor: word); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -140,7 +142,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -180,7 +183,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -191,7 +194,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletAnalogInV3.TBrickletAnalogInV3.SetStatusLEDConfig"/>
@@ -243,7 +246,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -296,94 +300,94 @@ end;
 
 function TBrickletAnalogInV3.GetVoltage: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_VOLTAGE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletAnalogInV3.SetVoltageCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: word; const max: word);
+procedure TBrickletAnalogInV3.SetVoltageCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: word; const aMax: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_SET_VOLTAGE_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertUInt16To(min, 14, _request);
-  LEConvertUInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertUInt16To(aMin, 14, _request);
+  LEConvertUInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAnalogInV3.GetVoltageCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: word; out max: word);
+procedure TBrickletAnalogInV3.GetVoltageCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: word; out aMax: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_VOLTAGE_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertUInt16From(14, _response);
-  max:= LEConvertUInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertUInt16From(14, _response);
+  aMax:= LEConvertUInt16From(16, _response);
 end;
 
-procedure TBrickletAnalogInV3.SetOversampling(const oversampling: byte);
+procedure TBrickletAnalogInV3.SetOversampling(const aOversampling: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_SET_OVERSAMPLING, 9);
-  LEConvertUInt8To(oversampling, 8, _request);
+  LEConvertUInt8To(aOversampling, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAnalogInV3.GetOversampling: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_OVERSAMPLING, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletAnalogInV3.SetCalibration(const offset: smallint; const multiplier: word; const divisor: word);
+procedure TBrickletAnalogInV3.SetCalibration(const aOffset: smallint; const aMultiplier: word; const aDivisor: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_SET_CALIBRATION, 14);
-  LEConvertInt16To(offset, 8, _request);
-  LEConvertUInt16To(multiplier, 10, _request);
-  LEConvertUInt16To(divisor, 12, _request);
+  LEConvertInt16To(aOffset, 8, _request);
+  LEConvertUInt16To(aMultiplier, 10, _request);
+  LEConvertUInt16To(aDivisor, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAnalogInV3.GetCalibration(out offset: smallint; out multiplier: word; out divisor: word);
+procedure TBrickletAnalogInV3.GetCalibration(out aOffset: smallint; out aMultiplier: word; out aDivisor: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_CALIBRATION, 8);
   _response:= SendRequest(_request);
-  offset:= LEConvertInt16From(8, _response);
-  multiplier:= LEConvertUInt16From(10, _response);
-  divisor:= LEConvertUInt16From(12, _response);
+  aOffset:= LEConvertInt16From(8, _response);
+  aMultiplier:= LEConvertUInt16From(10, _response);
+  aDivisor:= LEConvertUInt16From(12, _response);
 end;
 
-procedure TBrickletAnalogInV3.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletAnalogInV3.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletAnalogInV3.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -393,7 +397,7 @@ end;
 
 function TBrickletAnalogInV3.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
@@ -402,36 +406,37 @@ end;
 
 procedure TBrickletAnalogInV3.SetWriteFirmwarePointer(const pointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
   LEConvertUInt32To(pointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletAnalogInV3.WriteFirmware(const data: array of byte): byte;
+function TBrickletAnalogInV3.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletAnalogInV3.SetStatusLEDConfig(const config: byte);
+procedure TBrickletAnalogInV3.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAnalogInV3.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -440,7 +445,7 @@ end;
 
 function TBrickletAnalogInV3.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -449,7 +454,7 @@ end;
 
 procedure TBrickletAnalogInV3.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -457,7 +462,7 @@ end;
 
 procedure TBrickletAnalogInV3.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(aUID, 8, _request);
@@ -466,34 +471,36 @@ end;
 
 function TBrickletAnalogInV3.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAnalogInV3.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletAnalogInV3.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V3_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletAnalogInV3.CallbackWrapperVoltage(const aPacket: TDynamicByteArray);
-var voltage: word;
+var
+  _voltage: word;
 begin
-  voltage:= LEConvertUInt16From(8, aPacket);
+  _voltage:= LEConvertUInt16From(8, aPacket);
 
   if (Assigned(fVoltageCallback)) then begin
-    fVoltageCallback(self, voltage);
+    fVoltageCallback(self, _voltage);
   end;
 end;
 

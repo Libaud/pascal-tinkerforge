@@ -333,12 +333,14 @@ type
     ///  
     ///  It is recommended to use the Brick Viewer to set the WIFI configuration.
     /// </summary>
-    procedure SetWifiConfiguration(const ssid: string; const connection: byte; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const aPort: word); virtual;
+    procedure SetWifiConfiguration(const ssid: string; const connection: byte; const ip: array of byte; const subnetMask: array of byte;
+                                   const gateway: array of byte; const aPort: word); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickMaster.TBrickMaster.SetWifiConfiguration"/>.
     /// </summary>
-    procedure GetWifiConfiguration(out ssid: string; out connection: byte; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out port: word); virtual;
+    procedure GetWifiConfiguration(out ssid: string; out connection: byte; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8;
+                                   out gateway: TArray0To3OfUInt8; out port: word); virtual;
 
     /// <summary>
     ///  Sets the encryption of the WIFI Extension. The first parameter is the
@@ -2537,7 +2539,11 @@ begin
   website:= LEConvertUInt8From(16, _response);
 end;
 
-procedure TBrickMaster.GetWifi2Status(out clientEnabled: boolean; out clientStatus: byte; out clientIP: TArray0To3OfUInt8; out clientSubnetMask: TArray0To3OfUInt8; out clientGateway: TArray0To3OfUInt8; out clientMACAddress: TArray0To5OfUInt8; out clientRXCount: longword; out clientTXCount: longword; out clientRSSI: shortint; out apEnabled: boolean; out apIP: TArray0To3OfUInt8; out apSubnetMask: TArray0To3OfUInt8; out apGateway: TArray0To3OfUInt8; out apMACAddress: TArray0To5OfUInt8; out apRXCount: longword; out apTXCount: longword; out apConnectedCount: byte);
+procedure TBrickMaster.GetWifi2Status(out clientEnabled: boolean; out clientStatus: byte; out clientIP: TArray0To3OfUInt8; out clientSubnetMask: TArray0To3OfUInt8;
+                                      out clientGateway: TArray0To3OfUInt8; out clientMACAddress: TArray0To5OfUInt8; out clientRXCount: longword;
+                                      out clientTXCount: longword; out clientRSSI: shortint; out apEnabled: boolean; out apIP: TArray0To3OfUInt8;
+                                      out apSubnetMask: TArray0To3OfUInt8; out apGateway: TArray0To3OfUInt8; out apMACAddress: TArray0To5OfUInt8;
+                                      out apRXCount: longword; out apTXCount: longword; out apConnectedCount: byte);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
@@ -2562,7 +2568,8 @@ begin
   apConnectedCount:= LEConvertUInt8From(64, _response);
 end;
 
-procedure TBrickMaster.SetWifi2ClientConfiguration(const enable: boolean; const ssid: string; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const macAddress: array of byte; const bssid: array of byte);
+procedure TBrickMaster.SetWifi2ClientConfiguration(const enable: boolean; const ssid: string; const ip: array of byte; const subnetMask: array of byte;
+                                                   const gateway: array of byte; const macAddress: array of byte; const bssid: array of byte);
 var
   _request: TDynamicByteArray; _i: longint;
 begin
@@ -2582,7 +2589,8 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifi2ClientConfiguration(out enable: boolean; out ssid: string; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out macAddress: TArray0To5OfUInt8; out bssid: TArray0To5OfUInt8);
+procedure TBrickMaster.GetWifi2ClientConfiguration(out enable: boolean; out ssid: string; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8;
+                                                   out gateway: TArray0To3OfUInt8; out macAddress: TArray0To5OfUInt8; out bssid: TArray0To5OfUInt8);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin

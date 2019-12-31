@@ -28,9 +28,9 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletAccelerometerV2 = class;
-  TBrickletAccelerometerV2NotifyAcceleration = procedure(aSender: TBrickletAccelerometerV2; const x: longint; const y: longint; const z: longint) of object;
-  TBrickletAccelerometerV2NotifyContinuousAcceleration16Bit = procedure(aSender: TBrickletAccelerometerV2; const acceleration: TArray0To29OfInt16) of object;
-  TBrickletAccelerometerV2NotifyContinuousAcceleration8Bit = procedure(aSender: TBrickletAccelerometerV2; const acceleration: TArray0To59OfInt8) of object;
+  TBrickletAccelerometerV2NotifyAcceleration = procedure(aSender: TBrickletAccelerometerV2; const aX: longint; const aY: longint; const aZ: longint) of object;
+  TBrickletAccelerometerV2NotifyContinuousAcceleration16Bit = procedure(aSender: TBrickletAccelerometerV2; const aAcceleration: TArray0To29OfInt16) of object;
+  TBrickletAccelerometerV2NotifyContinuousAcceleration8Bit = procedure(aSender: TBrickletAccelerometerV2; const aAcceleration: TArray0To59OfInt8) of object;
 
   /// <summary>
   ///  Measures acceleration in three axis
@@ -58,7 +58,7 @@ type
     ///  to use the <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.OnAcceleration"/> callback and set the period with
     ///  <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetAccelerationCallbackConfiguration"/>.
     /// </summary>
-    procedure GetAcceleration(out x: longint; out y: longint; out z: longint); virtual;
+    procedure GetAcceleration(out aX: longint; out aY: longint; out aZ: longint); virtual;
 
     /// <summary>
     ///  Configures the data rate and full scale range.
@@ -70,12 +70,12 @@ type
     ///  Decreasing data rate or full scale range will also decrease the noise on
     ///  the data.
     /// </summary>
-    procedure SetConfiguration(const dataRate: byte; const fullScale: byte); virtual;
+    procedure SetConfiguration(const aDataRate: byte; const aFullScale: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out dataRate: byte; out fullScale: byte); virtual;
+    procedure GetConfiguration(out aDataRate: byte; out aFullScale: byte); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.OnAcceleration"/>
@@ -91,19 +91,19 @@ type
     ///  If this callback is enabled, the <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.OnContinuousAcceleration16Bit"/> callback
     ///  and <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.OnContinuousAcceleration8Bit"/> callback will automatically be disabled.
     /// </summary>
-    procedure SetAccelerationCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetAccelerationCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetAccelerationCallbackConfiguration"/>.
     /// </summary>
-    procedure GetAccelerationCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetAccelerationCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Configures the info LED (marked as "Force" on the Bricklet) to be either turned off,
     ///  turned on, or blink in heartbeat mode.
     /// </summary>
-    procedure SetInfoLEDConfig(const config: byte); virtual;
+    procedure SetInfoLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the LED configuration as set by <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetInfoLEDConfig"/>
@@ -157,13 +157,13 @@ type
     ///   "3", "20000Hz", "10000Hz"
     ///  </code>
     /// </summary>
-    procedure SetContinuousAccelerationConfiguration(const enableX: boolean; const enableY: boolean; const enableZ: boolean; const resolution: byte); virtual;
+    procedure SetContinuousAccelerationConfiguration(const aEnableX: boolean; const aEnableY: boolean; const aEnableZ: boolean; const aResolution: byte); virtual;
 
     /// <summary>
     ///  Returns the continuous acceleration configuration as set by
     ///  <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetContinuousAccelerationConfiguration"/>.
     /// </summary>
-    procedure GetContinuousAccelerationConfiguration(out enableX: boolean; out enableY: boolean; out enableZ: boolean; out resolution: byte); virtual;
+    procedure GetContinuousAccelerationConfiguration(out aEnableX: boolean; out aEnableY: boolean; out aEnableZ: boolean; out aResolution: byte); virtual;
 
     /// <summary>
     ///  Configures IIR Bypass filter mode and low pass filter roll off corner frequency.
@@ -179,14 +179,14 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetFilterConfiguration(const iirBypass: byte; const lowPassFilter: byte); virtual;
+    procedure SetFilterConfiguration(const aIIRBypass: byte; const aLowPassFilter: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetFilterConfiguration"/>.
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure GetFilterConfiguration(out iirBypass: byte; out lowPassFilter: byte); virtual;
+    procedure GetFilterConfiguration(out aIIRBypass: byte; out aLowPassFilter: byte); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -201,7 +201,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -229,7 +230,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -241,7 +242,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -252,7 +253,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletAccelerometerV2.TBrickletAccelerometerV2.SetStatusLEDConfig"/>
@@ -304,7 +305,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -340,7 +342,8 @@ type
     ///  * x, z enabled: "x, z, ... 15x ..., x, z"
     ///  * y enabled: "y, ... 30x ..., y"
     /// </summary>
-    property OnContinuousAcceleration16Bit: TBrickletAccelerometerV2NotifyContinuousAcceleration16Bit read fContinuousAcceleration16BitCallback write fContinuousAcceleration16BitCallback;
+    property OnContinuousAcceleration16Bit: TBrickletAccelerometerV2NotifyContinuousAcceleration16Bit read fContinuousAcceleration16BitCallback
+                                                                                                      write fContinuousAcceleration16BitCallback;
 
     /// <summary>
     ///  Returns 60 acceleration values with 8 bit resolution. The data rate can
@@ -368,7 +371,8 @@ type
     ///  * x, z enabled: "x, z, ... 30x ..., x, z"
     ///  * y enabled: "y, ... 60x ..., y"
     /// </summary>
-    property OnContinuousAcceleration8Bit: TBrickletAccelerometerV2NotifyContinuousAcceleration8Bit read fContinuousAcceleration8BitCallback write fContinuousAcceleration8BitCallback;
+    property OnContinuousAcceleration8Bit: TBrickletAccelerometerV2NotifyContinuousAcceleration8Bit read fContinuousAcceleration8BitCallback
+                                                                                                    write fContinuousAcceleration8BitCallback;
   end;
 
 implementation
@@ -417,63 +421,63 @@ begin
   aCallBacks[BRICKLET_ACCELEROMETER_V2_CALLBACK_CONTINUOUS_ACCELERATION_8_BIT]:= {$ifdef FPC}@{$endif}CallbackWrapperContinuousAcceleration8Bit;
 end;
 
-procedure TBrickletAccelerometerV2.GetAcceleration(out x: longint; out y: longint; out z: longint);
+procedure TBrickletAccelerometerV2.GetAcceleration(out aX: longint; out aY: longint; out aZ: longint);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_ACCELERATION, 8);
   _response:= SendRequest(_request);
-  x:= LEConvertInt32From(8, _response);
-  y:= LEConvertInt32From(12, _response);
-  z:= LEConvertInt32From(16, _response);
+  aX:= LEConvertInt32From(8, _response);
+  aY:= LEConvertInt32From(12, _response);
+  aZ:= LEConvertInt32From(16, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetConfiguration(const dataRate: byte; const fullScale: byte);
+procedure TBrickletAccelerometerV2.SetConfiguration(const aDataRate: byte; const aFullScale: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_CONFIGURATION, 10);
-  LEConvertUInt8To(dataRate, 8, _request);
-  LEConvertUInt8To(fullScale, 9, _request);
+  LEConvertUInt8To(aDataRate, 8, _request);
+  LEConvertUInt8To(aFullScale, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAccelerometerV2.GetConfiguration(out dataRate: byte; out fullScale: byte);
+procedure TBrickletAccelerometerV2.GetConfiguration(out aDataRate: byte; out aFullScale: byte);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  dataRate:= LEConvertUInt8From(8, _response);
-  fullScale:= LEConvertUInt8From(9, _response);
+  aDataRate:= LEConvertUInt8From(8, _response);
+  aFullScale:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetAccelerationCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletAccelerometerV2.SetAccelerationCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_ACCELERATION_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAccelerometerV2.GetAccelerationCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletAccelerometerV2.GetAccelerationCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_ACCELERATION_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetInfoLEDConfig(const config: byte);
+procedure TBrickletAccelerometerV2.SetInfoLEDConfig(const aConfig: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_INFO_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -486,60 +490,60 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetContinuousAccelerationConfiguration(const enableX: boolean; const enableY: boolean; const enableZ: boolean; const resolution: byte);
+procedure TBrickletAccelerometerV2.SetContinuousAccelerationConfiguration(const aEnableX: boolean; const aEnableY: boolean; const aEnableZ: boolean; const aResolution: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_CONTINUOUS_ACCELERATION_CONFIGURATION, 12);
-  LEConvertBooleanTo(enableX, 8, _request);
-  LEConvertBooleanTo(enableY, 9, _request);
-  LEConvertBooleanTo(enableZ, 10, _request);
-  LEConvertUInt8To(resolution, 11, _request);
+  LEConvertBooleanTo(aEnableX, 8, _request);
+  LEConvertBooleanTo(aEnableY, 9, _request);
+  LEConvertBooleanTo(aEnableZ, 10, _request);
+  LEConvertUInt8To(aResolution, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAccelerometerV2.GetContinuousAccelerationConfiguration(out enableX: boolean; out enableY: boolean; out enableZ: boolean; out resolution: byte);
+procedure TBrickletAccelerometerV2.GetContinuousAccelerationConfiguration(out aEnableX: boolean; out aEnableY: boolean; out aEnableZ: boolean; out aResolution: byte);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_CONTINUOUS_ACCELERATION_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  enableX:= LEConvertBooleanFrom(8, _response);
-  enableY:= LEConvertBooleanFrom(9, _response);
-  enableZ:= LEConvertBooleanFrom(10, _response);
-  resolution:= LEConvertUInt8From(11, _response);
+  aEnableX:= LEConvertBooleanFrom(8, _response);
+  aEnableY:= LEConvertBooleanFrom(9, _response);
+  aEnableZ:= LEConvertBooleanFrom(10, _response);
+  aResolution:= LEConvertUInt8From(11, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetFilterConfiguration(const iirBypass: byte; const lowPassFilter: byte);
+procedure TBrickletAccelerometerV2.SetFilterConfiguration(const aIIRBypass: byte; const aLowPassFilter: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_FILTER_CONFIGURATION, 10);
-  LEConvertUInt8To(iirBypass, 8, _request);
-  LEConvertUInt8To(lowPassFilter, 9, _request);
+  LEConvertUInt8To(aIIRBypass, 8, _request);
+  LEConvertUInt8To(aLowPassFilter, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAccelerometerV2.GetFilterConfiguration(out iirBypass: byte; out lowPassFilter: byte);
+procedure TBrickletAccelerometerV2.GetFilterConfiguration(out aIIRBypass: byte; out aLowPassFilter: byte);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_FILTER_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  iirBypass:= LEConvertUInt8From(8, _response);
-  lowPassFilter:= LEConvertUInt8From(9, _response);
+  aIIRBypass:= LEConvertUInt8From(8, _response);
+  aLowPassFilter:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletAccelerometerV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletAccelerometerV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletAccelerometerV2.SetBootloaderMode(const aMode: byte): byte;
@@ -561,32 +565,32 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletAccelerometerV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletAccelerometerV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletAccelerometerV2.WriteFirmware(const aData: array of byte): byte;
 var 
 _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletAccelerometerV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletAccelerometerV2.SetStatusLEDConfig(const aConfig: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -634,18 +638,18 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAccelerometerV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletAccelerometerV2.GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
 _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUid:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletAccelerometerV2.CallbackWrapperAcceleration(const aPacket: TDynamicByteArray);

@@ -483,7 +483,8 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickHAT.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
+procedure TBrickHAT.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                                out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -500,14 +501,14 @@ end;
 
 procedure TBrickHAT.CallbackWrapperVoltages(const aPacket: TDynamicByteArray);
 var
-  voltageUSB: word;
-  voltageDC: word;
+  _voltageUSB: word;
+  _voltageDC: word;
 begin
-  voltageUSB:= LEConvertUInt16From(8, aPacket);
-  voltageDC:= LEConvertUInt16From(10, aPacket);
+  _voltageUSB:= LEConvertUInt16From(8, aPacket);
+  _voltageDC:= LEConvertUInt16From(10, aPacket);
 
   if (Assigned(voltagesCallback)) then begin
-    voltagesCallback(self, voltageUSB, voltageDC);
+    voltagesCallback(self, _voltageUSB, _voltageDC);
   end;
 end;
 

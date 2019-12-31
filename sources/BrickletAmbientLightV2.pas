@@ -25,8 +25,8 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletAmbientLightV2 = class;
-  TBrickletAmbientLightV2NotifyIlluminance = procedure(aSender: TBrickletAmbientLightV2; const illuminance: longword) of object;
-  TBrickletAmbientLightV2NotifyIlluminanceReached = procedure(aSender: TBrickletAmbientLightV2; const illuminance: longword) of object;
+  TBrickletAmbientLightV2NotifyIlluminance = procedure(aSender: TBrickletAmbientLightV2; const aIlluminance: longword) of object;
+  TBrickletAmbientLightV2NotifyIlluminanceReached = procedure(aSender: TBrickletAmbientLightV2; const aIlluminance: longword) of object;
 
   /// <summary>
   ///  Measures ambient light up to 64000lux
@@ -67,7 +67,7 @@ type
     ///  The <see cref="BrickletAmbientLightV2.TBrickletAmbientLightV2.OnIlluminance"/> callback is only triggered if the illuminance has changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetIlluminanceCallbackPeriod(const period: longword); virtual;
+    procedure SetIlluminanceCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletAmbientLightV2.TBrickletAmbientLightV2.SetIlluminanceCallbackPeriod"/>.
@@ -91,12 +91,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetIlluminanceCallbackThreshold(const option: char; const min: longword; const max: longword); virtual;
+    procedure SetIlluminanceCallbackThreshold(const aOption: char; const aMin: longword; const aMax: longword); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletAmbientLightV2.TBrickletAmbientLightV2.SetIlluminanceCallbackThreshold"/>.
     /// </summary>
-    procedure GetIlluminanceCallbackThreshold(out option: char; out min: longword; out max: longword); virtual;
+    procedure GetIlluminanceCallbackThreshold(out aOption: char; out aMin: longword; out aMax: longword); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -109,7 +109,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletAmbientLightV2.TBrickletAmbientLightV2.SetDebouncePeriod"/>.
@@ -143,12 +143,12 @@ type
     ///  
     ///  The default values are 0-8000lux illuminance range and 200ms integration time.
     /// </summary>
-    procedure SetConfiguration(const illuminanceRange: byte; const integrationTime: byte); virtual;
+    procedure SetConfiguration(const aIlluminanceRange: byte; const aIntegrationTime: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletAmbientLightV2.TBrickletAmbientLightV2.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out illuminanceRange: byte; out integrationTime: byte); virtual;
+    procedure GetConfiguration(out aIlluminanceRange: byte; out aIntegrationTime: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -160,7 +160,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -214,122 +215,125 @@ end;
 
 function TBrickletAmbientLightV2.GetIlluminance: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_GET_ILLUMINANCE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAmbientLightV2.SetIlluminanceCallbackPeriod(const period: longword);
+procedure TBrickletAmbientLightV2.SetIlluminanceCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_SET_ILLUMINANCE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAmbientLightV2.GetIlluminanceCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_GET_ILLUMINANCE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAmbientLightV2.SetIlluminanceCallbackThreshold(const option: char; const min: longword; const max: longword);
+procedure TBrickletAmbientLightV2.SetIlluminanceCallbackThreshold(const aOption: char; const aMin: longword; const aMax: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_SET_ILLUMINANCE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt32To(min, 9, _request);
-  LEConvertUInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt32To(aMin, 9, _request);
+  LEConvertUInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAmbientLightV2.GetIlluminanceCallbackThreshold(out option: char; out min: longword; out max: longword);
+procedure TBrickletAmbientLightV2.GetIlluminanceCallbackThreshold(out aOption: char; out aMin: longword; out aMax: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_GET_ILLUMINANCE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt32From(9, _response);
-  max:= LEConvertUInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt32From(9, _response);
+  aMax:= LEConvertUInt32From(13, _response);
 end;
 
-procedure TBrickletAmbientLightV2.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletAmbientLightV2.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAmbientLightV2.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAmbientLightV2.SetConfiguration(const illuminanceRange: byte; const integrationTime: byte);
+procedure TBrickletAmbientLightV2.SetConfiguration(const aIlluminanceRange: byte; const aIntegrationTime: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_SET_CONFIGURATION, 10);
-  LEConvertUInt8To(illuminanceRange, 8, _request);
-  LEConvertUInt8To(integrationTime, 9, _request);
+  LEConvertUInt8To(aIlluminanceRange, 8, _request);
+  LEConvertUInt8To(aIntegrationTime, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAmbientLightV2.GetConfiguration(out illuminanceRange: byte; out integrationTime: byte);
+procedure TBrickletAmbientLightV2.GetConfiguration(out aIlluminanceRange: byte; out aIntegrationTime: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  illuminanceRange:= LEConvertUInt8From(8, _response);
-  integrationTime:= LEConvertUInt8From(9, _response);
+  aIlluminanceRange:= LEConvertUInt8From(8, _response);
+  aIntegrationTime:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletAmbientLightV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletAmbientLightV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_AMBIENT_LIGHT_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletAmbientLightV2.CallbackWrapperIlluminance(const aPacket: TDynamicByteArray);
-var illuminance: longword;
+var
+  _illuminance: longword;
 begin
-  illuminance:= LEConvertUInt32From(8, aPacket);
+  _illuminance:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(fIlluminanceCallback)) then begin
-    fIlluminanceCallback(self, illuminance);
+    fIlluminanceCallback(self, _illuminance);
   end;
 end;
 
 procedure TBrickletAmbientLightV2.CallbackWrapperIlluminanceReached(const aPacket: TDynamicByteArray);
-var illuminance: longword;
+var
+  _illuminance: longword;
 begin
-  illuminance:= LEConvertUInt32From(8, aPacket);
+  _illuminance:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(fIlluminanceReachedCallback)) then begin
-    fIlluminanceReachedCallback(self, illuminance);
+    fIlluminanceReachedCallback(self, _illuminance);
   end;
 end;
 

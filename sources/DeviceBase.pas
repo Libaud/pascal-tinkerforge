@@ -37,8 +37,8 @@ type
 
       // Abstract method's
       procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char;
-                          out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber;
-                          out aDeviceIdentifier: word); virtual; abstract;
+                            out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber;
+                            out aDeviceIdentifier: word); virtual; abstract;
       /// <summary>
       ///  Changes the response expected flag of the function specified by
       ///  the function ID paramdeviceseter. This flag can only be changed for setter
@@ -80,7 +80,7 @@ type
       ///  errors are sil    property IPConnection: fIPConnection read write;
       ///  ently ignored, because they cannot be detected.
       /// </summary>
-      function GetResponseExpected(const functionId: byte): boolean; virtual;
+      function GetResponseExpected(const aFunctionId: byte): boolean; virtual;
       // Properties
       property ResponseExpected: TTFResponseExpected read fResponseExpected write fResponseExpected;
       property CallbackWrappers: TTFCallbackWrappers read fCallbackWrappers;
@@ -115,13 +115,14 @@ end;
 // Access method's
 
 procedure TDeviceBase.SetResponseExpected(const aFunctionId: byte; const aResponseExpected: boolean);
-var flag: byte;
+var
+  _flag: byte;
 begin
-  flag:= fresponseExpected[aFunctionId];
-  if (flag = DEVICE_RESPONSE_EXPECTED_INVALID_FUNCTION_ID) then begin
+  _flag:= fresponseExpected[aFunctionId];
+  if (_flag = DEVICE_RESPONSE_EXPECTED_INVALID_FUNCTION_ID) then begin
     raise Exception.Create('Invalid function ID ' + IntToStr(aFunctionId));
   end;
-  if (flag = DEVICE_RESPONSE_EXPECTED_ALWAYS_TRUE) then begin
+  if (_flag = DEVICE_RESPONSE_EXPECTED_ALWAYS_TRUE) then begin
     raise Exception.Create('Response Expected flag cannot be changed for function ID ' + IntToStr(aFunctionId));
   end;
   if (aResponseExpected) then begin
@@ -132,15 +133,16 @@ begin
   end;
 end;
 
-function TDeviceBase.GetResponseExpected(const functionID: byte): boolean;
-var flag: byte;
+function TDeviceBase.GetResponseExpected(const aFunctionId: byte): boolean;
+var
+  _flag: byte;
 begin
-  flag:= fresponseExpected[functionID];
-  if (flag = DEVICE_RESPONSE_EXPECTED_INVALID_FUNCTION_ID) then begin
-    raise Exception.Create('Invalid function ID ' + IntToStr(functionID));
+  _flag:= fresponseExpected[aFunctionId];
+  if (_flag = DEVICE_RESPONSE_EXPECTED_INVALID_FUNCTION_ID) then begin
+    raise Exception.Create('Invalid function ID ' + IntToStr(aFunctionId));
   end;
-  if ((flag = DEVICE_RESPONSE_EXPECTED_ALWAYS_TRUE) or
-      (flag = DEVICE_RESPONSE_EXPECTED_TRUE)) then begin
+  if ((_flag = DEVICE_RESPONSE_EXPECTED_ALWAYS_TRUE) or
+      (_flag = DEVICE_RESPONSE_EXPECTED_TRUE)) then begin
     Result:= true;
   end
   else begin

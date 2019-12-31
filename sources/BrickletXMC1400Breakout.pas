@@ -28,7 +28,7 @@ type
 
   TBrickletXMC1400Breakout = class;
   TBrickletXMC1400BreakoutNotifyADCValues = procedure(aSender: TBrickletXMC1400Breakout; const aValues: TArray0To7OfUInt16) of object;
-  TBrickletXMC1400BreakoutNotifyCount = procedure(aSender: TBrickletXMC1400Breakout; const count: longword) of object;
+  TBrickletXMC1400BreakoutNotifyCount = procedure(aSender: TBrickletXMC1400Breakout; const aCount: longword) of object;
 
   /// <summary>
   ///  Breakout for Infineon XMC1400 microcontroller
@@ -50,7 +50,7 @@ type
     ///  Example for a setter function. The values are the values that can be given to
     ///  the XMC_GPIO_Init function. See communication.c in the firmware.
     /// </summary>
-    procedure SetGPIOConfig(const aPort: byte; const aPin: byte; const aMode: byte; const inputHysteresis: byte; const outputLevel: boolean); virtual;
+    procedure SetGPIOConfig(const aPort: byte; const aPin: byte; const aMode: byte; const aInputHysteresis: byte; const aOutputLevel: boolean); virtual;
 
     /// <summary>
     ///  Example for a getter function. Returns the Result of a
@@ -72,17 +72,17 @@ type
     ///  * Channel 6: P2_1
     ///  * Channel 7: P2_2
     /// </summary>
-    procedure SetADCChannelConfig(const channel: byte; const enable: boolean); virtual;
+    procedure SetADCChannelConfig(const aChannel: byte; const aEnable: boolean); virtual;
 
     /// <summary>
     ///  Returns the config for the given channel as set by <see cref="BrickletXMC1400Breakout.TBrickletXMC1400Breakout.SetADCChannelConfig"/>.
     /// </summary>
-    function GetADCChannelConfig(const channel: byte): boolean; virtual;
+    function GetADCChannelConfig(const aChannel: byte): boolean; virtual;
 
     /// <summary>
     ///  Returns the 12-bit value of the given ADC channel of the ADC driver example.
     /// </summary>
-    function GetADCChannelValue(const channel: byte): word; virtual;
+    function GetADCChannelValue(const aChannel: byte): word; virtual;
 
     /// <summary>
     ///  Returns the values for all 8 ADC channels of the adc driver example.
@@ -104,13 +104,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetADCValuesCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetADCValuesCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletXMC1400Breakout.TBrickletXMC1400Breakout.SetADCValuesCallbackConfiguration"/>.
     /// </summary>
-    procedure GetADCValuesCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetADCValuesCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the value of the example count (see example.c).
@@ -156,12 +156,14 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetCountCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: longword; const max: longword); virtual;
+    procedure SetCountCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char;
+                                            const aMin: longword; const aMax: longword); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletXMC1400Breakout.TBrickletXMC1400Breakout.SetCountCallbackConfiguration"/>.
     /// </summary>
-    procedure GetCountCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: longword; out max: longword); virtual;
+    procedure GetCountCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean;
+                                            out aOption: char; out aMin: longword; out aMax: longword); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -176,7 +178,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -205,7 +208,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -217,7 +220,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -228,7 +231,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletXMC1400Breakout.TBrickletXMC1400Breakout.SetStatusLEDConfig"/>
@@ -280,7 +283,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -344,7 +348,7 @@ begin
   aCallBacks[BRICKLET_XMC1400_BREAKOUT_CALLBACK_COUNT]:= {$ifdef FPC}@{$endif}CallbackWrapperCount;
 end;
 
-procedure TBrickletXMC1400Breakout.SetGPIOConfig(const aPort: byte; const aPin: byte; const aMode: byte; const inputHysteresis: byte; const outputLevel: boolean);
+procedure TBrickletXMC1400Breakout.SetGPIOConfig(const aPort: byte; const aPin: byte; const aMode: byte; const aInputHysteresis: byte; const aOutputLevel: boolean);
 var 
 _request: TDynamicByteArray;
 begin
@@ -352,8 +356,8 @@ begin
   LEConvertUInt8To(aPort, 8, _request);
   LEConvertUInt8To(aPin, 9, _request);
   LEConvertUInt8To(aMode, 10, _request);
-  LEConvertUInt8To(inputHysteresis, 11, _request);
-  LEConvertBooleanTo(outputLevel, 12, _request);
+  LEConvertUInt8To(aInputHysteresis, 11, _request);
+  LEConvertBooleanTo(aOutputLevel, 12, _request);
   SendRequest(_request);
 end;
 
@@ -368,32 +372,32 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletXMC1400Breakout.SetADCChannelConfig(const channel: byte; const enable: boolean);
+procedure TBrickletXMC1400Breakout.SetADCChannelConfig(const aChannel: byte; const aEnable: boolean);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_SET_ADC_CHANNEL_CONFIG, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(enable, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aEnable, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletXMC1400Breakout.GetADCChannelConfig(const channel: byte): boolean;
+function TBrickletXMC1400Breakout.GetADCChannelConfig(const aChannel: byte): boolean;
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_GET_ADC_CHANNEL_CONFIG, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-function TBrickletXMC1400Breakout.GetADCChannelValue(const channel: byte): word;
+function TBrickletXMC1400Breakout.GetADCChannelValue(const aChannel: byte): word;
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_GET_ADC_CHANNEL_VALUE, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
@@ -407,24 +411,24 @@ begin
   for _i:= 0 to 7 do Result[_i]:= LEConvertUInt16From(8 + (_i * 2), _response);
 end;
 
-procedure TBrickletXMC1400Breakout.SetADCValuesCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletXMC1400Breakout.SetADCValuesCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_SET_ADC_VALUES_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletXMC1400Breakout.GetADCValuesCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletXMC1400Breakout.GetADCValuesCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_GET_ADC_VALUES_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
 function TBrickletXMC1400Breakout.GetCount: longword;
@@ -436,42 +440,42 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletXMC1400Breakout.SetCountCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: longword; const max: longword);
+procedure TBrickletXMC1400Breakout.SetCountCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: longword; const aMax: longword);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_SET_COUNT_CALLBACK_CONFIGURATION, 22);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertUInt32To(min, 14, _request);
-  LEConvertUInt32To(max, 18, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertUInt32To(aMin, 14, _request);
+  LEConvertUInt32To(aMax, 18, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletXMC1400Breakout.GetCountCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: longword; out max: longword);
+procedure TBrickletXMC1400Breakout.GetCountCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: longword; out aMax: longword);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_GET_COUNT_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertUInt32From(14, _response);
-  max:= LEConvertUInt32From(18, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertUInt32From(14, _response);
+  aMax:= LEConvertUInt32From(18, _response);
 end;
 
-procedure TBrickletXMC1400Breakout.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletXMC1400Breakout.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletXMC1400Breakout.SetBootloaderMode(const aMode: byte): byte;
@@ -493,32 +497,32 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletXMC1400Breakout.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletXMC1400Breakout.SetWriteFirmwarePointer(const aPointer: longword);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletXMC1400Breakout.WriteFirmware(const data: array of byte): byte;
+function TBrickletXMC1400Breakout.WriteFirmware(const aData: array of byte): byte;
 var 
 _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletXMC1400Breakout.SetStatusLEDConfig(const config: byte);
+procedure TBrickletXMC1400Breakout.SetStatusLEDConfig(const aConfig: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -566,18 +570,18 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletXMC1400Breakout.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletXMC1400Breakout.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
 _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_XMC1400_BREAKOUT_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletXMC1400Breakout.CallbackWrapperADCValues(const aPacket: TDynamicByteArray);

@@ -127,7 +127,7 @@ type
     ///  Decreasing data rate or full scale range will also decrease the noise on
     ///  the data.
     /// </summary>
-    procedure SetConfiguration(const aDataRate: byte; const aFullScale: byte; const filterBandwidth: byte); virtual;
+    procedure SetConfiguration(const aDataRate: byte; const aFullScale: byte; const aFilterBandwidth: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletAccelerometer.TBrickletAccelerometer.SetConfiguration"/>.
@@ -303,14 +303,14 @@ begin
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletAccelerometer.SetConfiguration(const aDataRate: byte; const aFullScale: byte; const filterBandwidth: byte);
+procedure TBrickletAccelerometer.SetConfiguration(const aDataRate: byte; const aFullScale: byte; const aFilterBandwidth: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ACCELEROMETER_FUNCTION_SET_CONFIGURATION, 11);
   LEConvertUInt8To(aDataRate, 8, _request);
   LEConvertUInt8To(aFullScale, 9, _request);
-  LEConvertUInt8To(filterBandwidth, 10, _request);
+  LEConvertUInt8To(aFilterBandwidth, 10, _request);
   SendRequest(_request);
 end;
 

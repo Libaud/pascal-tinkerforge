@@ -271,7 +271,8 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickHATZero.SetUSBVoltageCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: word; const aMax: word);
+procedure TBrickHATZero.SetUSBVoltageCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean;
+                                                           const aOption: char; const aMin: word; const aMax: word);
 var 
 _request: TDynamicByteArray;
 begin
@@ -297,7 +298,8 @@ begin
   aMax:= LEConvertUInt16From(16, _response);
 end;
 
-procedure TBrickHATZero.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
+procedure TBrickHATZero.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                            out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
 _request, _response: TDynamicByteArray;
 begin
@@ -401,7 +403,8 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickHATZero.GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
+procedure TBrickHATZero.GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                                    out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;

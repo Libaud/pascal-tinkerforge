@@ -25,16 +25,16 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletCO2 = class;
-  TBrickletCO2NotifyCO2Concentration = procedure(sender: TBrickletCO2; const co2Concentration: word) of object;
-  TBrickletCO2NotifyCO2ConcentrationReached = procedure(sender: TBrickletCO2; const co2Concentration: word) of object;
+  TBrickletCO2NotifyCO2Concentration = procedure(sender: TBrickletCO2; const aCO2Concentration: word) of object;
+  TBrickletCO2NotifyCO2ConcentrationReached = procedure(sender: TBrickletCO2; const aCO2Concentration: word) of object;
 
   /// <summary>
   ///  Measures CO2 concentration in ppm
   /// </summary>
   TBrickletCO2 = class(TDevice)
   private
-    co2ConcentrationCallback: TBrickletCO2NotifyCO2Concentration;
-    co2ConcentrationReachedCallback: TBrickletCO2NotifyCO2ConcentrationReached;
+    fCO2ConcentrationCallback: TBrickletCO2NotifyCO2Concentration;
+    fCO2ConcentrationReachedCallback: TBrickletCO2NotifyCO2ConcentrationReached;
     procedure CallbackWrapperCO2Concentration(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperCO2ConcentrationReached(const aPacket: TDynamicByteArray); virtual;
   protected
@@ -60,7 +60,7 @@ type
     ///  The <see cref="BrickletCO2.TBrickletCO2.OnCO2Concentration"/> callback is only triggered if the CO2 concentration
     ///  has changed since the last triggering.
     /// </summary>
-    procedure SetCO2ConcentrationCallbackPeriod(const period: longword); virtual;
+    procedure SetCO2ConcentrationCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletCO2.TBrickletCO2.SetCO2ConcentrationCallbackPeriod"/>.
@@ -82,12 +82,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the CO2 concentration is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetCO2ConcentrationCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetCO2ConcentrationCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletCO2.TBrickletCO2.SetCO2ConcentrationCallbackThreshold"/>.
     /// </summary>
-    procedure GetCO2ConcentrationCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetCO2ConcentrationCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -100,7 +100,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletCO2.TBrickletCO2.SetDebouncePeriod"/>.
@@ -117,7 +117,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -127,7 +128,7 @@ type
     ///  The <see cref="BrickletCO2.TBrickletCO2.OnCO2Concentration"/> callback is only triggered if the CO2 concentration
     ///  has changed since the last triggering.
     /// </summary>
-    property OnCO2Concentration: TBrickletCO2NotifyCO2Concentration read co2ConcentrationCallback write co2ConcentrationCallback;
+    property OnCO2Concentration: TBrickletCO2NotifyCO2Concentration read fCO2ConcentrationCallback write fCO2ConcentrationCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -137,7 +138,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletCO2.TBrickletCO2.SetDebouncePeriod"/>.
     /// </summary>
-    property OnCO2ConcentrationReached: TBrickletCO2NotifyCO2ConcentrationReached read co2ConcentrationReachedCallback write co2ConcentrationReachedCallback;
+    property OnCO2ConcentrationReached: TBrickletCO2NotifyCO2ConcentrationReached read fCO2ConcentrationReachedCallback write fCO2ConcentrationReachedCallback;
   end;
 
 implementation
@@ -169,102 +170,105 @@ end;
 
 function TBrickletCO2.GetCO2Concentration: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_GET_CO2_CONCENTRATION, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletCO2.SetCO2ConcentrationCallbackPeriod(const period: longword);
+procedure TBrickletCO2.SetCO2ConcentrationCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_SET_CO2_CONCENTRATION_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletCO2.GetCO2ConcentrationCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_GET_CO2_CONCENTRATION_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletCO2.SetCO2ConcentrationCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickletCO2.SetCO2ConcentrationCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_SET_CO2_CONCENTRATION_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCO2.GetCO2ConcentrationCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickletCO2.GetCO2ConcentrationCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_GET_CO2_CONCENTRATION_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletCO2.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletCO2.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletCO2.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletCO2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletCO2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CO2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletCO2.CallbackWrapperCO2Concentration(const aPacket: TDynamicByteArray);
-var co2Concentration: word;
+var
+  _co2Concentration: word;
 begin
-  co2Concentration:= LEConvertUInt16From(8, aPacket);
+  _co2Concentration:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(co2ConcentrationCallback)) then begin
-    co2ConcentrationCallback(self, co2Concentration);
+  if (Assigned(fCO2ConcentrationCallback)) then begin
+    fCO2ConcentrationCallback(self, _co2Concentration);
   end;
 end;
 
 procedure TBrickletCO2.CallbackWrapperCO2ConcentrationReached(const aPacket: TDynamicByteArray);
-var co2Concentration: word;
+var
+  _co2Concentration: word;
 begin
-  co2Concentration:= LEConvertUInt16From(8, aPacket);
+  _co2Concentration:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(co2ConcentrationReachedCallback)) then begin
-    co2ConcentrationReachedCallback(self, co2Concentration);
+  if (Assigned(fCO2ConcentrationReachedCallback)) then begin
+    fCO2ConcentrationReachedCallback(self, _co2Concentration);
   end;
 end;
 

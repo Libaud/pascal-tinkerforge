@@ -48,9 +48,9 @@ type
   /// </summary>
   TBrickletCANV2 = class(TThreadedDevice)
   private
-    frameReadHighLevelCallbackState: TFrameReadHighLevelCallbackState;
-    frameReadLowLevelCallback: TBrickletCANV2NotifyFrameReadLowLevel;
-    frameReadCallback: TBrickletCANV2NotifyFrameRead;
+    fFrameReadHighLevelCallbackState: TFrameReadHighLevelCallbackState;
+    fFrameReadLowLevelCallback: TBrickletCANV2NotifyFrameReadLowLevel;
+    fFrameReadCallback: TBrickletCANV2NotifyFrameRead;
     procedure CallbackWrapperFrameReadLowLevel(const aPacket: TDynamicByteArray); virtual;
   protected
     // Inherited method's
@@ -435,14 +435,13 @@ type
     ///  out from the read buffer overflow occurrence list
     ///  (``read_buffer_overflow_error_occurred``).
     /// </summary>
-    procedure GetErrorLogLowLevel(out transceiverState: byte; out transceiverWriteErrorLevel: byte;
-                                  out transceiverReadErrorLevel: byte; out transceiverStuffingErrorCount: longword;
-                                  out transceiverFormatErrorCount: longword; out transceiverACKErrorCount: longword;
-                                  out transceiverBit1ErrorCount: longword; out transceiverBit0ErrorCount: longword;
-                                  out transceiverCRCErrorCount: longword; out writeBufferTimeoutErrorCount: longword;
-                                  out readBufferOverflowErrorCount: longword; out readBufferOverflowErrorOccurredLength: byte;
-                                  out readBufferOverflowErrorOccurredData: TArray0To31OfBoolean;
-                                  out readBacklogOverflowErrorCount: longword); virtual;
+    procedure GetErrorLogLowLevel(out aTransceiverState: byte; out aTransceiverWriteErrorLevel: byte;
+                                  out aTransceiverReadErrorLevel: byte; out aTransceiverStuffingErrorCount: longword;
+                                  out aTransceiverFormatErrorCount: longword; out aTransceiverACKErrorCount: longword;
+                                  out aTransceiverBit1ErrorCount: longword; out aTransceiverBit0ErrorCount: longword;
+                                  out aTransceiverCRCErrorCount: longword; out aWriteBufferTimeoutErrorCount: longword;
+                                  out aReadBufferOverflowErrorCount: longword; out aReadBufferOverflowErrorOccurredLength: byte;
+                                  out aReadBufferOverflowErrorOccurredData: TArray0To31OfBoolean; out aReadBacklogOverflowErrorCount: longword); virtual;
 
     /// <summary>
     ///  Returns information about different kinds of errors.
@@ -648,7 +647,7 @@ type
     /// <summary>
     ///  <see cref="BrickletCANV2.TBrickletCANV2.OnFrameRead"/>
     /// </summary>
-    property OnFrameReadLowLevel: TBrickletCANV2NotifyFrameReadLowLevel read frameReadLowLevelCallback write frameReadLowLevelCallback;
+    property OnFrameReadLowLevel: TBrickletCANV2NotifyFrameReadLowLevel read fFrameReadLowLevelCallback write fFrameReadLowLevelCallback;
 
     /// <summary>
     ///  This callback is triggered if a data or remote frame was received by the CAN
@@ -669,7 +668,7 @@ type
     ///   If reconstructing the value fails, the callback is triggered with nil for data.
     ///  </note>
     /// </summary>
-    property OnFrameRead: TBrickletCANV2NotifyFrameRead read frameReadCallback write frameReadCallback;
+    property OnFrameRead: TBrickletCANV2NotifyFrameRead read fFrameReadCallback write fFrameReadCallback;
   end;
 
 implementation
@@ -680,9 +679,9 @@ uses
 constructor TBrickletCANV2.Create(aOwner: TComponent);
 begin
   inherited Create(aOwner);
-  SetLength(frameReadHighLevelCallbackState.data, 0);
-  frameReadHighLevelCallbackState.data:= nil;
-  frameReadHighLevelCallbackState.length:= 0;
+  SetLength(fFrameReadHighLevelCallbackState.data, 0);
+  fFrameReadHighLevelCallbackState.data:= nil;
+  fFrameReadHighLevelCallbackState.length:= 0;
 end;
 
 procedure TBrickletCANV2.InitializeVersion(var aVersion: TTFVersionNumber);
@@ -904,7 +903,7 @@ begin
   aFilterIdentifier:= LEConvertUInt32From(13, _response);
 end;
 
-procedure TBrickletCANV2.GetErrorLogLowLevel(out transceiverState: byte; out transceiverWriteErrorLevel: byte; out transceiverReadErrorLevel: byte; out transceiverStuffingErrorCount: longword; out transceiverFormatErrorCount: longword; out transceiverACKErrorCount: longword; out transceiverBit1ErrorCount: longword; out transceiverBit0ErrorCount: longword; out transceiverCRCErrorCount: longword; out writeBufferTimeoutErrorCount: longword; out readBufferOverflowErrorCount: longword; out readBufferOverflowErrorOccurredLength: byte; out readBufferOverflowErrorOccurredData: TArray0To31OfBoolean; out readBacklogOverflowErrorCount: longword);
+procedure TBrickletCANV2.GetErrorLogLowLevel(out aTransceiverState: byte; out aTransceiverWriteErrorLevel: byte; out aTransceiverReadErrorLevel: byte; out aTransceiverStuffingErrorCount: longword; out aTransceiverFormatErrorCount: longword; out aTransceiverACKErrorCount: longword; out aTransceiverBit1ErrorCount: longword; out aTransceiverBit0ErrorCount: longword; out aTransceiverCRCErrorCount: longword; out aWriteBufferTimeoutErrorCount: longword; out aReadBufferOverflowErrorCount: longword; out aReadBufferOverflowErrorOccurredLength: byte; out aReadBufferOverflowErrorOccurredData: TArray0To31OfBoolean; out aReadBacklogOverflowErrorCount: longword);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -912,22 +911,22 @@ var
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_V2_FUNCTION_GET_ERROR_LOG_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
-  transceiverState:= LEConvertUInt8From(8, _response);
-  transceiverWriteErrorLevel:= LEConvertUInt8From(9, _response);
-  transceiverReadErrorLevel:= LEConvertUInt8From(10, _response);
-  transceiverStuffingErrorCount:= LEConvertUInt32From(11, _response);
-  transceiverFormatErrorCount:= LEConvertUInt32From(15, _response);
-  transceiverACKErrorCount:= LEConvertUInt32From(19, _response);
-  transceiverBit1ErrorCount:= LEConvertUInt32From(23, _response);
-  transceiverBit0ErrorCount:= LEConvertUInt32From(27, _response);
-  transceiverCRCErrorCount:= LEConvertUInt32From(31, _response);
-  writeBufferTimeoutErrorCount:= LEConvertUInt32From(35, _response);
-  readBufferOverflowErrorCount:= LEConvertUInt32From(39, _response);
-  readBufferOverflowErrorOccurredLength:= LEConvertUInt8From(43, _response);
+  aTransceiverState:= LEConvertUInt8From(8, _response);
+  aTransceiverWriteErrorLevel:= LEConvertUInt8From(9, _response);
+  aTransceiverReadErrorLevel:= LEConvertUInt8From(10, _response);
+  aTransceiverStuffingErrorCount:= LEConvertUInt32From(11, _response);
+  aTransceiverFormatErrorCount:= LEConvertUInt32From(15, _response);
+  aTransceiverACKErrorCount:= LEConvertUInt32From(19, _response);
+  aTransceiverBit1ErrorCount:= LEConvertUInt32From(23, _response);
+  aTransceiverBit0ErrorCount:= LEConvertUInt32From(27, _response);
+  aTransceiverCRCErrorCount:= LEConvertUInt32From(31, _response);
+  aWriteBufferTimeoutErrorCount:= LEConvertUInt32From(35, _response);
+  aReadBufferOverflowErrorCount:= LEConvertUInt32From(39, _response);
+  aReadBufferOverflowErrorOccurredLength:= LEConvertUInt8From(43, _response);
   FillChar(_readBufferOverflowErrorOccurredDataBits[0], Length(_readBufferOverflowErrorOccurredDataBits) * SizeOf(_readBufferOverflowErrorOccurredDataBits[0]), 0);
   for _i:= 0 to 3 do _readBufferOverflowErrorOccurredDataBits[_i]:= LEConvertUInt8From(44 + (_i * 1), _response);
-  for _i:= 0 to 31 do readBufferOverflowErrorOccurredData[_i]:= ((_readBufferOverflowErrorOccurredDataBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  readBacklogOverflowErrorCount:= LEConvertUInt32From(48, _response);
+  for _i:= 0 to 31 do aReadBufferOverflowErrorOccurredData[_i]:= ((_readBufferOverflowErrorOccurredDataBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  aReadBacklogOverflowErrorCount:= LEConvertUInt32From(48, _response);
 end;
 
 procedure TBrickletCANV2.GetErrorLog(out aTransceiverState: byte; out aTransceiverWriteErrorLevel: byte; out aTransceiverReadErrorLevel: byte; out aTransceiverStuffingErrorCount: longword; out aTransceiverFormatErrorCount: longword; out aTransceiverACKErrorCount: longword; out aTransceiverBit1ErrorCount: longword; out aTransceiverBit0ErrorCount: longword; out aTransceiverCRCErrorCount: longword; out aWriteBufferTimeoutErrorCount: longword; out aReadBufferOverflowErrorCount: longword; out aReadBufferOverflowErrorOccurred: TArrayOfBoolean; out aReadBacklogOverflowErrorCount: longword);
@@ -1109,17 +1108,17 @@ begin
   _dataLength:= LEConvertUInt8From(13, aPacket);
   for _i:= 0 to 14 do _Data[_i]:= LEConvertUInt8From(14 + (_i * 1), aPacket);
 
-  SetLength(frameReadHighLevelCallbackState.data, _dataLength);
-  Move(_Data[0], frameReadHighLevelCallbackState.data[0], SizeOf(byte) * _dataLength);
-  if (Assigned(frameReadCallback)) then begin
-    frameReadCallback(self, _frameType, _identifier, frameReadHighLevelCallbackState.data);
+  SetLength(fFrameReadHighLevelCallbackState.data, _dataLength);
+  Move(_Data[0], fFrameReadHighLevelCallbackState.data[0], SizeOf(byte) * _dataLength);
+  if (Assigned(fFrameReadCallback)) then begin
+    fFrameReadCallback(self, _frameType, _identifier, fFrameReadHighLevelCallbackState.data);
   end;
-  SetLength(frameReadHighLevelCallbackState.data, 0);
-  frameReadHighLevelCallbackState.data:= nil;
-  frameReadHighLevelCallbackState.length:= 0;
+  SetLength(fFrameReadHighLevelCallbackState.data, 0);
+  fFrameReadHighLevelCallbackState.data:= nil;
+  fFrameReadHighLevelCallbackState.length:= 0;
 
-  if (Assigned(frameReadLowLevelCallback)) then begin
-    frameReadLowLevelCallback(self, _frameType, _identifier, _dataLength, _Data);
+  if (Assigned(fFrameReadLowLevelCallback)) then begin
+    fFrameReadLowLevelCallback(self, _frameType, _identifier, _dataLength, _Data);
   end;
 end;
 

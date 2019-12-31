@@ -28,7 +28,9 @@ type
   TBrickStepper = class;
   TBrickStepperNotifyUnderVoltage = procedure(aSender: TBrickStepper; const aVoltage: word) of object;
   TBrickStepperNotifyPositionReached = procedure(aSender: TBrickStepper; const aPosition: longint) of object;
-  TBrickStepperNotifyAllData = procedure(aSender: TBrickStepper; const aCurrentVelocity: word; const aCurrentPosition: longint; const aRemainingSteps: longint; const aStackVoltage: word; const aExternalVoltage: word; const aCurrentConsumption: word) of object;
+  TBrickStepperNotifyAllData = procedure(aSender: TBrickStepper; const aCurrentVelocity: word; const aCurrentPosition: longint;
+                                         const aRemainingSteps: longint; const aStackVoltage: word; const aExternalVoltage: word;
+                                         const aCurrentConsumption: word) of object;
   TBrickStepperNotifyNewState = procedure(aSender: TBrickStepper; const aStateNew: byte; const aStatePrevious: byte) of object;
 
   /// <summary>
@@ -366,7 +368,8 @@ type
     ///  
     ///  There is also a callback for this function, see <see cref="BrickStepper.TBrickStepper.OnAllData"/> callback.
     /// </summary>
-    procedure GetAllData(out aCurrentVelocity: word; out aCurrentPosition: longint; out aRemainingSteps: longint; out aStackVoltage: word; out aExternalVoltage: word; out aCurrentConsumption: word); virtual;
+    procedure GetAllData(out aCurrentVelocity: word; out aCurrentPosition: longint; out aRemainingSteps: longint; out aStackVoltage: word;
+                         out aExternalVoltage: word; out aCurrentConsumption: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickStepper.TBrickStepper.OnAllData"/> callback is triggered
@@ -470,7 +473,8 @@ type
     ///  
     ///  .. versionadded:: 2.3.3$nbsp;(Firmware)
     /// </summary>
-    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Enables the status LED.
@@ -952,7 +956,8 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickStepper.GetAllData(out aCurrentVelocity: word; out aCurrentPosition: longint; out aRemainingSteps: longint; out aStackVoltage: word; out aExternalVoltage: word; out aCurrentConsumption: word);
+procedure TBrickStepper.GetAllData(out aCurrentVelocity: word; out aCurrentPosition: longint; out aRemainingSteps: longint;
+                                   out aStackVoltage: word; out aExternalVoltage: word; out aCurrentConsumption: word);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1034,7 +1039,8 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickStepper.GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
+procedure TBrickStepper.GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                            out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1102,7 +1108,8 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickStepper.GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
+procedure TBrickStepper.GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                                    out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;

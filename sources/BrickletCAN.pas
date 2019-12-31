@@ -26,7 +26,8 @@ type
   TArray0To7OfUInt8 = array [0..7] of byte;
 
   TBrickletCAN = class;
-  TBrickletCANNotifyFrameRead = procedure(aSender: TBrickletCAN; const frameType: byte; const identifier: longword; const data: TArray0To7OfUInt8; const length_: byte) of object;
+  TBrickletCANNotifyFrameRead = procedure(aSender: TBrickletCAN; const aFrameType: byte; const aIdentifier: longword;
+                                          const aData: TArray0To7OfUInt8; const aLength: byte) of object;
 
   /// <summary>
   ///  Communicates with CAN bus devices
@@ -65,7 +66,8 @@ type
     ///  arbitration or because the CAN transceiver is currently disabled due to a high
     ///  write error level (see <see cref="BrickletCAN.TBrickletCAN.GetErrorLog"/>).
     /// </summary>
-    function WriteFrame(const frameType: byte; const identifier: longword; const data: array of byte; const length_: byte): boolean; virtual;
+    function WriteFrame(const aFrameType: byte; const aIdentifier: longword;
+                        const aData: array of byte; const aLength: byte): boolean; virtual;
 
     /// <summary>
     ///  Tries to read the next data or remote frame from the read buffer and return it.
@@ -86,7 +88,8 @@ type
     ///  Instead of polling with this function, you can also use callbacks. See the
     ///  <see cref="BrickletCAN.TBrickletCAN.EnableFrameReadCallback"/> function and the <see cref="BrickletCAN.TBrickletCAN.OnFrameRead"/> callback.
     /// </summary>
-    procedure ReadFrame(out aSuccess: boolean; out aFrameType: byte; out aIdentifier: longword; out data: TArray0To7OfUInt8; out length_: byte); virtual;
+    procedure ReadFrame(out aSuccess: boolean; out aFrameType: byte; out aIdentifier: longword;
+                        out aData: TArray0To7OfUInt8; out aLength: byte); virtual;
 
     /// <summary>
     ///  Enables the <see cref="BrickletCAN.TBrickletCAN.OnFrameRead"/> callback.
@@ -133,12 +136,12 @@ type
     ///    If the frame could not be transmitted successfully after the configured
     ///    number of milliseconds then the frame is discarded.
     /// </summary>
-    procedure SetConfiguration(const baudRate: byte; const transceiverMode: byte; const writeTimeout: longint); virtual;
+    procedure SetConfiguration(const aBaudRate: byte; const aTransceiverMode: byte; const aWriteTimeout: longint); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletCAN.TBrickletCAN.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out baudRate: byte; out transceiverMode: byte; out writeTimeout: longint); virtual;
+    procedure GetConfiguration(out aBaudRate: byte; out aTransceiverMode: byte; out aWriteTimeout: longint); virtual;
 
     /// <summary>
     ///  Set the read filter configuration. This can be used to define which frames
@@ -194,12 +197,12 @@ type
     ///  To accept identifier 0x123 and identifier 0x456 at the same time, just set
     ///  filter 2 to 0x456 and keep mask and filter 1 unchanged.
     /// </summary>
-    procedure SetReadFilter(const aMode: byte; const mask: longword; const filter1: longword; const filter2: longword); virtual;
+    procedure SetReadFilter(const aMode: byte; const aMask: longword; const aFilter1: longword; const aFilter2: longword); virtual;
 
     /// <summary>
     ///  Returns the read filter as set by <see cref="BrickletCAN.TBrickletCAN.SetReadFilter"/>.
     /// </summary>
-    procedure GetReadFilter(out mode: byte; out mask: longword; out filter1: longword; out filter2: longword); virtual;
+    procedure GetReadFilter(out aMode: byte; out aMask: longword; out aFilter1: longword; out aFilter2: longword); virtual;
 
     /// <summary>
     ///  Returns information about different kinds of errors.
@@ -236,7 +239,8 @@ type
     ///    function. Using the <see cref="BrickletCAN.TBrickletCAN.OnFrameRead"/> callback ensures that the read buffer
     ///    can not overflow.
     /// </summary>
-    procedure GetErrorLog(out writeErrorLevel: byte; out readErrorLevel: byte; out transceiverDisabled: boolean; out writeTimeoutCount: longword; out readRegisterOverflowCount: longword; out readBufferOverflowCount: longword); virtual;
+    procedure GetErrorLog(out aWriteErrorLevel: byte; out aReadErrorLevel: byte; out aTransceiverDisabled: boolean;
+                          out aWriteTimeoutCount: longword; out aReadRegisterOverflowCount: longword; out aReadBufferOverflowCount: longword); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -248,7 +252,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered if a data or remote frame was received by the CAN
@@ -299,36 +304,38 @@ begin
   aCallBacks[BRICKLET_CAN_CALLBACK_FRAME_READ]:= {$ifdef FPC}@{$endif}CallbackWrapperFrameRead;
 end;
 
-function TBrickletCAN.WriteFrame(const frameType: byte; const identifier: longword; const data: array of byte; const length_: byte): boolean;
+function TBrickletCAN.WriteFrame(const aFrameType: byte; const aIdentifier: longword; const aData: array of byte; const aLength: byte): boolean;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_WRITE_FRAME, 22);
-  LEConvertUInt8To(frameType, 8, _request);
-  LEConvertUInt32To(identifier, 9, _request);
-  if (Length(data) <> 8) then raise EInvalidParameterException.Create('Data has to be exactly 8 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 13 + (_i * 1), _request);
-  LEConvertUInt8To(length_, 21, _request);
+  LEConvertUInt8To(aFrameType, 8, _request);
+  LEConvertUInt32To(aIdentifier, 9, _request);
+  if (Length(aData) <> 8) then raise EInvalidParameterException.Create('Data has to be exactly 8 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 13 + (_i * 1), _request);
+  LEConvertUInt8To(aLength, 21, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletCAN.ReadFrame(out aSuccess: boolean; out aFrameType: byte; out aIdentifier: longword; out data: TArray0To7OfUInt8; out length_: byte);
+procedure TBrickletCAN.ReadFrame(out aSuccess: boolean; out aFrameType: byte; out aIdentifier: longword; out aData: TArray0To7OfUInt8; out aLength: byte);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_READ_FRAME, 8);
   _response:= SendRequest(_request);
   aSuccess:= LEConvertBooleanFrom(8, _response);
   aFrameType:= LEConvertUInt8From(9, _response);
   aIdentifier:= LEConvertUInt32From(10, _response);
-  for _i:= 0 to 7 do data[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
-  length_:= LEConvertUInt8From(22, _response);
+  for _i:= 0 to 7 do aData[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
+  aLength:= LEConvertUInt8From(22, _response);
 end;
 
 procedure TBrickletCAN.EnableFrameReadCallback;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_ENABLE_FRAME_READ_CALLBACK, 8);
   SendRequest(_request);
@@ -336,7 +343,7 @@ end;
 
 procedure TBrickletCAN.DisableFrameReadCallback;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_DISABLE_FRAME_READ_CALLBACK, 8);
   SendRequest(_request);
@@ -344,97 +351,103 @@ end;
 
 function TBrickletCAN.IsFrameReadCallbackEnabled: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_IS_FRAME_READ_CALLBACK_ENABLED, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletCAN.SetConfiguration(const baudRate: byte; const transceiverMode: byte; const writeTimeout: longint);
+procedure TBrickletCAN.SetConfiguration(const aBaudRate: byte; const aTransceiverMode: byte; const aWriteTimeout: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_SET_CONFIGURATION, 14);
-  LEConvertUInt8To(baudRate, 8, _request);
-  LEConvertUInt8To(transceiverMode, 9, _request);
-  LEConvertInt32To(writeTimeout, 10, _request);
+  LEConvertUInt8To(aBaudRate, 8, _request);
+  LEConvertUInt8To(aTransceiverMode, 9, _request);
+  LEConvertInt32To(aWriteTimeout, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCAN.GetConfiguration(out baudRate: byte; out transceiverMode: byte; out writeTimeout: longint);
+procedure TBrickletCAN.GetConfiguration(out aBaudRate: byte; out aTransceiverMode: byte; out aWriteTimeout: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  baudRate:= LEConvertUInt8From(8, _response);
-  transceiverMode:= LEConvertUInt8From(9, _response);
-  writeTimeout:= LEConvertInt32From(10, _response);
+  aBaudRate:= LEConvertUInt8From(8, _response);
+  aTransceiverMode:= LEConvertUInt8From(9, _response);
+  aWriteTimeout:= LEConvertInt32From(10, _response);
 end;
 
-procedure TBrickletCAN.SetReadFilter(const aMode: byte; const mask: longword; const filter1: longword; const filter2: longword);
+procedure TBrickletCAN.SetReadFilter(const aMode: byte; const aMask: longword; const aFilter1: longword; const aFilter2: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_SET_READ_FILTER, 21);
   LEConvertUInt8To(aMode, 8, _request);
-  LEConvertUInt32To(mask, 9, _request);
-  LEConvertUInt32To(filter1, 13, _request);
-  LEConvertUInt32To(filter2, 17, _request);
+  LEConvertUInt32To(aMask, 9, _request);
+  LEConvertUInt32To(aFilter1, 13, _request);
+  LEConvertUInt32To(aFilter2, 17, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCAN.GetReadFilter(out mode: byte; out mask: longword; out filter1: longword; out filter2: longword);
+procedure TBrickletCAN.GetReadFilter(out aMode: byte; out aMask: longword; out aFilter1: longword; out aFilter2: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_GET_READ_FILTER, 8);
   _response:= SendRequest(_request);
-  mode:= LEConvertUInt8From(8, _response);
-  mask:= LEConvertUInt32From(9, _response);
-  filter1:= LEConvertUInt32From(13, _response);
-  filter2:= LEConvertUInt32From(17, _response);
+  aMode:= LEConvertUInt8From(8, _response);
+  aMask:= LEConvertUInt32From(9, _response);
+  aFilter1:= LEConvertUInt32From(13, _response);
+  aFilter2:= LEConvertUInt32From(17, _response);
 end;
 
-procedure TBrickletCAN.GetErrorLog(out writeErrorLevel: byte; out readErrorLevel: byte; out transceiverDisabled: boolean; out writeTimeoutCount: longword; out readRegisterOverflowCount: longword; out readBufferOverflowCount: longword);
+procedure TBrickletCAN.GetErrorLog(out aWriteErrorLevel: byte; out aReadErrorLevel: byte; out aTransceiverDisabled: boolean; out aWriteTimeoutCount: longword; out aReadRegisterOverflowCount: longword; out aReadBufferOverflowCount: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_GET_ERROR_LOG, 8);
   _response:= SendRequest(_request);
-  writeErrorLevel:= LEConvertUInt8From(8, _response);
-  readErrorLevel:= LEConvertUInt8From(9, _response);
-  transceiverDisabled:= LEConvertBooleanFrom(10, _response);
-  writeTimeoutCount:= LEConvertUInt32From(11, _response);
-  readRegisterOverflowCount:= LEConvertUInt32From(15, _response);
-  readBufferOverflowCount:= LEConvertUInt32From(19, _response);
+  aWriteErrorLevel:= LEConvertUInt8From(8, _response);
+  aReadErrorLevel:= LEConvertUInt8From(9, _response);
+  aTransceiverDisabled:= LEConvertBooleanFrom(10, _response);
+  aWriteTimeoutCount:= LEConvertUInt32From(11, _response);
+  aReadRegisterOverflowCount:= LEConvertUInt32From(15, _response);
+  aReadBufferOverflowCount:= LEConvertUInt32From(19, _response);
 end;
 
-procedure TBrickletCAN.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletCAN.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_CAN_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletCAN.CallbackWrapperFrameRead(const aPacket: TDynamicByteArray);
-var frameType: byte; identifier: longword; data: TArray0To7OfUInt8; length_: byte; _i: longint;
+var
+  _frameType: byte;
+  _identifier: longword;
+  _data: TArray0To7OfUInt8;
+  _length: byte;
+  _i: longint;
 begin
-  frameType:= LEConvertUInt8From(8, aPacket);
-  identifier:= LEConvertUInt32From(9, aPacket);
-  for _i:= 0 to 7 do data[_i]:= LEConvertUInt8From(13 + (_i * 1), aPacket);
-  length_:= LEConvertUInt8From(21, aPacket);
+  _frameType:= LEConvertUInt8From(8, aPacket);
+  _identifier:= LEConvertUInt32From(9, aPacket);
+  for _i:= 0 to 7 do _data[_i]:= LEConvertUInt8From(13 + (_i * 1), aPacket);
+  _length:= LEConvertUInt8From(21, aPacket);
 
   if (Assigned(frameReadCallback)) then begin
-    frameReadCallback(self, frameType, identifier, data, length_);
+    frameReadCallback(self, _frameType, _identifier, _data, _length);
   end;
 end;
 

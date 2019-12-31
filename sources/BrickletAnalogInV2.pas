@@ -25,25 +25,25 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletAnalogInV2 = class;
-  TBrickletAnalogInV2NotifyVoltage = procedure(aSender: TBrickletAnalogInV2; const voltage: word) of object;
-  TBrickletAnalogInV2NotifyAnalogValue = procedure(aSender: TBrickletAnalogInV2; const value: word) of object;
-  TBrickletAnalogInV2NotifyVoltageReached = procedure(aSender: TBrickletAnalogInV2; const voltage: word) of object;
-  TBrickletAnalogInV2NotifyAnalogValueReached = procedure(aSender: TBrickletAnalogInV2; const value: word) of object;
+  TBrickletAnalogInV2NotifyVoltage = procedure(aSender: TBrickletAnalogInV2; const aVoltage: word) of object;
+  TBrickletAnalogInV2NotifyAnalogValue = procedure(aSender: TBrickletAnalogInV2; const aValue: word) of object;
+  TBrickletAnalogInV2NotifyVoltageReached = procedure(aSender: TBrickletAnalogInV2; const aVoltage: word) of object;
+  TBrickletAnalogInV2NotifyAnalogValueReached = procedure(aSender: TBrickletAnalogInV2; const aValue: word) of object;
 
   /// <summary>
   ///  Measures DC voltage between 0V and 42V
   /// </summary>
   TBrickletAnalogInV2 = class(TDevice)
   private
-    voltageCallback: TBrickletAnalogInV2NotifyVoltage;
-    analogValueCallback: TBrickletAnalogInV2NotifyAnalogValue;
-    voltageReachedCallback: TBrickletAnalogInV2NotifyVoltageReached;
-    analogValueReachedCallback: TBrickletAnalogInV2NotifyAnalogValueReached;
-  protected
+    fVoltageCallback: TBrickletAnalogInV2NotifyVoltage;
+    fAnalogValueCallback: TBrickletAnalogInV2NotifyAnalogValue;
+    fVoltageReachedCallback: TBrickletAnalogInV2NotifyVoltageReached;
+    fAnalogValueReachedCallback: TBrickletAnalogInV2NotifyAnalogValueReached;
     procedure CallbackWrapperVoltage(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperAnalogValue(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperVoltageReached(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperAnalogValueReached(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
@@ -75,7 +75,7 @@ type
     ///  The <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.OnVoltage"/> callback is only triggered if the voltage has changed since
     ///  the last triggering.
     /// </summary>
-    procedure SetVoltageCallbackPeriod(const period: longword); virtual;
+    procedure SetVoltageCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetVoltageCallbackPeriod"/>.
@@ -89,7 +89,7 @@ type
     ///  The <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.OnAnalogValue"/> callback is only triggered if the analog value has
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetAnalogValueCallbackPeriod(const period: longword); virtual;
+    procedure SetAnalogValueCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetAnalogValueCallbackPeriod"/>.
@@ -111,12 +111,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the voltage is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetVoltageCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetVoltageCallbackThreshold"/>.
     /// </summary>
-    procedure GetVoltageCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.OnAnalogValueReached"/> callback.
@@ -133,12 +133,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the analog value is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetAnalogValueCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetAnalogValueCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetAnalogValueCallbackThreshold"/>.
     /// </summary>
-    procedure GetAnalogValueCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetAnalogValueCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -153,7 +153,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetDebouncePeriod"/>.
@@ -167,7 +167,7 @@ type
     ///  Setting the length to 1 will turn the averaging off. With less
     ///  averaging, there is more noise on the data.
     /// </summary>
-    procedure SetMovingAverage(const average: byte); virtual;
+    procedure SetMovingAverage(const aAverage: byte); virtual;
 
     /// <summary>
     ///  Returns the length of the moving average as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetMovingAverage"/>.
@@ -184,7 +184,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out ConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -194,7 +195,7 @@ type
     ///  Der <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.OnVoltage"/> callback is only triggered if the voltage has changed since
     ///  the last triggering.
     /// </summary>
-    property OnVoltage: TBrickletAnalogInV2NotifyVoltage read voltageCallback write voltageCallback;
+    property OnVoltage: TBrickletAnalogInV2NotifyVoltage read fVoltageCallback write fVoltageCallback;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -204,7 +205,7 @@ type
     ///  The <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.OnAnalogValue"/> callback is only triggered if the voltage has changed
     ///  since the last triggering.
     /// </summary>
-    property OnAnalogValue: TBrickletAnalogInV2NotifyAnalogValue read analogValueCallback write analogValueCallback;
+    property OnAnalogValue: TBrickletAnalogInV2NotifyAnalogValue read fAnalogValueCallback write fAnalogValueCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -214,7 +215,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetDebouncePeriod"/>.
     /// </summary>
-    property OnVoltageReached: TBrickletAnalogInV2NotifyVoltageReached read voltageReachedCallback write voltageReachedCallback;
+    property OnVoltageReached: TBrickletAnalogInV2NotifyVoltageReached read fVoltageReachedCallback write fVoltageReachedCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -224,7 +225,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletAnalogInV2.TBrickletAnalogInV2.SetDebouncePeriod"/>.
     /// </summary>
-    property OnAnalogValueReached: TBrickletAnalogInV2NotifyAnalogValueReached read analogValueReachedCallback write analogValueReachedCallback;
+    property OnAnalogValueReached: TBrickletAnalogInV2NotifyAnalogValueReached read fAnalogValueReachedCallback write fAnalogValueReachedCallback;
   end;
 
 implementation
@@ -265,7 +266,7 @@ end;
 
 function TBrickletAnalogInV2.GetVoltage: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_VOLTAGE, 8);
   _response:= SendRequest(_request);
@@ -274,180 +275,185 @@ end;
 
 function TBrickletAnalogInV2.GetAnalogValue: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_ANALOG_VALUE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletAnalogInV2.SetVoltageCallbackPeriod(const period: longword);
+procedure TBrickletAnalogInV2.SetVoltageCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_SET_VOLTAGE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAnalogInV2.GetVoltageCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_VOLTAGE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAnalogInV2.SetAnalogValueCallbackPeriod(const period: longword);
+procedure TBrickletAnalogInV2.SetAnalogValueCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_SET_ANALOG_VALUE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAnalogInV2.GetAnalogValueCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_ANALOG_VALUE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAnalogInV2.SetVoltageCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickletAnalogInV2.SetVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_SET_VOLTAGE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAnalogInV2.GetVoltageCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickletAnalogInV2.GetVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_VOLTAGE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletAnalogInV2.SetAnalogValueCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickletAnalogInV2.SetAnalogValueCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_SET_ANALOG_VALUE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletAnalogInV2.GetAnalogValueCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickletAnalogInV2.GetAnalogValueCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_ANALOG_VALUE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletAnalogInV2.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletAnalogInV2.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAnalogInV2.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletAnalogInV2.SetMovingAverage(const average: byte);
+procedure TBrickletAnalogInV2.SetMovingAverage(const aAverage: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_SET_MOVING_AVERAGE, 9);
-  LEConvertUInt8To(average, 8, _request);
+  LEConvertUInt8To(aAverage, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletAnalogInV2.GetMovingAverage: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_MOVING_AVERAGE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletAnalogInV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletAnalogInV2.GetIdentity(out aUID: string; out ConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ANALOG_IN_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  ConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletAnalogInV2.CallbackWrapperVoltage(const aPacket: TDynamicByteArray);
-var voltage: word;
+var
+  _voltage: word;
 begin
-  voltage:= LEConvertUInt16From(8, aPacket);
+  _voltage:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(voltageCallback)) then begin
-    voltageCallback(self, voltage);
+  if (Assigned(fVoltageCallback)) then begin
+    fVoltageCallback(self, _voltage);
   end;
 end;
 
 procedure TBrickletAnalogInV2.CallbackWrapperAnalogValue(const aPacket: TDynamicByteArray);
-var value: word;
+var
+  _value: word;
 begin
-  value:= LEConvertUInt16From(8, aPacket);
+  _value:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(analogValueCallback)) then begin
-    analogValueCallback(self, value);
+  if (Assigned(fAnalogValueCallback)) then begin
+    fAnalogValueCallback(self, _value);
   end;
 end;
 
 procedure TBrickletAnalogInV2.CallbackWrapperVoltageReached(const aPacket: TDynamicByteArray);
-var voltage: word;
+var
+  _voltage: word;
 begin
-  voltage:= LEConvertUInt16From(8, aPacket);
+  _voltage:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(voltageReachedCallback)) then begin
-    voltageReachedCallback(self, voltage);
+  if (Assigned(fVoltageReachedCallback)) then begin
+    fVoltageReachedCallback(self, _voltage);
   end;
 end;
 
 procedure TBrickletAnalogInV2.CallbackWrapperAnalogValueReached(const aPacket: TDynamicByteArray);
-var value: word;
+var
+  _value: word;
 begin
-  value:= LEConvertUInt16From(8, aPacket);
+  _value:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(analogValueReachedCallback)) then begin
-    analogValueReachedCallback(self, value);
+  if (Assigned(fAnalogValueReachedCallback)) then begin
+    fAnalogValueReachedCallback(self, _value);
   end;
 end;
 

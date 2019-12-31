@@ -461,7 +461,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetSPITFPBaudrate(const brickletPort: char; const baudrate: longword); virtual;
+    procedure SetSPITFPBaudrate(const aBrickletPort: char; const aBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the baudrate for a given Bricklet port, see <see cref="BrickIMUV2.TBrickIMUV2.SetSPITFPBaudrate"/>.
@@ -485,9 +485,9 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure GetSPITFPErrorCount(const brickletPort: char; out errorCountACKChecksum: longword;
-                                  out errorCountMessageChecksum: longword; out errorCountFrame: longword;
-                                  out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword;
+                                  out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword;
+                                  out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Enables the status LED.
@@ -521,7 +521,7 @@ type
     ///  This functions sole purpose is to allow automatic flashing of v1.x.y Bricklet
     ///  plugins.
     /// </summary>
-    procedure GetProtocol1BrickletName(const aPort: char; out protocolVersion: byte; out firmwareVersion: TArray0To2OfUInt8; out aName: string); virtual;
+    procedure GetProtocol1BrickletName(const aPort: char; out aProtocolVersion: byte; out aFirmwareVersion: TArray0To2OfUInt8; out aName: string); virtual;
 
     /// <summary>
     ///  Returns the temperature in °C/10 as measured inside the microcontroller. The
@@ -553,7 +553,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -696,7 +697,7 @@ end;
 
 procedure TBrickIMUV2.GetAcceleration(out aX: smallint; out aY: smallint; out aZ: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ACCELERATION, 8);
   _response:= SendRequest(_request);
@@ -707,7 +708,7 @@ end;
 
 procedure TBrickIMUV2.GetMagneticField(out aX: smallint; out aY: smallint; out aZ: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_MAGNETIC_FIELD, 8);
   _response:= SendRequest(_request);
@@ -718,7 +719,7 @@ end;
 
 procedure TBrickIMUV2.GetAngularVelocity(out aX: smallint; out aY: smallint; out aZ: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ANGULAR_VELOCITY, 8);
   _response:= SendRequest(_request);
@@ -729,7 +730,7 @@ end;
 
 function TBrickIMUV2.GetTemperature: shortint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -738,7 +739,7 @@ end;
 
 procedure TBrickIMUV2.GetOrientation(out aHeading: smallint; out aRoll: smallint; out aPitch: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ORIENTATION, 8);
   _response:= SendRequest(_request);
@@ -749,7 +750,7 @@ end;
 
 procedure TBrickIMUV2.GetLinearAcceleration(out aX: smallint; out aY: smallint; out aZ: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_LINEAR_ACCELERATION, 8);
   _response:= SendRequest(_request);
@@ -760,7 +761,7 @@ end;
 
 procedure TBrickIMUV2.GetGravityVector(out aX: smallint; out aY: smallint; out aZ: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_GRAVITY_VECTOR, 8);
   _response:= SendRequest(_request);
@@ -771,7 +772,7 @@ end;
 
 procedure TBrickIMUV2.GetQuaternion(out aW: smallint; out aX: smallint; out aY: smallint; out aZ: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_QUATERNION, 8);
   _response:= SendRequest(_request);
@@ -783,7 +784,8 @@ end;
 
 procedure TBrickIMUV2.GetAllData(out aAcceleration: TArray0To2OfInt16; out aMagneticField: TArray0To2OfInt16; out aAngularVelocity: TArray0To2OfInt16; out aEulerAngle: TArray0To2OfInt16; out aQuaternion: TArray0To3OfInt16; out aLinearAcceleration: TArray0To2OfInt16; out aGravityVector: TArray0To2OfInt16; out aTemperature: shortint; out aCalibrationStatus: byte);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ALL_DATA, 8);
   _response:= SendRequest(_request);
@@ -800,7 +802,7 @@ end;
 
 procedure TBrickIMUV2.LedsOn;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_LEDS_ON, 8);
   SendRequest(_request);
@@ -808,7 +810,7 @@ end;
 
 procedure TBrickIMUV2.LedsOff;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_LEDS_OFF, 8);
   SendRequest(_request);
@@ -816,7 +818,7 @@ end;
 
 function TBrickIMUV2.AreLedsOn: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_ARE_LEDS_ON, 8);
   _response:= SendRequest(_request);
@@ -825,7 +827,7 @@ end;
 
 function TBrickIMUV2.SaveCalibration: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SAVE_CALIBRATION, 8);
   _response:= SendRequest(_request);
@@ -834,7 +836,7 @@ end;
 
 procedure TBrickIMUV2.SetAccelerationPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_ACCELERATION_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -843,7 +845,7 @@ end;
 
 function TBrickIMUV2.GetAccelerationPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ACCELERATION_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -852,7 +854,7 @@ end;
 
 procedure TBrickIMUV2.SetMagneticFieldPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_MAGNETIC_FIELD_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -861,7 +863,7 @@ end;
 
 function TBrickIMUV2.GetMagneticFieldPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_MAGNETIC_FIELD_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -870,7 +872,7 @@ end;
 
 procedure TBrickIMUV2.SetAngularVelocityPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_ANGULAR_VELOCITY_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -879,7 +881,7 @@ end;
 
 function TBrickIMUV2.GetAngularVelocityPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ANGULAR_VELOCITY_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -888,7 +890,7 @@ end;
 
 procedure TBrickIMUV2.SetTemperaturePeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_TEMPERATURE_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -897,7 +899,7 @@ end;
 
 function TBrickIMUV2.GetTemperaturePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_TEMPERATURE_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -906,7 +908,7 @@ end;
 
 procedure TBrickIMUV2.SetOrientationPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_ORIENTATION_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -915,7 +917,7 @@ end;
 
 function TBrickIMUV2.GetOrientationPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ORIENTATION_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -924,7 +926,7 @@ end;
 
 procedure TBrickIMUV2.SetLinearAccelerationPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_LINEAR_ACCELERATION_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -933,7 +935,7 @@ end;
 
 function TBrickIMUV2.GetLinearAccelerationPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_LINEAR_ACCELERATION_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -942,7 +944,7 @@ end;
 
 procedure TBrickIMUV2.SetGravityVectorPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_GRAVITY_VECTOR_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -951,7 +953,7 @@ end;
 
 function TBrickIMUV2.GetGravityVectorPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_GRAVITY_VECTOR_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -960,7 +962,7 @@ end;
 
 procedure TBrickIMUV2.SetQuaternionPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_QUATERNION_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -969,7 +971,7 @@ end;
 
 function TBrickIMUV2.GetQuaternionPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_QUATERNION_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -978,7 +980,7 @@ end;
 
 procedure TBrickIMUV2.SetAllDataPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_ALL_DATA_PERIOD, 12);
   LEConvertUInt32To(aPeriod, 8, _request);
@@ -987,7 +989,7 @@ end;
 
 function TBrickIMUV2.GetAllDataPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_ALL_DATA_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -996,7 +998,7 @@ end;
 
 procedure TBrickIMUV2.SetSensorConfiguration(const aMagnetometerRate: byte; const aGyroscopeRange: byte; const aGyroscopeBandwidth: byte; const aAccelerometerRange: byte; const aAccelerometerBandwidth: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_SENSOR_CONFIGURATION, 13);
   LEConvertUInt8To(aMagnetometerRate, 8, _request);
@@ -1009,7 +1011,7 @@ end;
 
 procedure TBrickIMUV2.GetSensorConfiguration(out aMagnetometerRate: byte; out aGyroscopeRange: byte; out aGyroscopeBandwidth: byte; out aAccelerometerRange: byte; out aAccelerometerBandwidth: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_SENSOR_CONFIGURATION, 8);
   _response:= SendRequest(_request);
@@ -1022,7 +1024,7 @@ end;
 
 procedure TBrickIMUV2.SetSensorFusionMode(const aMode: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_SENSOR_FUSION_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -1031,7 +1033,7 @@ end;
 
 function TBrickIMUV2.GetSensorFusionMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_SENSOR_FUSION_MODE, 8);
   _response:= SendRequest(_request);
@@ -1040,7 +1042,7 @@ end;
 
 procedure TBrickIMUV2.SetSPITFPBaudrateConfig(const aEnableDynamicBaudrate: boolean; const aMinimumDynamicBaudrate: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_SPITFP_BAUDRATE_CONFIG, 13);
   LEConvertBooleanTo(aEnableDynamicBaudrate, 8, _request);
@@ -1050,7 +1052,7 @@ end;
 
 procedure TBrickIMUV2.GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_SPITFP_BAUDRATE_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -1060,7 +1062,7 @@ end;
 
 function TBrickIMUV2.GetSendTimeoutCount(const aCommunicationMethod: byte): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_SEND_TIMEOUT_COUNT, 9);
   LEConvertUInt8To(aCommunicationMethod, 8, _request);
@@ -1068,19 +1070,19 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickIMUV2.SetSPITFPBaudrate(const brickletPort: char; const baudrate: longword);
+procedure TBrickIMUV2.SetSPITFPBaudrate(const aBrickletPort: char; const aBaudrate: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_SET_SPITFP_BAUDRATE, 13);
-  LEConvertCharTo(brickletPort, 8, _request);
-  LEConvertUInt32To(baudrate, 9, _request);
+  LEConvertCharTo(aBrickletPort, 8, _request);
+  LEConvertUInt32To(aBaudrate, 9, _request);
   SendRequest(_request);
 end;
 
 function TBrickIMUV2.GetSPITFPBaudrate(const aBrickletPort: char): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_SPITFP_BAUDRATE, 9);
   LEConvertCharTo(aBrickletPort, 8, _request);
@@ -1088,22 +1090,22 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickIMUV2.GetSPITFPErrorCount(const brickletPort: char; out errorCountACKChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickIMUV2.GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 9);
-  LEConvertCharTo(brickletPort, 8, _request);
+  LEConvertCharTo(aBrickletPort, 8, _request);
   _response:= SendRequest(_request);
-  errorCountACKChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountACKChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 procedure TBrickIMUV2.EnableStatusLED;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_ENABLE_STATUS_LED, 8);
   SendRequest(_request);
@@ -1111,7 +1113,7 @@ end;
 
 procedure TBrickIMUV2.DisableStatusLED;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_DISABLE_STATUS_LED, 8);
   SendRequest(_request);
@@ -1119,28 +1121,28 @@ end;
 
 function TBrickIMUV2.IsStatusLEDEnabled: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_IS_STATUS_LED_ENABLED, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickIMUV2.GetProtocol1BrickletName(const aPort: char; out protocolVersion: byte; out firmwareVersion: TArray0To2OfUInt8; out aName: string);
+procedure TBrickIMUV2.GetProtocol1BrickletName(const aPort: char; out aProtocolVersion: byte; out aFirmwareVersion: TArray0To2OfUInt8; out aName: string);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_PROTOCOL1_BRICKLET_NAME, 9);
   LEConvertCharTo(aPort, 8, _request);
   _response:= SendRequest(_request);
-  protocolVersion:= LEConvertUInt8From(8, _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
+  aProtocolVersion:= LEConvertUInt8From(8, _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
   aName:= LEConvertStringFrom(12, 40, _response);
 end;
 
 function TBrickIMUV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -1149,147 +1151,154 @@ end;
 
 procedure TBrickIMUV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
 end;
 
-procedure TBrickIMUV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickIMUV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_IMU_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUid:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickIMUV2.CallbackWrapperAcceleration(const aPacket: TDynamicByteArray);
-var x: smallint; y: smallint; z: smallint;
+var
+  _x: smallint; _y: smallint; _z: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
-  z:= LEConvertInt16From(12, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
+  _z:= LEConvertInt16From(12, aPacket);
 
   if (Assigned(fAccelerationCallback)) then begin
-    fAccelerationCallback(self, x, y, z);
+    fAccelerationCallback(self, _x, _y, _z);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperMagneticField(const aPacket: TDynamicByteArray);
-var x: smallint; y: smallint; z: smallint;
+var
+  _x: smallint; _y: smallint; _z: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
-  z:= LEConvertInt16From(12, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
+  _z:= LEConvertInt16From(12, aPacket);
 
   if (Assigned(fMagneticFieldCallback)) then begin
-    fMagneticFieldCallback(self, x, y, z);
+    fMagneticFieldCallback(self, _x, _y, _z);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperAngularVelocity(const aPacket: TDynamicByteArray);
-var x: smallint; y: smallint; z: smallint;
+var
+  _x: smallint; _y: smallint; _z: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
-  z:= LEConvertInt16From(12, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
+  _z:= LEConvertInt16From(12, aPacket);
 
   if (Assigned(fAngularVelocityCallback)) then begin
-    fAngularVelocityCallback(self, x, y, z);
+    fAngularVelocityCallback(self, _x, _y, _z);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperTemperature(const aPacket: TDynamicByteArray);
-var temperature: shortint;
+var
+  _temperature: shortint;
 begin
-  temperature:= LEConvertInt8From(8, aPacket);
+  _temperature:= LEConvertInt8From(8, aPacket);
 
   if (Assigned(fTemperatureCallback)) then begin
-    fTemperatureCallback(self, temperature);
+    fTemperatureCallback(self, _temperature);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperLinearAcceleration(const aPacket: TDynamicByteArray);
-var x: smallint; y: smallint; z: smallint;
+var
+  _x: smallint; _y: smallint; _z: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
-  z:= LEConvertInt16From(12, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
+  _z:= LEConvertInt16From(12, aPacket);
 
   if (Assigned(fLinearAccelerationCallback)) then begin
-    fLinearAccelerationCallback(self, x, y, z);
+    fLinearAccelerationCallback(self, _x, _y, _z);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperGravityVector(const aPacket: TDynamicByteArray);
-var x: smallint; y: smallint; z: smallint;
+var
+  _x: smallint; _y: smallint; _z: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
-  z:= LEConvertInt16From(12, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
+  _z:= LEConvertInt16From(12, aPacket);
 
   if (Assigned(fGravityVectorCallback)) then begin
-    fGravityVectorCallback(self, x, y, z);
+    fGravityVectorCallback(self, _x, _y, _z);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperOrientation(const aPacket: TDynamicByteArray);
-var heading: smallint; roll: smallint; pitch: smallint;
+var
+  _heading: smallint; _roll: smallint; _pitch: smallint;
 begin
-  heading:= LEConvertInt16From(8, aPacket);
-  roll:= LEConvertInt16From(10, aPacket);
-  pitch:= LEConvertInt16From(12, aPacket);
+  _heading:= LEConvertInt16From(8, aPacket);
+  _roll:= LEConvertInt16From(10, aPacket);
+  _pitch:= LEConvertInt16From(12, aPacket);
 
   if (Assigned(fOrientationCallback)) then begin
-    fOrientationCallback(self, heading, roll, pitch);
+    fOrientationCallback(self, _heading, _roll, _pitch);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperQuaternion(const aPacket: TDynamicByteArray);
 var
-  w: smallint; x: smallint; y: smallint; z: smallint;
+  _w: smallint; _x: smallint; _y: smallint; _z: smallint;
 begin
-  w:= LEConvertInt16From(8, aPacket);
-  x:= LEConvertInt16From(10, aPacket);
-  y:= LEConvertInt16From(12, aPacket);
-  z:= LEConvertInt16From(14, aPacket);
+  _w:= LEConvertInt16From(8, aPacket);
+  _x:= LEConvertInt16From(10, aPacket);
+  _y:= LEConvertInt16From(12, aPacket);
+  _z:= LEConvertInt16From(14, aPacket);
 
   if (Assigned(fQuaternionCallback)) then begin
-    fQuaternionCallback(self, w, x, y, z);
+    fQuaternionCallback(self, _w, _x, _y, _z);
   end;
 end;
 
 procedure TBrickIMUV2.CallbackWrapperAllData(const aPacket: TDynamicByteArray);
 var
-  acceleration: TArray0To2OfInt16;
-  magneticField: TArray0To2OfInt16;
-  angularVelocity: TArray0To2OfInt16;
-  eulerAngle: TArray0To2OfInt16;
-  quaternion: TArray0To3OfInt16;
-  linearAcceleration: TArray0To2OfInt16;
-  gravityVector: TArray0To2OfInt16;
-  temperature: shortint;
-  calibrationStatus: byte;
+  _acceleration: TArray0To2OfInt16;
+  _magneticField: TArray0To2OfInt16;
+  _angularVelocity: TArray0To2OfInt16;
+  _eulerAngle: TArray0To2OfInt16;
+  _quaternion: TArray0To3OfInt16;
+  _linearAcceleration: TArray0To2OfInt16;
+  _gravityVector: TArray0To2OfInt16;
+  _temperature: shortint;
+  _calibrationStatus: byte;
   _i: longint;
 begin
-  for _i:= 0 to 2 do acceleration[_i]:= LEConvertInt16From(8 + (_i * 2), aPacket);
-  for _i:= 0 to 2 do magneticField[_i]:= LEConvertInt16From(14 + (_i * 2), aPacket);
-  for _i:= 0 to 2 do angularVelocity[_i]:= LEConvertInt16From(20 + (_i * 2), aPacket);
-  for _i:= 0 to 2 do eulerAngle[_i]:= LEConvertInt16From(26 + (_i * 2), aPacket);
-  for _i:= 0 to 3 do quaternion[_i]:= LEConvertInt16From(32 + (_i * 2), aPacket);
-  for _i:= 0 to 2 do linearAcceleration[_i]:= LEConvertInt16From(40 + (_i * 2), aPacket);
-  for _i:= 0 to 2 do gravityVector[_i]:= LEConvertInt16From(46 + (_i * 2), aPacket);
-  temperature:= LEConvertInt8From(52, aPacket);
-  calibrationStatus:= LEConvertUInt8From(53, aPacket);
+  for _i:= 0 to 2 do _acceleration[_i]:= LEConvertInt16From(8 + (_i * 2), aPacket);
+  for _i:= 0 to 2 do _magneticField[_i]:= LEConvertInt16From(14 + (_i * 2), aPacket);
+  for _i:= 0 to 2 do _angularVelocity[_i]:= LEConvertInt16From(20 + (_i * 2), aPacket);
+  for _i:= 0 to 2 do _eulerAngle[_i]:= LEConvertInt16From(26 + (_i * 2), aPacket);
+  for _i:= 0 to 3 do _quaternion[_i]:= LEConvertInt16From(32 + (_i * 2), aPacket);
+  for _i:= 0 to 2 do _linearAcceleration[_i]:= LEConvertInt16From(40 + (_i * 2), aPacket);
+  for _i:= 0 to 2 do _gravityVector[_i]:= LEConvertInt16From(46 + (_i * 2), aPacket);
+  _temperature:= LEConvertInt8From(52, aPacket);
+  _calibrationStatus:= LEConvertUInt8From(53, aPacket);
 
   if (Assigned(fAllDataCallback)) then begin
-    fAllDataCallback(self, acceleration, magneticField, angularVelocity, eulerAngle, quaternion, linearAcceleration, gravityVector, temperature, calibrationStatus);
+    fAllDataCallback(self, _acceleration, _magneticField, _angularVelocity, _eulerAngle, _quaternion, _linearAcceleration, _gravityVector, _temperature, _calibrationStatus);
   end;
 end;
 

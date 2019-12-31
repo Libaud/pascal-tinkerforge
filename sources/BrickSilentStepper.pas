@@ -25,10 +25,12 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickSilentStepper = class;
-  TBrickSilentStepperNotifyUnderVoltage = procedure(aSender: TBrickSilentStepper; const voltage: word) of object;
-  TBrickSilentStepperNotifyPositionReached = procedure(aSender: TBrickSilentStepper; const position: longint) of object;
-  TBrickSilentStepperNotifyAllData = procedure(aSender: TBrickSilentStepper; const currentVelocity: word; const currentPosition: longint; const remainingSteps: longint; const stackVoltage: word; const externalVoltage: word; const currentConsumption: word) of object;
-  TBrickSilentStepperNotifyNewState = procedure(aSender: TBrickSilentStepper; const stateNew: byte; const statePrevious: byte) of object;
+  TBrickSilentStepperNotifyUnderVoltage = procedure(aSender: TBrickSilentStepper; const aVoltage: word) of object;
+  TBrickSilentStepperNotifyPositionReached = procedure(aSender: TBrickSilentStepper; const aPosition: longint) of object;
+  TBrickSilentStepperNotifyAllData = procedure(aSender: TBrickSilentStepper; const aCurrentVelocity: word; const aCurrentPosition: longint;
+                                               const aRemainingSteps: longint; const aStackVoltage: word; const aExternalVoltage: word;
+                                               const acurrentConsumption: word) of object;
+  TBrickSilentStepperNotifyNewState = procedure(aSender: TBrickSilentStepper; const aStateNew: byte; const aStatePrevious: byte) of object;
 
   /// <summary>
   ///  Silently drives one bipolar stepper motor with up to 46V and 1.6A per phase
@@ -56,7 +58,7 @@ type
     ///  either <see cref="BrickSilentStepper.TBrickSilentStepper.SetTargetPosition"/>, <see cref="BrickSilentStepper.TBrickSilentStepper.SetSteps"/>, <see cref="BrickSilentStepper.TBrickSilentStepper.DriveForward"/> or
     ///  <see cref="BrickSilentStepper.TBrickSilentStepper.DriveBackward"/>.
     /// </summary>
-    procedure SetMaxVelocity(const velocity: word); virtual;
+    procedure SetMaxVelocity(const aVelocity: word); virtual;
 
     /// <summary>
     ///  Returns the velocity as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetMaxVelocity"/>.
@@ -82,13 +84,13 @@ type
     ///  
     ///  The default value is 1000 for both
     /// </summary>
-    procedure SetSpeedRamping(const acceleration: word; const deacceleration: word); virtual;
+    procedure SetSpeedRamping(const aAcceleration: word; const aDeacceleration: word); virtual;
 
     /// <summary>
     ///  Returns the acceleration and deacceleration as set by
     ///  <see cref="BrickSilentStepper.TBrickSilentStepper.SetSpeedRamping"/>.
     /// </summary>
-    procedure GetSpeedRamping(out acceleration: word; out deacceleration: word); virtual;
+    procedure GetSpeedRamping(out aAcceleration: word; out aDeacceleration: word); virtual;
 
     /// <summary>
     ///  Executes an active full brake.
@@ -108,7 +110,7 @@ type
     ///  set the current position to 0 when some kind of starting position
     ///  is reached (e.g. when a CNC machine reaches a corner).
     /// </summary>
-    procedure SetCurrentPosition(const position: longint); virtual;
+    procedure SetCurrentPosition(const aPosition: longint); virtual;
 
     /// <summary>
     ///  Returns the current position of the stepper motor in steps. On startup
@@ -130,7 +132,7 @@ type
     ///  a call of <see cref="BrickSilentStepper.TBrickSilentStepper.SetSteps"/> with the parameter
     ///  (*x* - <see cref="BrickSilentStepper.TBrickSilentStepper.GetCurrentPosition"/>).
     /// </summary>
-    procedure SetTargetPosition(const position: longint); virtual;
+    procedure SetTargetPosition(const aPosition: longint); virtual;
 
     /// <summary>
     ///  Returns the last target position as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetTargetPosition"/>.
@@ -143,7 +145,7 @@ type
     ///  The velocity, acceleration and deacceleration as set by
     ///  <see cref="BrickSilentStepper.TBrickSilentStepper.SetMaxVelocity"/> and <see cref="BrickSilentStepper.TBrickSilentStepper.SetSpeedRamping"/> will be used.
     /// </summary>
-    procedure SetSteps(const steps: longint); virtual;
+    procedure SetSteps(const aSteps: longint); virtual;
 
     /// <summary>
     ///  Returns the last steps as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetSteps"/>.
@@ -173,12 +175,12 @@ type
     ///  
     ///  The default is 1/256-step with interpolation on.
     /// </summary>
-    procedure SetStepConfiguration(const stepResolution: byte; const interpolation: boolean); virtual;
+    procedure SetStepConfiguration(const aStepResolution: byte; const aInterpolation: boolean); virtual;
 
     /// <summary>
     ///  Returns the step mode as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetStepConfiguration"/>.
     /// </summary>
-    procedure GetStepConfiguration(out stepResolution: byte; out interpolation: boolean); virtual;
+    procedure GetStepConfiguration(out aStepResolution: byte; out aInterpolation: boolean); virtual;
 
     /// <summary>
     ///  Drives the stepper motor forward until <see cref="BrickSilentStepper.TBrickSilentStepper.DriveBackward"/> or
@@ -234,7 +236,7 @@ type
     ///   Otherwise it may damage your motor.
     ///  </note>
     /// </summary>
-    procedure SetMotorCurrent(const current: word); virtual;
+    procedure SetMotorCurrent(const aCurrent: word); virtual;
 
     /// <summary>
     ///  Returns the current as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetMotorCurrent"/>.
@@ -312,12 +314,16 @@ type
     ///  * Classic Threshold: 1000
     ///  * High Velocity Shopper Mode: false
     /// </summary>
-    procedure SetBasicConfiguration(const standstillCurrent: word; const motorRunCurrent: word; const standstillDelayTime: word; const powerDownTime: word; const stealthThreshold: word; const coolstepThreshold: word; const classicThreshold: word; const highVelocityChopperMode: boolean); virtual;
+    procedure SetBasicConfiguration(const aStandstillCurrent: word; const aMotorRunCurrent: word; const aStandstillDelayTime: word;
+                                    const aPowerDownTime: word; const aStealthThreshold: word; const aCoolstepThreshold: word;
+                                    const aClassicThreshold: word; const aHighVelocityChopperMode: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetBasicConfiguration"/>.
     /// </summary>
-    procedure GetBasicConfiguration(out standstillCurrent: word; out motorRunCurrent: word; out standstillDelayTime: word; out powerDownTime: word; out stealthThreshold: word; out coolstepThreshold: word; out classicThreshold: word; out highVelocityChopperMode: boolean); virtual;
+    procedure GetBasicConfiguration(out aStandstillCurrent: word; out aMotorRunCurrent: word; out aStandstillDelayTime: word;
+                                    out aPowerDownTime: word; out aStealthThreshold: word; out aCoolstepThreshold: word;
+                                    out aClassicThreshold: word; out aHighVelocityChopperMode: boolean); virtual;
 
     /// <summary>
     ///  Note: If you don't know what any of this means you can very likely keep all of
@@ -372,12 +378,16 @@ type
     ///  * Comparator Blank Time: 1
     ///  * Fast Decay Without Comparator: false
     /// </summary>
-    procedure SetSpreadcycleConfiguration(const slowDecayDuration: byte; const enableRandomSlowDecay: boolean; const fastDecayDuration: byte; const hysteresisStartValue: byte; const hysteresisEndValue: shortint; const sineWaveOffset: shortint; const chopperMode: byte; const comparatorBlankTime: byte; const fastDecayWithoutComparator: boolean); virtual;
+    procedure SetSpreadcycleConfiguration(const slowDecayDuration: byte; const enableRandomSlowDecay: boolean; const fastDecayDuration: byte;
+                                          const hysteresisStartValue: byte; const hysteresisEndValue: shortint; const sineWaveOffset: shortint;
+                                          const chopperMode: byte; const comparatorBlankTime: byte; const fastDecayWithoutComparator: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetBasicConfiguration"/>.
     /// </summary>
-    procedure GetSpreadcycleConfiguration(out slowDecayDuration: byte; out enableRandomSlowDecay: boolean; out fastDecayDuration: byte; out hysteresisStartValue: byte; out hysteresisEndValue: shortint; out sineWaveOffset: shortint; out chopperMode: byte; out comparatorBlankTime: byte; out fastDecayWithoutComparator: boolean); virtual;
+    procedure GetSpreadcycleConfiguration(out slowDecayDuration: byte; out enableRandomSlowDecay: boolean; out fastDecayDuration: byte;
+                                          out hysteresisStartValue: byte; out hysteresisEndValue: shortint; out sineWaveOffset: shortint;
+                                          out chopperMode: byte; out comparatorBlankTime: byte; out fastDecayWithoutComparator: boolean); virtual;
 
     /// <summary>
     ///  Note: If you don't know what any of this means you can very likely keep all of
@@ -849,12 +859,12 @@ begin
   aCallBacks[BRICK_SILENT_STEPPER_CALLBACK_NEW_STATE]:= {$ifdef FPC}@{$endif}CallbackWrapperNewState;
 end;
 
-procedure TBrickSilentStepper.SetMaxVelocity(const velocity: word);
+procedure TBrickSilentStepper.SetMaxVelocity(const aVelocity: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_MAX_VELOCITY, 10);
-  LEConvertUInt16To(velocity, 8, _request);
+  LEConvertUInt16To(aVelocity, 8, _request);
   SendRequest(_request);
 end;
 
@@ -876,24 +886,24 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetSpeedRamping(const acceleration: word; const deacceleration: word);
+procedure TBrickSilentStepper.SetSpeedRamping(const aAcceleration: word; const aDeacceleration: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_SPEED_RAMPING, 12);
-  LEConvertUInt16To(acceleration, 8, _request);
-  LEConvertUInt16To(deacceleration, 10, _request);
+  LEConvertUInt16To(aAcceleration, 8, _request);
+  LEConvertUInt16To(aDeacceleration, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetSpeedRamping(out acceleration: word; out deacceleration: word);
+procedure TBrickSilentStepper.GetSpeedRamping(out aAcceleration: word; out aDeacceleration: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_SPEED_RAMPING, 8);
   _response:= SendRequest(_request);
-  acceleration:= LEConvertUInt16From(8, _response);
-  deacceleration:= LEConvertUInt16From(10, _response);
+  aAcceleration:= LEConvertUInt16From(8, _response);
+  aDeacceleration:= LEConvertUInt16From(10, _response);
 end;
 
 procedure TBrickSilentStepper.FullBrake;
@@ -904,12 +914,12 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.SetCurrentPosition(const position: longint);
+procedure TBrickSilentStepper.SetCurrentPosition(const aPosition: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_CURRENT_POSITION, 12);
-  LEConvertInt32To(position, 8, _request);
+  LEConvertInt32To(aPosition, 8, _request);
   SendRequest(_request);
 end;
 
@@ -922,12 +932,12 @@ begin
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetTargetPosition(const position: longint);
+procedure TBrickSilentStepper.SetTargetPosition(const aPosition: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_TARGET_POSITION, 12);
-  LEConvertInt32To(position, 8, _request);
+  LEConvertInt32To(aPosition, 8, _request);
   SendRequest(_request);
 end;
 
@@ -940,12 +950,12 @@ begin
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetSteps(const steps: longint);
+procedure TBrickSilentStepper.SetSteps(const aSteps: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_STEPS, 12);
-  LEConvertInt32To(steps, 8, _request);
+  LEConvertInt32To(aSteps, 8, _request);
   SendRequest(_request);
 end;
 
@@ -967,24 +977,24 @@ begin
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetStepConfiguration(const stepResolution: byte; const interpolation: boolean);
+procedure TBrickSilentStepper.SetStepConfiguration(const aStepResolution: byte; const aInterpolation: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_STEP_CONFIGURATION, 10);
-  LEConvertUInt8To(stepResolution, 8, _request);
-  LEConvertBooleanTo(interpolation, 9, _request);
+  LEConvertUInt8To(aStepResolution, 8, _request);
+  LEConvertBooleanTo(aInterpolation, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetStepConfiguration(out stepResolution: byte; out interpolation: boolean);
+procedure TBrickSilentStepper.GetStepConfiguration(out aStepResolution: byte; out aInterpolation: boolean);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_STEP_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  stepResolution:= LEConvertUInt8From(8, _response);
-  interpolation:= LEConvertBooleanFrom(9, _response);
+  aStepResolution:= LEConvertUInt8From(8, _response);
+  aInterpolation:= LEConvertBooleanFrom(9, _response);
 end;
 
 procedure TBrickSilentStepper.DriveForward;
@@ -1029,12 +1039,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetMotorCurrent(const current: word);
+procedure TBrickSilentStepper.SetMotorCurrent(const aCurrent: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_MOTOR_CURRENT, 10);
-  LEConvertUInt16To(current, 8, _request);
+  LEConvertUInt16To(aCurrent, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1072,39 +1082,43 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetBasicConfiguration(const standstillCurrent: word; const motorRunCurrent: word; const standstillDelayTime: word; const powerDownTime: word; const stealthThreshold: word; const coolstepThreshold: word; const classicThreshold: word; const highVelocityChopperMode: boolean);
+procedure TBrickSilentStepper.SetBasicConfiguration(const aStandstillCurrent: word; const aMotorRunCurrent: word; const aStandstillDelayTime: word; const aPowerDownTime: word;
+                                                    const aStealthThreshold: word; const aCoolstepThreshold: word; const aClassicThreshold: word; const aHighVelocityChopperMode: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_BASIC_CONFIGURATION, 23);
-  LEConvertUInt16To(standstillCurrent, 8, _request);
-  LEConvertUInt16To(motorRunCurrent, 10, _request);
-  LEConvertUInt16To(standstillDelayTime, 12, _request);
-  LEConvertUInt16To(powerDownTime, 14, _request);
-  LEConvertUInt16To(stealthThreshold, 16, _request);
-  LEConvertUInt16To(coolstepThreshold, 18, _request);
-  LEConvertUInt16To(classicThreshold, 20, _request);
-  LEConvertBooleanTo(highVelocityChopperMode, 22, _request);
+  LEConvertUInt16To(aStandstillCurrent, 8, _request);
+  LEConvertUInt16To(aMotorRunCurrent, 10, _request);
+  LEConvertUInt16To(aStandstillDelayTime, 12, _request);
+  LEConvertUInt16To(aPowerDownTime, 14, _request);
+  LEConvertUInt16To(aStealthThreshold, 16, _request);
+  LEConvertUInt16To(aCoolstepThreshold, 18, _request);
+  LEConvertUInt16To(aClassicThreshold, 20, _request);
+  LEConvertBooleanTo(aHighVelocityChopperMode, 22, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetBasicConfiguration(out standstillCurrent: word; out motorRunCurrent: word; out standstillDelayTime: word; out powerDownTime: word; out stealthThreshold: word; out coolstepThreshold: word; out classicThreshold: word; out highVelocityChopperMode: boolean);
+procedure TBrickSilentStepper.GetBasicConfiguration(out aStandstillCurrent: word; out aMotorRunCurrent: word; out aStandstillDelayTime: word; out aPowerDownTime: word;
+                                                    out aStealthThreshold: word; out aCoolstepThreshold: word; out aClassicThreshold: word; out aHighVelocityChopperMode: boolean);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_BASIC_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  standstillCurrent:= LEConvertUInt16From(8, _response);
-  motorRunCurrent:= LEConvertUInt16From(10, _response);
-  standstillDelayTime:= LEConvertUInt16From(12, _response);
-  powerDownTime:= LEConvertUInt16From(14, _response);
-  stealthThreshold:= LEConvertUInt16From(16, _response);
-  coolstepThreshold:= LEConvertUInt16From(18, _response);
-  classicThreshold:= LEConvertUInt16From(20, _response);
-  highVelocityChopperMode:= LEConvertBooleanFrom(22, _response);
+  aStandstillCurrent:= LEConvertUInt16From(8, _response);
+  aMotorRunCurrent:= LEConvertUInt16From(10, _response);
+  aStandstillDelayTime:= LEConvertUInt16From(12, _response);
+  aPowerDownTime:= LEConvertUInt16From(14, _response);
+  aStealthThreshold:= LEConvertUInt16From(16, _response);
+  aCoolstepThreshold:= LEConvertUInt16From(18, _response);
+  aClassicThreshold:= LEConvertUInt16From(20, _response);
+  aHighVelocityChopperMode:= LEConvertBooleanFrom(22, _response);
 end;
 
-procedure TBrickSilentStepper.SetSpreadcycleConfiguration(const slowDecayDuration: byte; const enableRandomSlowDecay: boolean; const fastDecayDuration: byte; const hysteresisStartValue: byte; const hysteresisEndValue: shortint; const sineWaveOffset: shortint; const chopperMode: byte; const comparatorBlankTime: byte; const fastDecayWithoutComparator: boolean);
+procedure TBrickSilentStepper.SetSpreadcycleConfiguration(const slowDecayDuration: byte; const enableRandomSlowDecay: boolean; const fastDecayDuration: byte;
+                                                          const hysteresisStartValue: byte; const hysteresisEndValue: shortint; const sineWaveOffset: shortint;
+                                                          const chopperMode: byte; const comparatorBlankTime: byte; const fastDecayWithoutComparator: boolean);
 var
   _request: TDynamicByteArray;
 begin
@@ -1121,7 +1135,9 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetSpreadcycleConfiguration(out slowDecayDuration: byte; out enableRandomSlowDecay: boolean; out fastDecayDuration: byte; out hysteresisStartValue: byte; out hysteresisEndValue: shortint; out sineWaveOffset: shortint; out chopperMode: byte; out comparatorBlankTime: byte; out fastDecayWithoutComparator: boolean);
+procedure TBrickSilentStepper.GetSpreadcycleConfiguration(out slowDecayDuration: byte; out enableRandomSlowDecay: boolean; out fastDecayDuration: byte;
+                                                          out hysteresisStartValue: byte; out hysteresisEndValue: shortint; out sineWaveOffset: shortint;
+                                                          out chopperMode: byte; out comparatorBlankTime: byte; out fastDecayWithoutComparator: boolean);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1138,7 +1154,8 @@ begin
   fastDecayWithoutComparator:= LEConvertBooleanFrom(16, _response);
 end;
 
-procedure TBrickSilentStepper.SetStealthConfiguration(const enableStealth: boolean; const amplitude: byte; const gradient: byte; const enableAutoscale: boolean; const forceSymmetric: boolean; const freewheelMode: byte);
+procedure TBrickSilentStepper.SetStealthConfiguration(const enableStealth: boolean; const amplitude: byte; const gradient: byte;
+                                                      const enableAutoscale: boolean; const forceSymmetric: boolean; const freewheelMode: byte);
 var
   _request: TDynamicByteArray;
 begin
@@ -1152,7 +1169,8 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetStealthConfiguration(out enableStealth: boolean; out amplitude: byte; out gradient: byte; out enableAutoscale: boolean; out forceSymmetric: boolean; out freewheelMode: byte);
+procedure TBrickSilentStepper.GetStealthConfiguration(out enableStealth: boolean; out amplitude: byte; out gradient: byte; out enableAutoscale: boolean;
+                                                      out forceSymmetric: boolean; out freewheelMode: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1166,7 +1184,9 @@ begin
   freewheelMode:= LEConvertUInt8From(13, _response);
 end;
 
-procedure TBrickSilentStepper.SetCoolstepConfiguration(const minimumStallguardValue: byte; const maximumStallguardValue: byte; const currentUpStepWidth: byte; const currentDownStepWidth: byte; const minimumCurrent: byte; const stallguardThresholdValue: shortint; const stallguardMode: byte);
+procedure TBrickSilentStepper.SetCoolstepConfiguration(const minimumStallguardValue: byte; const maximumStallguardValue: byte; const currentUpStepWidth: byte;
+                                                       const currentDownStepWidth: byte; const minimumCurrent: byte; const stallguardThresholdValue: shortint;
+                                                       const stallguardMode: byte);
 var
   _request: TDynamicByteArray;
 begin
@@ -1181,7 +1201,9 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetCoolstepConfiguration(out minimumStallguardValue: byte; out maximumStallguardValue: byte; out currentUpStepWidth: byte; out currentDownStepWidth: byte; out minimumCurrent: byte; out stallguardThresholdValue: shortint; out stallguardMode: byte);
+procedure TBrickSilentStepper.GetCoolstepConfiguration(out minimumStallguardValue: byte; out maximumStallguardValue: byte; out currentUpStepWidth: byte;
+                                                       out currentDownStepWidth: byte; out minimumCurrent: byte; out stallguardThresholdValue: shortint;
+                                                       out stallguardMode: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1216,7 +1238,8 @@ begin
   synchronizePhaseFrequency:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickSilentStepper.GetDriverStatus(out openLoad: byte; out shortToGround: byte; out overTemperature: byte; out motorStalled: boolean; out actualMotorCurrent: byte; out fullStepActive: boolean; out stallguardResult: byte; out stealthVoltageAmplitude: byte);
+procedure TBrickSilentStepper.GetDriverStatus(out openLoad: byte; out shortToGround: byte; out overTemperature: byte; out motorStalled: boolean;
+                                              out actualMotorCurrent: byte; out fullStepActive: boolean; out stallguardResult: byte; out stealthVoltageAmplitude: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1268,7 +1291,8 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.GetAllData(out currentVelocity: word; out currentPosition: longint; out remainingSteps: longint; out stackVoltage: word; out externalVoltage: word; out currentConsumption: word);
+procedure TBrickSilentStepper.GetAllData(out currentVelocity: word; out currentPosition: longint; out remainingSteps: longint;
+                                         out stackVoltage: word; out externalVoltage: word; out currentConsumption: word);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1350,7 +1374,9 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.GetSPITFPErrorCount(const brickletPort: char; out errorCountACKChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickSilentStepper.GetSPITFPErrorCount(const brickletPort: char; out errorCountACKChecksum: longword;
+                                                  out errorCountMessageChecksum: longword; out errorCountFrame: longword;
+                                                  out errorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -1418,7 +1444,9 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickSilentStepper.GetIdentity(out aUID: string; out connectedUid: string; out position: char;
+                                          out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber;
+                                          out deviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;

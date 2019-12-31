@@ -25,10 +25,10 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletBarometer = class;
-  TBrickletBarometerNotifyAirPressure = procedure(aSender: TBrickletBarometer; const airPressure: longint) of object;
-  TBrickletBarometerNotifyAltitude = procedure(aSender: TBrickletBarometer; const altitude: longint) of object;
-  TBrickletBarometerNotifyAirPressureReached = procedure(aSender: TBrickletBarometer; const airPressure: longint) of object;
-  TBrickletBarometerNotifyAltitudeReached = procedure(aSender: TBrickletBarometer; const altitude: longint) of object;
+  TBrickletBarometerNotifyAirPressure = procedure(aSender: TBrickletBarometer; const aAirPressure: longint) of object;
+  TBrickletBarometerNotifyAltitude = procedure(aSender: TBrickletBarometer; const aAltitude: longint) of object;
+  TBrickletBarometerNotifyAirPressureReached = procedure(aSender: TBrickletBarometer; const aAirPressure: longint) of object;
+  TBrickletBarometerNotifyAltitudeReached = procedure(aSender: TBrickletBarometer; const aAltitude: longint) of object;
 
   /// <summary>
   ///  Measures air pressure and altitude changes
@@ -77,7 +77,7 @@ type
     ///  The <see cref="BrickletBarometer.TBrickletBarometer.OnAirPressure"/> callback is only triggered if the air pressure has
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetAirPressureCallbackPeriod(const period: longword); virtual;
+    procedure SetAirPressureCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletBarometer.TBrickletBarometer.SetAirPressureCallbackPeriod"/>.
@@ -91,7 +91,7 @@ type
     ///  The <see cref="BrickletBarometer.TBrickletBarometer.OnAltitude"/> callback is only triggered if the altitude has changed since
     ///  the last triggering.
     /// </summary>
-    procedure SetAltitudeCallbackPeriod(const period: longword); virtual;
+    procedure SetAltitudeCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletBarometer.TBrickletBarometer.SetAltitudeCallbackPeriod"/>.
@@ -113,12 +113,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the air pressure is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetAirPressureCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetAirPressureCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletBarometer.TBrickletBarometer.SetAirPressureCallbackThreshold"/>.
     /// </summary>
-    procedure GetAirPressureCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetAirPressureCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletBarometer.TBrickletBarometer.OnAltitudeReached"/> callback.
@@ -135,12 +135,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the altitude is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetAltitudeCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetAltitudeCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletBarometer.TBrickletBarometer.SetAltitudeCallbackThreshold"/>.
     /// </summary>
-    procedure GetAltitudeCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetAltitudeCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -155,7 +155,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletBarometer.TBrickletBarometer.SetDebouncePeriod"/>.
@@ -173,7 +173,7 @@ type
     ///  `QFE &lt;https://en.wikipedia.org/wiki/Mean_sea_level_pressure#Mean_sea_level_pressure&gt;`__
     ///  used in aviation.
     /// </summary>
-    procedure SetReferenceAirPressure(const airPressure: longint); virtual;
+    procedure SetReferenceAirPressure(const aAirPressure: longint); virtual;
 
     /// <summary>
     ///  Returns the temperature of the air pressure sensor.
@@ -205,14 +205,14 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SetAveraging(const movingAveragePressure: byte; const averagePressure: byte; const averageTemperature: byte); virtual;
+    procedure SetAveraging(const aMovingAveragePressure: byte; const aAveragePressure: byte; const aAverageTemperature: byte); virtual;
 
     /// <summary>
     ///  Returns the averaging configuration as set by <see cref="BrickletBarometer.TBrickletBarometer.SetAveraging"/>.
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure GetAveraging(out movingAveragePressure: byte; out averagePressure: byte; out averageTemperature: byte); virtual;
+    procedure GetAveraging(out aMovingAveragePressure: byte; out aAveragePressure: byte; out aAverageTemperature: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -224,7 +224,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -308,7 +309,7 @@ end;
 
 function TBrickletBarometer.GetAirPressure: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_AIR_PRESSURE, 8);
   _response:= SendRequest(_request);
@@ -317,123 +318,123 @@ end;
 
 function TBrickletBarometer.GetAltitude: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_ALTITUDE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletBarometer.SetAirPressureCallbackPeriod(const period: longword);
+procedure TBrickletBarometer.SetAirPressureCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_AIR_PRESSURE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletBarometer.GetAirPressureCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_AIR_PRESSURE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletBarometer.SetAltitudeCallbackPeriod(const period: longword);
+procedure TBrickletBarometer.SetAltitudeCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_ALTITUDE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletBarometer.GetAltitudeCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_ALTITUDE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletBarometer.SetAirPressureCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletBarometer.SetAirPressureCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_AIR_PRESSURE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletBarometer.GetAirPressureCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletBarometer.GetAirPressureCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_AIR_PRESSURE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletBarometer.SetAltitudeCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletBarometer.SetAltitudeCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_ALTITUDE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletBarometer.GetAltitudeCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletBarometer.GetAltitudeCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_ALTITUDE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletBarometer.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletBarometer.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletBarometer.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletBarometer.SetReferenceAirPressure(const airPressure: longint);
+procedure TBrickletBarometer.SetReferenceAirPressure(const aAirPressure: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_REFERENCE_AIR_PRESSURE, 12);
-  LEConvertInt32To(airPressure, 8, _request);
+  LEConvertInt32To(aAirPressure, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletBarometer.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -442,86 +443,91 @@ end;
 
 function TBrickletBarometer.GetReferenceAirPressure: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_REFERENCE_AIR_PRESSURE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletBarometer.SetAveraging(const movingAveragePressure: byte; const averagePressure: byte; const averageTemperature: byte);
+procedure TBrickletBarometer.SetAveraging(const aMovingAveragePressure: byte; const aAveragePressure: byte; const aAverageTemperature: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_SET_AVERAGING, 11);
-  LEConvertUInt8To(movingAveragePressure, 8, _request);
-  LEConvertUInt8To(averagePressure, 9, _request);
-  LEConvertUInt8To(averageTemperature, 10, _request);
+  LEConvertUInt8To(aMovingAveragePressure, 8, _request);
+  LEConvertUInt8To(aAveragePressure, 9, _request);
+  LEConvertUInt8To(aAverageTemperature, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletBarometer.GetAveraging(out movingAveragePressure: byte; out averagePressure: byte; out averageTemperature: byte);
+procedure TBrickletBarometer.GetAveraging(out aMovingAveragePressure: byte; out aAveragePressure: byte; out aAverageTemperature: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_AVERAGING, 8);
   _response:= SendRequest(_request);
-  movingAveragePressure:= LEConvertUInt8From(8, _response);
-  averagePressure:= LEConvertUInt8From(9, _response);
-  averageTemperature:= LEConvertUInt8From(10, _response);
+  aMovingAveragePressure:= LEConvertUInt8From(8, _response);
+  aAveragePressure:= LEConvertUInt8From(9, _response);
+  aAverageTemperature:= LEConvertUInt8From(10, _response);
 end;
 
-procedure TBrickletBarometer.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletBarometer.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_BAROMETER_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletBarometer.CallbackWrapperAirPressure(const aPacket: TDynamicByteArray);
-var airPressure: longint;
+var
+  _airPressure: longint;
 begin
-  airPressure:= LEConvertInt32From(8, aPacket);
+  _airPressure:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fAirPressureCallback)) then begin
-    fAirPressureCallback(self, airPressure);
+    fAirPressureCallback(self, _airPressure);
   end;
 end;
 
 procedure TBrickletBarometer.CallbackWrapperAltitude(const aPacket: TDynamicByteArray);
-var altitude: longint;
+var
+  _altitude: longint;
 begin
-  altitude:= LEConvertInt32From(8, aPacket);
+  _altitude:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fAltitudeCallback)) then begin
-    fAltitudeCallback(self, altitude);
+    fAltitudeCallback(self, _altitude);
   end;
 end;
 
 procedure TBrickletBarometer.CallbackWrapperAirPressureReached(const aPacket: TDynamicByteArray);
-var airPressure: longint;
+var
+  _airPressure: longint;
 begin
-  airPressure:= LEConvertInt32From(8, aPacket);
+  _airPressure:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fAirPressureReachedCallback)) then begin
-    fAirPressureReachedCallback(self, airPressure);
+    fAirPressureReachedCallback(self, _airPressure);
   end;
 end;
 
 procedure TBrickletBarometer.CallbackWrapperAltitudeReached(const aPacket: TDynamicByteArray);
-var altitude: longint;
+var
+  _altitude: longint;
 begin
-  altitude:= LEConvertInt32From(8, aPacket);
+  _altitude:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fAltitudeReachedCallback)) then begin
-    fAltitudeReachedCallback(self, altitude);
+    fAltitudeReachedCallback(self, _altitude);
   end;
 end;
 
