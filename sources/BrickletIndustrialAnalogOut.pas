@@ -98,12 +98,12 @@ type
     ///  The resolution will always be 12 bit. This means, that the
     ///  precision is higher with a smaller range.
     /// </summary>
-    procedure SetConfiguration(const voltageRange: byte; const currentRange: byte); virtual;
+    procedure SetConfiguration(const aVoltageRange: byte; const aCurrentRange: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletIndustrialAnalogOut.TBrickletIndustrialAnalogOut.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out voltageRange: byte; out currentRange: byte); virtual;
+    procedure GetConfiguration(out aVoltageRange: byte; out aCurrentRange: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -115,7 +115,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
   end;
 
 implementation
@@ -148,7 +149,7 @@ end;
 
 procedure TBrickletIndustrialAnalogOut.Enable;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_ENABLE, 8);
   SendRequest(_request);
@@ -156,7 +157,7 @@ end;
 
 procedure TBrickletIndustrialAnalogOut.Disable;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_DISABLE, 8);
   SendRequest(_request);
@@ -164,7 +165,7 @@ end;
 
 function TBrickletIndustrialAnalogOut.IsEnabled: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_IS_ENABLED, 8);
   _response:= SendRequest(_request);
@@ -173,7 +174,7 @@ end;
 
 procedure TBrickletIndustrialAnalogOut.SetVoltage(const voltage: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_SET_VOLTAGE, 10);
   LEConvertUInt16To(voltage, 8, _request);
@@ -182,7 +183,7 @@ end;
 
 function TBrickletIndustrialAnalogOut.GetVoltage: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_GET_VOLTAGE, 8);
   _response:= SendRequest(_request);
@@ -191,7 +192,7 @@ end;
 
 procedure TBrickletIndustrialAnalogOut.SetCurrent(const current: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_SET_CURRENT, 10);
   LEConvertUInt16To(current, 8, _request);
@@ -200,45 +201,46 @@ end;
 
 function TBrickletIndustrialAnalogOut.GetCurrent: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_GET_CURRENT, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletIndustrialAnalogOut.SetConfiguration(const voltageRange: byte; const currentRange: byte);
+procedure TBrickletIndustrialAnalogOut.SetConfiguration(const aVoltageRange: byte; const aCurrentRange: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_SET_CONFIGURATION, 10);
-  LEConvertUInt8To(voltageRange, 8, _request);
-  LEConvertUInt8To(currentRange, 9, _request);
+  LEConvertUInt8To(aVoltageRange, 8, _request);
+  LEConvertUInt8To(aCurrentRange, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialAnalogOut.GetConfiguration(out voltageRange: byte; out currentRange: byte);
+procedure TBrickletIndustrialAnalogOut.GetConfiguration(out aVoltageRange: byte; out aCurrentRange: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  voltageRange:= LEConvertUInt8From(8, _response);
-  currentRange:= LEConvertUInt8From(9, _response);
+  aVoltageRange:= LEConvertUInt8From(8, _response);
+  aCurrentRange:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletIndustrialAnalogOut.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialAnalogOut.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_ANALOG_OUT_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 end.

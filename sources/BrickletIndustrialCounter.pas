@@ -31,19 +31,21 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletIndustrialCounter = class;
-  TBrickletIndustrialCounterNotifyAllCounter = procedure(aSender: TBrickletIndustrialCounter; const counter: TArray0To3OfInt64) of object;
-  TBrickletIndustrialCounterNotifyAllSignalData = procedure(aSender: TBrickletIndustrialCounter; const dutyCycle: TArray0To3OfUInt16; const period: TArray0To3OfUInt64; const frequency: TArray0To3OfUInt32; const value: TArray0To3OfBoolean) of object;
+  TBrickletIndustrialCounterNotifyAllCounter = procedure(aSender: TBrickletIndustrialCounter; const aCounter: TArray0To3OfInt64) of object;
+  TBrickletIndustrialCounterNotifyAllSignalData = procedure(aSender: TBrickletIndustrialCounter; const aDutyCycle: TArray0To3OfUInt16;
+                                                            const aPeriod: TArray0To3OfUInt64; const aFrequency: TArray0To3OfUInt32;
+                                                            const aValue: TArray0To3OfBoolean) of object;
 
   /// <summary>
   ///  4 channel counter up to 4MHz
   /// </summary>
   TBrickletIndustrialCounter = class(TDevice)
   private
-    allCounterCallback: TBrickletIndustrialCounterNotifyAllCounter;
-    allSignalDataCallback: TBrickletIndustrialCounterNotifyAllSignalData;
-  protected
+    fAllCounterCallback: TBrickletIndustrialCounterNotifyAllCounter;
+    fAllSignalDataCallback: TBrickletIndustrialCounterNotifyAllSignalData;
     procedure CallbackWrapperAllCounter(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperAllSignalData(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
@@ -53,7 +55,7 @@ type
     /// <summary>
     ///  Returns the current counter value for the given channel.
     /// </summary>
-    function GetCounter(const channel: byte): int64; virtual;
+    function GetCounter(const aChannel: byte): int64; virtual;
 
     /// <summary>
     ///  Returns the current counter values for all four channels.
@@ -65,26 +67,28 @@ type
     ///  
     ///  The default value for the counters on startup is 0.
     /// </summary>
-    procedure SetCounter(const channel: byte; const counter: int64); virtual;
+    procedure SetCounter(const aChannel: byte; const aCounter: int64); virtual;
 
     /// <summary>
     ///  Sets the counter values for all four channels.
     ///  
     ///  The default value for the counters on startup is 0.
     /// </summary>
-    procedure SetAllCounter(const counter: array of int64); virtual;
+    procedure SetAllCounter(const aCounter: array of int64); virtual;
 
     /// <summary>
     ///  Returns the signal data (duty cycle, period, frequency and value) for the
     ///  given channel.
     /// </summary>
-    procedure GetSignalData(const channel: byte; out dutyCycle: word; out period: uint64; out frequency: longword; out aValue: boolean); virtual;
+    procedure GetSignalData(const aChannel: byte; out aDutyCycle: word; out aPeriod: uint64;
+                            out aFrequency: longword; out aValue: boolean); virtual;
 
     /// <summary>
     ///  Returns the signal data (duty cycle, period, frequency and value) for all four
     ///  channels.
     /// </summary>
-    procedure GetAllSignalData(out dutyCycle: TArray0To3OfUInt16; out period: TArray0To3OfUInt64; out frequency: TArray0To3OfUInt32; out aValue: TArray0To3OfBoolean); virtual;
+    procedure GetAllSignalData(out aDutyCycle: TArray0To3OfUInt16; out aPeriod: TArray0To3OfUInt64;
+                               out aFrequency: TArray0To3OfUInt32; out aValue: TArray0To3OfBoolean); virtual;
 
     /// <summary>
     ///  Activates/deactivates the counter of the given channel.
@@ -93,7 +97,7 @@ type
     ///  
     ///  By default all channels are activated.
     /// </summary>
-    procedure SetCounterActive(const channel: byte; const active: boolean); virtual;
+    procedure SetCounterActive(const aChannel: byte; const aActive: boolean); virtual;
 
     /// <summary>
     ///  Activates/deactivates the counter of all four channels.
@@ -102,14 +106,14 @@ type
     ///  
     ///  By default all channels are activated.
     /// </summary>
-    procedure SetAllCounterActive(const active: array of boolean); virtual;
+    procedure SetAllCounterActive(const aActive: array of boolean); virtual;
 
     /// <summary>
     ///  Returns the activation state of the given channel.
     ///  
     ///  true = activated, false = deactivated.
     /// </summary>
-    function GetCounterActive(const channel: byte): boolean; virtual;
+    function GetCounterActive(const aChannel: byte): boolean; virtual;
 
     /// <summary>
     ///  Returns the activation state of all four channels.
@@ -134,12 +138,14 @@ type
     ///    `here &lt;https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Industrial_Counter.html#duty-cycle-prescaler-and-frequency-integration-time&gt;`__
     ///    for details.
     /// </summary>
-    procedure SetCounterConfiguration(const channel: byte; const countEdge: byte; const countDirection: byte; const dutyCyclePrescaler: byte; const frequencyIntegrationTime: byte); virtual;
+    procedure SetCounterConfiguration(const aChannel: byte; const aCountEdge: byte; const aCountDirection: byte;
+                                      const aDutyCyclePrescaler: byte; const aFrequencyIntegrationTime: byte); virtual;
 
     /// <summary>
     ///  Returns the counter configuration as set by <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.SetCounterConfiguration"/>.
     /// </summary>
-    procedure GetCounterConfiguration(const channel: byte; out countEdge: byte; out countDirection: byte; out dutyCyclePrescaler: byte; out frequencyIntegrationTime: byte); virtual;
+    procedure GetCounterConfiguration(const aChannel: byte; out aCountEdge: byte; out aCountDirection: byte;
+                                      out aDutyCyclePrescaler: byte; out aFrequencyIntegrationTime: byte); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.OnAllCounter"/>
@@ -152,13 +158,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetAllCounterCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetAllCounterCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.SetAllCounterCallbackConfiguration"/>.
     /// </summary>
-    procedure GetAllCounterCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetAllCounterCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.OnAllSignalData"/>
@@ -171,13 +177,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetAllSignalDataCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetAllSignalDataCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.SetAllSignalDataCallbackConfiguration"/>.
     /// </summary>
-    procedure GetAllSignalDataCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetAllSignalDataCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Each channel has a corresponding LED. You can turn the LED off, on or show a
@@ -186,12 +192,12 @@ type
     ///  
     ///  By default all channel LEDs are configured as "Channel Status".
     /// </summary>
-    procedure SetChannelLEDConfig(const channel: byte; const config: byte); virtual;
+    procedure SetChannelLEDConfig(const aChannel: byte; const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the channel LED configuration as set by <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.SetChannelLEDConfig"/>
     /// </summary>
-    function GetChannelLEDConfig(const channel: byte): byte; virtual;
+    function GetChannelLEDConfig(const aChannel: byte): byte; virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -206,7 +212,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -234,7 +241,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -246,7 +253,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -257,7 +264,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.SetStatusLEDConfig"/>
@@ -309,7 +316,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -317,7 +325,7 @@ type
     ///  
     ///  The parameters are the same as <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.GetAllCounter"/>.
     /// </summary>
-    property OnAllCounter: TBrickletIndustrialCounterNotifyAllCounter read allCounterCallback write allCounterCallback;
+    property OnAllCounter: TBrickletIndustrialCounterNotifyAllCounter read fAllCounterCallback write fAllCounterCallback;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -325,7 +333,7 @@ type
     ///  
     ///  The parameters are the same as <see cref="BrickletIndustrialCounter.TBrickletIndustrialCounter.GetAllSignalData"/>.
     /// </summary>
-    property OnAllSignalData: TBrickletIndustrialCounterNotifyAllSignalData read allSignalDataCallback write allSignalDataCallback;
+    property OnAllSignalData: TBrickletIndustrialCounterNotifyAllSignalData read fAllSignalDataCallback write fAllSignalDataCallback;
   end;
 
 implementation
@@ -380,107 +388,115 @@ begin
   aCallBacks[BRICKLET_INDUSTRIAL_COUNTER_CALLBACK_ALL_SIGNAL_DATA]:= {$ifdef FPC}@{$endif}CallbackWrapperAllSignalData;
 end;
 
-function TBrickletIndustrialCounter.GetCounter(const channel: byte): int64;
+function TBrickletIndustrialCounter.GetCounter(const aChannel: byte): int64;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_COUNTER, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertInt64From(8, _response);
 end;
 
 function TBrickletIndustrialCounter.GetAllCounter: TArray0To3OfInt64;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_ALL_COUNTER, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 3 do Result[_i]:= LEConvertInt64From(8 + (_i * 8), _response);
 end;
 
-procedure TBrickletIndustrialCounter.SetCounter(const channel: byte; const counter: int64);
+procedure TBrickletIndustrialCounter.SetCounter(const aChannel: byte; const aCounter: int64);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_COUNTER, 17);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertInt64To(counter, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertInt64To(aCounter, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialCounter.SetAllCounter(const counter: array of int64);
+procedure TBrickletIndustrialCounter.SetAllCounter(const aCounter: array of int64);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_ALL_COUNTER, 40);
-  if (Length(counter) <> 4) then raise EInvalidParameterException.Create('Counter has to be exactly 4 items long');
-  for _i:= 0 to Length(counter) - 1 do LEConvertInt64To(counter[_i], 8 + (_i * 8), _request);
+  if (Length(aCounter) <> 4) then raise EInvalidParameterException.Create('Counter has to be exactly 4 items long');
+  for _i:= 0 to Length(aCounter) - 1 do LEConvertInt64To(aCounter[_i], 8 + (_i * 8), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialCounter.GetSignalData(const channel: byte; out dutyCycle: word; out period: uint64; out frequency: longword; out aValue: boolean);
+procedure TBrickletIndustrialCounter.GetSignalData(const aChannel: byte; out aDutyCycle: word; out aPeriod: uint64; out aFrequency: longword; out aValue: boolean);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_SIGNAL_DATA, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  dutyCycle:= LEConvertUInt16From(8, _response);
-  period:= LEConvertUInt64From(10, _response);
-  frequency:= LEConvertUInt32From(18, _response);
+  aDutyCycle:= LEConvertUInt16From(8, _response);
+  aPeriod:= LEConvertUInt64From(10, _response);
+  aFrequency:= LEConvertUInt32From(18, _response);
   aValue:= LEConvertBooleanFrom(22, _response);
 end;
 
-procedure TBrickletIndustrialCounter.GetAllSignalData(out dutyCycle: TArray0To3OfUInt16; out period: TArray0To3OfUInt64; out frequency: TArray0To3OfUInt32; out aValue: TArray0To3OfBoolean);
+procedure TBrickletIndustrialCounter.GetAllSignalData(out aDutyCycle: TArray0To3OfUInt16; out aPeriod: TArray0To3OfUInt64; out aFrequency: TArray0To3OfUInt32; out aValue: TArray0To3OfBoolean);
 var 
-_request, _response: TDynamicByteArray; _i: longint; valueBits: array [0..0] of byte;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
+  valueBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_ALL_SIGNAL_DATA, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 3 do dutyCycle[_i]:= LEConvertUInt16From(8 + (_i * 2), _response);
-  for _i:= 0 to 3 do period[_i]:= LEConvertUInt64From(16 + (_i * 8), _response);
-  for _i:= 0 to 3 do frequency[_i]:= LEConvertUInt32From(48 + (_i * 4), _response);
+  for _i:= 0 to 3 do aDutyCycle[_i]:= LEConvertUInt16From(8 + (_i * 2), _response);
+  for _i:= 0 to 3 do aPeriod[_i]:= LEConvertUInt64From(16 + (_i * 8), _response);
+  for _i:= 0 to 3 do aFrequency[_i]:= LEConvertUInt32From(48 + (_i * 4), _response);
   FillChar(valueBits[0], Length(valueBits) * SizeOf(valueBits[0]), 0);
   for _i:= 0 to 0 do valueBits[_i]:= LEConvertUInt8From(64 + (_i * 1), _response);
   for _i:= 0 to 3 do avalue[_i]:= ((valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 end;
 
-procedure TBrickletIndustrialCounter.SetCounterActive(const channel: byte; const active: boolean);
+procedure TBrickletIndustrialCounter.SetCounterActive(const aChannel: byte; const aActive: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_COUNTER_ACTIVE, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(active, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aActive, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialCounter.SetAllCounterActive(const active: array of boolean);
+procedure TBrickletIndustrialCounter.SetAllCounterActive(const aActive: array of boolean);
 var 
-_request: TDynamicByteArray; _i: longint; activeBits: array [0..0] of byte;
+  _request: TDynamicByteArray;
+  _i: longint;
+  activeBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_ALL_COUNTER_ACTIVE, 9);
-  if (Length(active) <> 4) then raise EInvalidParameterException.Create('Active has to be exactly 4 items long');
+  if (Length(aActive) <> 4) then raise EInvalidParameterException.Create('Active has to be exactly 4 items long');
   FillChar(activeBits[0], Length(activeBits) * SizeOf(activeBits[0]), 0);
-  for _i:= 0 to 3 do if active[_i] then activeBits[Floor(_i / 8)]:= activeBits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 3 do if aActive[_i] then activeBits[Floor(_i / 8)]:= activeBits[Floor(_i / 8)] or (1 shl (_i mod 8));
   for _i:= 0 to 0 do LEConvertUInt8To(activeBits[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialCounter.GetCounterActive(const channel: byte): boolean;
+function TBrickletIndustrialCounter.GetCounterActive(const aChannel: byte): boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_COUNTER_ACTIVE, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
 function TBrickletIndustrialCounter.GetAllCounterActive: TArray0To3OfBoolean;
 var 
-_request, _response: TDynamicByteArray; _i: longint; activeBits: array [0..0] of byte;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
+  activeBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_ALL_COUNTER_ACTIVE, 8);
   _response:= SendRequest(_request);
@@ -489,107 +505,107 @@ begin
   for _i:= 0 to 3 do Result[_i]:= ((activeBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 end;
 
-procedure TBrickletIndustrialCounter.SetCounterConfiguration(const channel: byte; const countEdge: byte; const countDirection: byte; const dutyCyclePrescaler: byte; const frequencyIntegrationTime: byte);
+procedure TBrickletIndustrialCounter.SetCounterConfiguration(const aChannel: byte; const aCountEdge: byte; const aCountDirection: byte; const aDutyCyclePrescaler: byte; const aFrequencyIntegrationTime: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_COUNTER_CONFIGURATION, 13);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt8To(countEdge, 9, _request);
-  LEConvertUInt8To(countDirection, 10, _request);
-  LEConvertUInt8To(dutyCyclePrescaler, 11, _request);
-  LEConvertUInt8To(frequencyIntegrationTime, 12, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt8To(aCountEdge, 9, _request);
+  LEConvertUInt8To(aCountDirection, 10, _request);
+  LEConvertUInt8To(aDutyCyclePrescaler, 11, _request);
+  LEConvertUInt8To(aFrequencyIntegrationTime, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialCounter.GetCounterConfiguration(const channel: byte; out countEdge: byte; out countDirection: byte; out dutyCyclePrescaler: byte; out frequencyIntegrationTime: byte);
+procedure TBrickletIndustrialCounter.GetCounterConfiguration(const aChannel: byte; out aCountEdge: byte; out aCountDirection: byte; out aDutyCyclePrescaler: byte; out aFrequencyIntegrationTime: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_COUNTER_CONFIGURATION, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  countEdge:= LEConvertUInt8From(8, _response);
-  countDirection:= LEConvertUInt8From(9, _response);
-  dutyCyclePrescaler:= LEConvertUInt8From(10, _response);
-  frequencyIntegrationTime:= LEConvertUInt8From(11, _response);
+  aCountEdge:= LEConvertUInt8From(8, _response);
+  aCountDirection:= LEConvertUInt8From(9, _response);
+  aDutyCyclePrescaler:= LEConvertUInt8From(10, _response);
+  aFrequencyIntegrationTime:= LEConvertUInt8From(11, _response);
 end;
 
-procedure TBrickletIndustrialCounter.SetAllCounterCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletIndustrialCounter.SetAllCounterCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_ALL_COUNTER_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialCounter.GetAllCounterCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletIndustrialCounter.GetAllCounterCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_ALL_COUNTER_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletIndustrialCounter.SetAllSignalDataCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletIndustrialCounter.SetAllSignalDataCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_ALL_SIGNAL_DATA_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialCounter.GetAllSignalDataCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletIndustrialCounter.GetAllSignalDataCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_ALL_SIGNAL_DATA_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletIndustrialCounter.SetChannelLEDConfig(const channel: byte; const config: byte);
+procedure TBrickletIndustrialCounter.SetChannelLEDConfig(const aChannel: byte; const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_CHANNEL_LED_CONFIG, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt8To(config, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt8To(aConfig, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialCounter.GetChannelLEDConfig(const channel: byte): byte;
+function TBrickletIndustrialCounter.GetChannelLEDConfig(const aChannel: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_CHANNEL_LED_CONFIG, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialCounter.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletIndustrialCounter.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletIndustrialCounter.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -599,45 +615,45 @@ end;
 
 function TBrickletIndustrialCounter.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialCounter.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletIndustrialCounter.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialCounter.WriteFirmware(const data: array of byte): byte;
+function TBrickletIndustrialCounter.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialCounter.SetStatusLEDConfig(const config: byte);
+procedure TBrickletIndustrialCounter.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialCounter.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -646,7 +662,7 @@ end;
 
 function TBrickletIndustrialCounter.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -655,7 +671,7 @@ end;
 
 procedure TBrickletIndustrialCounter.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -663,7 +679,7 @@ end;
 
 procedure TBrickletIndustrialCounter.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -672,49 +688,58 @@ end;
 
 function TBrickletIndustrialCounter.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialCounter.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialCounter.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_COUNTER_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialCounter.CallbackWrapperAllCounter(const aPacket: TDynamicByteArray);
-var counter: TArray0To3OfInt64; _i: longint;
+var
+  _counter: TArray0To3OfInt64;
+  _i: longint;
 begin
-  for _i:= 0 to 3 do counter[_i]:= LEConvertInt64From(8 + (_i * 8), aPacket);
+  for _i:= 0 to 3 do _counter[_i]:= LEConvertInt64From(8 + (_i * 8), aPacket);
 
-  if (Assigned(allCounterCallback)) then begin
-    allCounterCallback(self, counter);
+  if (Assigned(fAllCounterCallback)) then begin
+    fAllCounterCallback(self, _counter);
   end;
 end;
 
 procedure TBrickletIndustrialCounter.CallbackWrapperAllSignalData(const aPacket: TDynamicByteArray);
-var dutyCycle: TArray0To3OfUInt16; period: TArray0To3OfUInt64; frequency: TArray0To3OfUInt32; value: TArray0To3OfBoolean; _i: longint; valueBits: array [0..0] of byte;
+var
+  _dutyCycle: TArray0To3OfUInt16;
+  _period: TArray0To3OfUInt64;
+  _frequency: TArray0To3OfUInt32;
+  _value: TArray0To3OfBoolean;
+  _i: longint;
+  _valueBits: array [0..0] of byte;
 begin
-  for _i:= 0 to 3 do dutyCycle[_i]:= LEConvertUInt16From(8 + (_i * 2), aPacket);
-  for _i:= 0 to 3 do period[_i]:= LEConvertUInt64From(16 + (_i * 8), aPacket);
-  for _i:= 0 to 3 do frequency[_i]:= LEConvertUInt32From(48 + (_i * 4), aPacket);
-  FillChar(valueBits[0], Length(valueBits) * SizeOf(valueBits[0]), 0);
-  for _i:= 0 to 0 do valueBits[_i]:= LEConvertUInt8From(64 + (_i * 1), aPacket);
-  for _i:= 0 to 3 do value[_i]:= ((valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  for _i:= 0 to 3 do _dutyCycle[_i]:= LEConvertUInt16From(8 + (_i * 2), aPacket);
+  for _i:= 0 to 3 do _period[_i]:= LEConvertUInt64From(16 + (_i * 8), aPacket);
+  for _i:= 0 to 3 do _frequency[_i]:= LEConvertUInt32From(48 + (_i * 4), aPacket);
+  FillChar(_valueBits[0], Length(_valueBits) * SizeOf(_valueBits[0]), 0);
+  for _i:= 0 to 0 do _valueBits[_i]:= LEConvertUInt8From(64 + (_i * 1), aPacket);
+  for _i:= 0 to 3 do _value[_i]:= ((_valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 
-  if (Assigned(allSignalDataCallback)) then begin
-    allSignalDataCallback(self, dutyCycle, period, frequency, value);
+  if (Assigned(fAllSignalDataCallback)) then begin
+    fAllSignalDataCallback(self, _dutyCycle, _period, _frequency, _value);
   end;
 end;
 
