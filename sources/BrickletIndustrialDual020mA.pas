@@ -25,16 +25,16 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletIndustrialDual020mA = class;
-  TBrickletIndustrialDual020mANotifyCurrent = procedure(sender: TBrickletIndustrialDual020mA; const sensor: byte; const current: longint) of object;
-  TBrickletIndustrialDual020mANotifyCurrentReached = procedure(sender: TBrickletIndustrialDual020mA; const sensor: byte; const current: longint) of object;
+  TBrickletIndustrialDual020mANotifyCurrent = procedure(aSender: TBrickletIndustrialDual020mA; const aSensor: byte; const aCurrent: longint) of object;
+  TBrickletIndustrialDual020mANotifyCurrentReached = procedure(aSender: TBrickletIndustrialDual020mA; const aSensor: byte; const aCurrent: longint) of object;
 
   /// <summary>
   ///  Measures two DC currents between 0mA and 20mA (IEC 60381-1)
   /// </summary>
   TBrickletIndustrialDual020mA = class(TDevice)
   private
-    currentCallback: TBrickletIndustrialDual020mANotifyCurrent;
-    currentReachedCallback: TBrickletIndustrialDual020mANotifyCurrentReached;
+    fCurrentCallback: TBrickletIndustrialDual020mANotifyCurrent;
+    fCurrentReachedCallback: TBrickletIndustrialDual020mANotifyCurrentReached;
     procedure CallbackWrapperCurrent(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperCurrentReached(const aPacket: TDynamicByteArray); virtual;
   protected
@@ -58,7 +58,7 @@ type
     ///  <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.OnCurrent"/> callback and set the period with
     ///  <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.SetCurrentCallbackPeriod"/>.
     /// </summary>
-    function GetCurrent(const sensor: byte): longint; virtual;
+    function GetCurrent(const aSensor: byte): longint; virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.OnCurrent"/> callback is triggered
@@ -67,12 +67,12 @@ type
     ///  The <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.OnCurrent"/> callback is only triggered if the current has changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetCurrentCallbackPeriod(const sensor: byte; const period: longword); virtual;
+    procedure SetCurrentCallbackPeriod(const aSensor: byte; const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.SetCurrentCallbackPeriod"/>.
     /// </summary>
-    function GetCurrentCallbackPeriod(const sensor: byte): longword; virtual;
+    function GetCurrentCallbackPeriod(const aSensor: byte): longword; virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.OnCurrentReached"/> callback for the given
@@ -90,12 +90,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the current is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetCurrentCallbackThreshold(const sensor: byte; const option: char; const min: longint; const max: longint); virtual;
+    procedure SetCurrentCallbackThreshold(const aSensor: byte; const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.SetCurrentCallbackThreshold"/>.
     /// </summary>
-    procedure GetCurrentCallbackThreshold(const sensor: byte; out option: char; out min: longint; out max: longint); virtual;
+    procedure GetCurrentCallbackThreshold(const aSensor: byte; out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callback
@@ -108,7 +108,7 @@ type
     ///  
     ///  keeps being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.SetDebouncePeriod"/>.
@@ -128,7 +128,7 @@ type
     ///   "3",    "4 samples per second, 18 bit resolution"
     ///  </code>
     /// </summary>
-    procedure SetSampleRate(const rate: byte); virtual;
+    procedure SetSampleRate(const aRate: byte); virtual;
 
     /// <summary>
     ///  Returns the sample rate as set by <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.SetSampleRate"/>.
@@ -145,7 +145,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -155,7 +156,7 @@ type
     ///  The <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.OnCurrent"/> callback is only triggered if the current has changed since the
     ///  last triggering.
     /// </summary>
-    property OnCurrent: TBrickletIndustrialDual020mANotifyCurrent read currentCallback write currentCallback;
+    property OnCurrent: TBrickletIndustrialDual020mANotifyCurrent read fCurrentCallback write fCurrentCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -165,7 +166,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletIndustrialDual020mA.TBrickletIndustrialDual020mA.SetDebouncePeriod"/>.
     /// </summary>
-    property OnCurrentReached: TBrickletIndustrialDual020mANotifyCurrentReached read currentReachedCallback write currentReachedCallback;
+    property OnCurrentReached: TBrickletIndustrialDual020mANotifyCurrentReached read fCurrentReachedCallback write fCurrentReachedCallback;
   end;
 
 implementation
@@ -197,129 +198,134 @@ begin
   aCallBacks[BRICKLET_INDUSTRIAL_DUAL_0_20MA_CALLBACK_CURRENT_REACHED]:= {$ifdef FPC}@{$endif}CallbackWrapperCurrentReached;
 end;
 
-function TBrickletIndustrialDual020mA.GetCurrent(const sensor: byte): longint;
+function TBrickletIndustrialDual020mA.GetCurrent(const aSensor: byte): longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_GET_CURRENT, 9);
-  LEConvertUInt8To(sensor, 8, _request);
+  LEConvertUInt8To(aSensor, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDual020mA.SetCurrentCallbackPeriod(const sensor: byte; const period: longword);
+procedure TBrickletIndustrialDual020mA.SetCurrentCallbackPeriod(const aSensor: byte; const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_SET_CURRENT_CALLBACK_PERIOD, 13);
-  LEConvertUInt8To(sensor, 8, _request);
-  LEConvertUInt32To(period, 9, _request);
+  LEConvertUInt8To(aSensor, 8, _request);
+  LEConvertUInt32To(aPeriod, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialDual020mA.GetCurrentCallbackPeriod(const sensor: byte): longword;
+function TBrickletIndustrialDual020mA.GetCurrentCallbackPeriod(const aSensor: byte): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_GET_CURRENT_CALLBACK_PERIOD, 9);
-  LEConvertUInt8To(sensor, 8, _request);
+  LEConvertUInt8To(aSensor, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDual020mA.SetCurrentCallbackThreshold(const sensor: byte; const option: char; const min: longint; const max: longint);
+procedure TBrickletIndustrialDual020mA.SetCurrentCallbackThreshold(const aSensor: byte; const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_SET_CURRENT_CALLBACK_THRESHOLD, 18);
-  LEConvertUInt8To(sensor, 8, _request);
-  LEConvertCharTo(option, 9, _request);
-  LEConvertInt32To(min, 10, _request);
-  LEConvertInt32To(max, 14, _request);
+  LEConvertUInt8To(aSensor, 8, _request);
+  LEConvertCharTo(aOption, 9, _request);
+  LEConvertInt32To(aMin, 10, _request);
+  LEConvertInt32To(aMax, 14, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDual020mA.GetCurrentCallbackThreshold(const sensor: byte; out option: char; out min: longint; out max: longint);
+procedure TBrickletIndustrialDual020mA.GetCurrentCallbackThreshold(const aSensor: byte; out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_GET_CURRENT_CALLBACK_THRESHOLD, 9);
-  LEConvertUInt8To(sensor, 8, _request);
+  LEConvertUInt8To(aSensor, 8, _request);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletIndustrialDual020mA.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletIndustrialDual020mA.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDual020mA.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDual020mA.SetSampleRate(const rate: byte);
+procedure TBrickletIndustrialDual020mA.SetSampleRate(const aRate: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_SET_SAMPLE_RATE, 9);
-  LEConvertUInt8To(rate, 8, _request);
+  LEConvertUInt8To(aRate, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDual020mA.GetSampleRate: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_GET_SAMPLE_RATE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDual020mA.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialDual020mA.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_0_20MA_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialDual020mA.CallbackWrapperCurrent(const aPacket: TDynamicByteArray);
-var sensor: byte; current: longint;
+var
+  _sensor: byte;
+  _current: longint;
 begin
-  sensor:= LEConvertUInt8From(8, aPacket);
-  current:= LEConvertInt32From(9, aPacket);
+  _sensor:= LEConvertUInt8From(8, aPacket);
+  _current:= LEConvertInt32From(9, aPacket);
 
-  if (Assigned(currentCallback)) then begin
-    currentCallback(self, sensor, current);
+  if (Assigned(fCurrentCallback)) then begin
+    fCurrentCallback(self, _sensor, _current);
   end;
 end;
 
 procedure TBrickletIndustrialDual020mA.CallbackWrapperCurrentReached(const aPacket: TDynamicByteArray);
-var sensor: byte; current: longint;
+var
+  _sensor: byte;
+  _current: longint;
 begin
-  sensor:= LEConvertUInt8From(8, aPacket);
-  current:= LEConvertInt32From(9, aPacket);
+  _sensor:= LEConvertUInt8From(8, aPacket);
+  _current:= LEConvertInt32From(9, aPacket);
 
-  if (Assigned(currentReachedCallback)) then begin
-    currentReachedCallback(self, sensor, current);
+  if (Assigned(fCurrentReachedCallback)) then begin
+    fCurrentReachedCallback(self, _sensor, _current);
   end;
 end;
 
