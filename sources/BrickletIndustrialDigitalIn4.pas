@@ -26,7 +26,7 @@ type
   TArray0To3OfChar = array [0..3] of char;
 
   TBrickletIndustrialDigitalIn4 = class;
-  TBrickletIndustrialDigitalIn4NotifyInterrupt = procedure(aSender: TBrickletIndustrialDigitalIn4; const interruptMask: word; const valueMask: word) of object;
+  TBrickletIndustrialDigitalIn4NotifyInterrupt = procedure(aSender: TBrickletIndustrialDigitalIn4; const aInterruptMask: word; const aValueMask: word) of object;
 
   /// <summary>
   ///  4 galvanically isolated digital inputs
@@ -78,7 +78,7 @@ type
     ///  Changing the group configuration resets all edge counter configurations
     ///  and values.
     /// </summary>
-    procedure SetGroup(const group: array of char); virtual;
+    procedure SetGroup(const aGroup: array of char); virtual;
 
     /// <summary>
     ///  Returns the group as set by <see cref="BrickletIndustrialDigitalIn4.TBrickletIndustrialDigitalIn4.SetGroup"/>
@@ -99,7 +99,7 @@ type
     ///  maximal every 100ms. This is necessary if something that bounces is
     ///  connected to the Digital In 4 Bricklet, such as a button.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletIndustrialDigitalIn4.TBrickletIndustrialDigitalIn4.SetDebouncePeriod"/>.
@@ -118,7 +118,7 @@ type
     ///  
     ///  The interrupt is delivered with the <see cref="BrickletIndustrialDigitalIn4.TBrickletIndustrialDigitalIn4.OnInterrupt"/> callback.
     /// </summary>
-    procedure SetInterrupt(const interruptMask: word); virtual;
+    procedure SetInterrupt(const aInterruptMask: word); virtual;
 
     /// <summary>
     ///  Returns the interrupt bitmask as set by <see cref="BrickletIndustrialDigitalIn4.TBrickletIndustrialDigitalIn4.SetInterrupt"/>.
@@ -136,7 +136,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    function GetEdgeCount(const aPin: byte; const resetCounter: boolean): longword; virtual;
+    function GetEdgeCount(const aPin: byte; const aResetCounter: boolean): longword; virtual;
 
     /// <summary>
     ///  Configures the edge counter for the selected pins. A bitmask of 9 or 0b1001 will
@@ -158,7 +158,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SetEdgeCountConfig(const selectionMask: word; const edgeType: byte; const debounce: byte); virtual;
+    procedure SetEdgeCountConfig(const aSelectionMask: word; const aEdgeType: byte; const aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the edge type and debounce time for the selected pin as set by
@@ -166,7 +166,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure GetEdgeCountConfig(const aPin: byte; out edgeType: byte; out debounce: byte); virtual;
+    procedure GetEdgeCountConfig(const aPin: byte; out aEdgeType: byte; out aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -178,7 +178,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever a change of the voltage level is detected
@@ -234,26 +235,28 @@ end;
 
 function TBrickletIndustrialDigitalIn4.GetValue: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_VALUE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletIndustrialDigitalIn4.SetGroup(const group: array of char);
+procedure TBrickletIndustrialDigitalIn4.SetGroup(const aGroup: array of char);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_SET_GROUP, 12);
-  if (Length(group) <> 4) then raise EInvalidParameterException.Create('Group has to be exactly 4 items long');
-  for _i:= 0 to Length(group) - 1 do LEConvertCharTo(group[_i], 8 + (_i * 1), _request);
+  if (Length(aGroup) <> 4) then raise EInvalidParameterException.Create('Group has to be exactly 4 items long');
+  for _i:= 0 to Length(aGroup) - 1 do LEConvertCharTo(aGroup[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDigitalIn4.GetGroup: TArray0To3OfChar;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_GROUP, 8);
   _response:= SendRequest(_request);
@@ -262,104 +265,107 @@ end;
 
 function TBrickletIndustrialDigitalIn4.GetAvailableForGroup: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_AVAILABLE_FOR_GROUP, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDigitalIn4.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletIndustrialDigitalIn4.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDigitalIn4.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDigitalIn4.SetInterrupt(const interruptMask: word);
+procedure TBrickletIndustrialDigitalIn4.SetInterrupt(const aInterruptMask: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_SET_INTERRUPT, 10);
-  LEConvertUInt16To(interruptMask, 8, _request);
+  LEConvertUInt16To(aInterruptMask, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDigitalIn4.GetInterrupt: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_INTERRUPT, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-function TBrickletIndustrialDigitalIn4.GetEdgeCount(const aPin: byte; const resetCounter: boolean): longword;
+function TBrickletIndustrialDigitalIn4.GetEdgeCount(const aPin: byte; const aResetCounter: boolean): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_EDGE_COUNT, 10);
   LEConvertUInt8To(aPin, 8, _request);
-  LEConvertBooleanTo(resetCounter, 9, _request);
+  LEConvertBooleanTo(aResetCounter, 9, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDigitalIn4.SetEdgeCountConfig(const selectionMask: word; const edgeType: byte; const debounce: byte);
+procedure TBrickletIndustrialDigitalIn4.SetEdgeCountConfig(const aSelectionMask: word; const aEdgeType: byte; const aDebounce: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_SET_EDGE_COUNT_CONFIG, 12);
-  LEConvertUInt16To(selectionMask, 8, _request);
-  LEConvertUInt8To(edgeType, 10, _request);
-  LEConvertUInt8To(debounce, 11, _request);
+  LEConvertUInt16To(aSelectionMask, 8, _request);
+  LEConvertUInt8To(aEdgeType, 10, _request);
+  LEConvertUInt8To(aDebounce, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDigitalIn4.GetEdgeCountConfig(const aPin: byte; out edgeType: byte; out debounce: byte);
+procedure TBrickletIndustrialDigitalIn4.GetEdgeCountConfig(const aPin: byte; out aEdgeType: byte; out aDebounce: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_EDGE_COUNT_CONFIG, 9);
   LEConvertUInt8To(aPin, 8, _request);
   _response:= SendRequest(_request);
-  edgeType:= LEConvertUInt8From(8, _response);
-  debounce:= LEConvertUInt8From(9, _response);
+  aEdgeType:= LEConvertUInt8From(8, _response);
+  aDebounce:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletIndustrialDigitalIn4.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialDigitalIn4.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DIGITAL_IN_4_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialDigitalIn4.CallbackWrapperInterrupt(const aPacket: TDynamicByteArray);
-var interruptMask: word; valueMask: word;
+var
+  _interruptMask: word;
+  _valueMask: word;
 begin
-  interruptMask:= LEConvertUInt16From(8, aPacket);
-  valueMask:= LEConvertUInt16From(10, aPacket);
+  _interruptMask:= LEConvertUInt16From(8, aPacket);
+  _valueMask:= LEConvertUInt16From(10, aPacket);
 
   if (Assigned(fInterruptCallback)) then begin
-    fInterruptCallback(self, interruptMask, valueMask);
+    fInterruptCallback(self, _interruptMask, _valueMask);
   end;
 end;
 
