@@ -25,7 +25,7 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletHallEffect = class;
-  TBrickletHallEffectNotifyEdgeCount = procedure(aSender: TBrickletHallEffect; const count: longword; const value: boolean) of object;
+  TBrickletHallEffectNotifyEdgeCount = procedure(aSender: TBrickletHallEffect; const aCount: longword; const aValue: boolean) of object;
 
   /// <summary>
   ///  Detects presence of magnetic field
@@ -54,7 +54,7 @@ type
     ///  If you set the reset counter to *true*, the count is set back to 0
     ///  directly after it is read.
     /// </summary>
-    function GetEdgeCount(const resetCounter: boolean): longword; virtual;
+    function GetEdgeCount(const aResetCounter: boolean): longword; virtual;
 
     /// <summary>
     ///  The edge type parameter configures if rising edges, falling edges or
@@ -77,12 +77,12 @@ type
     ///  If you don't know what any of this means, just leave it at default. The
     ///  default configuration is very likely OK for you.
     /// </summary>
-    procedure SetEdgeCountConfig(const edgeType: byte; const debounce: byte); virtual;
+    procedure SetEdgeCountConfig(const aEdgeType: byte; const aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the edge type and debounce time as set by <see cref="BrickletHallEffect.TBrickletHallEffect.SetEdgeCountConfig"/>.
     /// </summary>
-    procedure GetEdgeCountConfig(out edgeType: byte; out debounce: byte); virtual;
+    procedure GetEdgeCountConfig(out aEdgeType: byte; out aDebounce: byte); virtual;
 
     /// <summary>
     ///  Sets the number of edges until an interrupt is invoked.
@@ -93,7 +93,7 @@ type
     ///  
     ///  Default value is 0.
     /// </summary>
-    procedure SetEdgeInterrupt(const edges: longword); virtual;
+    procedure SetEdgeInterrupt(const aEdges: longword); virtual;
 
     /// <summary>
     ///  Returns the edges as set by <see cref="BrickletHallEffect.TBrickletHallEffect.SetEdgeInterrupt"/>.
@@ -107,7 +107,7 @@ type
     ///  The <see cref="BrickletHallEffect.TBrickletHallEffect.OnEdgeCount"/> callback is only triggered if the edge count has changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetEdgeCountCallbackPeriod(const period: longword); virtual;
+    procedure SetEdgeCountCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletHallEffect.TBrickletHallEffect.SetEdgeCountCallbackPeriod"/>.
@@ -120,7 +120,7 @@ type
     ///  current count and the current value (see <see cref="BrickletHallEffect.TBrickletHallEffect.GetValue"/> and
     ///  <see cref="BrickletHallEffect.TBrickletHallEffect.GetEdgeCount"/>).
     /// </summary>
-    procedure EdgeInterrupt(out count: longword; out aValue: boolean); virtual;
+    procedure EdgeInterrupt(out aCount: longword; out aValue: boolean); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -132,7 +132,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out ConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -176,111 +177,114 @@ end;
 
 function TBrickletHallEffect.GetValue: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_GET_VALUE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-function TBrickletHallEffect.GetEdgeCount(const resetCounter: boolean): longword;
+function TBrickletHallEffect.GetEdgeCount(const aResetCounter: boolean): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_GET_EDGE_COUNT, 9);
-  LEConvertBooleanTo(resetCounter, 8, _request);
+  LEConvertBooleanTo(aResetCounter, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHallEffect.SetEdgeCountConfig(const edgeType: byte; const debounce: byte);
+procedure TBrickletHallEffect.SetEdgeCountConfig(const aEdgeType: byte; const aDebounce: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_SET_EDGE_COUNT_CONFIG, 10);
-  LEConvertUInt8To(edgeType, 8, _request);
-  LEConvertUInt8To(debounce, 9, _request);
+  LEConvertUInt8To(aEdgeType, 8, _request);
+  LEConvertUInt8To(aDebounce, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletHallEffect.GetEdgeCountConfig(out edgeType: byte; out debounce: byte);
+procedure TBrickletHallEffect.GetEdgeCountConfig(out aEdgeType: byte; out aDebounce: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_GET_EDGE_COUNT_CONFIG, 8);
   _response:= SendRequest(_request);
-  edgeType:= LEConvertUInt8From(8, _response);
-  debounce:= LEConvertUInt8From(9, _response);
+  aEdgeType:= LEConvertUInt8From(8, _response);
+  aDebounce:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletHallEffect.SetEdgeInterrupt(const edges: longword);
+procedure TBrickletHallEffect.SetEdgeInterrupt(const aEdges: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_SET_EDGE_INTERRUPT, 12);
-  LEConvertUInt32To(edges, 8, _request);
+  LEConvertUInt32To(aEdges, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletHallEffect.GetEdgeInterrupt: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_GET_EDGE_INTERRUPT, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHallEffect.SetEdgeCountCallbackPeriod(const period: longword);
+procedure TBrickletHallEffect.SetEdgeCountCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_SET_EDGE_COUNT_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletHallEffect.GetEdgeCountCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_GET_EDGE_COUNT_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHallEffect.EdgeInterrupt(out count: longword; out aValue: boolean);
+procedure TBrickletHallEffect.EdgeInterrupt(out aCount: longword; out aValue: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_EDGE_INTERRUPT, 8);
   _response:= SendRequest(_request);
-  count:= LEConvertUInt32From(8, _response);
+  aCount:= LEConvertUInt32From(8, _response);
   aValue:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletHallEffect.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletHallEffect.GetIdentity(out aUID: string; out ConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HALL_EFFECT_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  ConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletHallEffect.CallbackWrapperEdgeCount(const aPacket: TDynamicByteArray);
-var count: longword; value: boolean;
+var
+  _count: longword;
+  _value: boolean;
 begin
-  count:= LEConvertUInt32From(8, aPacket);
-  value:= LEConvertBooleanFrom(12, aPacket);
+  _count:= LEConvertUInt32From(8, aPacket);
+  _value:= LEConvertBooleanFrom(12, aPacket);
 
   if (Assigned(fedgeCountCallback)) then begin
-    fedgeCountCallback(self, count, value);
+    fedgeCountCallback(self, _count, _value);
   end;
 end;
 

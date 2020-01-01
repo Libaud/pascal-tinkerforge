@@ -25,8 +25,8 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletDustDetector = class;
-  TBrickletDustDetectorNotifyDustDensity = procedure(aSender: TBrickletDustDetector; const dustDensity: word) of object;
-  TBrickletDustDetectorNotifyDustDensityReached = procedure(aSender: TBrickletDustDetector; const dustDensity: word) of object;
+  TBrickletDustDetectorNotifyDustDensity = procedure(aSender: TBrickletDustDetector; const aDustDensity: word) of object;
+  TBrickletDustDetectorNotifyDustDensityReached = procedure(aSender: TBrickletDustDetector; const aDustDensity: word) of object;
 
   /// <summary>
   ///  Measures dust density
@@ -60,7 +60,7 @@ type
     ///  The <see cref="BrickletDustDetector.TBrickletDustDetector.OnDustDensity"/> callback is only triggered if the dust density has
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetDustDensityCallbackPeriod(const period: longword); virtual;
+    procedure SetDustDensityCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletDustDetector.TBrickletDustDetector.SetDustDensityCallbackPeriod"/>.
@@ -82,12 +82,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the dust density value is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetDustDensityCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetDustDensityCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletDustDetector.TBrickletDustDetector.SetDustDensityCallbackThreshold"/>.
     /// </summary>
-    procedure GetDustDensityCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetDustDensityCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callback
@@ -100,7 +100,7 @@ type
     ///  
     ///  keeps being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletDustDetector.TBrickletDustDetector.SetDebouncePeriod"/>.
@@ -114,7 +114,7 @@ type
     ///  Setting the length to 0 will turn the averaging completely off. With less
     ///  averaging, there is more noise on the data.
     /// </summary>
-    procedure SetMovingAverage(const average: byte); virtual;
+    procedure SetMovingAverage(const aAverage: byte); virtual;
 
     /// <summary>
     ///  Returns the length moving average as set by <see cref="BrickletDustDetector.TBrickletDustDetector.SetMovingAverage"/>.
@@ -131,7 +131,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -192,12 +193,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletDustDetector.SetDustDensityCallbackPeriod(const period: longword);
+procedure TBrickletDustDetector.SetDustDensityCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUST_DETECTOR_FUNCTION_SET_DUST_DENSITY_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -210,34 +211,34 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletDustDetector.SetDustDensityCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickletDustDetector.SetDustDensityCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUST_DETECTOR_FUNCTION_SET_DUST_DENSITY_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDustDetector.GetDustDensityCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickletDustDetector.GetDustDensityCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUST_DETECTOR_FUNCTION_GET_DUST_DENSITY_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletDustDetector.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletDustDetector.SetDebouncePeriod(const aDebounce: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUST_DETECTOR_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
@@ -250,12 +251,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletDustDetector.SetMovingAverage(const average: byte);
+procedure TBrickletDustDetector.SetMovingAverage(const aAverage: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUST_DETECTOR_FUNCTION_SET_MOVING_AVERAGE, 9);
-  LEConvertUInt8To(average, 8, _request);
+  LEConvertUInt8To(aAverage, 8, _request);
   SendRequest(_request);
 end;
 
@@ -268,7 +269,7 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDustDetector.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletDustDetector.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -276,11 +277,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUST_DETECTOR_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletDustDetector.CallbackWrapperDustDensity(const aPacket: TDynamicByteArray);

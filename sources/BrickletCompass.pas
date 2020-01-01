@@ -27,8 +27,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletCompass = class;
-  TBrickletCompassNotifyHeading = procedure(aSender: TBrickletCompass; const heading: smallint) of object;
-  TBrickletCompassNotifyMagneticFluxDensity = procedure(aSender: TBrickletCompass; const x: longint; const y: longint; const z: longint) of object;
+  TBrickletCompassNotifyHeading = procedure(aSender: TBrickletCompass; const aHeading: smallint) of object;
+  TBrickletCompassNotifyMagneticFluxDensity = procedure(aSender: TBrickletCompass; const aX: longint; const aY: longint; const aZ: longint) of object;
 
   /// <summary>
   ///  3-axis compass with 0.1mG (milli Gauss) and 0.1° resolution
@@ -88,12 +88,12 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetHeadingCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint); virtual;
+    procedure SetHeadingCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletCompass.TBrickletCompass.SetHeadingCallbackConfiguration"/>.
     /// </summary>
-    procedure GetHeadingCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint); virtual;
+    procedure GetHeadingCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the `magnetic flux density (magnetic induction) &lt;https://en.wikipedia.org/wiki/Magnetic_flux&gt;`__
@@ -103,7 +103,7 @@ type
     ///  <see cref="BrickletCompass.TBrickletCompass.OnMagneticFluxDensity"/> callback. You can set the callback configuration
     ///  with <see cref="BrickletCompass.TBrickletCompass.SetMagneticFluxDensityCallbackConfiguration"/>.
     /// </summary>
-    procedure GetMagneticFluxDensity(out x: longint; out y: longint; out z: longint); virtual;
+    procedure GetMagneticFluxDensity(out aX: longint; out aY: longint; out aZ: longint); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletCompass.TBrickletCompass.OnMagneticFluxDensity"/> callback
@@ -116,13 +116,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetMagneticFluxDensityCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetMagneticFluxDensityCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletCompass.TBrickletCompass.SetMagneticFluxDensityCallbackConfiguration"/>.
     /// </summary>
-    procedure GetMagneticFluxDensityCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetMagneticFluxDensityCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Configures the data rate and background calibration.
@@ -138,12 +138,12 @@ type
     ///    you keep the background calibration enabled and only disable it if the 20ms
     ///    off-time is a problem in your application.
     /// </summary>
-    procedure SetConfiguration(const dataRate: byte; const backgroundCalibration: boolean); virtual;
+    procedure SetConfiguration(const aDataRate: byte; const aBackgroundCalibration: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletCompass.TBrickletCompass.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out dataRate: byte; out backgroundCalibration: boolean); virtual;
+    procedure GetConfiguration(out aDataRate: byte; out aBackgroundCalibration: boolean); virtual;
 
     /// <summary>
     ///  Sets offset and gain for each of the three axes.
@@ -154,12 +154,12 @@ type
     ///  The calibration is saved in non-volatile memory and only has to be
     ///  done once.
     /// </summary>
-    procedure SetCalibration(const offset: array of smallint; const gain: array of smallint); virtual;
+    procedure SetCalibration(const aOffset: array of smallint; const aGain: array of smallint); virtual;
 
     /// <summary>
     ///  Returns the calibration parameters as set by <see cref="BrickletCompass.TBrickletCompass.SetCalibration"/>.
     /// </summary>
-    procedure GetCalibration(out offset: TArray0To2OfInt16; out gain: TArray0To2OfInt16); virtual;
+    procedure GetCalibration(out aOffset: TArray0To2OfInt16; out aGain: TArray0To2OfInt16); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -174,7 +174,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -202,7 +203,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -214,7 +215,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -225,7 +226,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletCompass.TBrickletCompass.SetStatusLEDConfig"/>
@@ -277,7 +278,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -342,127 +344,128 @@ end;
 
 function TBrickletCompass.GetHeading: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_HEADING, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletCompass.SetHeadingCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint);
+procedure TBrickletCompass.SetHeadingCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_HEADING_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertInt16To(min, 14, _request);
-  LEConvertInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertInt16To(aMin, 14, _request);
+  LEConvertInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCompass.GetHeadingCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint);
+procedure TBrickletCompass.GetHeadingCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_HEADING_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertInt16From(14, _response);
-  max:= LEConvertInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertInt16From(14, _response);
+  aMax:= LEConvertInt16From(16, _response);
 end;
 
-procedure TBrickletCompass.GetMagneticFluxDensity(out x: longint; out y: longint; out z: longint);
+procedure TBrickletCompass.GetMagneticFluxDensity(out aX: longint; out aY: longint; out aZ: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_MAGNETIC_FLUX_DENSITY, 8);
   _response:= SendRequest(_request);
-  x:= LEConvertInt32From(8, _response);
-  y:= LEConvertInt32From(12, _response);
-  z:= LEConvertInt32From(16, _response);
+  aX:= LEConvertInt32From(8, _response);
+  aY:= LEConvertInt32From(12, _response);
+  aZ:= LEConvertInt32From(16, _response);
 end;
 
-procedure TBrickletCompass.SetMagneticFluxDensityCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletCompass.SetMagneticFluxDensityCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_MAGNETIC_FLUX_DENSITY_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCompass.GetMagneticFluxDensityCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletCompass.GetMagneticFluxDensityCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_MAGNETIC_FLUX_DENSITY_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletCompass.SetConfiguration(const dataRate: byte; const backgroundCalibration: boolean);
+procedure TBrickletCompass.SetConfiguration(const aDataRate: byte; const aBackgroundCalibration: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_CONFIGURATION, 10);
-  LEConvertUInt8To(dataRate, 8, _request);
-  LEConvertBooleanTo(backgroundCalibration, 9, _request);
+  LEConvertUInt8To(aDataRate, 8, _request);
+  LEConvertBooleanTo(aBackgroundCalibration, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCompass.GetConfiguration(out dataRate: byte; out backgroundCalibration: boolean);
+procedure TBrickletCompass.GetConfiguration(out aDataRate: byte; out aBackgroundCalibration: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  dataRate:= LEConvertUInt8From(8, _response);
-  backgroundCalibration:= LEConvertBooleanFrom(9, _response);
+  aDataRate:= LEConvertUInt8From(8, _response);
+  aBackgroundCalibration:= LEConvertBooleanFrom(9, _response);
 end;
 
-procedure TBrickletCompass.SetCalibration(const offset: array of smallint; const gain: array of smallint);
+procedure TBrickletCompass.SetCalibration(const aOffset: array of smallint; const aGain: array of smallint);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_CALIBRATION, 20);
-  if (Length(offset) <> 3) then raise EInvalidParameterException.Create('Offset has to be exactly 3 items long');
-  for _i:= 0 to Length(offset) - 1 do LEConvertInt16To(offset[_i], 8 + (_i * 2), _request);
-  if (Length(gain) <> 3) then raise EInvalidParameterException.Create('Gain has to be exactly 3 items long');
-  for _i:= 0 to Length(gain) - 1 do LEConvertInt16To(gain[_i], 14 + (_i * 2), _request);
+  if (Length(aOffset) <> 3) then raise EInvalidParameterException.Create('Offset has to be exactly 3 items long');
+  for _i:= 0 to Length(aOffset) - 1 do LEConvertInt16To(aOffset[_i], 8 + (_i * 2), _request);
+  if (Length(aGain) <> 3) then raise EInvalidParameterException.Create('Gain has to be exactly 3 items long');
+  for _i:= 0 to Length(aGain) - 1 do LEConvertInt16To(aGain[_i], 14 + (_i * 2), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletCompass.GetCalibration(out offset: TArray0To2OfInt16; out gain: TArray0To2OfInt16);
+procedure TBrickletCompass.GetCalibration(out aOffset: TArray0To2OfInt16; out aGain: TArray0To2OfInt16);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_CALIBRATION, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 2 do offset[_i]:= LEConvertInt16From(8 + (_i * 2), _response);
-  for _i:= 0 to 2 do gain[_i]:= LEConvertInt16From(14 + (_i * 2), _response);
+  for _i:= 0 to 2 do aOffset[_i]:= LEConvertInt16From(8 + (_i * 2), _response);
+  for _i:= 0 to 2 do aGain[_i]:= LEConvertInt16From(14 + (_i * 2), _response);
 end;
 
-procedure TBrickletCompass.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletCompass.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletCompass.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -472,45 +475,46 @@ end;
 
 function TBrickletCompass.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletCompass.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletCompass.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletCompass.WriteFirmware(const data: array of byte): byte;
+function TBrickletCompass.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletCompass.SetStatusLEDConfig(const config: byte);
+procedure TBrickletCompass.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletCompass.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -519,7 +523,7 @@ end;
 
 function TBrickletCompass.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -528,7 +532,7 @@ end;
 
 procedure TBrickletCompass.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -536,7 +540,7 @@ end;
 
 procedure TBrickletCompass.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(aUID, 8, _request);
@@ -545,46 +549,49 @@ end;
 
 function TBrickletCompass.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletCompass.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletCompass.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COMPASS_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletCompass.CallbackWrapperHeading(const aPacket: TDynamicByteArray);
-var heading: smallint;
+var
+  _heading: smallint;
 begin
-  heading:= LEConvertInt16From(8, aPacket);
+  _heading:= LEConvertInt16From(8, aPacket);
 
   if (Assigned(fHeadingCallback)) then begin
-    fHeadingCallback(self, heading);
+    fHeadingCallback(self, _heading);
   end;
 end;
 
 procedure TBrickletCompass.CallbackWrapperMagneticFluxDensity(const aPacket: TDynamicByteArray);
-var x: longint; y: longint; z: longint;
+var
+  _x: longint; _y: longint; _z: longint;
 begin
-  x:= LEConvertInt32From(8, aPacket);
-  y:= LEConvertInt32From(12, aPacket);
-  z:= LEConvertInt32From(16, aPacket);
+  _x:= LEConvertInt32From(8, aPacket);
+  _y:= LEConvertInt32From(12, aPacket);
+  _z:= LEConvertInt32From(16, aPacket);
 
   if (Assigned(fMagneticFluxDensityCallback)) then begin
-    fMagneticFluxDensityCallback(self, x, y, z);
+    fMagneticFluxDensityCallback(self, _x, _y, _z);
   end;
 end;
 

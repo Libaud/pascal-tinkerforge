@@ -26,8 +26,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletHumidityV2 = class;
-  TBrickletHumidityV2NotifyHumidity = procedure(aSender: TBrickletHumidityV2; const humidity: word) of object;
-  TBrickletHumidityV2NotifyTemperature = procedure(aSender: TBrickletHumidityV2; const temperature: smallint) of object;
+  TBrickletHumidityV2NotifyHumidity = procedure(aSender: TBrickletHumidityV2; const aHumidity: word) of object;
+  TBrickletHumidityV2NotifyTemperature = procedure(aSender: TBrickletHumidityV2; const aTemperature: smallint) of object;
 
   /// <summary>
   ///  Measures relative humidity
@@ -84,12 +84,14 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetHumidityCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: word; const max: word); virtual;
+    procedure SetHumidityCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean;
+                                               const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletHumidityV2.TBrickletHumidityV2.SetHumidityCallbackConfiguration"/>.
     /// </summary>
-    procedure GetHumidityCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: word; out max: word); virtual;
+    procedure GetHumidityCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char;
+                                               out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Returns the temperature measured by the sensor.
@@ -126,22 +128,23 @@ type
     ///   "'i'",    "Threshold is triggered when the value is *inside* or equal to the min and max values"
     ///   "'&lt;'",    "Threshold is triggered when the value is smaller than the min value (max is ignored)"
     ///   "'&gt;'",    "Threshold is triggered when the value is greater than the min value (max is ignored)"
-    ///  </code>
+    ///  </code>                                                                     max
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetTemperatureCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint); virtual;
+    procedure SetTemperatureCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char;
+                                                  const aMin: smallint; const aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletHumidityV2.TBrickletHumidityV2.SetTemperatureCallbackConfiguration"/>.
     /// </summary>
-    procedure GetTemperatureCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint); virtual;
+    procedure GetTemperatureCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint); virtual;
 
     /// <summary>
     ///  Enables/disables the heater. The heater can be used to dry the sensor in
     ///  extremely wet conditions.
     /// </summary>
-    procedure SetHeaterConfiguration(const heaterConfig: byte); virtual;
+    procedure SetHeaterConfiguration(const aHeaterConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the heater configuration as set by <see cref="BrickletHumidityV2.TBrickletHumidityV2.SetHeaterConfiguration"/>.
@@ -164,12 +167,12 @@ type
     ///  of th IC, changed the default value from 20 samples per second to 1. With 1 sample per second
     ///  a moving average length of 1000 would Result in an averaging window of 1000 seconds!
     /// </summary>
-    procedure SetMovingAverageConfiguration(const movingAverageLengthHumidity: word; const movingAverageLengthTemperature: word); virtual;
+    procedure SetMovingAverageConfiguration(const aMovingAverageLengthHumidity: word; const aMovingAverageLengthTemperature: word); virtual;
 
     /// <summary>
     ///  Returns the moving average configuration as set by <see cref="BrickletHumidityV2.TBrickletHumidityV2.SetMovingAverageConfiguration"/>.
     /// </summary>
-    procedure GetMovingAverageConfiguration(out movingAverageLengthHumidity: word; out movingAverageLengthTemperature: word); virtual;
+    procedure GetMovingAverageConfiguration(out aMovingAverageLengthHumidity: word; out aMovingAverageLengthTemperature: word); virtual;
 
     /// <summary>
     ///  Sets the samples per second that are gathered by the humidity/temperature sensor HDC1080.
@@ -184,7 +187,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.3$nbsp;(Plugin)
     /// </summary>
-    procedure SetSamplesPerSecond(const sps: byte); virtual;
+    procedure SetSamplesPerSecond(const aSPS: byte); virtual;
 
     /// <summary>
     ///  Returnes the samples per second, as set by <see cref="BrickletHumidityV2.TBrickletHumidityV2.SetSamplesPerSecond"/>.
@@ -206,7 +209,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -234,7 +238,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -246,7 +250,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -257,7 +261,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletHumidityV2.TBrickletHumidityV2.SetStatusLEDConfig"/>
@@ -309,7 +313,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -376,145 +381,145 @@ end;
 
 function TBrickletHumidityV2.GetHumidity: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_HUMIDITY, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.SetHumidityCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: word; const max: word);
+procedure TBrickletHumidityV2.SetHumidityCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: word; const aMax: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_HUMIDITY_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertUInt16To(min, 14, _request);
-  LEConvertUInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertUInt16To(aMin, 14, _request);
+  LEConvertUInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletHumidityV2.GetHumidityCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: word; out max: word);
+procedure TBrickletHumidityV2.GetHumidityCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: word; out aMax: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_HUMIDITY_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertUInt16From(14, _response);
-  max:= LEConvertUInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertUInt16From(14, _response);
+  aMax:= LEConvertUInt16From(16, _response);
 end;
 
 function TBrickletHumidityV2.GetTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_TEMPERATURE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.SetTemperatureCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint);
+procedure TBrickletHumidityV2.SetTemperatureCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_TEMPERATURE_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertInt16To(min, 14, _request);
-  LEConvertInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertInt16To(aMin, 14, _request);
+  LEConvertInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletHumidityV2.GetTemperatureCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint);
+procedure TBrickletHumidityV2.GetTemperatureCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_TEMPERATURE_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertInt16From(14, _response);
-  max:= LEConvertInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertInt16From(14, _response);
+  aMax:= LEConvertInt16From(16, _response);
 end;
 
-procedure TBrickletHumidityV2.SetHeaterConfiguration(const heaterConfig: byte);
+procedure TBrickletHumidityV2.SetHeaterConfiguration(const aHeaterConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_HEATER_CONFIGURATION, 9);
-  LEConvertUInt8To(heaterConfig, 8, _request);
+  LEConvertUInt8To(aHeaterConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletHumidityV2.GetHeaterConfiguration: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_HEATER_CONFIGURATION, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.SetMovingAverageConfiguration(const movingAverageLengthHumidity: word; const movingAverageLengthTemperature: word);
+procedure TBrickletHumidityV2.SetMovingAverageConfiguration(const aMovingAverageLengthHumidity: word; const aMovingAverageLengthTemperature: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_MOVING_AVERAGE_CONFIGURATION, 12);
-  LEConvertUInt16To(movingAverageLengthHumidity, 8, _request);
-  LEConvertUInt16To(movingAverageLengthTemperature, 10, _request);
+  LEConvertUInt16To(aMovingAverageLengthHumidity, 8, _request);
+  LEConvertUInt16To(aMovingAverageLengthTemperature, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletHumidityV2.GetMovingAverageConfiguration(out movingAverageLengthHumidity: word; out movingAverageLengthTemperature: word);
+procedure TBrickletHumidityV2.GetMovingAverageConfiguration(out aMovingAverageLengthHumidity: word; out aMovingAverageLengthTemperature: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_MOVING_AVERAGE_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  movingAverageLengthHumidity:= LEConvertUInt16From(8, _response);
-  movingAverageLengthTemperature:= LEConvertUInt16From(10, _response);
+  aMovingAverageLengthHumidity:= LEConvertUInt16From(8, _response);
+  aMovingAverageLengthTemperature:= LEConvertUInt16From(10, _response);
 end;
 
-procedure TBrickletHumidityV2.SetSamplesPerSecond(const sps: byte);
+procedure TBrickletHumidityV2.SetSamplesPerSecond(const aSPS: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_SAMPLES_PER_SECOND, 9);
-  LEConvertUInt8To(sps, 8, _request);
+  LEConvertUInt8To(aSPS, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletHumidityV2.GetSamplesPerSecond: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_SAMPLES_PER_SECOND, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletHumidityV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletHumidityV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -524,46 +529,46 @@ end;
 
 function TBrickletHumidityV2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletHumidityV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletHumidityV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletHumidityV2.WriteFirmware(const aData: array of byte): byte;
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletHumidityV2.SetStatusLEDConfig(const aConfig: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletHumidityV2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -572,7 +577,7 @@ end;
 
 function TBrickletHumidityV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -581,7 +586,7 @@ end;
 
 procedure TBrickletHumidityV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -589,7 +594,7 @@ end;
 
 procedure TBrickletHumidityV2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -598,45 +603,47 @@ end;
 
 function TBrickletHumidityV2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHumidityV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletHumidityV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray;
-_i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletHumidityV2.CallbackWrapperHumidity(const aPacket: TDynamicByteArray);
-var humidity: word;
+var
+  _humidity: word;
 begin
-  humidity:= LEConvertUInt16From(8, aPacket);
+  _humidity:= LEConvertUInt16From(8, aPacket);
 
   if (Assigned(fHumidityCallback)) then begin
-    fHumidityCallback(self, humidity);
+    fHumidityCallback(self, _humidity);
   end;
 end;
 
 procedure TBrickletHumidityV2.CallbackWrapperTemperature(const aPacket: TDynamicByteArray);
-var temperature: smallint;
+var
+  _temperature: smallint;
 begin
-  temperature:= LEConvertInt16From(8, aPacket);
+  _temperature:= LEConvertInt16From(8, aPacket);
 
   if (Assigned(fTemperatureCallback)) then begin
-    fTemperatureCallback(self, temperature);
+    fTemperatureCallback(self, _temperature);
   end;
 end;
 

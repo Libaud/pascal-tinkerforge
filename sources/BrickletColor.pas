@@ -25,10 +25,10 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletColor = class;
-  TBrickletColorNotifyColor = procedure(sender: TBrickletColor; const r: word; const g: word; const b: word; const c: word) of object;
-  TBrickletColorNotifyColorReached = procedure(sender: TBrickletColor; const r: word; const g: word; const b: word; const c: word) of object;
-  TBrickletColorNotifyIlluminance = procedure(sender: TBrickletColor; const illuminance: longword) of object;
-  TBrickletColorNotifyColorTemperature = procedure(sender: TBrickletColor; const colorTemperature: word) of object;
+  TBrickletColorNotifyColor = procedure(aSender: TBrickletColor; const aR: word; const aG: word; const aB: word; const aC: word) of object;
+  TBrickletColorNotifyColorReached = procedure(aSender: TBrickletColor; const aR: word; const aG: word; const aB: word; const aC: word) of object;
+  TBrickletColorNotifyIlluminance = procedure(aSender: TBrickletColor; const aIlluminance: longword) of object;
+  TBrickletColorNotifyColorTemperature = procedure(aSender: TBrickletColor; const aColorTemperature: word) of object;
 
   /// <summary>
   ///  Measures color (RGB value), illuminance and color temperature
@@ -67,7 +67,7 @@ type
     ///  to use the <see cref="BrickletColor.TBrickletColor.OnColor"/> callback and set the period with
     ///  <see cref="BrickletColor.TBrickletColor.SetColorCallbackPeriod"/>.
     /// </summary>
-    procedure GetColor(out r: word; out g: word; out b: word; out c: word); virtual;
+    procedure GetColor(out aR: word; out aG: word; out aB: word; out aC: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickletColor.TBrickletColor.OnColor"/> callback is triggered
@@ -76,7 +76,7 @@ type
     ///  The <see cref="BrickletColor.TBrickletColor.OnColor"/> callback is only triggered if the color has changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetColorCallbackPeriod(const period: longword); virtual;
+    procedure SetColorCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletColor.TBrickletColor.SetColorCallbackPeriod"/>.
@@ -98,12 +98,14 @@ type
     ///   "'&gt;'",    "Callback is triggered when the temperature is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetColorCallbackThreshold(const option: char; const minR: word; const maxR: word; const minG: word; const maxG: word; const minB: word; const maxB: word; const minC: word; const maxC: word); virtual;
+    procedure SetColorCallbackThreshold(const aOption: char; const aMinR: word; const aMaxR: word; const aMinG: word; const aMaxG: word;
+                                        const aMinB: word; const aMaxB: word; const aMinC: word; const aMaxC: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletColor.TBrickletColor.SetColorCallbackThreshold"/>.
     /// </summary>
-    procedure GetColorCallbackThreshold(out option: char; out minR: word; out maxR: word; out minG: word; out maxG: word; out minB: word; out maxB: word; out minC: word; out maxC: word); virtual;
+    procedure GetColorCallbackThreshold(out aOption: char; out aMinR: word; out aMaxR: word; out aMinG: word; out aMaxG: word;
+                                        out aMinB: word; out aMaxB: word; out aMinC: word; out aMaxC: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callback
@@ -116,7 +118,7 @@ type
     ///  
     ///  keeps being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletColor.TBrickletColor.SetDebouncePeriod"/>.
@@ -168,12 +170,12 @@ type
     ///  be more accurate but it will take longer time to get the conversion
     ///  results.
     /// </summary>
-    procedure SetConfig(const gain: byte; const integrationTime: byte); virtual;
+    procedure SetConfig(const aGain: byte; const aIntegrationTime: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletColor.TBrickletColor.SetConfig"/>.
     /// </summary>
-    procedure GetConfig(out gain: byte; out integrationTime: byte); virtual;
+    procedure GetConfig(out aGain: byte; out aIntegrationTime: byte); virtual;
 
     /// <summary>
     ///  Returns the illuminance affected by the gain and integration time as
@@ -205,7 +207,7 @@ type
     ///  The <see cref="BrickletColor.TBrickletColor.OnIlluminance"/> callback is only triggered if the illuminance has changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetIlluminanceCallbackPeriod(const period: longword); virtual;
+    procedure SetIlluminanceCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletColor.TBrickletColor.SetIlluminanceCallbackPeriod"/>.
@@ -219,7 +221,7 @@ type
     ///  The <see cref="BrickletColor.TBrickletColor.OnColorTemperature"/> callback is only triggered if the color temperature
     ///  has changed since the last triggering.
     /// </summary>
-    procedure SetColorTemperatureCallbackPeriod(const period: longword); virtual;
+    procedure SetColorTemperatureCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletColor.TBrickletColor.SetColorTemperatureCallbackPeriod"/>.
@@ -236,7 +238,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -320,82 +323,82 @@ begin
   aCallBacks[BRICKLET_COLOR_CALLBACK_COLOR_TEMPERATURE]:= {$ifdef FPC}@{$endif}CallbackWrapperColorTemperature;
 end;
 
-procedure TBrickletColor.GetColor(out r: word; out g: word; out b: word; out c: word);
+procedure TBrickletColor.GetColor(out aR: word; out aG: word; out aB: word; out aC: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_COLOR, 8);
   _response:= SendRequest(_request);
-  r:= LEConvertUInt16From(8, _response);
-  g:= LEConvertUInt16From(10, _response);
-  b:= LEConvertUInt16From(12, _response);
-  c:= LEConvertUInt16From(14, _response);
+  aR:= LEConvertUInt16From(8, _response);
+  aG:= LEConvertUInt16From(10, _response);
+  aB:= LEConvertUInt16From(12, _response);
+  aC:= LEConvertUInt16From(14, _response);
 end;
 
-procedure TBrickletColor.SetColorCallbackPeriod(const period: longword);
+procedure TBrickletColor.SetColorCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_SET_COLOR_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletColor.GetColorCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_COLOR_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletColor.SetColorCallbackThreshold(const option: char; const minR: word; const maxR: word; const minG: word; const maxG: word; const minB: word; const maxB: word; const minC: word; const maxC: word);
+procedure TBrickletColor.SetColorCallbackThreshold(const aOption: char; const aMinR: word; const aMaxR: word; const aMinG: word; const aMaxG: word; const aMinB: word; const aMaxB: word; const aMinC: word; const aMaxC: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_SET_COLOR_CALLBACK_THRESHOLD, 25);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(minR, 9, _request);
-  LEConvertUInt16To(maxR, 11, _request);
-  LEConvertUInt16To(minG, 13, _request);
-  LEConvertUInt16To(maxG, 15, _request);
-  LEConvertUInt16To(minB, 17, _request);
-  LEConvertUInt16To(maxB, 19, _request);
-  LEConvertUInt16To(minC, 21, _request);
-  LEConvertUInt16To(maxC, 23, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMinR, 9, _request);
+  LEConvertUInt16To(aMaxR, 11, _request);
+  LEConvertUInt16To(aMinG, 13, _request);
+  LEConvertUInt16To(aMaxG, 15, _request);
+  LEConvertUInt16To(aMinB, 17, _request);
+  LEConvertUInt16To(aMaxB, 19, _request);
+  LEConvertUInt16To(aMinC, 21, _request);
+  LEConvertUInt16To(aMaxC, 23, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletColor.GetColorCallbackThreshold(out option: char; out minR: word; out maxR: word; out minG: word; out maxG: word; out minB: word; out maxB: word; out minC: word; out maxC: word);
+procedure TBrickletColor.GetColorCallbackThreshold(out aOption: char; out aMinR: word; out aMaxR: word; out aMinG: word; out aMaxG: word; out aMinB: word; out aMaxB: word; out aMinC: word; out aMaxC: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_COLOR_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  minR:= LEConvertUInt16From(9, _response);
-  maxR:= LEConvertUInt16From(11, _response);
-  minG:= LEConvertUInt16From(13, _response);
-  maxG:= LEConvertUInt16From(15, _response);
-  minB:= LEConvertUInt16From(17, _response);
-  maxB:= LEConvertUInt16From(19, _response);
-  minC:= LEConvertUInt16From(21, _response);
-  maxC:= LEConvertUInt16From(23, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMinR:= LEConvertUInt16From(9, _response);
+  aMaxR:= LEConvertUInt16From(11, _response);
+  aMinG:= LEConvertUInt16From(13, _response);
+  aMaxG:= LEConvertUInt16From(15, _response);
+  aMinB:= LEConvertUInt16From(17, _response);
+  aMaxB:= LEConvertUInt16From(19, _response);
+  aMinC:= LEConvertUInt16From(21, _response);
+  aMaxC:= LEConvertUInt16From(23, _response);
 end;
 
-procedure TBrickletColor.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletColor.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletColor.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
@@ -404,7 +407,7 @@ end;
 
 procedure TBrickletColor.LightOn;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_LIGHT_ON, 8);
   SendRequest(_request);
@@ -412,7 +415,7 @@ end;
 
 procedure TBrickletColor.LightOff;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_LIGHT_OFF, 8);
   SendRequest(_request);
@@ -420,36 +423,36 @@ end;
 
 function TBrickletColor.IsLightOn: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_IS_LIGHT_ON, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletColor.SetConfig(const gain: byte; const integrationTime: byte);
+procedure TBrickletColor.SetConfig(const aGain: byte; const aIntegrationTime: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_SET_CONFIG, 10);
-  LEConvertUInt8To(gain, 8, _request);
-  LEConvertUInt8To(integrationTime, 9, _request);
+  LEConvertUInt8To(aGain, 8, _request);
+  LEConvertUInt8To(aIntegrationTime, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletColor.GetConfig(out gain: byte; out integrationTime: byte);
+procedure TBrickletColor.GetConfig(out aGain: byte; out aIntegrationTime: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_CONFIG, 8);
   _response:= SendRequest(_request);
-  gain:= LEConvertUInt8From(8, _response);
-  integrationTime:= LEConvertUInt8From(9, _response);
+  aGain:= LEConvertUInt8From(8, _response);
+  aIntegrationTime:= LEConvertUInt8From(9, _response);
 end;
 
 function TBrickletColor.GetIlluminance: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_ILLUMINANCE, 8);
   _response:= SendRequest(_request);
@@ -458,106 +461,111 @@ end;
 
 function TBrickletColor.GetColorTemperature: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_COLOR_TEMPERATURE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletColor.SetIlluminanceCallbackPeriod(const period: longword);
+procedure TBrickletColor.SetIlluminanceCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_SET_ILLUMINANCE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletColor.GetIlluminanceCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_ILLUMINANCE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletColor.SetColorTemperatureCallbackPeriod(const period: longword);
+procedure TBrickletColor.SetColorTemperatureCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_SET_COLOR_TEMPERATURE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletColor.GetColorTemperatureCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_COLOR_TEMPERATURE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletColor.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletColor.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_COLOR_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletColor.CallbackWrapperColor(const aPacket: TDynamicByteArray);
-var r: word; g: word; b: word; c: word;
+var
+  _r: word; _g: word; _b: word; _c: word;
 begin
-  r:= LEConvertUInt16From(8, aPacket);
-  g:= LEConvertUInt16From(10, aPacket);
-  b:= LEConvertUInt16From(12, aPacket);
-  c:= LEConvertUInt16From(14, aPacket);
+  _r:= LEConvertUInt16From(8, aPacket);
+  _g:= LEConvertUInt16From(10, aPacket);
+  _b:= LEConvertUInt16From(12, aPacket);
+  _c:= LEConvertUInt16From(14, aPacket);
 
   if (Assigned(colorCallback)) then begin
-    colorCallback(self, r, g, b, c);
+    colorCallback(self, _r, _g, _b, _c);
   end;
 end;
 
 procedure TBrickletColor.CallbackWrapperColorReached(const aPacket: TDynamicByteArray);
-var r: word; g: word; b: word; c: word;
+var
+  _r: word; _g: word; _b: word; _c: word;
 begin
-  r:= LEConvertUInt16From(8, aPacket);
-  g:= LEConvertUInt16From(10, aPacket);
-  b:= LEConvertUInt16From(12, aPacket);
-  c:= LEConvertUInt16From(14, aPacket);
+  _r:= LEConvertUInt16From(8, aPacket);
+  _g:= LEConvertUInt16From(10, aPacket);
+  _b:= LEConvertUInt16From(12, aPacket);
+  _c:= LEConvertUInt16From(14, aPacket);
 
   if (Assigned(colorReachedCallback)) then begin
-    colorReachedCallback(self, r, g, b, c);
+    colorReachedCallback(self, _r, _g, _b, _c);
   end;
 end;
 
 procedure TBrickletColor.CallbackWrapperIlluminance(const aPacket: TDynamicByteArray);
-var illuminance: longword;
+var
+  _illuminance: longword;
 begin
-  illuminance:= LEConvertUInt32From(8, aPacket);
+  _illuminance:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(illuminanceCallback)) then begin
-    illuminanceCallback(self, illuminance);
+    illuminanceCallback(self, _illuminance);
   end;
 end;
 
 procedure TBrickletColor.CallbackWrapperColorTemperature(const aPacket: TDynamicByteArray);
-var colorTemperature: word;
+var
+  _colorTemperature: word;
 begin
-  colorTemperature:= LEConvertUInt16From(8, aPacket);
+  _colorTemperature:= LEConvertUInt16From(8, aPacket);
 
   if (Assigned(colorTemperatureCallback)) then begin
-    colorTemperatureCallback(self, colorTemperature);
+    colorTemperatureCallback(self, _colorTemperature);
   end;
 end;
 

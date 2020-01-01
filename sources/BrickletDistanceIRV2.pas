@@ -26,8 +26,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletDistanceIRV2 = class;
-  TBrickletDistanceIRV2NotifyDistance = procedure(aSender: TBrickletDistanceIRV2; const distance: word) of object;
-  TBrickletDistanceIRV2NotifyAnalogValue = procedure(aSender: TBrickletDistanceIRV2; const analogValue: longword) of object;
+  TBrickletDistanceIRV2NotifyDistance = procedure(aSender: TBrickletDistanceIRV2; const aDistance: word) of object;
+  TBrickletDistanceIRV2NotifyAnalogValue = procedure(aSender: TBrickletDistanceIRV2; const aAnalogValue: longword) of object;
 
   /// <summary>
   ///  Measures distance up to 150cm with infrared light
@@ -86,12 +86,14 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetDistanceCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: word; const max: word); virtual;
+    procedure SetDistanceCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean;
+                                               const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletDistanceIRV2.TBrickletDistanceIRV2.SetDistanceCallbackConfiguration"/>.
     /// </summary>
-    procedure GetDistanceCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: word; out max: word); virtual;
+    procedure GetDistanceCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean;
+                                               out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Returns the analog value as read by a analog-to-digital converter.
@@ -139,12 +141,14 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetAnalogValueCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: longword; const max: longword); virtual;
+    procedure SetAnalogValueCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean;
+                                                  const aOption: char; const aMin: longword; const aMax: longword); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletDistanceIRV2.TBrickletDistanceIRV2.SetAnalogValueCallbackConfiguration"/>.
     /// </summary>
-    procedure GetAnalogValueCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: longword; out max: longword); virtual;
+    procedure GetAnalogValueCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean;
+                                                  out aOption: char; out aMin: longword; out aMax: longword); virtual;
 
     /// <summary>
     ///  Sets the length of a `moving averaging &lt;https://en.wikipedia.org/wiki/Moving_average&gt;`__
@@ -157,7 +161,7 @@ type
     ///  resulting averaging window has a length of approximately 10s. If you want to do
     ///  long term measurements the longest moving average will give the cleanest results.
     /// </summary>
-    procedure SetMovingAverageConfiguration(const movingAverageLength: word); virtual;
+    procedure SetMovingAverageConfiguration(const aMovingAverageLength: word); virtual;
 
     /// <summary>
     ///  Returns the moving average configuration as set by <see cref="BrickletDistanceIRV2.TBrickletDistanceIRV2.SetMovingAverageConfiguration"/>.
@@ -168,7 +172,7 @@ type
     ///  Configures the distance LED to be either turned off, turned on, blink in
     ///  heartbeat mode or show the distance (brighter = object is nearer).
     /// </summary>
-    procedure SetDistanceLEDConfig(const config: byte); virtual;
+    procedure SetDistanceLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the LED configuration as set by <see cref="BrickletDistanceIRV2.TBrickletDistanceIRV2.SetDistanceLEDConfig"/>
@@ -185,7 +189,7 @@ type
     ///  If you want to change the sensor you can set the type in Brick Viewer,
     ///  you will likely never need to call this function from your program.
     /// </summary>
-    procedure SetSensorType(const sensor: byte); virtual;
+    procedure SetSensorType(const aSensor: byte); virtual;
 
     /// <summary>
     ///  Returns the sensor type as set by <see cref="BrickletDistanceIRV2.TBrickletDistanceIRV2.SetSensorType"/>.
@@ -205,7 +209,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -245,7 +250,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -256,7 +261,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletDistanceIRV2.TBrickletDistanceIRV2.SetStatusLEDConfig"/>
@@ -308,7 +313,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -375,143 +381,143 @@ end;
 
 function TBrickletDistanceIRV2.GetDistance: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_DISTANCE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.SetDistanceCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: word; const max: word);
+procedure TBrickletDistanceIRV2.SetDistanceCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: word; const aMax: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_DISTANCE_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertUInt16To(min, 14, _request);
-  LEConvertUInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertUInt16To(aMin, 14, _request);
+  LEConvertUInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDistanceIRV2.GetDistanceCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: word; out max: word);
+procedure TBrickletDistanceIRV2.GetDistanceCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: word; out aMax: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_DISTANCE_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertUInt16From(14, _response);
-  max:= LEConvertUInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertUInt16From(14, _response);
+  aMax:= LEConvertUInt16From(16, _response);
 end;
 
 function TBrickletDistanceIRV2.GetAnalogValue: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_ANALOG_VALUE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.SetAnalogValueCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: longword; const max: longword);
+procedure TBrickletDistanceIRV2.SetAnalogValueCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: longword; const aMax: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_ANALOG_VALUE_CALLBACK_CONFIGURATION, 22);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertUInt32To(min, 14, _request);
-  LEConvertUInt32To(max, 18, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertUInt32To(aMin, 14, _request);
+  LEConvertUInt32To(aMax, 18, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDistanceIRV2.GetAnalogValueCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: longword; out max: longword);
+procedure TBrickletDistanceIRV2.GetAnalogValueCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: longword; out aMax: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_ANALOG_VALUE_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertUInt32From(14, _response);
-  max:= LEConvertUInt32From(18, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertUInt32From(14, _response);
+  aMax:= LEConvertUInt32From(18, _response);
 end;
 
-procedure TBrickletDistanceIRV2.SetMovingAverageConfiguration(const movingAverageLength: word);
+procedure TBrickletDistanceIRV2.SetMovingAverageConfiguration(const aMovingAverageLength: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_MOVING_AVERAGE_CONFIGURATION, 10);
-  LEConvertUInt16To(movingAverageLength, 8, _request);
+  LEConvertUInt16To(aMovingAverageLength, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletDistanceIRV2.GetMovingAverageConfiguration: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_MOVING_AVERAGE_CONFIGURATION, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.SetDistanceLEDConfig(const config: byte);
+procedure TBrickletDistanceIRV2.SetDistanceLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_DISTANCE_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletDistanceIRV2.GetDistanceLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_DISTANCE_LED_CONFIG, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.SetSensorType(const sensor: byte);
+procedure TBrickletDistanceIRV2.SetSensorType(const aSensor: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_SENSOR_TYPE, 9);
-  LEConvertUInt8To(sensor, 8, _request);
+  LEConvertUInt8To(aSensor, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletDistanceIRV2.GetSensorType: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_SENSOR_TYPE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletDistanceIRV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletDistanceIRV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -521,7 +527,7 @@ end;
 
 function TBrickletDistanceIRV2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
@@ -530,36 +536,36 @@ end;
 
 procedure TBrickletDistanceIRV2.SetWriteFirmwarePointer(const pointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
   LEConvertUInt32To(pointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletDistanceIRV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletDistanceIRV2.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletDistanceIRV2.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletDistanceIRV2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -568,7 +574,7 @@ end;
 
 function TBrickletDistanceIRV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -577,7 +583,7 @@ end;
 
 procedure TBrickletDistanceIRV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -585,7 +591,7 @@ end;
 
 procedure TBrickletDistanceIRV2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(aUID, 8, _request);
@@ -594,44 +600,47 @@ end;
 
 function TBrickletDistanceIRV2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletDistanceIRV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletDistanceIRV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DISTANCE_IR_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletDistanceIRV2.CallbackWrapperDistance(const aPacket: TDynamicByteArray);
-var distance: word;
+var
+  _distance: word;
 begin
-  distance:= LEConvertUInt16From(8, aPacket);
+  _distance:= LEConvertUInt16From(8, aPacket);
 
   if (Assigned(fDistanceCallback)) then begin
-    fDistanceCallback(self, distance);
+    fDistanceCallback(self, _distance);
   end;
 end;
 
 procedure TBrickletDistanceIRV2.CallbackWrapperAnalogValue(const aPacket: TDynamicByteArray);
-var analogValue: longword;
+var
+  _analogValue: longword;
 begin
-  analogValue:= LEConvertUInt32From(8, aPacket);
+  _analogValue:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(fAnalogValueCallback)) then begin
-    fAnalogValueCallback(self, analogValue);
+    fAnalogValueCallback(self, _analogValue);
   end;
 end;
 

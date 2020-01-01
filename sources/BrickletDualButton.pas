@@ -25,7 +25,8 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletDualButton = class;
-  TBrickletDualButtonNotifyStateChanged = procedure(aSender: TBrickletDualButton; const buttonL: byte; const buttonR: byte; const ledL: byte; const ledR: byte) of object;
+  TBrickletDualButtonNotifyStateChanged = procedure(aSender: TBrickletDualButton; const aButtonL: byte; const aButtonR: byte;
+                                                    const aLedL: byte; const aLedR: byte) of object;
 
   /// <summary>
   ///  Two tactile buttons with built-in blue LEDs
@@ -55,12 +56,12 @@ type
     ///  of the other LED, you can get the state with <see cref="BrickletDualButton.TBrickletDualButton.GetLEDState"/> or you
     ///  can use <see cref="BrickletDualButton.TBrickletDualButton.SetSelectedLEDState"/>.
     /// </summary>
-    procedure SetLEDState(const ledL: byte; const ledR: byte); virtual;
+    procedure SetLEDState(const aLedL: byte; const aLedR: byte); virtual;
 
     /// <summary>
     ///  Returns the current state of the LEDs, as set by <see cref="BrickletDualButton.TBrickletDualButton.SetLEDState"/>.
     /// </summary>
-    procedure GetLEDState(out ledL: byte; out ledR: byte); virtual;
+    procedure GetLEDState(out aLedL: byte; out aLedR: byte); virtual;
 
     /// <summary>
     ///  Returns the current state for both buttons. Possible states are:
@@ -68,14 +69,14 @@ type
     ///  * 0 = pressed
     ///  * 1 = released
     /// </summary>
-    procedure GetButtonState(out buttonL: byte; out buttonR: byte); virtual;
+    procedure GetButtonState(out aButtonL: byte; out aButtonR: byte); virtual;
 
     /// <summary>
     ///  Sets the state of the selected LED (0 or 1).
     ///  
     ///  The other LED remains untouched.
     /// </summary>
-    procedure SetSelectedLEDState(const led: byte; const state: byte); virtual;
+    procedure SetSelectedLEDState(const aLed: byte; const aState: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -87,7 +88,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is called whenever a button is pressed.
@@ -130,71 +132,72 @@ begin
   aCallBacks[BRICKLET_DUAL_BUTTON_CALLBACK_STATE_CHANGED]:= {$ifdef FPC}@{$endif}CallbackWrapperStateChanged;
 end;
 
-procedure TBrickletDualButton.SetLEDState(const ledL: byte; const ledR: byte);
+procedure TBrickletDualButton.SetLEDState(const aLedL: byte; const aLedR: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_FUNCTION_SET_LED_STATE, 10);
-  LEConvertUInt8To(ledL, 8, _request);
-  LEConvertUInt8To(ledR, 9, _request);
+  LEConvertUInt8To(aLedL, 8, _request);
+  LEConvertUInt8To(aLedR, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDualButton.GetLEDState(out ledL: byte; out ledR: byte);
+procedure TBrickletDualButton.GetLEDState(out aLedL: byte; out aLedR: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_FUNCTION_GET_LED_STATE, 8);
   _response:= SendRequest(_request);
-  ledL:= LEConvertUInt8From(8, _response);
-  ledR:= LEConvertUInt8From(9, _response);
+  aLedL:= LEConvertUInt8From(8, _response);
+  aLedR:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletDualButton.GetButtonState(out buttonL: byte; out buttonR: byte);
+procedure TBrickletDualButton.GetButtonState(out aButtonL: byte; out aButtonR: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_FUNCTION_GET_BUTTON_STATE, 8);
   _response:= SendRequest(_request);
-  buttonL:= LEConvertUInt8From(8, _response);
-  buttonR:= LEConvertUInt8From(9, _response);
+  aButtonL:= LEConvertUInt8From(8, _response);
+  aButtonR:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletDualButton.SetSelectedLEDState(const led: byte; const state: byte);
+procedure TBrickletDualButton.SetSelectedLEDState(const aLed: byte; const aState: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_FUNCTION_SET_SELECTED_LED_STATE, 10);
-  LEConvertUInt8To(led, 8, _request);
-  LEConvertUInt8To(state, 9, _request);
+  LEConvertUInt8To(aLed, 8, _request);
+  LEConvertUInt8To(aState, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDualButton.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletDualButton.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
-  _request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletDualButton.CallbackWrapperStateChanged(const aPacket: TDynamicByteArray);
 var
-  buttonL: byte; buttonR: byte; ledL: byte; ledR: byte;
+  _buttonL: byte; _buttonR: byte; _ledL: byte; _ledR: byte;
 begin
-  buttonL:= LEConvertUInt8From(8, aPacket);
-  buttonR:= LEConvertUInt8From(9, aPacket);
-  ledL:= LEConvertUInt8From(10, aPacket);
-  ledR:= LEConvertUInt8From(11, aPacket);
+  _buttonL:= LEConvertUInt8From(8, aPacket);
+  _buttonR:= LEConvertUInt8From(9, aPacket);
+  _ledL:= LEConvertUInt8From(10, aPacket);
+  _ledR:= LEConvertUInt8From(11, aPacket);
 
   if (Assigned(fStateChangedCallback)) then begin
-    fStateChangedCallback(self, buttonL, buttonR, ledL, ledR);
+    fStateChangedCallback(self, _buttonL, _buttonR, _ledL, _ledR);
   end;
 end;
 

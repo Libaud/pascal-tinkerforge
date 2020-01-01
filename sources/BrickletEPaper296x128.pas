@@ -29,7 +29,7 @@ type
   TArrayOfBoolean = array of boolean;
 
   TBrickletEPaper296x128 = class;
-  TBrickletEPaper296x128NotifyDrawStatus = procedure(sender: TBrickletEPaper296x128; const drawStatus: byte) of object;
+  TBrickletEPaper296x128NotifyDrawStatus = procedure(aSender: TBrickletEPaper296x128; const aDrawStatus: byte) of object;
 
   /// <summary>
   ///  Three color 296x128 e-paper display
@@ -80,7 +80,8 @@ type
     ///  
     ///  Use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.WriteColor"/> to write red or gray pixels.
     /// </summary>
-    procedure WriteBlackWhiteLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixelsLength: word; const pixelsChunkOffset: word; const pixelsChunkData: TArray0To431OfBoolean); virtual;
+    procedure WriteBlackWhiteLowLevel(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixelsLength: word;
+                                      const aPixelsChunkOffset: word; const aPixelsChunkData: TArray0To431OfBoolean); virtual;
 
     /// <summary>
     ///  Writes black/white pixels to the specified window into the buffer.
@@ -96,7 +97,7 @@ type
     ///  
     ///  Use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.WriteColor"/> to write red or gray pixels.
     /// </summary>
-    procedure WriteBlackWhite(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixels: array of boolean); virtual;
+    procedure WriteBlackWhite(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixels: array of boolean); virtual;
 
     /// <summary>
     ///  Returns the current content of the black/white pixel buffer for the specified window.
@@ -108,7 +109,8 @@ type
     ///  It is possible that the data was not drawn to the display yet and after a restart of
     ///  the Bricklet the buffer will be reset to black, while the display retains its content.
     /// </summary>
-    procedure ReadBlackWhiteLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; out pixelsLength: word; out pixelsChunkOffset: word; out pixelsChunkData: TArray0To463OfBoolean); virtual;
+    procedure ReadBlackWhiteLowLevel(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; out aPixelsLength: word;
+                                     out aPixelsChunkOffset: word; out aPixelsChunkData: TArray0To463OfBoolean); virtual;
 
     /// <summary>
     ///  Returns the current content of the black/white pixel buffer for the specified window.
@@ -120,7 +122,7 @@ type
     ///  It is possible that the data was not drawn to the display yet and after a restart of
     ///  the Bricklet the buffer will be reset to black, while the display retains its content.
     /// </summary>
-    function ReadBlackWhite(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte): TArrayOfBoolean; virtual;
+    function ReadBlackWhite(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte): TArrayOfBoolean; virtual;
 
     /// <summary>
     ///  The E-Paper 296x128 Bricklet is available with the colors black/white/red and
@@ -139,7 +141,8 @@ type
     ///  
     ///  Use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.WriteBlackWhite"/> to write black/white pixels.
     /// </summary>
-    procedure WriteColorLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixelsLength: word; const pixelsChunkOffset: word; const pixelsChunkData: TArray0To431OfBoolean); virtual;
+    procedure WriteColorLowLevel(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte;
+                                 const aPixelsLength: word; const aPixelsChunkOffset: word; const aPixelsChunkData: TArray0To431OfBoolean); virtual;
 
     /// <summary>
     ///  The E-Paper 296x128 Bricklet is available with the colors black/white/red and
@@ -158,7 +161,7 @@ type
     ///  
     ///  Use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.WriteBlackWhite"/> to write black/white pixels.
     /// </summary>
-    procedure WriteColor(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixels: array of boolean); virtual;
+    procedure WriteColor(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixels: array of boolean); virtual;
 
     /// <summary>
     ///  Returns the current content of the red or gray pixel buffer for the specified window.
@@ -170,7 +173,8 @@ type
     ///  It is possible that the data was not drawn to the display yet and after a restart of
     ///  the Bricklet the buffer will be reset to black, while the display retains its content.
     /// </summary>
-    procedure ReadColorLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; out pixelsLength: word; out pixelsChunkOffset: word; out pixelsChunkData: TArray0To463OfBoolean); virtual;
+    procedure ReadColorLowLevel(const aXStart: word; const aYStart: byte; const XEnd: word; const aYEnd: byte; out aPixelsLength: word;
+                                out aPixelsChunkOffset: word; out aPixelsChunkData: TArray0To463OfBoolean); virtual;
 
     /// <summary>
     ///  Returns the current content of the red or gray pixel buffer for the specified window.
@@ -182,7 +186,7 @@ type
     ///  It is possible that the data was not drawn to the display yet and after a restart of
     ///  the Bricklet the buffer will be reset to black, while the display retains its content.
     /// </summary>
-    function ReadColor(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte): TArrayOfBoolean; virtual;
+    function ReadColor(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte): TArrayOfBoolean; virtual;
 
     /// <summary>
     ///  Fills the complete content of the display with the given color.
@@ -190,7 +194,7 @@ type
     ///  This function writes the pixels into the black/white/red|gray pixel buffer, to draw the buffer
     ///  to the display use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.Draw"/>.
     /// </summary>
-    procedure FillDisplay(const color: byte); virtual;
+    procedure FillDisplay(const aColor: byte); virtual;
 
     /// <summary>
     ///  Draws a text with up to 50 characters at the pixel position (x, y).
@@ -201,7 +205,8 @@ type
     ///  This function writes the pixels into the black/white/red|gray pixel buffer, to draw the buffer
     ///  to the display use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.Draw"/>.
     /// </summary>
-    procedure DrawText(const positionX: word; const positionY: byte; const font: byte; const color: byte; const orientation: byte; const text: string); virtual;
+    procedure DrawText(const aPositionX: word; const aPositionY: byte; const aFont: byte; const aColor: byte;
+                       const aOrientation: byte; const aText: string); virtual;
 
     /// <summary>
     ///  Draws a line from (x, y)-start to (x, y)-end in the given color.
@@ -209,7 +214,8 @@ type
     ///  This function writes the pixels into the black/white/red|gray pixel buffer, to draw the buffer
     ///  to the display use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.Draw"/>.
     /// </summary>
-    procedure DrawLine(const positionXStart: word; const positionYStart: byte; const positionXEnd: word; const positionYEnd: byte; const color: byte); virtual;
+    procedure DrawLine(const aPositionXStart: word; const aPositionYStart: byte; const aPositionXEnd: word;
+                       const aPositionYEnd: byte; const aColor: byte); virtual;
 
     /// <summary>
     ///  Draws a box from (x, y)-start to (x, y)-end in the given color.
@@ -220,7 +226,8 @@ type
     ///  This function writes the pixels into the black/white/red|gray pixel buffer, to draw the buffer
     ///  to the display use <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.Draw"/>.
     /// </summary>
-    procedure DrawBox(const positionXStart: word; const positionYStart: byte; const positionXEnd: word; const positionYEnd: byte; const fill: boolean; const color: byte); virtual;
+    procedure DrawBox(const aPositionXStart: word; const aPositionYStart: byte; const aPositionXEnd: word;
+                      const aPositionYEnd: byte; const aFill: boolean; const aColor: byte); virtual;
 
     /// <summary>
     ///  <note>
@@ -259,7 +266,7 @@ type
     ///  three available colors a few times. This will get rid of the ghosting and after that you can
     ///  go back to the delta mode with flicker-free updates.
     /// </summary>
-    procedure SetUpdateMode(const updateMode: byte); virtual;
+    procedure SetUpdateMode(const aUpdateMode: byte); virtual;
 
     /// <summary>
     ///  Returns the update mode as set by <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.SetUpdateMode"/>.
@@ -272,7 +279,7 @@ type
     ///  during the flashing and testing phase. The value is saved in
     ///  non-volatile memory and will stay after a power cycle.
     /// </summary>
-    procedure SetDisplayType(const displayType: byte); virtual;
+    procedure SetDisplayType(const aDisplayType: byte); virtual;
 
     /// <summary>
     ///  Returns the type of the e-paper display. It can either be
@@ -293,7 +300,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -321,7 +329,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -333,7 +341,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -344,7 +352,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletEPaper296x128.TBrickletEPaper296x128.SetStatusLEDConfig"/>
@@ -396,7 +404,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  Callback for the current draw status. Will be called every time the
@@ -469,167 +478,42 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEPaper296x128.WriteBlackWhiteLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixelsLength: word; const pixelsChunkOffset: word; const pixelsChunkData: TArray0To431OfBoolean);
+procedure TBrickletEPaper296x128.WriteBlackWhiteLowLevel(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixelsLength: word; const aPixelsChunkOffset: word; const aPixelsChunkData: TArray0To431OfBoolean);
 var 
   _request: TDynamicByteArray;
   _i: longint;
   _pixelsChunkDataBits: array [0..53] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_WRITE_BLACK_WHITE_LOW_LEVEL, 72);
-  LEConvertUInt16To(xStart, 8, _request);
-  LEConvertUInt8To(yStart, 10, _request);
-  LEConvertUInt16To(xEnd, 11, _request);
-  LEConvertUInt8To(yEnd, 13, _request);
-  LEConvertUInt16To(pixelsLength, 14, _request);
-  LEConvertUInt16To(pixelsChunkOffset, 16, _request);
+  LEConvertUInt16To(aXStart, 8, _request);
+  LEConvertUInt8To(aYStart, 10, _request);
+  LEConvertUInt16To(aXEnd, 11, _request);
+  LEConvertUInt8To(aYEnd, 13, _request);
+  LEConvertUInt16To(aPixelsLength, 14, _request);
+  LEConvertUInt16To(aPixelsChunkOffset, 16, _request);
   FillChar(_pixelsChunkDataBits[0], Length(_pixelsChunkDataBits) * SizeOf(_pixelsChunkDataBits[0]), 0);
-  for _i:= 0 to 431 do if pixelsChunkData[_i] then _pixelsChunkDataBits[Floor(_i / 8)]:= _pixelsChunkDataBits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 431 do if aPixelsChunkData[_i] then _pixelsChunkDataBits[Floor(_i / 8)]:= _pixelsChunkDataBits[Floor(_i / 8)] or (1 shl (_i mod 8));
   for _i:= 0 to 53 do LEConvertUInt8To(_pixelsChunkDataBits[_i], 18 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEPaper296x128.WriteBlackWhite(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixels: array of boolean);
-var
-  pixelsChunkOffset: word;
-  pixelsChunkData: TArray0To431OfBoolean;
-  pixelsChunkLength: word;
-  pixelsLength: word;
-begin
-  if (Length(pixels) > 65535) then begin
-    raise EInvalidParameterException.Create('Pixels can be at most 65535 items long');
-  end;
-
-  pixelsLength:= Length(pixels);
-  pixelsChunkOffset:= 0;
-
-  if (pixelsLength = 0) then begin
-    FillChar(pixelsChunkData[0], SizeOf(boolean) * 432, 0);
-    WriteBlackWhiteLowLevel(xStart, yStart, xEnd, yEnd, pixelsLength, pixelsChunkOffset, pixelsChunkData);
-  end
-  else begin
-    StreamMutex.Acquire;
-    try
-      while (pixelsChunkOffset < pixelsLength) do begin
-        pixelsChunkLength:= pixelsLength - pixelsChunkOffset;
-
-        if (pixelsChunkLength > 432) then pixelsChunkLength:= 432;
-
-        FillChar(pixelsChunkData[0], SizeOf(boolean) * 432, 0);
-        Move(pixels[pixelsChunkOffset], pixelsChunkData[0], SizeOf(boolean) * pixelsChunkLength);
-
-        WriteBlackWhiteLowLevel(xStart, yStart, xEnd, yEnd, pixelsLength, pixelsChunkOffset, pixelsChunkData);
-        Inc(pixelsChunkOffset, 432);
-      end;
-    finally
-      StreamMutex.Release;
-    end;
-  end;
-end;
-
-procedure TBrickletEPaper296x128.ReadBlackWhiteLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; out pixelsLength: word; out pixelsChunkOffset: word; out pixelsChunkData: TArray0To463OfBoolean);
-var 
-  _request, _response: TDynamicByteArray;
-  _i: longint;
-  _pixelsChunkDataBits: array [0..57] of byte;
-begin
-  _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_READ_BLACK_WHITE_LOW_LEVEL, 14);
-  LEConvertUInt16To(xStart, 8, _request);
-  LEConvertUInt8To(yStart, 10, _request);
-  LEConvertUInt16To(xEnd, 11, _request);
-  LEConvertUInt8To(yEnd, 13, _request);
-  _response:= SendRequest(_request);
-  pixelsLength:= LEConvertUInt16From(8, _response);
-  pixelsChunkOffset:= LEConvertUInt16From(10, _response);
-  FillChar(_pixelsChunkDataBits[0], Length(_pixelsChunkDataBits) * SizeOf(_pixelsChunkDataBits[0]), 0);
-  for _i:= 0 to 57 do _pixelsChunkDataBits[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
-  for _i:= 0 to 463 do pixelsChunkData[_i]:= ((_pixelsChunkDataBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-end;
-
-function TBrickletEPaper296x128.ReadBlackWhite(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte): TArrayOfBoolean;
-var
-  _pixels: TArrayOfBoolean;
-  _pixelsCurrentLength: word;
-  _pixelsLength: word;
-  _pixelsChunkOffset: word;
-  _pixelsChunkData: TArray0To463OfBoolean;
-  _pixelsOutOfSync: boolean;
-  _pixelsChunkLength: word;
-begin
-  SetLength(Result, 0);
-  SetLength(_pixels, 0);
-  StreamMutex.Acquire;
-  try
-    _pixelsLength:= 0;
-    ReadBlackWhiteLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
-    SetLength(_pixels, _pixelsLength);
-    _pixelsOutOfSync:= (_pixelsChunkOffset <> 0);
-
-    if ((not _pixelsOutOfSync) and (_pixelsLength > 0)) then begin
-      _pixelsChunkLength:= _pixelsLength - _pixelsChunkOffset;
-      if (_pixelsChunkLength > 464) then _pixelsChunkLength:= 464;
-      Move(_pixelsChunkData, _pixels[0], SizeOf(boolean) * _pixelsChunkLength);
-      _pixelsCurrentLength:= _pixelsChunkLength;
-
-      while ((not _pixelsOutOfSync) and (_pixelsCurrentLength < _pixelsLength)) do begin
-        ReadBlackWhiteLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
-        _pixelsOutOfSync:= _pixelsChunkOffset <> _pixelsCurrentLength;
-        _pixelsChunkLength:= _pixelsLength - _pixelsChunkOffset;
-        if (_pixelsChunkLength > 464) then _pixelsChunkLength:= 464;
-        Move(_pixelsChunkData, _pixels[_pixelsCurrentLength], SizeOf(boolean) * _pixelsChunkLength);
-        Inc(_pixelsCurrentLength, _pixelsChunkLength);
-      end;
-    end;
-
-    if (_pixelsOutOfSync) then begin
-      { Discard remaining stream to bring it back in-sync }
-      while (_pixelsChunkOffset + 464 < _pixelsLength) do begin
-        ReadBlackWhiteLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
-      end;
-
-      raise EStreamOutOfSyncException.Create('Pixels stream out-of-sync');
-    end;
-  finally
-    StreamMutex.Release;
-  end;
-  Result:= _pixels;
-end;
-
-procedure TBrickletEPaper296x128.WriteColorLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixelsLength: word; const pixelsChunkOffset: word; const pixelsChunkData: TArray0To431OfBoolean);
-var 
-  _request: TDynamicByteArray;
-  _i: longint;
-  _pixelsChunkDataBits: array [0..53] of byte;
-begin
-  _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_WRITE_COLOR_LOW_LEVEL, 72);
-  LEConvertUInt16To(xStart, 8, _request);
-  LEConvertUInt8To(yStart, 10, _request);
-  LEConvertUInt16To(xEnd, 11, _request);
-  LEConvertUInt8To(yEnd, 13, _request);
-  LEConvertUInt16To(pixelsLength, 14, _request);
-  LEConvertUInt16To(pixelsChunkOffset, 16, _request);
-  FillChar(_pixelsChunkDataBits[0], Length(_pixelsChunkDataBits) * SizeOf(_pixelsChunkDataBits[0]), 0);
-  for _i:= 0 to 431 do if pixelsChunkData[_i] then _pixelsChunkDataBits[Floor(_i / 8)]:= _pixelsChunkDataBits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 53 do LEConvertUInt8To(_pixelsChunkDataBits[_i], 18 + (_i * 1), _request);
-  SendRequest(_request);
-end;
-
-procedure TBrickletEPaper296x128.WriteColor(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; const pixels: array of boolean);
+procedure TBrickletEPaper296x128.WriteBlackWhite(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixels: array of boolean);
 var
   _pixelsChunkOffset: word;
   _pixelsChunkData: TArray0To431OfBoolean;
   _pixelsChunkLength: word;
   _pixelsLength: word;
 begin
-  if (Length(pixels) > 65535) then begin
+  if (Length(aPixels) > 65535) then begin
     raise EInvalidParameterException.Create('Pixels can be at most 65535 items long');
   end;
 
-  _pixelsLength:= Length(pixels);
+  _pixelsLength:= Length(aPixels);
   _pixelsChunkOffset:= 0;
 
   if (_pixelsLength = 0) then begin
     FillChar(_pixelsChunkData[0], SizeOf(boolean) * 432, 0);
-    WriteColorLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+    WriteBlackWhiteLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
   end
   else begin
     StreamMutex.Acquire;
@@ -640,9 +524,9 @@ begin
         if (_pixelsChunkLength > 432) then _pixelsChunkLength:= 432;
 
         FillChar(_pixelsChunkData[0], SizeOf(boolean) * 432, 0);
-        Move(pixels[_pixelsChunkOffset], _pixelsChunkData[0], SizeOf(boolean) * _pixelsChunkLength);
+        Move(aPixels[_pixelsChunkOffset], _pixelsChunkData[0], SizeOf(boolean) * _pixelsChunkLength);
 
-        WriteColorLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+        WriteBlackWhiteLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
         Inc(_pixelsChunkOffset, 432);
       end;
     finally
@@ -651,26 +535,26 @@ begin
   end;
 end;
 
-procedure TBrickletEPaper296x128.ReadColorLowLevel(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte; out pixelsLength: word; out pixelsChunkOffset: word; out pixelsChunkData: TArray0To463OfBoolean);
+procedure TBrickletEPaper296x128.ReadBlackWhiteLowLevel(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; out aPixelsLength: word; out aPixelsChunkOffset: word; out aPixelsChunkData: TArray0To463OfBoolean);
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
   _pixelsChunkDataBits: array [0..57] of byte;
 begin
-  _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_READ_COLOR_LOW_LEVEL, 14);
-  LEConvertUInt16To(xStart, 8, _request);
-  LEConvertUInt8To(yStart, 10, _request);
-  LEConvertUInt16To(xEnd, 11, _request);
-  LEConvertUInt8To(yEnd, 13, _request);
+  _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_READ_BLACK_WHITE_LOW_LEVEL, 14);
+  LEConvertUInt16To(aXStart, 8, _request);
+  LEConvertUInt8To(aYStart, 10, _request);
+  LEConvertUInt16To(aXEnd, 11, _request);
+  LEConvertUInt8To(aYEnd, 13, _request);
   _response:= SendRequest(_request);
-  pixelsLength:= LEConvertUInt16From(8, _response);
-  pixelsChunkOffset:= LEConvertUInt16From(10, _response);
+  aPixelsLength:= LEConvertUInt16From(8, _response);
+  aPixelsChunkOffset:= LEConvertUInt16From(10, _response);
   FillChar(_pixelsChunkDataBits[0], Length(_pixelsChunkDataBits) * SizeOf(_pixelsChunkDataBits[0]), 0);
   for _i:= 0 to 57 do _pixelsChunkDataBits[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
-  for _i:= 0 to 463 do pixelsChunkData[_i]:= ((_pixelsChunkDataBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  for _i:= 0 to 463 do aPixelsChunkData[_i]:= ((_pixelsChunkDataBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 end;
 
-function TBrickletEPaper296x128.ReadColor(const xStart: word; const yStart: byte; const xEnd: word; const yEnd: byte): TArrayOfBoolean;
+function TBrickletEPaper296x128.ReadBlackWhite(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte): TArrayOfBoolean;
 var
   _pixels: TArrayOfBoolean;
   _pixelsCurrentLength: word;
@@ -685,7 +569,7 @@ begin
   StreamMutex.Acquire;
   try
     _pixelsLength:= 0;
-    ReadColorLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+    ReadBlackWhiteLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
     SetLength(_pixels, _pixelsLength);
     _pixelsOutOfSync:= (_pixelsChunkOffset <> 0);
 
@@ -696,7 +580,7 @@ begin
       _pixelsCurrentLength:= _pixelsChunkLength;
 
       while ((not _pixelsOutOfSync) and (_pixelsCurrentLength < _pixelsLength)) do begin
-        ReadColorLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+        ReadBlackWhiteLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
         _pixelsOutOfSync:= _pixelsChunkOffset <> _pixelsCurrentLength;
         _pixelsChunkLength:= _pixelsLength - _pixelsChunkOffset;
         if (_pixelsChunkLength > 464) then _pixelsChunkLength:= 464;
@@ -708,7 +592,7 @@ begin
     if (_pixelsOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
       while (_pixelsChunkOffset + 464 < _pixelsLength) do begin
-        ReadColorLowLevel(xStart, yStart, xEnd, yEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+        ReadBlackWhiteLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('Pixels stream out-of-sync');
@@ -719,62 +603,187 @@ begin
   Result:= _pixels;
 end;
 
-procedure TBrickletEPaper296x128.FillDisplay(const color: byte);
+procedure TBrickletEPaper296x128.WriteColorLowLevel(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixelsLength: word; const aPixelsChunkOffset: word; const aPixelsChunkData: TArray0To431OfBoolean);
+var 
+  _request: TDynamicByteArray;
+  _i: longint;
+  _pixelsChunkDataBits: array [0..53] of byte;
+begin
+  _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_WRITE_COLOR_LOW_LEVEL, 72);
+  LEConvertUInt16To(aXStart, 8, _request);
+  LEConvertUInt8To(aYStart, 10, _request);
+  LEConvertUInt16To(aXEnd, 11, _request);
+  LEConvertUInt8To(aYEnd, 13, _request);
+  LEConvertUInt16To(aPixelsLength, 14, _request);
+  LEConvertUInt16To(aPixelsChunkOffset, 16, _request);
+  FillChar(_pixelsChunkDataBits[0], Length(_pixelsChunkDataBits) * SizeOf(_pixelsChunkDataBits[0]), 0);
+  for _i:= 0 to 431 do if aPixelsChunkData[_i] then _pixelsChunkDataBits[Floor(_i / 8)]:= _pixelsChunkDataBits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 53 do LEConvertUInt8To(_pixelsChunkDataBits[_i], 18 + (_i * 1), _request);
+  SendRequest(_request);
+end;
+
+procedure TBrickletEPaper296x128.WriteColor(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte; const aPixels: array of boolean);
+var
+  _pixelsChunkOffset: word;
+  _pixelsChunkData: TArray0To431OfBoolean;
+  _pixelsChunkLength: word;
+  _pixelsLength: word;
+begin
+  if (Length(aPixels) > 65535) then begin
+    raise EInvalidParameterException.Create('Pixels can be at most 65535 items long');
+  end;
+
+  _pixelsLength:= Length(aPixels);
+  _pixelsChunkOffset:= 0;
+
+  if (_pixelsLength = 0) then begin
+    FillChar(_pixelsChunkData[0], SizeOf(boolean) * 432, 0);
+    WriteColorLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+  end
+  else begin
+    StreamMutex.Acquire;
+    try
+      while (_pixelsChunkOffset < _pixelsLength) do begin
+        _pixelsChunkLength:= _pixelsLength - _pixelsChunkOffset;
+
+        if (_pixelsChunkLength > 432) then _pixelsChunkLength:= 432;
+
+        FillChar(_pixelsChunkData[0], SizeOf(boolean) * 432, 0);
+        Move(aPixels[_pixelsChunkOffset], _pixelsChunkData[0], SizeOf(boolean) * _pixelsChunkLength);
+
+        WriteColorLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+        Inc(_pixelsChunkOffset, 432);
+      end;
+    finally
+      StreamMutex.Release;
+    end;
+  end;
+end;
+
+procedure TBrickletEPaper296x128.ReadColorLowLevel(const aXStart: word; const aYStart: byte; const XEnd: word; const aYEnd: byte; out aPixelsLength: word; out aPixelsChunkOffset: word; out aPixelsChunkData: TArray0To463OfBoolean);
+var 
+  _request, _response: TDynamicByteArray;
+  _i: longint;
+  _pixelsChunkDataBits: array [0..57] of byte;
+begin
+  _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_READ_COLOR_LOW_LEVEL, 14);
+  LEConvertUInt16To(aXStart, 8, _request);
+  LEConvertUInt8To(aYStart, 10, _request);
+  LEConvertUInt16To(XEnd, 11, _request);
+  LEConvertUInt8To(aYEnd, 13, _request);
+  _response:= SendRequest(_request);
+  aPixelsLength:= LEConvertUInt16From(8, _response);
+  aPixelsChunkOffset:= LEConvertUInt16From(10, _response);
+  FillChar(_pixelsChunkDataBits[0], Length(_pixelsChunkDataBits) * SizeOf(_pixelsChunkDataBits[0]), 0);
+  for _i:= 0 to 57 do _pixelsChunkDataBits[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
+  for _i:= 0 to 463 do aPixelsChunkData[_i]:= ((_pixelsChunkDataBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+end;
+
+function TBrickletEPaper296x128.ReadColor(const aXStart: word; const aYStart: byte; const aXEnd: word; const aYEnd: byte): TArrayOfBoolean;
+var
+  _pixels: TArrayOfBoolean;
+  _pixelsCurrentLength: word;
+  _pixelsLength: word;
+  _pixelsChunkOffset: word;
+  _pixelsChunkData: TArray0To463OfBoolean;
+  _pixelsOutOfSync: boolean;
+  _pixelsChunkLength: word;
+begin
+  SetLength(Result, 0);
+  SetLength(_pixels, 0);
+  StreamMutex.Acquire;
+  try
+    _pixelsLength:= 0;
+    ReadColorLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+    SetLength(_pixels, _pixelsLength);
+    _pixelsOutOfSync:= (_pixelsChunkOffset <> 0);
+
+    if ((not _pixelsOutOfSync) and (_pixelsLength > 0)) then begin
+      _pixelsChunkLength:= _pixelsLength - _pixelsChunkOffset;
+      if (_pixelsChunkLength > 464) then _pixelsChunkLength:= 464;
+      Move(_pixelsChunkData, _pixels[0], SizeOf(boolean) * _pixelsChunkLength);
+      _pixelsCurrentLength:= _pixelsChunkLength;
+
+      while ((not _pixelsOutOfSync) and (_pixelsCurrentLength < _pixelsLength)) do begin
+        ReadColorLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+        _pixelsOutOfSync:= _pixelsChunkOffset <> _pixelsCurrentLength;
+        _pixelsChunkLength:= _pixelsLength - _pixelsChunkOffset;
+        if (_pixelsChunkLength > 464) then _pixelsChunkLength:= 464;
+        Move(_pixelsChunkData, _pixels[_pixelsCurrentLength], SizeOf(boolean) * _pixelsChunkLength);
+        Inc(_pixelsCurrentLength, _pixelsChunkLength);
+      end;
+    end;
+
+    if (_pixelsOutOfSync) then begin
+      { Discard remaining stream to bring it back in-sync }
+      while (_pixelsChunkOffset + 464 < _pixelsLength) do begin
+        ReadColorLowLevel(aXStart, aYStart, aXEnd, aYEnd, _pixelsLength, _pixelsChunkOffset, _pixelsChunkData);
+      end;
+
+      raise EStreamOutOfSyncException.Create('Pixels stream out-of-sync');
+    end;
+  finally
+    StreamMutex.Release;
+  end;
+  Result:= _pixels;
+end;
+
+procedure TBrickletEPaper296x128.FillDisplay(const aColor: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_FILL_DISPLAY, 9);
-  LEConvertUInt8To(color, 8, _request);
+  LEConvertUInt8To(aColor, 8, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEPaper296x128.DrawText(const positionX: word; const positionY: byte; const font: byte; const color: byte; const orientation: byte; const text: string);
+procedure TBrickletEPaper296x128.DrawText(const aPositionX: word; const aPositionY: byte; const aFont: byte; const aColor: byte; const aOrientation: byte; const aText: string);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_DRAW_TEXT, 64);
-  LEConvertUInt16To(positionX, 8, _request);
-  LEConvertUInt8To(positionY, 10, _request);
-  LEConvertUInt8To(font, 11, _request);
-  LEConvertUInt8To(color, 12, _request);
-  LEConvertUInt8To(orientation, 13, _request);
-  LEConvertStringTo(text, 14, 50, _request);
+  LEConvertUInt16To(aPositionX, 8, _request);
+  LEConvertUInt8To(aPositionY, 10, _request);
+  LEConvertUInt8To(aFont, 11, _request);
+  LEConvertUInt8To(aColor, 12, _request);
+  LEConvertUInt8To(aOrientation, 13, _request);
+  LEConvertStringTo(aText, 14, 50, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEPaper296x128.DrawLine(const positionXStart: word; const positionYStart: byte; const positionXEnd: word; const positionYEnd: byte; const color: byte);
+procedure TBrickletEPaper296x128.DrawLine(const aPositionXStart: word; const aPositionYStart: byte; const aPositionXEnd: word; const aPositionYEnd: byte; const aColor: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_DRAW_LINE, 15);
-  LEConvertUInt16To(positionXStart, 8, _request);
-  LEConvertUInt8To(positionYStart, 10, _request);
-  LEConvertUInt16To(positionXEnd, 11, _request);
-  LEConvertUInt8To(positionYEnd, 13, _request);
-  LEConvertUInt8To(color, 14, _request);
+  LEConvertUInt16To(aPositionXStart, 8, _request);
+  LEConvertUInt8To(aPositionYStart, 10, _request);
+  LEConvertUInt16To(aPositionXEnd, 11, _request);
+  LEConvertUInt8To(aPositionYEnd, 13, _request);
+  LEConvertUInt8To(aColor, 14, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEPaper296x128.DrawBox(const positionXStart: word; const positionYStart: byte; const positionXEnd: word; const positionYEnd: byte; const fill: boolean; const color: byte);
+procedure TBrickletEPaper296x128.DrawBox(const aPositionXStart: word; const aPositionYStart: byte; const aPositionXEnd: word; const aPositionYEnd: byte; const aFill: boolean; const aColor: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_DRAW_BOX, 16);
-  LEConvertUInt16To(positionXStart, 8, _request);
-  LEConvertUInt8To(positionYStart, 10, _request);
-  LEConvertUInt16To(positionXEnd, 11, _request);
-  LEConvertUInt8To(positionYEnd, 13, _request);
-  LEConvertBooleanTo(fill, 14, _request);
-  LEConvertUInt8To(color, 15, _request);
+  LEConvertUInt16To(aPositionXStart, 8, _request);
+  LEConvertUInt8To(aPositionYStart, 10, _request);
+  LEConvertUInt16To(aPositionXEnd, 11, _request);
+  LEConvertUInt8To(aPositionYEnd, 13, _request);
+  LEConvertBooleanTo(aFill, 14, _request);
+  LEConvertUInt8To(aColor, 15, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEPaper296x128.SetUpdateMode(const updateMode: byte);
+procedure TBrickletEPaper296x128.SetUpdateMode(const aUpdateMode: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_SET_UPDATE_MODE, 9);
-  LEConvertUInt8To(updateMode, 8, _request);
+  LEConvertUInt8To(aUpdateMode, 8, _request);
   SendRequest(_request);
 end;
 
@@ -787,12 +796,12 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEPaper296x128.SetDisplayType(const displayType: byte);
+procedure TBrickletEPaper296x128.SetDisplayType(const aDisplayType: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_SET_DISPLAY_TYPE, 9);
-  LEConvertUInt8To(displayType, 8, _request);
+  LEConvertUInt8To(aDisplayType, 8, _request);
   SendRequest(_request);
 end;
 
@@ -805,16 +814,16 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEPaper296x128.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletEPaper296x128.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletEPaper296x128.SetBootloaderMode(const aMode: byte): byte;
@@ -836,33 +845,33 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEPaper296x128.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletEPaper296x128.SetWriteFirmwarePointer(const aPointer: longword);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletEPaper296x128.WriteFirmware(const data: array of byte): byte;
+function TBrickletEPaper296x128.WriteFirmware(const aData: array of byte): byte;
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEPaper296x128.SetStatusLEDConfig(const config: byte);
+procedure TBrickletEPaper296x128.SetStatusLEDConfig(const aConfig: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -910,7 +919,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletEPaper296x128.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletEPaper296x128.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -918,11 +927,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_E_PAPER_296X128_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletEPaper296x128.CallbackWrapperDrawStatus(const aPacket: TDynamicByteArray);

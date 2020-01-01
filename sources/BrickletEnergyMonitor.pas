@@ -28,7 +28,9 @@ type
   TArrayOfInt16 = array of smallint;
 
   TBrickletEnergyMonitor = class;
-  TBrickletEnergyMonitorNotifyEnergyData = procedure(aSender: TBrickletEnergyMonitor; const voltage: longint; const current: longint; const energy: longint; const realPower: longint; const apparentPower: longint; const reactivePower: longint; const powerFactor: word; const frequency: word) of object;
+  TBrickletEnergyMonitorNotifyEnergyData = procedure(aSender: TBrickletEnergyMonitor; const aVoltage: longint; const aCurrent: longint;
+                                                     const aEnergy: longint; const aRealPower: longint; const aApparentPower: longint;
+                                                     const aReactivePower: longint; const aPowerFactor: word; const aFrequency: word) of object;
 
   /// <summary>
   ///  Measures Voltage, Current, Energy, Real/Apparent/Reactive Power, Power Factor and Frequency
@@ -66,7 +68,8 @@ type
     ///  to calculate the frequency and it will use an integration time of
     ///  10 zero-crossings of the current waveform.
     /// </summary>
-    procedure GetEnergyData(out voltage: longint; out current: longint; out energy: longint; out realPower: longint; out apparentPower: longint; out reactivePower: longint; out powerFactor: word; out frequency: word); virtual;
+    procedure GetEnergyData(out aVoltage: longint; out aCurrent: longint; out aEnergy: longint; out aRealPower: longint;
+                            out aApparentPower: longint; out aReactivePower: longint; out aPowerFactor: word; out aFrequency: word); virtual;
 
     /// <summary>
     ///  Sets the energy value (see <see cref="BrickletEnergyMonitor.TBrickletEnergyMonitor.GetEnergyData"/>) back to 0Wh.
@@ -85,7 +88,7 @@ type
     ///  This data is meant to be used for a non-realtime graphical representation of
     ///  the voltage and current waveforms.
     /// </summary>
-    procedure GetWaveformLowLevel(out waveformChunkOffset: word; out waveformChunkData: TArray0To29OfInt16); virtual;
+    procedure GetWaveformLowLevel(out aWaveformChunkOffset: word; out aWaveformChunkData: TArray0To29OfInt16); virtual;
 
     /// <summary>
     ///  Returns a snapshot of the voltage and current waveform. The values
@@ -104,7 +107,7 @@ type
     /// <summary>
     ///  Returns *true* if a voltage/current transformer is connected to the Bricklet.
     /// </summary>
-    procedure GetTransformerStatus(out voltageTransformerConnected: boolean; out currentTransformerConnected: boolean); virtual;
+    procedure GetTransformerStatus(out aVoltageTransformerConnected: boolean; out aCurrentTransformerConnected: boolean); virtual;
 
     /// <summary>
     ///  Sets the transformer ratio for the voltage and current transformer in 1/100 form.
@@ -120,12 +123,12 @@ type
     ///  
     ///  Set the phase shift to 0. It is for future use and currently not supported by the Bricklet.
     /// </summary>
-    procedure SetTransformerCalibration(const voltageRatio: word; const currentRatio: word; const phaseShift: smallint); virtual;
+    procedure SetTransformerCalibration(const aVoltageRatio: word; const aCurrentRatio: word; const aPhaseShift: smallint); virtual;
 
     /// <summary>
     ///  Returns the transformer calibration as set by <see cref="BrickletEnergyMonitor.TBrickletEnergyMonitor.SetTransformerCalibration"/>.
     /// </summary>
-    procedure GetTransformerCalibration(out voltageRatio: word; out currentRatio: word; out phaseShift: smallint); virtual;
+    procedure GetTransformerCalibration(out aVoltageRatio: word; out aCurrentRatio: word; out aPhaseShift: smallint); virtual;
 
     /// <summary>
     ///  Calling this function will start an offset calibration. The offset calibration will
@@ -154,13 +157,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetEnergyDataCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetEnergyDataCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletEnergyMonitor.TBrickletEnergyMonitor.SetEnergyDataCallbackConfiguration"/>.
     /// </summary>
-    procedure GetEnergyDataCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetEnergyDataCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -175,7 +178,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -203,7 +207,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -215,7 +219,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -226,7 +230,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletEnergyMonitor.TBrickletEnergyMonitor.SetStatusLEDConfig"/>
@@ -278,7 +282,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -331,85 +336,86 @@ begin
   aCallBacks[BRICKLET_ENERGY_MONITOR_CALLBACK_ENERGY_DATA]:= {$ifdef FPC}@{$endif}CallbackWrapperEnergyData;
 end;
 
-procedure TBrickletEnergyMonitor.GetEnergyData(out voltage: longint; out current: longint; out energy: longint; out realPower: longint; out apparentPower: longint; out reactivePower: longint; out powerFactor: word; out frequency: word);
+procedure TBrickletEnergyMonitor.GetEnergyData(out aVoltage: longint; out aCurrent: longint; out aEnergy: longint; out aRealPower: longint; out aApparentPower: longint; out aReactivePower: longint; out aPowerFactor: word; out aFrequency: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_ENERGY_DATA, 8);
   _response:= SendRequest(_request);
-  voltage:= LEConvertInt32From(8, _response);
-  current:= LEConvertInt32From(12, _response);
-  energy:= LEConvertInt32From(16, _response);
-  realPower:= LEConvertInt32From(20, _response);
-  apparentPower:= LEConvertInt32From(24, _response);
-  reactivePower:= LEConvertInt32From(28, _response);
-  powerFactor:= LEConvertUInt16From(32, _response);
-  frequency:= LEConvertUInt16From(34, _response);
+  aVoltage:= LEConvertInt32From(8, _response);
+  aCurrent:= LEConvertInt32From(12, _response);
+  aEnergy:= LEConvertInt32From(16, _response);
+  aRealPower:= LEConvertInt32From(20, _response);
+  aApparentPower:= LEConvertInt32From(24, _response);
+  aReactivePower:= LEConvertInt32From(28, _response);
+  aPowerFactor:= LEConvertUInt16From(32, _response);
+  aFrequency:= LEConvertUInt16From(34, _response);
 end;
 
 procedure TBrickletEnergyMonitor.ResetEnergy;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_RESET_ENERGY, 8);
   SendRequest(_request);
 end;
 
-procedure TBrickletEnergyMonitor.GetWaveformLowLevel(out waveformChunkOffset: word; out waveformChunkData: TArray0To29OfInt16);
+procedure TBrickletEnergyMonitor.GetWaveformLowLevel(out aWaveformChunkOffset: word; out aWaveformChunkData: TArray0To29OfInt16);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_WAVEFORM_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
-  waveformChunkOffset:= LEConvertUInt16From(8, _response);
-  for _i:= 0 to 29 do waveformChunkData[_i]:= LEConvertInt16From(10 + (_i * 2), _response);
+  aWaveformChunkOffset:= LEConvertUInt16From(8, _response);
+  for _i:= 0 to 29 do aWaveformChunkData[_i]:= LEConvertInt16From(10 + (_i * 2), _response);
 end;
 
 function TBrickletEnergyMonitor.GetWaveform: TArrayOfInt16;
 var
-  waveform: TArrayOfInt16;
-  waveformCurrentLength: word;
-  waveformLength: word;
-  waveformChunkOffset: word;
-  waveformChunkData: TArray0To29OfInt16;
-  waveformOutOfSync: boolean;
-  waveformChunkLength: word;
+  _waveform: TArrayOfInt16;
+  _waveformCurrentLength: word;
+  _waveformLength: word;
+  _waveformChunkOffset: word;
+  _waveformChunkData: TArray0To29OfInt16;
+  _waveformOutOfSync: boolean;
+  _waveformChunkLength: word;
 begin
   SetLength(Result, 0);
-  SetLength(waveform, 0);
+  SetLength(_waveform, 0);
   StreamMutex.Acquire;
   try
-    waveformLength:= 1536;
-    GetWaveformLowLevel(waveformChunkOffset, waveformChunkData);
-    SetLength(waveform, waveformLength);
+    _waveformLength:= 1536;
+    GetWaveformLowLevel(_waveformChunkOffset, _waveformChunkData);
+    SetLength(_waveform, _waveformLength);
 
-    if (waveformChunkOffset = ((1 shl 16) - 1)) then begin { Maximum chunk offset -> stream has no data }
-      SetLength(waveform, 0);
+    if (_waveformChunkOffset = ((1 shl 16) - 1)) then begin { Maximum chunk offset -> stream has no data }
+      SetLength(_waveform, 0);
       exit;
     end;
 
-    waveformOutOfSync:= (waveformChunkOffset <> 0);
+    _waveformOutOfSync:= (_waveformChunkOffset <> 0);
 
-    if ((not waveformOutOfSync) and (waveformLength > 0)) then begin
-      waveformChunkLength:= waveformLength - waveformChunkOffset;
-      if (waveformChunkLength > 30) then waveformChunkLength:= 30;
-      Move(waveformChunkData, waveform[0], SizeOf(smallint) * waveformChunkLength);
-      waveformCurrentLength:= waveformChunkLength;
+    if ((not _waveformOutOfSync) and (_waveformLength > 0)) then begin
+      _waveformChunkLength:= _waveformLength - _waveformChunkOffset;
+      if (_waveformChunkLength > 30) then _waveformChunkLength:= 30;
+      Move(_waveformChunkData, _waveform[0], SizeOf(smallint) * _waveformChunkLength);
+      _waveformCurrentLength:= _waveformChunkLength;
 
-      while ((not waveformOutOfSync) and (waveformCurrentLength < waveformLength)) do begin
-        GetWaveformLowLevel(waveformChunkOffset, waveformChunkData);
-        waveformOutOfSync:= waveformChunkOffset <> waveformCurrentLength;
-        waveformChunkLength:= waveformLength - waveformChunkOffset;
-        if (waveformChunkLength > 30) then waveformChunkLength:= 30;
-        Move(waveformChunkData, waveform[waveformCurrentLength], SizeOf(smallint) * waveformChunkLength);
-        Inc(waveformCurrentLength, waveformChunkLength);
+      while ((not _waveformOutOfSync) and (_waveformCurrentLength < _waveformLength)) do begin
+        GetWaveformLowLevel(_waveformChunkOffset, _waveformChunkData);
+        _waveformOutOfSync:= _waveformChunkOffset <> _waveformCurrentLength;
+        _waveformChunkLength:= _waveformLength - _waveformChunkOffset;
+        if (_waveformChunkLength > 30) then _waveformChunkLength:= 30;
+        Move(_waveformChunkData, _waveform[_waveformCurrentLength], SizeOf(smallint) * _waveformChunkLength);
+        Inc(_waveformCurrentLength, _waveformChunkLength);
       end;
     end;
 
-    if (waveformOutOfSync) then begin
+    if (_waveformOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
-      while (waveformChunkOffset + 30 < waveformLength) do begin
-        GetWaveformLowLevel(waveformChunkOffset, waveformChunkData);
+      while (_waveformChunkOffset + 30 < _waveformLength) do begin
+        GetWaveformLowLevel(_waveformChunkOffset, _waveformChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('Waveform stream out-of-sync');
@@ -417,84 +423,84 @@ begin
   finally
     StreamMutex.Release;
   end;
-  Result:= waveform;
+  Result:= _waveform;
 end;
 
-procedure TBrickletEnergyMonitor.GetTransformerStatus(out voltageTransformerConnected: boolean; out currentTransformerConnected: boolean);
+procedure TBrickletEnergyMonitor.GetTransformerStatus(out aVoltageTransformerConnected: boolean; out aCurrentTransformerConnected: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_TRANSFORMER_STATUS, 8);
   _response:= SendRequest(_request);
-  voltageTransformerConnected:= LEConvertBooleanFrom(8, _response);
-  currentTransformerConnected:= LEConvertBooleanFrom(9, _response);
+  aVoltageTransformerConnected:= LEConvertBooleanFrom(8, _response);
+  aCurrentTransformerConnected:= LEConvertBooleanFrom(9, _response);
 end;
 
-procedure TBrickletEnergyMonitor.SetTransformerCalibration(const voltageRatio: word; const currentRatio: word; const phaseShift: smallint);
+procedure TBrickletEnergyMonitor.SetTransformerCalibration(const aVoltageRatio: word; const aCurrentRatio: word; const aPhaseShift: smallint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_SET_TRANSFORMER_CALIBRATION, 14);
-  LEConvertUInt16To(voltageRatio, 8, _request);
-  LEConvertUInt16To(currentRatio, 10, _request);
-  LEConvertInt16To(phaseShift, 12, _request);
+  LEConvertUInt16To(aVoltageRatio, 8, _request);
+  LEConvertUInt16To(aCurrentRatio, 10, _request);
+  LEConvertInt16To(aPhaseShift, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEnergyMonitor.GetTransformerCalibration(out voltageRatio: word; out currentRatio: word; out phaseShift: smallint);
+procedure TBrickletEnergyMonitor.GetTransformerCalibration(out aVoltageRatio: word; out aCurrentRatio: word; out aPhaseShift: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_TRANSFORMER_CALIBRATION, 8);
   _response:= SendRequest(_request);
-  voltageRatio:= LEConvertUInt16From(8, _response);
-  currentRatio:= LEConvertUInt16From(10, _response);
-  phaseShift:= LEConvertInt16From(12, _response);
+  aVoltageRatio:= LEConvertUInt16From(8, _response);
+  aCurrentRatio:= LEConvertUInt16From(10, _response);
+  aPhaseShift:= LEConvertInt16From(12, _response);
 end;
 
 procedure TBrickletEnergyMonitor.CalibrateOffset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_CALIBRATE_OFFSET, 8);
   SendRequest(_request);
 end;
 
-procedure TBrickletEnergyMonitor.SetEnergyDataCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletEnergyMonitor.SetEnergyDataCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_SET_ENERGY_DATA_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletEnergyMonitor.GetEnergyDataCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletEnergyMonitor.GetEnergyDataCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_ENERGY_DATA_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletEnergyMonitor.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletEnergyMonitor.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletEnergyMonitor.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -504,45 +510,46 @@ end;
 
 function TBrickletEnergyMonitor.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEnergyMonitor.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletEnergyMonitor.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletEnergyMonitor.WriteFirmware(const data: array of byte): byte;
+function TBrickletEnergyMonitor.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletEnergyMonitor.SetStatusLEDConfig(const config: byte);
+procedure TBrickletEnergyMonitor.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletEnergyMonitor.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -551,7 +558,7 @@ end;
 
 function TBrickletEnergyMonitor.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -560,7 +567,7 @@ end;
 
 procedure TBrickletEnergyMonitor.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -568,7 +575,7 @@ end;
 
 procedure TBrickletEnergyMonitor.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(aUID, 8, _request);
@@ -577,41 +584,51 @@ end;
 
 function TBrickletEnergyMonitor.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletEnergyMonitor.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletEnergyMonitor.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                                             out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ENERGY_MONITOR_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletEnergyMonitor.CallbackWrapperEnergyData(const aPacket: TDynamicByteArray);
-var voltage: longint; current: longint; energy: longint; realPower: longint; apparentPower: longint; reactivePower: longint; powerFactor: word; frequency: word;
+var
+  _voltage: longint;
+  _current: longint;
+  _energy: longint;
+  _realPower: longint;
+  _apparentPower: longint;
+  _reactivePower: longint;
+  _powerFactor: word;
+  _frequency: word;
 begin
-  voltage:= LEConvertInt32From(8, aPacket);
-  current:= LEConvertInt32From(12, aPacket);
-  energy:= LEConvertInt32From(16, aPacket);
-  realPower:= LEConvertInt32From(20, aPacket);
-  apparentPower:= LEConvertInt32From(24, aPacket);
-  reactivePower:= LEConvertInt32From(28, aPacket);
-  powerFactor:= LEConvertUInt16From(32, aPacket);
-  frequency:= LEConvertUInt16From(34, aPacket);
+  _voltage:= LEConvertInt32From(8, aPacket);
+  _current:= LEConvertInt32From(12, aPacket);
+  _energy:= LEConvertInt32From(16, aPacket);
+  _realPower:= LEConvertInt32From(20, aPacket);
+  _apparentPower:= LEConvertInt32From(24, aPacket);
+  _reactivePower:= LEConvertInt32From(28, aPacket);
+  _powerFactor:= LEConvertUInt16From(32, aPacket);
+  _frequency:= LEConvertUInt16From(34, aPacket);
 
   if (Assigned(fEnergyDataCallback)) then begin
-    fEnergyDataCallback(self, voltage, current, energy, realPower, apparentPower, reactivePower, powerFactor, frequency);
+    fEnergyDataCallback(self, _voltage, _current, _energy, _realPower, _apparentPower, _reactivePower, _powerFactor, _frequency);
   end;
 end;
 

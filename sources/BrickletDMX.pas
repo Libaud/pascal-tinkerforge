@@ -32,22 +32,23 @@ type
 
   TBrickletDMX = class;
   TBrickletDMXNotifyFrameStarted = procedure(aSender: TBrickletDMX) of object;
-  TBrickletDMXNotifyFrameAvailable = procedure(aSender: TBrickletDMX; const frameNumber: longword) of object;
-  TBrickletDMXNotifyFrameLowLevel = procedure(aSender: TBrickletDMX; const frameLength: word; const frameChunkOffset: word; const frameChunkData: TArray0To55OfUInt8; const frameNumber: longword) of object;
-  TBrickletDMXNotifyFrame = procedure(aSender: TBrickletDMX; const frame: TArrayOfUInt8; const frameNumber: longword) of object;
-  TBrickletDMXNotifyFrameErrorCount = procedure(aSender: TBrickletDMX; const overrunErrorCount: longword; const framingErrorCount: longword) of object;
+  TBrickletDMXNotifyFrameAvailable = procedure(aSender: TBrickletDMX; const aFrameNumber: longword) of object;
+  TBrickletDMXNotifyFrameLowLevel = procedure(aSender: TBrickletDMX; const aFrameLength: word; const aFrameChunkOffset: word;
+                                              const aFrameChunkData: TArray0To55OfUInt8; const aFrameNumber: longword) of object;
+  TBrickletDMXNotifyFrame = procedure(aSender: TBrickletDMX; const aFrame: TArrayOfUInt8; const aFrameNumber: longword) of object;
+  TBrickletDMXNotifyFrameErrorCount = procedure(aSender: TBrickletDMX; const aOverrunErrorCount: longword; const aFramingErrorCount: longword) of object;
 
   /// <summary>
   ///  DMX master and slave
   /// </summary>
   TBrickletDMX = class(TThreadedDevice)
   private
-    frameHighLevelCallbackState: TFrameHighLevelCallbackState;
-    frameStartedCallback: TBrickletDMXNotifyFrameStarted;
-    frameAvailableCallback: TBrickletDMXNotifyFrameAvailable;
-    frameLowLevelCallback: TBrickletDMXNotifyFrameLowLevel;
-    frameCallback: TBrickletDMXNotifyFrame;
-    frameErrorCountCallback: TBrickletDMXNotifyFrameErrorCount;
+    fFrameHighLevelCallbackState: TFrameHighLevelCallbackState;
+    fFrameStartedCallback: TBrickletDMXNotifyFrameStarted;
+    fFrameAvailableCallback: TBrickletDMXNotifyFrameAvailable;
+    fFrameLowLevelCallback: TBrickletDMXNotifyFrameLowLevel;
+    fFrameCallback: TBrickletDMXNotifyFrame;
+    fFrameErrorCountCallback: TBrickletDMXNotifyFrameErrorCount;
     procedure CallbackWrapperFrameStarted(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperFrameAvailable(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperFrameLowLevel(const aPacket: TDynamicByteArray); virtual;
@@ -118,7 +119,7 @@ type
     ///  
     ///  This function can only be called in master mode.
     /// </summary>
-    procedure WriteFrame(const frame: array of byte); virtual;
+    procedure WriteFrame(const aFrame: array of byte); virtual;
 
     /// <summary>
     ///  Returns the last frame that was written by the DMX master. The size of the array
@@ -141,7 +142,7 @@ type
     ///  
     ///  This function can only be called in slave mode.
     /// </summary>
-    procedure ReadFrameLowLevel(out frameLength: word; out frameChunkOffset: word; out frameChunkData: TArray0To55OfUInt8; out frameNumber: longword); virtual;
+    procedure ReadFrameLowLevel(out aFrameLength: word; out aFrameChunkOffset: word; out aFrameChunkData: TArray0To55OfUInt8; out aFrameNumber: longword); virtual;
 
     /// <summary>
     ///  Returns the last frame that was written by the DMX master. The size of the array
@@ -231,12 +232,14 @@ type
     ///  the cb:`Frame Available` callback at the same time. It becomes redundant in
     ///  this case.
     /// </summary>
-    procedure SetFrameCallbackConfig(const aFrameStartedCallbackEnabled: boolean; const aframeAvailableCallbackEnabled: boolean; const aFrameCallbackEnabled: boolean; const aFrameErrorCountCallbackEnabled: boolean); virtual;
+    procedure SetFrameCallbackConfig(const aFrameStartedCallbackEnabled: boolean; const aframeAvailableCallbackEnabled: boolean;
+                                     const aFrameCallbackEnabled: boolean; const aFrameErrorCountCallbackEnabled: boolean); virtual;
 
     /// <summary>
     ///  Returns the frame callback config as set by <see cref="BrickletDMX.TBrickletDMX.SetFrameCallbackConfig"/>.
     /// </summary>
-    procedure GetFrameCallbackConfig(out aFrameStartedCallbackEnabled: boolean; out aFrameAvailableCallbackEnabled: boolean; out aFrameCallbackEnabled: boolean; out aFrameErrorCountCallbackEnabled: boolean); virtual;
+    procedure GetFrameCallbackConfig(out aFrameStartedCallbackEnabled: boolean; out aFrameAvailableCallbackEnabled: boolean;
+                                     out aFrameCallbackEnabled: boolean; out aFrameErrorCountCallbackEnabled: boolean); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -251,7 +254,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -302,7 +306,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletDMX.TBrickletDMX.SetStatusLEDConfig"/>
@@ -354,7 +358,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered as soon as a new frame write is started.
@@ -367,7 +372,7 @@ type
     ///  
     ///  This callback can only be triggered in master mode.
     /// </summary>
-    property OnFrameStarted: TBrickletDMXNotifyFrameStarted read frameStartedCallback write frameStartedCallback;
+    property OnFrameStarted: TBrickletDMXNotifyFrameStarted read fFrameStartedCallback write fFrameStartedCallback;
 
     /// <summary>
     ///  This callback is triggered in slave mode when a new frame was received from the DMX master
@@ -380,12 +385,12 @@ type
     ///  
     ///  This callback can only be triggered in slave mode.
     /// </summary>
-    property OnFrameAvailable: TBrickletDMXNotifyFrameAvailable read frameAvailableCallback write frameAvailableCallback;
+    property OnFrameAvailable: TBrickletDMXNotifyFrameAvailable read fFrameAvailableCallback write fFrameAvailableCallback;
 
     /// <summary>
     ///  <see cref="BrickletDMX.TBrickletDMX.OnFrame"/>
     /// </summary>
-    property OnFrameLowLevel: TBrickletDMXNotifyFrameLowLevel read frameLowLevelCallback write frameLowLevelCallback;
+    property OnFrameLowLevel: TBrickletDMXNotifyFrameLowLevel read fFrameLowLevelCallback write fFrameLowLevelCallback;
 
     /// <summary>
     ///  This callback is called as soon as a new frame is available
@@ -402,13 +407,13 @@ type
     ///   If reconstructing the value fails, the callback is triggered with nil for frame.
     ///  </note>
     /// </summary>
-    property OnFrame: TBrickletDMXNotifyFrame read frameCallback write frameCallback;
+    property OnFrame: TBrickletDMXNotifyFrame read fFrameCallback write fFrameCallback;
 
     /// <summary>
     ///  This callback is called if a new error occurs. It returns
     ///  the current overrun and framing error count.
     /// </summary>
-    property OnFrameErrorCount: TBrickletDMXNotifyFrameErrorCount read frameErrorCountCallback write frameErrorCountCallback;
+    property OnFrameErrorCount: TBrickletDMXNotifyFrameErrorCount read fFrameErrorCountCallback write fFrameErrorCountCallback;
   end;
 
 implementation
@@ -419,9 +424,9 @@ uses
 constructor TBrickletDMX.Create(aOwner: TComponent);
 begin
   inherited Create(aOwner);
-  SetLength(frameHighLevelCallbackState.data, 0);
-  frameHighLevelCallbackState.data:= nil;
-  frameHighLevelCallbackState.length:= 0;
+  SetLength(fFrameHighLevelCallbackState.data, 0);
+  fFrameHighLevelCallbackState.data:= nil;
+  fFrameHighLevelCallbackState.length:= 0;
 end;
 
 procedure TBrickletDMX.InitializeVersion(var aVersion: TTFVersionNumber);
@@ -498,18 +503,18 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickletDMX.WriteFrame(const frame: array of byte);
+procedure TBrickletDMX.WriteFrame(const aFrame: array of byte);
 var
   _frameChunkOffset: word;
   _frameChunkData: TArray0To59OfUInt8;
   _frameChunkLength: word;
   _frameLength: word;
 begin
-  if (Length(frame) > 65535) then begin
+  if (Length(aFrame) > 65535) then begin
     raise EInvalidParameterException.Create('Frame can be at most 65535 items long');
   end;
 
-  _frameLength:= Length(frame);
+  _frameLength:= Length(aFrame);
   _frameChunkOffset:= 0;
 
   if (_frameLength = 0) then begin
@@ -525,7 +530,7 @@ begin
         if (_frameChunkLength > 60) then _frameChunkLength:= 60;
 
         FillChar(_frameChunkData[0], SizeOf(byte) * 60, 0);
-        Move(frame[_frameChunkOffset], _frameChunkData[0], SizeOf(byte) * _frameChunkLength);
+        Move(aFrame[_frameChunkOffset], _frameChunkData[0], SizeOf(byte) * _frameChunkLength);
 
         WriteFrameLowLevel(_frameLength, _frameChunkOffset, _frameChunkData);
         Inc(_frameChunkOffset, 60);
@@ -536,17 +541,17 @@ begin
   end;
 end;
 
-procedure TBrickletDMX.ReadFrameLowLevel(out frameLength: word; out frameChunkOffset: word; out frameChunkData: TArray0To55OfUInt8; out frameNumber: longword);
+procedure TBrickletDMX.ReadFrameLowLevel(out aFrameLength: word; out aFrameChunkOffset: word; out aFrameChunkData: TArray0To55OfUInt8; out aFrameNumber: longword);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DMX_FUNCTION_READ_FRAME_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
-  frameLength:= LEConvertUInt16From(8, _response);
-  frameChunkOffset:= LEConvertUInt16From(10, _response);
-  for _i:= 0 to 55 do frameChunkData[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
-  frameNumber:= LEConvertUInt32From(68, _response);
+  aFrameLength:= LEConvertUInt16From(8, _response);
+  aFrameChunkOffset:= LEConvertUInt16From(10, _response);
+  for _i:= 0 to 55 do aFrameChunkData[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
+  aFrameNumber:= LEConvertUInt32From(68, _response);
 end;
 
 procedure TBrickletDMX.ReadFrame(out aFrame: TArrayOfUInt8; out aFrameNumber: longword);
@@ -734,12 +739,12 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDMX.SetStatusLEDConfig(const config: byte);
+procedure TBrickletDMX.SetStatusLEDConfig(const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DMX_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -806,8 +811,8 @@ procedure TBrickletDMX.CallbackWrapperFrameStarted(const aPacket: TDynamicByteAr
 begin
   Assert(aPacket <> nil); { Avoid 'Parameter not used' warning }
 
-  if (Assigned(frameStartedCallback)) then begin
-    frameStartedCallback(self);
+  if (Assigned(fFrameStartedCallback)) then begin
+    fFrameStartedCallback(self);
   end;
 end;
 
@@ -817,8 +822,8 @@ var
 begin
   _frameNumber:= LEConvertUInt32From(8, aPacket);
 
-  if (Assigned(frameAvailableCallback)) then begin
-    frameAvailableCallback(self, _frameNumber);
+  if (Assigned(fFrameAvailableCallback)) then begin
+    fFrameAvailableCallback(self, _frameNumber);
   end;
 end;
 
@@ -840,48 +845,48 @@ begin
   if (_frameChunkLength > 56) then begin
     _frameChunkLength:= 56;
   end;
-  if (frameHighLevelCallbackState.data = nil) then begin { No stream in-progress }
+  if (fFrameHighLevelCallbackState.data = nil) then begin { No stream in-progress }
     if (_frameChunkOffset = 0) then begin { Stream starts }
-      SetLength(frameHighLevelCallbackState.data, _frameLength);
-      Move(_frameChunkData[0], frameHighLevelCallbackState.data[0], SizeOf(byte) * _frameChunkLength);
-      frameHighLevelCallbackState.length:= _frameChunkLength;
+      SetLength(fFrameHighLevelCallbackState.data, _frameLength);
+      Move(_frameChunkData[0], fFrameHighLevelCallbackState.data[0], SizeOf(byte) * _frameChunkLength);
+      fFrameHighLevelCallbackState.length:= _frameChunkLength;
 
-      if (frameHighLevelCallbackState.length >= _frameLength) then begin { Stream complete }
-        if (Assigned(frameCallback)) then begin
-          frameCallback(self, frameHighLevelCallbackState.data, _frameNumber);
+      if (fFrameHighLevelCallbackState.length >= _frameLength) then begin { Stream complete }
+        if (Assigned(fFrameCallback)) then begin
+          fFrameCallback(self, fFrameHighLevelCallbackState.data, _frameNumber);
         end;
-        SetLength(frameHighLevelCallbackState.data, 0);
-        frameHighLevelCallbackState.data:= nil;
-        frameHighLevelCallbackState.length:= 0;
+        SetLength(fFrameHighLevelCallbackState.data, 0);
+        fFrameHighLevelCallbackState.data:= nil;
+        fFrameHighLevelCallbackState.length:= 0;
       end;
     end;
   end
   else begin { Stream in-progress }
-    if (_frameChunkOffset <> frameHighLevelCallbackState.length) then begin { Stream out-of-sync }
-      SetLength(frameHighLevelCallbackState.data, 0);
-      frameHighLevelCallbackState.data:= nil;
-      frameHighLevelCallbackState.length:= 0;
-      if (Assigned(frameCallback)) then begin
-        frameCallback(self, frameHighLevelCallbackState.data, _frameNumber);
+    if (_frameChunkOffset <> fFrameHighLevelCallbackState.length) then begin { Stream out-of-sync }
+      SetLength(fFrameHighLevelCallbackState.data, 0);
+      fFrameHighLevelCallbackState.data:= nil;
+      fFrameHighLevelCallbackState.length:= 0;
+      if (Assigned(fFrameCallback)) then begin
+        fFrameCallback(self, fFrameHighLevelCallbackState.data, _frameNumber);
       end;
     end
     else begin { Stream in-sync }
-      Move(_frameChunkData[0], frameHighLevelCallbackState.data[frameHighLevelCallbackState.length], SizeOf(byte) * _frameChunkLength);
-      Inc(frameHighLevelCallbackState.length, _frameChunkLength);
+      Move(_frameChunkData[0], fFrameHighLevelCallbackState.data[fFrameHighLevelCallbackState.length], SizeOf(byte) * _frameChunkLength);
+      Inc(fFrameHighLevelCallbackState.length, _frameChunkLength);
 
-      if frameHighLevelCallbackState.length >= _frameLength then begin { Stream complete }
-        if (Assigned(frameCallback)) then begin
-          frameCallback(self, frameHighLevelCallbackState.data, _frameNumber);
+      if fFrameHighLevelCallbackState.length >= _frameLength then begin { Stream complete }
+        if (Assigned(fFrameCallback)) then begin
+          fFrameCallback(self, fFrameHighLevelCallbackState.data, _frameNumber);
         end;
-        SetLength(frameHighLevelCallbackState.data, 0);
-        frameHighLevelCallbackState.data:= nil;
-        frameHighLevelCallbackState.length:= 0;
+        SetLength(fFrameHighLevelCallbackState.data, 0);
+        fFrameHighLevelCallbackState.data:= nil;
+        fFrameHighLevelCallbackState.length:= 0;
       end;
     end;
   end;
 
-  if (Assigned(frameLowLevelCallback)) then begin
-    frameLowLevelCallback(self, _frameLength, _frameChunkOffset, _frameChunkData, _frameNumber);
+  if (Assigned(fFrameLowLevelCallback)) then begin
+    fFrameLowLevelCallback(self, _frameLength, _frameChunkOffset, _frameChunkData, _frameNumber);
   end;
 end;
 
@@ -893,8 +898,8 @@ begin
   _overrunErrorCount:= LEConvertUInt32From(8, aPacket);
   _framingErrorCount:= LEConvertUInt32From(12, aPacket);
 
-  if (Assigned(frameErrorCountCallback)) then begin
-    frameErrorCountCallback(self, _overrunErrorCount, _framingErrorCount);
+  if (Assigned(fFrameErrorCountCallback)) then begin
+    fFrameErrorCountCallback(self, _overrunErrorCount, _framingErrorCount);
   end;
 end;
 

@@ -25,11 +25,12 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletGPS = class;
-  TBrickletGPSNotifyCoordinates = procedure(aSender: TBrickletGPS; const latitude: longword; const ns: char; const longitude: longword; const ew: char; const pdop: word; const hdop: word; const vdop: word; const epe: word) of object;
-  TBrickletGPSNotifyStatus = procedure(aSender: TBrickletGPS; const fix: byte; const satellitesView: byte; const satellitesUsed: byte) of object;
-  TBrickletGPSNotifyAltitude = procedure(aSender: TBrickletGPS; const altitude: longint; const geoidalSeparation: longint) of object;
-  TBrickletGPSNotifyMotion = procedure(aSender: TBrickletGPS; const course: longword; const speed: longword) of object;
-  TBrickletGPSNotifyDateTime = procedure(aSender: TBrickletGPS; const date: longword; const time: longword) of object;
+  TBrickletGPSNotifyCoordinates = procedure(aSender: TBrickletGPS; const aLatitude: longword; const aNS: char; const aLongitude: longword;
+                                            const aEW: char; const aPDop: word; const aHDop: word; const aVDop: word; const aEPE: word) of object;
+  TBrickletGPSNotifyStatus = procedure(aSender: TBrickletGPS; const aFix: byte; const aSatellitesView: byte; const aSatellitesUsed: byte) of object;
+  TBrickletGPSNotifyAltitude = procedure(aSender: TBrickletGPS; const aAltitude: longint; const aGeoidalSeparation: longint) of object;
+  TBrickletGPSNotifyMotion = procedure(aSender: TBrickletGPS; const aCourse: longword; const aSpeed: longword) of object;
+  TBrickletGPSNotifyDateTime = procedure(aSender: TBrickletGPS; const aDate: longword; const aTime: longword) of object;
 
   /// <summary>
   ///  Determine position, velocity and altitude using GPS
@@ -73,7 +74,8 @@ type
     ///  This data is only valid if there is currently a fix as indicated by
     ///  <see cref="BrickletGPS.TBrickletGPS.GetStatus"/>.
     /// </summary>
-    procedure GetCoordinates(out latitude: longword; out ns: char; out longitude: longword; out ew: char; out pdop: word; out hdop: word; out vdop: word; out epe: word); virtual;
+    procedure GetCoordinates(out aLatitude: longword; out aNS: char; out aLongitude: longword; out aEW: char;
+                             out aPDop: word; out aHDop: word; out aVDop: word; out aEPE: word); virtual;
 
     /// <summary>
     ///  Returns the current fix status, the number of satellites that are in view and
@@ -92,7 +94,7 @@ type
     ///  There is also a :ref:`blue LED &lt;gps_bricklet_fix_led&gt;` on the Bricklet that
     ///  indicates the fix status.
     /// </summary>
-    procedure GetStatus(out fix: byte; out satellitesView: byte; out satellitesUsed: byte); virtual;
+    procedure GetStatus(out AFix: byte; out aSatellitesView: byte; out aSatellitesUsed: byte); virtual;
 
     /// <summary>
     ///  Returns the current altitude and corresponding geoidal separation.
@@ -100,7 +102,7 @@ type
     ///  This data is only valid if there is currently a fix as indicated by
     ///  <see cref="BrickletGPS.TBrickletGPS.GetStatus"/>.
     /// </summary>
-    procedure GetAltitude(out altitude: longint; out geoidalSeparation: longint); virtual;
+    procedure GetAltitude(out aAltitude: longint; out aGeoidalSeparation: longint); virtual;
 
     /// <summary>
     ///  Returns the current course and speed. A course of 0° means the Bricklet is
@@ -112,7 +114,7 @@ type
     ///  This data is only valid if there is currently a fix as indicated by
     ///  <see cref="BrickletGPS.TBrickletGPS.GetStatus"/>.
     /// </summary>
-    procedure GetMotion(out course: longword; out speed: longword); virtual;
+    procedure GetMotion(out aCourse: longword; out aSpeed: longword); virtual;
 
     /// <summary>
     ///  Returns the current date and time. The date is
@@ -120,7 +122,7 @@ type
     ///  in the format ``hhmmss.sss``. For example, 140713 means
     ///  14.07.13 as date and 195923568 means 19:59:23.568 as time.
     /// </summary>
-    procedure GetDateTime(out date: longword; out time: longword); virtual;
+    procedure GetDateTime(out aDate: longword; out aTime: longword); virtual;
 
     /// <summary>
     ///  Restarts the GPS Bricklet, the following restart types are available:
@@ -134,7 +136,7 @@ type
     ///   "3", "Factory reset (clear all system/user configurations at restart)"
     ///  </code>
     /// </summary>
-    procedure Restart(const restartType: byte); virtual;
+    procedure Restart(const aRestartType: byte); virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickletGPS.TBrickletGPS.OnCoordinates"/> callback is triggered
@@ -143,7 +145,7 @@ type
     ///  The <see cref="BrickletGPS.TBrickletGPS.OnCoordinates"/> callback is only triggered if the coordinates changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetCoordinatesCallbackPeriod(const period: longword); virtual;
+    procedure SetCoordinatesCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletGPS.TBrickletGPS.SetCoordinatesCallbackPeriod"/>.
@@ -157,7 +159,7 @@ type
     ///  The <see cref="BrickletGPS.TBrickletGPS.OnStatus"/> callback is only triggered if the status changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetStatusCallbackPeriod(const period: longword); virtual;
+    procedure SetStatusCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletGPS.TBrickletGPS.SetStatusCallbackPeriod"/>.
@@ -171,7 +173,7 @@ type
     ///  The <see cref="BrickletGPS.TBrickletGPS.OnAltitude"/> callback is only triggered if the altitude changed since
     ///  the last triggering.
     /// </summary>
-    procedure SetAltitudeCallbackPeriod(const period: longword); virtual;
+    procedure SetAltitudeCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletGPS.TBrickletGPS.SetAltitudeCallbackPeriod"/>.
@@ -199,7 +201,7 @@ type
     ///  The <see cref="BrickletGPS.TBrickletGPS.OnDateTime"/> callback is only triggered if the date or time changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetDateTimeCallbackPeriod(const period: longword); virtual;
+    procedure SetDateTimeCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletGPS.TBrickletGPS.SetDateTimeCallbackPeriod"/>.
@@ -216,7 +218,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -311,78 +314,78 @@ begin
   aCallBacks[BRICKLET_GPS_CALLBACK_DATE_TIME]:= {$ifdef FPC}@{$endif}CallbackWrapperDateTime;
 end;
 
-procedure TBrickletGPS.GetCoordinates(out latitude: longword; out ns: char; out longitude: longword; out ew: char; out pdop: word; out hdop: word; out vdop: word; out epe: word);
+procedure TBrickletGPS.GetCoordinates(out aLatitude: longword; out aNS: char; out aLongitude: longword; out aEW: char; out aPDop: word; out aHDop: word; out aVDop: word; out aEPE: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_GET_COORDINATES, 8);
   _response:= SendRequest(_request);
-  latitude:= LEConvertUInt32From(8, _response);
-  ns:= LEConvertCharFrom(12, _response);
-  longitude:= LEConvertUInt32From(13, _response);
-  ew:= LEConvertCharFrom(17, _response);
-  pdop:= LEConvertUInt16From(18, _response);
-  hdop:= LEConvertUInt16From(20, _response);
-  vdop:= LEConvertUInt16From(22, _response);
-  epe:= LEConvertUInt16From(24, _response);
+  aLatitude:= LEConvertUInt32From(8, _response);
+  aNS:= LEConvertCharFrom(12, _response);
+  aLongitude:= LEConvertUInt32From(13, _response);
+  aEW:= LEConvertCharFrom(17, _response);
+  aPDop:= LEConvertUInt16From(18, _response);
+  aHDop:= LEConvertUInt16From(20, _response);
+  aVDop:= LEConvertUInt16From(22, _response);
+  aEPE:= LEConvertUInt16From(24, _response);
 end;
 
-procedure TBrickletGPS.GetStatus(out fix: byte; out satellitesView: byte; out satellitesUsed: byte);
+procedure TBrickletGPS.GetStatus(out AFix: byte; out aSatellitesView: byte; out aSatellitesUsed: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_GET_STATUS, 8);
   _response:= SendRequest(_request);
-  fix:= LEConvertUInt8From(8, _response);
-  satellitesView:= LEConvertUInt8From(9, _response);
-  satellitesUsed:= LEConvertUInt8From(10, _response);
+  AFix:= LEConvertUInt8From(8, _response);
+  aSatellitesView:= LEConvertUInt8From(9, _response);
+  aSatellitesUsed:= LEConvertUInt8From(10, _response);
 end;
 
-procedure TBrickletGPS.GetAltitude(out altitude: longint; out geoidalSeparation: longint);
+procedure TBrickletGPS.GetAltitude(out aAltitude: longint; out aGeoidalSeparation: longint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_GET_ALTITUDE, 8);
   _response:= SendRequest(_request);
-  altitude:= LEConvertInt32From(8, _response);
-  geoidalSeparation:= LEConvertInt32From(12, _response);
+  aAltitude:= LEConvertInt32From(8, _response);
+  aGeoidalSeparation:= LEConvertInt32From(12, _response);
 end;
 
-procedure TBrickletGPS.GetMotion(out course: longword; out speed: longword);
+procedure TBrickletGPS.GetMotion(out aCourse: longword; out aSpeed: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_GET_MOTION, 8);
   _response:= SendRequest(_request);
-  course:= LEConvertUInt32From(8, _response);
-  speed:= LEConvertUInt32From(12, _response);
+  aCourse:= LEConvertUInt32From(8, _response);
+  aSpeed:= LEConvertUInt32From(12, _response);
 end;
 
-procedure TBrickletGPS.GetDateTime(out date: longword; out time: longword);
+procedure TBrickletGPS.GetDateTime(out aDate: longword; out aTime: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_GET_DATE_TIME, 8);
   _response:= SendRequest(_request);
-  date:= LEConvertUInt32From(8, _response);
-  time:= LEConvertUInt32From(12, _response);
+  aDate:= LEConvertUInt32From(8, _response);
+  aTime:= LEConvertUInt32From(12, _response);
 end;
 
-procedure TBrickletGPS.Restart(const restartType: byte);
+procedure TBrickletGPS.Restart(const aRestartType: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_RESTART, 9);
-  LEConvertUInt8To(restartType, 8, _request);
+  LEConvertUInt8To(aRestartType, 8, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletGPS.SetCoordinatesCallbackPeriod(const period: longword);
+procedure TBrickletGPS.SetCoordinatesCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_SET_COORDINATES_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -395,12 +398,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletGPS.SetStatusCallbackPeriod(const period: longword);
+procedure TBrickletGPS.SetStatusCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_SET_STATUS_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -413,12 +416,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletGPS.SetAltitudeCallbackPeriod(const period: longword);
+procedure TBrickletGPS.SetAltitudeCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_SET_ALTITUDE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -449,12 +452,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletGPS.SetDateTimeCallbackPeriod(const period: longword);
+procedure TBrickletGPS.SetDateTimeCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_SET_DATE_TIME_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -467,7 +470,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletGPS.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletGPS.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -475,78 +478,89 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_GPS_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletGPS.CallbackWrapperCoordinates(const aPacket: TDynamicByteArray);
 var
-
-  latitude: longword; ns: char; longitude: longword; ew: char; pdop: word; hdop: word; vdop: word; epe: word;
+  _latitude: longword;
+  _ns: char;
+  _longitude: longword;
+  _ew: char;
+  _pdop: word;
+  _hdop: word;
+  _vdop: word;
+  _epe: word;
 begin
-  latitude:= LEConvertUInt32From(8, aPacket);
-  ns:= LEConvertCharFrom(12, aPacket);
-  longitude:= LEConvertUInt32From(13, aPacket);
-  ew:= LEConvertCharFrom(17, aPacket);
-  pdop:= LEConvertUInt16From(18, aPacket);
-  hdop:= LEConvertUInt16From(20, aPacket);
-  vdop:= LEConvertUInt16From(22, aPacket);
-  epe:= LEConvertUInt16From(24, aPacket);
+  _latitude:= LEConvertUInt32From(8, aPacket);
+  _ns:= LEConvertCharFrom(12, aPacket);
+  _longitude:= LEConvertUInt32From(13, aPacket);
+  _ew:= LEConvertCharFrom(17, aPacket);
+  _pdop:= LEConvertUInt16From(18, aPacket);
+  _hdop:= LEConvertUInt16From(20, aPacket);
+  _vdop:= LEConvertUInt16From(22, aPacket);
+  _epe:= LEConvertUInt16From(24, aPacket);
 
   if (Assigned(fCoordinatesCallback)) then begin
-    fCoordinatesCallback(self, latitude, ns, longitude, ew, pdop, hdop, vdop, epe);
+    fCoordinatesCallback(self, _latitude, _ns, _longitude, _ew, _pdop, _hdop, _vdop, _epe);
   end;
 end;
 
 procedure TBrickletGPS.CallbackWrapperStatus(const aPacket: TDynamicByteArray);
 var
-  fix: byte; satellitesView: byte; satellitesUsed: byte;
+  _fix: byte;
+  _satellitesView: byte;
+  _satellitesUsed: byte;
 begin
-  fix:= LEConvertUInt8From(8, aPacket);
-  satellitesView:= LEConvertUInt8From(9, aPacket);
-  satellitesUsed:= LEConvertUInt8From(10, aPacket);
+  _fix:= LEConvertUInt8From(8, aPacket);
+  _satellitesView:= LEConvertUInt8From(9, aPacket);
+  _satellitesUsed:= LEConvertUInt8From(10, aPacket);
 
   if (Assigned(fStatusCallback)) then begin
-    fStatusCallback(self, fix, satellitesView, satellitesUsed);
+    fStatusCallback(self, _fix, _satellitesView, _satellitesUsed);
   end;
 end;
 
 procedure TBrickletGPS.CallbackWrapperAltitude(const aPacket: TDynamicByteArray);
 var
-  altitude: longint; geoidalSeparation: longint;
+  _altitude: longint;
+  _geoidalSeparation: longint;
 begin
-  altitude:= LEConvertInt32From(8, aPacket);
-  geoidalSeparation:= LEConvertInt32From(12, aPacket);
+  _altitude:= LEConvertInt32From(8, aPacket);
+  _geoidalSeparation:= LEConvertInt32From(12, aPacket);
 
   if (Assigned(fAltitudeCallback)) then begin
-    fAltitudeCallback(self, altitude, geoidalSeparation);
+    fAltitudeCallback(self, _altitude, _geoidalSeparation);
   end;
 end;
 
 procedure TBrickletGPS.CallbackWrapperMotion(const aPacket: TDynamicByteArray);
 var
-  course: longword; speed: longword;
+  _course: longword;
+  _speed: longword;
 begin
-  course:= LEConvertUInt32From(8, aPacket);
-  speed:= LEConvertUInt32From(12, aPacket);
+  _course:= LEConvertUInt32From(8, aPacket);
+  _speed:= LEConvertUInt32From(12, aPacket);
 
   if (Assigned(fMotionCallback)) then begin
-    fMotionCallback(self, course, speed);
+    fMotionCallback(self, _course, _speed);
   end;
 end;
 
 procedure TBrickletGPS.CallbackWrapperDateTime(const aPacket: TDynamicByteArray);
 var
-  date: longword; time: longword;
+  _date: longword;
+  _time: longword;
 begin
-  date:= LEConvertUInt32From(8, aPacket);
-  time:= LEConvertUInt32From(12, aPacket);
+  _date:= LEConvertUInt32From(8, aPacket);
+  _time:= LEConvertUInt32From(12, aPacket);
 
   if (Assigned(fDateTimeCallback)) then begin
-    fDateTimeCallback(self, date, time);
+    fDateTimeCallback(self, _date, _time);
   end;
 end;
 

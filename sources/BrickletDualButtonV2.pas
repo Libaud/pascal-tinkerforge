@@ -26,7 +26,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletDualButtonV2 = class;
-  TBrickletDualButtonV2NotifyStateChanged = procedure(sender: TBrickletDualButtonV2; const buttonL: byte; const buttonR: byte; const ledL: byte; const ledR: byte) of object;
+  TBrickletDualButtonV2NotifyStateChanged = procedure(aSender: TBrickletDualButtonV2; const aButtonL: byte; const aButtonR: byte;
+                                                      const aLedL: byte; const aLedR: byte) of object;
 
   /// <summary>
   ///  Two tactile buttons with built-in blue LEDs
@@ -56,12 +57,12 @@ type
     ///  of the other LED, you can get the state with <see cref="BrickletDualButtonV2.TBrickletDualButtonV2.GetLEDState"/> or you
     ///  can use <see cref="BrickletDualButtonV2.TBrickletDualButtonV2.SetSelectedLEDState"/>.
     /// </summary>
-    procedure SetLEDState(const ledL: byte; const ledR: byte); virtual;
+    procedure SetLEDState(const aLedL: byte; const aLedR: byte); virtual;
 
     /// <summary>
     ///  Returns the current state of the LEDs, as set by <see cref="BrickletDualButtonV2.TBrickletDualButtonV2.SetLEDState"/>.
     /// </summary>
-    procedure GetLEDState(out ledL: byte; out ledR: byte); virtual;
+    procedure GetLEDState(out aLedL: byte; out aLedR: byte); virtual;
 
     /// <summary>
     ///  Returns the current state for both buttons. Possible states are:
@@ -69,20 +70,20 @@ type
     ///  * 0 = pressed
     ///  * 1 = released
     /// </summary>
-    procedure GetButtonState(out buttonL: byte; out buttonR: byte); virtual;
+    procedure GetButtonState(out aButtonL: byte; out aButtonR: byte); virtual;
 
     /// <summary>
     ///  Sets the state of the selected LED.
     ///  
     ///  The other LED remains untouched.
     /// </summary>
-    procedure SetSelectedLEDState(const led: byte; const state: byte); virtual;
+    procedure SetSelectedLEDState(const aLed: byte; const aState: byte); virtual;
 
     /// <summary>
     ///  If you enable this callback, the <see cref="BrickletDualButtonV2.TBrickletDualButtonV2.OnStateChanged"/> callback is triggered
     ///  every time a button is pressed/released
     /// </summary>
-    procedure SetStateChangedCallbackConfiguration(const enabled: boolean); virtual;
+    procedure SetStateChangedCallbackConfiguration(const aEnabled: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletDualButtonV2.TBrickletDualButtonV2.SetStateChangedCallbackConfiguration"/>.
@@ -102,7 +103,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -130,7 +132,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -142,7 +144,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -153,7 +155,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletDualButtonV2.TBrickletDualButtonV2.SetStatusLEDConfig"/>
@@ -205,7 +207,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is called whenever a button is pressed.
@@ -266,79 +269,79 @@ begin
   aCallBacks[BRICKLET_DUAL_BUTTON_V2_CALLBACK_STATE_CHANGED]:= {$ifdef FPC}@{$endif}CallbackWrapperStateChanged;
 end;
 
-procedure TBrickletDualButtonV2.SetLEDState(const ledL: byte; const ledR: byte);
+procedure TBrickletDualButtonV2.SetLEDState(const aLedL: byte; const aLedR: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_SET_LED_STATE, 10);
-  LEConvertUInt8To(ledL, 8, _request);
-  LEConvertUInt8To(ledR, 9, _request);
+  LEConvertUInt8To(aLedL, 8, _request);
+  LEConvertUInt8To(aLedR, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDualButtonV2.GetLEDState(out ledL: byte; out ledR: byte);
+procedure TBrickletDualButtonV2.GetLEDState(out aLedL: byte; out aLedR: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_LED_STATE, 8);
   _response:= SendRequest(_request);
-  ledL:= LEConvertUInt8From(8, _response);
-  ledR:= LEConvertUInt8From(9, _response);
+  aLedL:= LEConvertUInt8From(8, _response);
+  aLedR:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletDualButtonV2.GetButtonState(out buttonL: byte; out buttonR: byte);
+procedure TBrickletDualButtonV2.GetButtonState(out aButtonL: byte; out aButtonR: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_BUTTON_STATE, 8);
   _response:= SendRequest(_request);
-  buttonL:= LEConvertUInt8From(8, _response);
-  buttonR:= LEConvertUInt8From(9, _response);
+  aButtonL:= LEConvertUInt8From(8, _response);
+  aButtonR:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletDualButtonV2.SetSelectedLEDState(const led: byte; const state: byte);
+procedure TBrickletDualButtonV2.SetSelectedLEDState(const aLed: byte; const aState: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_SET_SELECTED_LED_STATE, 10);
-  LEConvertUInt8To(led, 8, _request);
-  LEConvertUInt8To(state, 9, _request);
+  LEConvertUInt8To(aLed, 8, _request);
+  LEConvertUInt8To(aState, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletDualButtonV2.SetStateChangedCallbackConfiguration(const enabled: boolean);
+procedure TBrickletDualButtonV2.SetStateChangedCallbackConfiguration(const aEnabled: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_SET_STATE_CHANGED_CALLBACK_CONFIGURATION, 9);
-  LEConvertBooleanTo(enabled, 8, _request);
+  LEConvertBooleanTo(aEnabled, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletDualButtonV2.GetStateChangedCallbackConfiguration: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_STATE_CHANGED_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletDualButtonV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletDualButtonV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletDualButtonV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -348,45 +351,46 @@ end;
 
 function TBrickletDualButtonV2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDualButtonV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletDualButtonV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletDualButtonV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletDualButtonV2.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletDualButtonV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletDualButtonV2.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletDualButtonV2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -395,7 +399,7 @@ end;
 
 function TBrickletDualButtonV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -404,7 +408,7 @@ end;
 
 procedure TBrickletDualButtonV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -412,7 +416,7 @@ end;
 
 procedure TBrickletDualButtonV2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(aUID, 8, _request);
@@ -421,37 +425,39 @@ end;
 
 function TBrickletDualButtonV2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletDualButtonV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletDualButtonV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_DUAL_BUTTON_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletDualButtonV2.CallbackWrapperStateChanged(const aPacket: TDynamicByteArray);
-var buttonL: byte; buttonR: byte; ledL: byte; ledR: byte;
+var
+  _buttonL: byte; _buttonR: byte; _ledL: byte; _ledR: byte;
 begin
-  buttonL:= LEConvertUInt8From(8, aPacket);
-  buttonR:= LEConvertUInt8From(9, aPacket);
-  ledL:= LEConvertUInt8From(10, aPacket);
-  ledR:= LEConvertUInt8From(11, aPacket);
+  _buttonL:= LEConvertUInt8From(8, aPacket);
+  _buttonR:= LEConvertUInt8From(9, aPacket);
+  _ledL:= LEConvertUInt8From(10, aPacket);
+  _ledR:= LEConvertUInt8From(11, aPacket);
 
   if (Assigned(fStateChangedCallback)) then begin
-    fStateChangedCallback(self, buttonL, buttonR, ledL, ledR);
+    fStateChangedCallback(self, _buttonL, _buttonR, _ledL, _ledR);
   end;
 end;
 

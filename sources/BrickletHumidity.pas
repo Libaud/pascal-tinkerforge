@@ -25,20 +25,20 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletHumidity = class;
-  TBrickletHumidityNotifyHumidity = procedure(aSender: TBrickletHumidity; const humidity: word) of object;
-  TBrickletHumidityNotifyAnalogValue = procedure(aSender: TBrickletHumidity; const value: word) of object;
-  TBrickletHumidityNotifyHumidityReached = procedure(aSender: TBrickletHumidity; const humidity: word) of object;
-  TBrickletHumidityNotifyAnalogValueReached = procedure(aSender: TBrickletHumidity; const value: word) of object;
+  TBrickletHumidityNotifyHumidity = procedure(aSender: TBrickletHumidity; const aHumidity: word) of object;
+  TBrickletHumidityNotifyAnalogValue = procedure(aSender: TBrickletHumidity; const aValue: word) of object;
+  TBrickletHumidityNotifyHumidityReached = procedure(aSender: TBrickletHumidity; const aHumidity: word) of object;
+  TBrickletHumidityNotifyAnalogValueReached = procedure(aSender: TBrickletHumidity; const aValue: word) of object;
 
   /// <summary>
   ///  Measures relative humidity
   /// </summary>
   TBrickletHumidity = class(TDevice)
   private
-    humidityCallback: TBrickletHumidityNotifyHumidity;
-    analogValueCallback: TBrickletHumidityNotifyAnalogValue;
-    humidityReachedCallback: TBrickletHumidityNotifyHumidityReached;
-    analogValueReachedCallback: TBrickletHumidityNotifyAnalogValueReached;
+    fHumidityCallback: TBrickletHumidityNotifyHumidity;
+    fAnalogValueCallback: TBrickletHumidityNotifyAnalogValue;
+    fHumidityReachedCallback: TBrickletHumidityNotifyHumidityReached;
+    fAnalogValueReachedCallback: TBrickletHumidityNotifyAnalogValueReached;
     procedure CallbackWrapperHumidity(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperAnalogValue(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperHumidityReached(const aPacket: TDynamicByteArray); virtual;
@@ -85,7 +85,7 @@ type
     ///  The <see cref="BrickletHumidity.TBrickletHumidity.OnHumidity"/> callback is only triggered if the humidity has changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetHumidityCallbackPeriod(const period: longword); virtual;
+    procedure SetHumidityCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletHumidity.TBrickletHumidity.SetHumidityCallbackPeriod"/>.
@@ -99,7 +99,7 @@ type
     ///  The <see cref="BrickletHumidity.TBrickletHumidity.OnAnalogValue"/> callback is only triggered if the analog value has
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetAnalogValueCallbackPeriod(const period: longword); virtual;
+    procedure SetAnalogValueCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletHumidity.TBrickletHumidity.SetAnalogValueCallbackPeriod"/>.
@@ -121,12 +121,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the humidity is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetHumidityCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetHumidityCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletHumidity.TBrickletHumidity.SetHumidityCallbackThreshold"/>.
     /// </summary>
-    procedure GetHumidityCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetHumidityCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletHumidity.TBrickletHumidity.OnAnalogValueReached"/> callback.
@@ -143,12 +143,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the analog value is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetAnalogValueCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetAnalogValueCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletHumidity.TBrickletHumidity.SetAnalogValueCallbackThreshold"/>.
     /// </summary>
-    procedure GetAnalogValueCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetAnalogValueCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -163,7 +163,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletHumidity.TBrickletHumidity.SetDebouncePeriod"/>.
@@ -180,7 +180,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -190,7 +191,7 @@ type
     ///  The <see cref="BrickletHumidity.TBrickletHumidity.OnHumidity"/> callback is only triggered if the humidity has changed since
     ///  the last triggering.
     /// </summary>
-    property OnHumidity: TBrickletHumidityNotifyHumidity read humidityCallback write humidityCallback;
+    property OnHumidity: TBrickletHumidityNotifyHumidity read fHumidityCallback write fHumidityCallback;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -200,7 +201,7 @@ type
     ///  The <see cref="BrickletHumidity.TBrickletHumidity.OnAnalogValue"/> callback is only triggered if the humidity has changed
     ///  since the last triggering.
     /// </summary>
-    property OnAnalogValue: TBrickletHumidityNotifyAnalogValue read analogValueCallback write analogValueCallback;
+    property OnAnalogValue: TBrickletHumidityNotifyAnalogValue read fAnalogValueCallback write fAnalogValueCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -210,7 +211,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletHumidity.TBrickletHumidity.SetDebouncePeriod"/>.
     /// </summary>
-    property OnHumidityReached: TBrickletHumidityNotifyHumidityReached read humidityReachedCallback write humidityReachedCallback;
+    property OnHumidityReached: TBrickletHumidityNotifyHumidityReached read fHumidityReachedCallback write fHumidityReachedCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -220,7 +221,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletHumidity.TBrickletHumidity.SetDebouncePeriod"/>.
     /// </summary>
-    property OnAnalogValueReached: TBrickletHumidityNotifyAnalogValueReached read analogValueReachedCallback write analogValueReachedCallback;
+    property OnAnalogValueReached: TBrickletHumidityNotifyAnalogValueReached read fAnalogValueReachedCallback write fAnalogValueReachedCallback;
   end;
 
 implementation
@@ -275,12 +276,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletHumidity.SetHumidityCallbackPeriod(const period: longword);
+procedure TBrickletHumidity.SetHumidityCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_SET_HUMIDITY_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -293,12 +294,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHumidity.SetAnalogValueCallbackPeriod(const period: longword);
+procedure TBrickletHumidity.SetAnalogValueCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_SET_ANALOG_VALUE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -311,56 +312,56 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHumidity.SetHumidityCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickletHumidity.SetHumidityCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_SET_HUMIDITY_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletHumidity.GetHumidityCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickletHumidity.GetHumidityCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_GET_HUMIDITY_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletHumidity.SetAnalogValueCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickletHumidity.SetAnalogValueCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_SET_ANALOG_VALUE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletHumidity.GetAnalogValueCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickletHumidity.GetAnalogValueCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_GET_ANALOG_VALUE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletHumidity.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletHumidity.SetDebouncePeriod(const aDebounce: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_HUMIDITY_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
@@ -373,7 +374,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletHumidity.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletHumidity.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -383,9 +384,9 @@ begin
   aUID:= LEConvertStringFrom(8, 8, _response);
   aConnectedUID:= LEConvertStringFrom(16, 8, _response);
   aPosition:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletHumidity.CallbackWrapperHumidity(const aPacket: TDynamicByteArray);
@@ -394,8 +395,8 @@ var
 begin
   _Humidity:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(humidityCallback)) then begin
-    humidityCallback(self, _Humidity);
+  if (Assigned(fHumidityCallback)) then begin
+    fHumidityCallback(self, _Humidity);
   end;
 end;
 
@@ -405,8 +406,8 @@ var
 begin
   _Value:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(analogValueCallback)) then begin
-    analogValueCallback(self, _Value);
+  if (Assigned(fAnalogValueCallback)) then begin
+    fAnalogValueCallback(self, _Value);
   end;
 end;
 
@@ -416,8 +417,8 @@ var
 begin
   _Humidity:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(humidityReachedCallback)) then begin
-    humidityReachedCallback(self, _Humidity);
+  if (Assigned(fHumidityReachedCallback)) then begin
+    fHumidityReachedCallback(self, _Humidity);
   end;
 end;
 
@@ -427,8 +428,8 @@ var
 begin
   _Value:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(analogValueReachedCallback)) then begin
-    analogValueReachedCallback(self, _Value);
+  if (Assigned(fAnalogValueReachedCallback)) then begin
+    fAnalogValueReachedCallback(self, _Value);
   end;
 end;
 
