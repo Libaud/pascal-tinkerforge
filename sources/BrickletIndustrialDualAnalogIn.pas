@@ -26,16 +26,16 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletIndustrialDualAnalogIn = class;
-  TBrickletIndustrialDualAnalogInNotifyVoltage = procedure(sender: TBrickletIndustrialDualAnalogIn; const channel: byte; const voltage: longint) of object;
-  TBrickletIndustrialDualAnalogInNotifyVoltageReached = procedure(sender: TBrickletIndustrialDualAnalogIn; const channel: byte; const voltage: longint) of object;
+  TBrickletIndustrialDualAnalogInNotifyVoltage = procedure(aSender: TBrickletIndustrialDualAnalogIn; const aChannel: byte; const aVoltage: longint) of object;
+  TBrickletIndustrialDualAnalogInNotifyVoltageReached = procedure(aSender: TBrickletIndustrialDualAnalogIn; const aChannel: byte; const aVoltage: longint) of object;
 
   /// <summary>
   ///  Measures two DC voltages between -35V and +35V with 24bit resolution each
   /// </summary>
   TBrickletIndustrialDualAnalogIn = class(TDevice)
   private
-    voltageCallback: TBrickletIndustrialDualAnalogInNotifyVoltage;
-    voltageReachedCallback: TBrickletIndustrialDualAnalogInNotifyVoltageReached;
+    fVoltageCallback: TBrickletIndustrialDualAnalogInNotifyVoltage;
+    fVoltageReachedCallback: TBrickletIndustrialDualAnalogInNotifyVoltageReached;
   protected
     procedure CallbackWrapperVoltage(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperVoltageReached(const aPacket: TDynamicByteArray); virtual;
@@ -52,7 +52,7 @@ type
     ///  <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.OnVoltage"/> callback and set the period with
     ///  <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetVoltageCallbackPeriod"/>.
     /// </summary>
-    function GetVoltage(const channel: byte): longint; virtual;
+    function GetVoltage(const aChannel: byte): longint; virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.OnVoltage"/> callback is triggered
@@ -61,12 +61,12 @@ type
     ///  The <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.OnVoltage"/> callback is only triggered if the voltage has changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetVoltageCallbackPeriod(const channel: byte; const period: longword); virtual;
+    procedure SetVoltageCallbackPeriod(const aChannel: byte; const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetVoltageCallbackPeriod"/>.
     /// </summary>
-    function GetVoltageCallbackPeriod(const channel: byte): longword; virtual;
+    function GetVoltageCallbackPeriod(const aChannel: byte): longword; virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.OnVoltageReached"/> callback for the given
@@ -84,12 +84,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the voltage is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetVoltageCallbackThreshold(const channel: byte; const option: char; const min: longint; const max: longint); virtual;
+    procedure SetVoltageCallbackThreshold(const aChannel: byte; const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetVoltageCallbackThreshold"/>.
     /// </summary>
-    procedure GetVoltageCallbackThreshold(const channel: byte; out option: char; out min: longint; out max: longint); virtual;
+    procedure GetVoltageCallbackThreshold(const aChannel: byte; out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callback
@@ -102,7 +102,7 @@ type
     ///  
     ///  keeps being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetDebouncePeriod"/>.
@@ -114,7 +114,7 @@ type
     ///  and 976 samples per second. Decreasing the sample rate will also decrease the
     ///  noise on the data.
     /// </summary>
-    procedure SetSampleRate(const rate: byte); virtual;
+    procedure SetSampleRate(const aRate: byte); virtual;
 
     /// <summary>
     ///  Returns the sample rate as set by <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetSampleRate"/>.
@@ -128,12 +128,12 @@ type
     ///  is already factory calibrated by Tinkerforge. It should not be necessary
     ///  for you to use this function
     /// </summary>
-    procedure SetCalibration(const offset: array of longint; const gain: array of longint); virtual;
+    procedure SetCalibration(const aOffset: array of longint; const aGain: array of longint); virtual;
 
     /// <summary>
     ///  Returns the calibration as set by <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetCalibration"/>.
     /// </summary>
-    procedure GetCalibration(out offset: TArray0To1OfInt32; out gain: TArray0To1OfInt32); virtual;
+    procedure GetCalibration(out aOffset: TArray0To1OfInt32; out aGain: TArray0To1OfInt32); virtual;
 
     /// <summary>
     ///  Returns the ADC values as given by the MCP3911 IC. This function
@@ -151,7 +151,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -161,7 +162,7 @@ type
     ///  The <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.OnVoltage"/> callback is only triggered if the voltage has changed since the
     ///  last triggering.
     /// </summary>
-    property OnVoltage: TBrickletIndustrialDualAnalogInNotifyVoltage read voltageCallback write voltageCallback;
+    property OnVoltage: TBrickletIndustrialDualAnalogInNotifyVoltage read fVoltageCallback write fVoltageCallback;
 
     /// <summary>
     ///  This callback is triggered when the threshold as set by
@@ -171,7 +172,7 @@ type
     ///  If the threshold keeps being reached, the callback is triggered periodically
     ///  with the period as set by <see cref="BrickletIndustrialDualAnalogIn.TBrickletIndustrialDualAnalogIn.SetDebouncePeriod"/>.
     /// </summary>
-    property OnVoltageReached: TBrickletIndustrialDualAnalogInNotifyVoltageReached read voltageReachedCallback write voltageReachedCallback;
+    property OnVoltageReached: TBrickletIndustrialDualAnalogInNotifyVoltageReached read fVoltageReachedCallback write fVoltageReachedCallback;
   end;
 
 implementation
@@ -209,84 +210,84 @@ begin
   aCallBacks[BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_CALLBACK_VOLTAGE_REACHED]:= {$ifdef FPC}@{$endif}CallbackWrapperVoltageReached;
 end;
 
-function TBrickletIndustrialDualAnalogIn.GetVoltage(const channel: byte): longint;
+function TBrickletIndustrialDualAnalogIn.GetVoltage(const aChannel: byte): longint;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_VOLTAGE, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.SetVoltageCallbackPeriod(const channel: byte; const period: longword);
+procedure TBrickletIndustrialDualAnalogIn.SetVoltageCallbackPeriod(const aChannel: byte; const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_SET_VOLTAGE_CALLBACK_PERIOD, 13);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt32To(period, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt32To(aPeriod, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialDualAnalogIn.GetVoltageCallbackPeriod(const channel: byte): longword;
+function TBrickletIndustrialDualAnalogIn.GetVoltageCallbackPeriod(const aChannel: byte): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_VOLTAGE_CALLBACK_PERIOD, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.SetVoltageCallbackThreshold(const channel: byte; const option: char; const min: longint; const max: longint);
+procedure TBrickletIndustrialDualAnalogIn.SetVoltageCallbackThreshold(const aChannel: byte; const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_SET_VOLTAGE_CALLBACK_THRESHOLD, 18);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertCharTo(option, 9, _request);
-  LEConvertInt32To(min, 10, _request);
-  LEConvertInt32To(max, 14, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertCharTo(aOption, 9, _request);
+  LEConvertInt32To(aMin, 10, _request);
+  LEConvertInt32To(aMax, 14, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.GetVoltageCallbackThreshold(const channel: byte; out option: char; out min: longint; out max: longint);
+procedure TBrickletIndustrialDualAnalogIn.GetVoltageCallbackThreshold(const aChannel: byte; out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_VOLTAGE_CALLBACK_THRESHOLD, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletIndustrialDualAnalogIn.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDualAnalogIn.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.SetSampleRate(const rate: byte);
+procedure TBrickletIndustrialDualAnalogIn.SetSampleRate(const aRate: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_SET_SAMPLE_RATE, 9);
-  LEConvertUInt8To(rate, 8, _request);
+  LEConvertUInt8To(aRate, 8, _request);
   SendRequest(_request);
 end;
 
@@ -299,70 +300,78 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.SetCalibration(const offset: array of longint; const gain: array of longint);
+procedure TBrickletIndustrialDualAnalogIn.SetCalibration(const aOffset: array of longint; const aGain: array of longint);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_SET_CALIBRATION, 24);
-  if (Length(offset) <> 2) then raise EInvalidParameterException.Create('Offset has to be exactly 2 items long');
-  for _i:= 0 to Length(offset) - 1 do LEConvertInt32To(offset[_i], 8 + (_i * 4), _request);
-  if (Length(gain) <> 2) then raise EInvalidParameterException.Create('Gain has to be exactly 2 items long');
-  for _i:= 0 to Length(gain) - 1 do LEConvertInt32To(gain[_i], 16 + (_i * 4), _request);
+  if (Length(aOffset) <> 2) then raise EInvalidParameterException.Create('Offset has to be exactly 2 items long');
+  for _i:= 0 to Length(aOffset) - 1 do LEConvertInt32To(aOffset[_i], 8 + (_i * 4), _request);
+  if (Length(aGain) <> 2) then raise EInvalidParameterException.Create('Gain has to be exactly 2 items long');
+  for _i:= 0 to Length(aGain) - 1 do LEConvertInt32To(aGain[_i], 16 + (_i * 4), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.GetCalibration(out offset: TArray0To1OfInt32; out gain: TArray0To1OfInt32);
+procedure TBrickletIndustrialDualAnalogIn.GetCalibration(out aOffset: TArray0To1OfInt32; out aGain: TArray0To1OfInt32);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_CALIBRATION, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 1 do offset[_i]:= LEConvertInt32From(8 + (_i * 4), _response);
-  for _i:= 0 to 1 do gain[_i]:= LEConvertInt32From(16 + (_i * 4), _response);
+  for _i:= 0 to 1 do aOffset[_i]:= LEConvertInt32From(8 + (_i * 4), _response);
+  for _i:= 0 to 1 do aGain[_i]:= LEConvertInt32From(16 + (_i * 4), _response);
 end;
 
 function TBrickletIndustrialDualAnalogIn.GetADCValues: TArray0To1OfInt32;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_ADC_VALUES, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 1 do Result[_i]:= LEConvertInt32From(8 + (_i * 4), _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogIn.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialDualAnalogIn.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialDualAnalogIn.CallbackWrapperVoltage(const aPacket: TDynamicByteArray);
-var channel: byte; voltage: longint;
+var
+  _channel: byte;
+  _voltage: longint;
 begin
-  channel:= LEConvertUInt8From(8, aPacket);
-  voltage:= LEConvertInt32From(9, aPacket);
+  _channel:= LEConvertUInt8From(8, aPacket);
+  _voltage:= LEConvertInt32From(9, aPacket);
 
-  if (Assigned(voltageCallback)) then begin
-    voltageCallback(self, channel, voltage);
+  if (Assigned(fVoltageCallback)) then begin
+    fVoltageCallback(self, _channel, _voltage);
   end;
 end;
 
 procedure TBrickletIndustrialDualAnalogIn.CallbackWrapperVoltageReached(const aPacket: TDynamicByteArray);
-var channel: byte; voltage: longint;
+var
+  _channel: byte;
+  _voltage: longint;
 begin
-  channel:= LEConvertUInt8From(8, aPacket);
-  voltage:= LEConvertInt32From(9, aPacket);
+  _channel:= LEConvertUInt8From(8, aPacket);
+  _voltage:= LEConvertInt32From(9, aPacket);
 
-  if (Assigned(voltageReachedCallback)) then begin
-    voltageReachedCallback(self, channel, voltage);
+  if (Assigned(fVoltageReachedCallback)) then begin
+    fVoltageReachedCallback(self, _channel, _voltage);
   end;
 end;
 
