@@ -25,10 +25,10 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletJoystick = class;
-  TBrickletJoystickNotifyPosition = procedure(aSender: TBrickletJoystick; const x: smallint; const y: smallint) of object;
-  TBrickletJoystickNotifyAnalogValue = procedure(aSender: TBrickletJoystick; const x: word; const y: word) of object;
-  TBrickletJoystickNotifyPositionReached = procedure(aSender: TBrickletJoystick; const x: smallint; const y: smallint) of object;
-  TBrickletJoystickNotifyAnalogValueReached = procedure(aSender: TBrickletJoystick; const x: word; const y: word) of object;
+  TBrickletJoystickNotifyPosition = procedure(aSender: TBrickletJoystick; const aX: smallint; const aY: smallint) of object;
+  TBrickletJoystickNotifyAnalogValue = procedure(aSender: TBrickletJoystick; const aX: word; const aY: word) of object;
+  TBrickletJoystickNotifyPositionReached = procedure(aSender: TBrickletJoystick; const aX: smallint; const aY: smallint) of object;
+  TBrickletJoystickNotifyAnalogValueReached = procedure(aSender: TBrickletJoystick; const aX: word; const aY: word) of object;
   TBrickletJoystickNotifyPressed = procedure(aSender: TBrickletJoystick) of object;
   TBrickletJoystickNotifyReleased = procedure(aSender: TBrickletJoystick) of object;
 
@@ -64,7 +64,7 @@ type
     ///  <see cref="BrickletJoystick.TBrickletJoystick.OnPosition"/> callback and set the period with
     ///  <see cref="BrickletJoystick.TBrickletJoystick.SetPositionCallbackPeriod"/>.
     /// </summary>
-    procedure GetPosition(out x: smallint; out y: smallint); virtual;
+    procedure GetPosition(out aX: smallint; out aY: smallint); virtual;
 
     /// <summary>
     ///  Returns *true* if the button is pressed and *false* otherwise.
@@ -88,7 +88,7 @@ type
     ///  <see cref="BrickletJoystick.TBrickletJoystick.OnAnalogValue"/> callback and set the period with
     ///  <see cref="BrickletJoystick.TBrickletJoystick.SetAnalogValueCallbackPeriod"/>.
     /// </summary>
-    procedure GetAnalogValue(out x: word; out y: word); virtual;
+    procedure GetAnalogValue(out aX: word; out aY: word); virtual;
 
     /// <summary>
     ///  Calibrates the middle position of the joystick. If your Joystick Bricklet
@@ -107,7 +107,7 @@ type
     ///  The <see cref="BrickletJoystick.TBrickletJoystick.OnPosition"/> callback is only triggered if the position has changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetPositionCallbackPeriod(const period: longword); virtual;
+    procedure SetPositionCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletJoystick.TBrickletJoystick.SetPositionCallbackPeriod"/>.
@@ -121,7 +121,7 @@ type
     ///  The <see cref="BrickletJoystick.TBrickletJoystick.OnAnalogValue"/> callback is only triggered if the analog values have
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetAnalogValueCallbackPeriod(const period: longword); virtual;
+    procedure SetAnalogValueCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletJoystick.TBrickletJoystick.SetAnalogValueCallbackPeriod"/>.
@@ -143,12 +143,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the position is greater than the min values (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetPositionCallbackThreshold(const option: char; const minX: smallint; const maxX: smallint; const minY: smallint; const maxY: smallint); virtual;
+    procedure SetPositionCallbackThreshold(const aOption: char; const aMinX: smallint; const aMaxX: smallint; const aMinY: smallint; const aMaxY: smallint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletJoystick.TBrickletJoystick.SetPositionCallbackThreshold"/>.
     /// </summary>
-    procedure GetPositionCallbackThreshold(out option: char; out minX: smallint; out maxX: smallint; out minY: smallint; out maxY: smallint); virtual;
+    procedure GetPositionCallbackThreshold(out aOption: char; out aMinX: smallint; out aMaxX: smallint; out aMinY: smallint; out aMaxY: smallint); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletJoystick.TBrickletJoystick.OnAnalogValueReached"/> callback.
@@ -165,12 +165,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the analog values are greater than the min values (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetAnalogValueCallbackThreshold(const option: char; const minX: word; const maxX: word; const minY: word; const maxY: word); virtual;
+    procedure SetAnalogValueCallbackThreshold(const aOption: char; const aMinX: word; const aMaxX: word; const aMinY: word; const aMaxY: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletJoystick.TBrickletJoystick.SetAnalogValueCallbackThreshold"/>.
     /// </summary>
-    procedure GetAnalogValueCallbackThreshold(out option: char; out minX: word; out maxX: word; out minY: word; out maxY: word); virtual;
+    procedure GetAnalogValueCallbackThreshold(out aOption: char; out aMinX: word; out aMaxX: word; out aMinY: word; out aMaxY: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -185,7 +185,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletJoystick.TBrickletJoystick.SetDebouncePeriod"/>.
@@ -202,7 +202,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -293,14 +294,14 @@ begin
   aCallBacks[BRICKLET_JOYSTICK_CALLBACK_RELEASED]:= {$ifdef FPC}@{$endif}CallbackWrapperReleased;
 end;
 
-procedure TBrickletJoystick.GetPosition(out x: smallint; out y: smallint);
+procedure TBrickletJoystick.GetPosition(out aX: smallint; out aY: smallint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_GET_POSITION, 8);
   _response:= SendRequest(_request);
-  x:= LEConvertInt16From(8, _response);
-  y:= LEConvertInt16From(10, _response);
+  aX:= LEConvertInt16From(8, _response);
+  aY:= LEConvertInt16From(10, _response);
 end;
 
 function TBrickletJoystick.IsPressed: boolean;
@@ -312,14 +313,14 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletJoystick.GetAnalogValue(out x: word; out y: word);
+procedure TBrickletJoystick.GetAnalogValue(out aX: word; out aY: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_GET_ANALOG_VALUE, 8);
   _response:= SendRequest(_request);
-  x:= LEConvertUInt16From(8, _response);
-  y:= LEConvertUInt16From(10, _response);
+  aX:= LEConvertUInt16From(8, _response);
+  aY:= LEConvertUInt16From(10, _response);
 end;
 
 procedure TBrickletJoystick.Calibrate;
@@ -330,12 +331,12 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickletJoystick.SetPositionCallbackPeriod(const period: longword);
+procedure TBrickletJoystick.SetPositionCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_SET_POSITION_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -348,12 +349,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletJoystick.SetAnalogValueCallbackPeriod(const period: longword);
+procedure TBrickletJoystick.SetAnalogValueCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_SET_ANALOG_VALUE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -366,64 +367,64 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletJoystick.SetPositionCallbackThreshold(const option: char; const minX: smallint; const maxX: smallint; const minY: smallint; const maxY: smallint);
+procedure TBrickletJoystick.SetPositionCallbackThreshold(const aOption: char; const aMinX: smallint; const aMaxX: smallint; const aMinY: smallint; const aMaxY: smallint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_SET_POSITION_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt16To(minX, 9, _request);
-  LEConvertInt16To(maxX, 11, _request);
-  LEConvertInt16To(minY, 13, _request);
-  LEConvertInt16To(maxY, 15, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt16To(aMinX, 9, _request);
+  LEConvertInt16To(aMaxX, 11, _request);
+  LEConvertInt16To(aMinY, 13, _request);
+  LEConvertInt16To(aMaxY, 15, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletJoystick.GetPositionCallbackThreshold(out option: char; out minX: smallint; out maxX: smallint; out minY: smallint; out maxY: smallint);
+procedure TBrickletJoystick.GetPositionCallbackThreshold(out aOption: char; out aMinX: smallint; out aMaxX: smallint; out aMinY: smallint; out aMaxY: smallint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_GET_POSITION_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  minX:= LEConvertInt16From(9, _response);
-  maxX:= LEConvertInt16From(11, _response);
-  minY:= LEConvertInt16From(13, _response);
-  maxY:= LEConvertInt16From(15, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMinX:= LEConvertInt16From(9, _response);
+  aMaxX:= LEConvertInt16From(11, _response);
+  aMinY:= LEConvertInt16From(13, _response);
+  aMaxY:= LEConvertInt16From(15, _response);
 end;
 
-procedure TBrickletJoystick.SetAnalogValueCallbackThreshold(const option: char; const minX: word; const maxX: word; const minY: word; const maxY: word);
+procedure TBrickletJoystick.SetAnalogValueCallbackThreshold(const aOption: char; const aMinX: word; const aMaxX: word; const aMinY: word; const aMaxY: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_SET_ANALOG_VALUE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(minX, 9, _request);
-  LEConvertUInt16To(maxX, 11, _request);
-  LEConvertUInt16To(minY, 13, _request);
-  LEConvertUInt16To(maxY, 15, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMinX, 9, _request);
+  LEConvertUInt16To(aMaxX, 11, _request);
+  LEConvertUInt16To(aMinY, 13, _request);
+  LEConvertUInt16To(aMaxY, 15, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletJoystick.GetAnalogValueCallbackThreshold(out option: char; out minX: word; out maxX: word; out minY: word; out maxY: word);
+procedure TBrickletJoystick.GetAnalogValueCallbackThreshold(out aOption: char; out aMinX: word; out aMaxX: word; out aMinY: word; out aMaxY: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_GET_ANALOG_VALUE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  minX:= LEConvertUInt16From(9, _response);
-  maxX:= LEConvertUInt16From(11, _response);
-  minY:= LEConvertUInt16From(13, _response);
-  maxY:= LEConvertUInt16From(15, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMinX:= LEConvertUInt16From(9, _response);
+  aMaxX:= LEConvertUInt16From(11, _response);
+  aMinY:= LEConvertUInt16From(13, _response);
+  aMaxY:= LEConvertUInt16From(15, _response);
 end;
 
-procedure TBrickletJoystick.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletJoystick.SetDebouncePeriod(const aDebounce: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
@@ -436,7 +437,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletJoystick.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletJoystick.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -444,58 +445,58 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_JOYSTICK_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletJoystick.CallbackWrapperPosition(const aPacket: TDynamicByteArray);
 var
-  x: smallint; y: smallint;
+  _x: smallint; _y: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
 
   if (Assigned(fPositionCallback)) then begin
-    fPositionCallback(self, x, y);
+    fPositionCallback(self, _x, _y);
   end;
 end;
 
 procedure TBrickletJoystick.CallbackWrapperAnalogValue(const aPacket: TDynamicByteArray);
 var
-  x: word; y: word;
+  _x: word; _y: word;
 begin
-  x:= LEConvertUInt16From(8, aPacket);
-  y:= LEConvertUInt16From(10, aPacket);
+  _x:= LEConvertUInt16From(8, aPacket);
+  _y:= LEConvertUInt16From(10, aPacket);
 
   if (Assigned(fAnalogValueCallback)) then begin
-    fAnalogValueCallback(self, x, y);
+    fAnalogValueCallback(self, _x, _y);
   end;
 end;
 
 procedure TBrickletJoystick.CallbackWrapperPositionReached(const aPacket: TDynamicByteArray);
 var
-  x: smallint; y: smallint;
+  _x: smallint; _y: smallint;
 begin
-  x:= LEConvertInt16From(8, aPacket);
-  y:= LEConvertInt16From(10, aPacket);
+  _x:= LEConvertInt16From(8, aPacket);
+  _y:= LEConvertInt16From(10, aPacket);
 
   if (Assigned(fPositionReachedCallback)) then begin
-    fPositionReachedCallback(self, x, y);
+    fPositionReachedCallback(self, _x, _y);
   end;
 end;
 
 procedure TBrickletJoystick.CallbackWrapperAnalogValueReached(const aPacket: TDynamicByteArray);
 var
-  x: word; y: word;
+  _x: word; _y: word;
 begin
-  x:= LEConvertUInt16From(8, aPacket);
-  y:= LEConvertUInt16From(10, aPacket);
+  _x:= LEConvertUInt16From(8, aPacket);
+  _y:= LEConvertUInt16From(10, aPacket);
 
   if (Assigned(fAnalogValueReachedCallback)) then begin
-    fAnalogValueReachedCallback(self, x, y);
+    fAnalogValueReachedCallback(self, _x, _y);
   end;
 end;
 
