@@ -26,19 +26,21 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletParticulateMatter = class;
-  TBrickletParticulateMatterNotifyPMConcentration = procedure(aSender: TBrickletParticulateMatter; const pm10: word; const pm25: word; const pm100: word) of object;
-  TBrickletParticulateMatterNotifyPMCount = procedure(aSender: TBrickletParticulateMatter; const greater03um: word; const greater05um: word; const greater10um: word; const greater25um: word; const greater50um: word; const greater100um: word) of object;
+  TBrickletParticulateMatterNotifyPMConcentration = procedure(aSender: TBrickletParticulateMatter; const aPM10: word;
+                                                              const aPM25: word; const aPM100: word) of object;
+  TBrickletParticulateMatterNotifyPMCount = procedure(aSender: TBrickletParticulateMatter; const aGreater03um: word; const aGreater05um: word; const aGreater10um: word;
+                                                      const aGreater25um: word; const aGreater50um: word; const aGreater100um: word) of object;
 
   /// <summary>
   ///  Measures Particulate Matter concentration (PM1.0, PM2.5 and PM10)
   /// </summary>
   TBrickletParticulateMatter = class(TDevice)
   private
-    pmConcentrationCallback: TBrickletParticulateMatterNotifyPMConcentration;
-    pmCountCallback: TBrickletParticulateMatterNotifyPMCount;
-  protected
+    fPMConcentrationCallback: TBrickletParticulateMatterNotifyPMConcentration;
+    fPMCountCallback: TBrickletParticulateMatterNotifyPMCount;
     procedure CallbackWrapperPMConcentration(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperPMCount(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
@@ -59,7 +61,7 @@ type
     ///  <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.OnPMConcentration"/> callback. You can set the callback configuration
     ///  with <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.SetPMConcentrationCallbackConfiguration"/>.
     /// </summary>
-    procedure GetPMConcentration(out pm10: word; out pm25: word; out pm100: word); virtual;
+    procedure GetPMConcentration(out aPM10: word; out aPM25: word; out aPM100: word); virtual;
 
     /// <summary>
     ///  Returns the number of particulates in 100 ml of air, broken down by their
@@ -79,7 +81,7 @@ type
     ///  <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.OnPMCount"/> callback. You can set the callback configuration
     ///  with <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.SetPMCountCallbackConfiguration"/>.
     /// </summary>
-    procedure GetPMCount(out greater03um: word; out greater05um: word; out greater10um: word; out greater25um: word; out greater50um: word; out greater100um: word); virtual;
+    procedure GetPMCount(out aGreater03um: word; out aGreater05um: word; out aGreater10um: word; out aGreater25um: word; out aGreater50um: word; out aGreater100um: word); virtual;
 
     /// <summary>
     ///  Enables/Disables the fan and the laser diode of the sensors. The sensor is
@@ -92,7 +94,7 @@ type
     ///  an interval with a long idle time (e.g. hourly) you should turn the
     ///  laser diode off between the measurements.
     /// </summary>
-    procedure SetEnable(const enable: boolean); virtual;
+    procedure SetEnable(const aEnable: boolean); virtual;
 
     /// <summary>
     ///  Returns the state of the sensor as set by <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.SetEnable"/>.
@@ -107,7 +109,7 @@ type
     ///  * the number of framing and checksum errors that occurred in the communication
     ///    with the sensor.
     /// </summary>
-    procedure GetSensorInfo(out sensorVersion: byte; out lastErrorCode: byte; out framingErrorCount: byte; out checksumErrorCount: byte); virtual;
+    procedure GetSensorInfo(out aSensorVersion: byte; out aLastErrorCode: byte; out aFramingErrorCount: byte; out aChecksumErrorCount: byte); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.OnPMConcentration"/>
@@ -120,13 +122,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetPMConcentrationCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetPMConcentrationCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.SetPMConcentrationCallbackConfiguration"/>.
     /// </summary>
-    procedure GetPMConcentrationCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetPMConcentrationCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.OnPMCount"/> callback
@@ -139,13 +141,13 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetPMCountCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetPMCountCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.SetPMCountCallbackConfiguration"/>.
     /// </summary>
-    procedure GetPMCountCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetPMCountCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -160,7 +162,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -188,7 +191,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -200,7 +203,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -211,7 +214,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.SetStatusLEDConfig"/>
@@ -263,7 +266,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -271,7 +275,7 @@ type
     ///  
     ///  The parameters are the same as <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.GetPMConcentration"/>.
     /// </summary>
-    property OnPMConcentration: TBrickletParticulateMatterNotifyPMConcentration read pmConcentrationCallback write pmConcentrationCallback;
+    property OnPMConcentration: TBrickletParticulateMatterNotifyPMConcentration read fPMConcentrationCallback write fPMConcentrationCallback;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -279,7 +283,7 @@ type
     ///  
     ///  The parameters are the same as <see cref="BrickletParticulateMatter.TBrickletParticulateMatter.GetPMCount"/>.
     /// </summary>
-    property OnPMCount: TBrickletParticulateMatterNotifyPMCount read pmCountCallback write pmCountCallback;
+    property OnPMCount: TBrickletParticulateMatterNotifyPMCount read fPMCountCallback write fPMCountCallback;
   end;
 
 implementation
@@ -325,116 +329,116 @@ begin
   aCallBacks[BRICKLET_PARTICULATE_MATTER_CALLBACK_PM_COUNT]:= {$ifdef FPC}@{$endif}CallbackWrapperPMCount;
 end;
 
-procedure TBrickletParticulateMatter.GetPMConcentration(out pm10: word; out pm25: word; out pm100: word);
+procedure TBrickletParticulateMatter.GetPMConcentration(out aPM10: word; out aPM25: word; out aPM100: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_PM_CONCENTRATION, 8);
   _response:= SendRequest(_request);
-  pm10:= LEConvertUInt16From(8, _response);
-  pm25:= LEConvertUInt16From(10, _response);
-  pm100:= LEConvertUInt16From(12, _response);
+  aPM10:= LEConvertUInt16From(8, _response);
+  aPM25:= LEConvertUInt16From(10, _response);
+  aPM100:= LEConvertUInt16From(12, _response);
 end;
 
-procedure TBrickletParticulateMatter.GetPMCount(out greater03um: word; out greater05um: word; out greater10um: word; out greater25um: word; out greater50um: word; out greater100um: word);
+procedure TBrickletParticulateMatter.GetPMCount(out aGreater03um: word; out aGreater05um: word; out aGreater10um: word; out aGreater25um: word; out aGreater50um: word; out aGreater100um: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_PM_COUNT, 8);
   _response:= SendRequest(_request);
-  greater03um:= LEConvertUInt16From(8, _response);
-  greater05um:= LEConvertUInt16From(10, _response);
-  greater10um:= LEConvertUInt16From(12, _response);
-  greater25um:= LEConvertUInt16From(14, _response);
-  greater50um:= LEConvertUInt16From(16, _response);
-  greater100um:= LEConvertUInt16From(18, _response);
+  aGreater03um:= LEConvertUInt16From(8, _response);
+  aGreater05um:= LEConvertUInt16From(10, _response);
+  aGreater10um:= LEConvertUInt16From(12, _response);
+  aGreater25um:= LEConvertUInt16From(14, _response);
+  aGreater50um:= LEConvertUInt16From(16, _response);
+  aGreater100um:= LEConvertUInt16From(18, _response);
 end;
 
-procedure TBrickletParticulateMatter.SetEnable(const enable: boolean);
+procedure TBrickletParticulateMatter.SetEnable(const aEnable: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_SET_ENABLE, 9);
-  LEConvertBooleanTo(enable, 8, _request);
+  LEConvertBooleanTo(aEnable, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletParticulateMatter.GetEnable: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_ENABLE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletParticulateMatter.GetSensorInfo(out sensorVersion: byte; out lastErrorCode: byte; out framingErrorCount: byte; out checksumErrorCount: byte);
+procedure TBrickletParticulateMatter.GetSensorInfo(out aSensorVersion: byte; out aLastErrorCode: byte; out aFramingErrorCount: byte; out aChecksumErrorCount: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_SENSOR_INFO, 8);
   _response:= SendRequest(_request);
-  sensorVersion:= LEConvertUInt8From(8, _response);
-  lastErrorCode:= LEConvertUInt8From(9, _response);
-  framingErrorCount:= LEConvertUInt8From(10, _response);
-  checksumErrorCount:= LEConvertUInt8From(11, _response);
+  aSensorVersion:= LEConvertUInt8From(8, _response);
+  aLastErrorCode:= LEConvertUInt8From(9, _response);
+  aFramingErrorCount:= LEConvertUInt8From(10, _response);
+  aChecksumErrorCount:= LEConvertUInt8From(11, _response);
 end;
 
-procedure TBrickletParticulateMatter.SetPMConcentrationCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletParticulateMatter.SetPMConcentrationCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_SET_PM_CONCENTRATION_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletParticulateMatter.GetPMConcentrationCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletParticulateMatter.GetPMConcentrationCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_PM_CONCENTRATION_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletParticulateMatter.SetPMCountCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletParticulateMatter.SetPMCountCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_SET_PM_COUNT_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletParticulateMatter.GetPMCountCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletParticulateMatter.GetPMCountCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_PM_COUNT_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletParticulateMatter.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletParticulateMatter.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletParticulateMatter.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -444,45 +448,46 @@ end;
 
 function TBrickletParticulateMatter.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletParticulateMatter.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletParticulateMatter.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletParticulateMatter.WriteFirmware(const data: array of byte): byte;
+function TBrickletParticulateMatter.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletParticulateMatter.SetStatusLEDConfig(const config: byte);
+procedure TBrickletParticulateMatter.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletParticulateMatter.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -491,7 +496,7 @@ end;
 
 function TBrickletParticulateMatter.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -500,7 +505,7 @@ end;
 
 procedure TBrickletParticulateMatter.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -508,7 +513,7 @@ end;
 
 procedure TBrickletParticulateMatter.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -517,51 +522,61 @@ end;
 
 function TBrickletParticulateMatter.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletParticulateMatter.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletParticulateMatter.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PARTICULATE_MATTER_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletParticulateMatter.CallbackWrapperPMConcentration(const aPacket: TDynamicByteArray);
-var pm10: word; pm25: word; pm100: word;
+var
+  _pm10: word;
+  _pm25: word;
+  _pm100: word;
 begin
-  pm10:= LEConvertUInt16From(8, aPacket);
-  pm25:= LEConvertUInt16From(10, aPacket);
-  pm100:= LEConvertUInt16From(12, aPacket);
+  _pm10:= LEConvertUInt16From(8, aPacket);
+  _pm25:= LEConvertUInt16From(10, aPacket);
+  _pm100:= LEConvertUInt16From(12, aPacket);
 
-  if (Assigned(pmConcentrationCallback)) then begin
-    pmConcentrationCallback(self, pm10, pm25, pm100);
+  if (Assigned(fPMConcentrationCallback)) then begin
+    fPMConcentrationCallback(self, _pm10, _pm25, _pm100);
   end;
 end;
 
 procedure TBrickletParticulateMatter.CallbackWrapperPMCount(const aPacket: TDynamicByteArray);
-var greater03um: word; greater05um: word; greater10um: word; greater25um: word; greater50um: word; greater100um: word;
+var
+  _greater03um: word;
+  _greater05um: word;
+  _greater10um: word;
+  _greater25um: word;
+  _greater50um: word;
+  _greater100um: word;
 begin
-  greater03um:= LEConvertUInt16From(8, aPacket);
-  greater05um:= LEConvertUInt16From(10, aPacket);
-  greater10um:= LEConvertUInt16From(12, aPacket);
-  greater25um:= LEConvertUInt16From(14, aPacket);
-  greater50um:= LEConvertUInt16From(16, aPacket);
-  greater100um:= LEConvertUInt16From(18, aPacket);
+  _greater03um:= LEConvertUInt16From(8, aPacket);
+  _greater05um:= LEConvertUInt16From(10, aPacket);
+  _greater10um:= LEConvertUInt16From(12, aPacket);
+  _greater25um:= LEConvertUInt16From(14, aPacket);
+  _greater50um:= LEConvertUInt16From(16, aPacket);
+  _greater100um:= LEConvertUInt16From(18, aPacket);
 
-  if (Assigned(pmCountCallback)) then begin
-    pmCountCallback(self, greater03um, greater05um, greater10um, greater25um, greater50um, greater100um);
+  if (Assigned(fPMCountCallback)) then begin
+    fPMCountCallback(self, _greater03um, _greater05um, _greater10um, _greater25um, _greater50um, _greater100um);
   end;
 end;
 
