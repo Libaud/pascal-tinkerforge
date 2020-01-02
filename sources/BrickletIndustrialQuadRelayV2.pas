@@ -27,7 +27,7 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletIndustrialQuadRelayV2 = class;
-  TBrickletIndustrialQuadRelayV2NotifyMonoflopDone = procedure(aSender: TBrickletIndustrialQuadRelayV2; const channel: byte; const value: boolean) of object;
+  TBrickletIndustrialQuadRelayV2NotifyMonoflopDone = procedure(aSender: TBrickletIndustrialQuadRelayV2; const aChannel: byte; const aValue: boolean) of object;
 
   /// <summary>
   ///  4 galvanically isolated solid state relays
@@ -51,7 +51,7 @@ type
     ///  
     ///  All running monoflop timers will be aborted if this function is called.
     /// </summary>
-    procedure SetValue(const value: array of boolean); virtual;
+    procedure SetValue(const aValue: array of boolean); virtual;
 
     /// <summary>
     ///  Returns the values as set by <see cref="BrickletIndustrialQuadRelayV2.TBrickletIndustrialQuadRelayV2.SetValue"/>.
@@ -77,7 +77,7 @@ type
     ///  time. If now the RS485 connection is lost, then channel 0 will be opened in at
     ///  most two seconds.
     /// </summary>
-    procedure SetMonoflop(const channel: byte; const value: boolean; const time: longword); virtual;
+    procedure SetMonoflop(const aChannel: byte; const aValue: boolean; const aTime: longword); virtual;
 
     /// <summary>
     ///  Returns (for the given channel) the current value and the time as set by
@@ -86,7 +86,7 @@ type
     ///  If the timer is not running currently, the remaining time will be returned
     ///  as 0.
     /// </summary>
-    procedure GetMonoflop(const channel: byte; out aValue: boolean; out time: longword; out timeRemaining: longword); virtual;
+    procedure GetMonoflop(const aChannel: byte; out aValue: boolean; out aTime: longword; out aTimeRemaining: longword); virtual;
 
     /// <summary>
     ///  Sets the output value of the specified channel without affecting the other
@@ -95,19 +95,19 @@ type
     ///  A running monoflop timer for the specified channel will be aborted if this
     ///  function is called.
     /// </summary>
-    procedure SetSelectedValue(const channel: byte; const value: boolean); virtual;
+    procedure SetSelectedValue(const aChannel: byte; const aValue: boolean); virtual;
 
     /// <summary>
     ///  Each channel has a corresponding LED. You can turn the LED off, on or show a
     ///  heartbeat. You can also set the LED to "Channel Status". In this mode the
     ///  LED is on if the channel is high and off otherwise.
     /// </summary>
-    procedure SetChannelLEDConfig(const channel: byte; const config: byte); virtual;
+    procedure SetChannelLEDConfig(const aChannel: byte; const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the channel LED configuration as set by <see cref="BrickletIndustrialQuadRelayV2.TBrickletIndustrialQuadRelayV2.SetChannelLEDConfig"/>
     /// </summary>
-    function GetChannelLEDConfig(const channel: byte): byte; virtual;
+    function GetChannelLEDConfig(const aChannel: byte): byte; virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -122,7 +122,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -150,7 +151,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -162,7 +163,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -173,7 +174,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletIndustrialQuadRelayV2.TBrickletIndustrialQuadRelayV2.SetStatusLEDConfig"/>
@@ -225,7 +226,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char;
+                          out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever a monoflop timer reaches 0. The
@@ -275,16 +277,16 @@ begin
   aCallBacks[BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_CALLBACK_MONOFLOP_DONE]:= {$ifdef FPC}@{$endif}CallbackWrapperMonoflopDone;
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.SetValue(const value: array of boolean);
+procedure TBrickletIndustrialQuadRelayV2.SetValue(const aValue: array of boolean);
 var
   _request: TDynamicByteArray;
   _i: longint;
   _ValueBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_SET_VALUE, 9);
-  if (Length(value) <> 4) then raise EInvalidParameterException.Create('Value has to be exactly 4 items long');
+  if (Length(aValue) <> 4) then raise EInvalidParameterException.Create('Value has to be exactly 4 items long');
   FillChar(_ValueBits[0], Length(_ValueBits) * SizeOf(_ValueBits[0]), 0);
-  for _i:= 0 to 3 do if value[_i] then _ValueBits[Floor(_i/8)]:= _ValueBits[Floor(_i/8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 3 do if aValue[_i] then _ValueBits[Floor(_i/8)]:= _ValueBits[Floor(_i/8)] or (1 shl (_i mod 8));
   for _i:= 0 to 0 do LEConvertUInt8To(_ValueBits[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
@@ -302,69 +304,69 @@ begin
   for _i:= 0 to 3 do Result[_i]:= ((_ValueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.SetMonoflop(const channel: byte; const value: boolean; const time: longword);
+procedure TBrickletIndustrialQuadRelayV2.SetMonoflop(const aChannel: byte; const aValue: boolean; const aTime: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_SET_MONOFLOP, 14);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(value, 9, _request);
-  LEConvertUInt32To(time, 10, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aValue, 9, _request);
+  LEConvertUInt32To(aTime, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.GetMonoflop(const channel: byte; out aValue: boolean; out time: longword; out timeRemaining: longword);
+procedure TBrickletIndustrialQuadRelayV2.GetMonoflop(const aChannel: byte; out aValue: boolean; out aTime: longword; out aTimeRemaining: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_GET_MONOFLOP, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   aValue:= LEConvertBooleanFrom(8, _response);
-  time:= LEConvertUInt32From(9, _response);
-  timeRemaining:= LEConvertUInt32From(13, _response);
+  aTime:= LEConvertUInt32From(9, _response);
+  aTimeRemaining:= LEConvertUInt32From(13, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.SetSelectedValue(const channel: byte; const value: boolean);
+procedure TBrickletIndustrialQuadRelayV2.SetSelectedValue(const aChannel: byte; const aValue: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_SET_SELECTED_VALUE, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(value, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aValue, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.SetChannelLEDConfig(const channel: byte; const config: byte);
+procedure TBrickletIndustrialQuadRelayV2.SetChannelLEDConfig(const aChannel: byte; const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_SET_CHANNEL_LED_CONFIG, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt8To(config, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt8To(aConfig, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialQuadRelayV2.GetChannelLEDConfig(const channel: byte): byte;
+function TBrickletIndustrialQuadRelayV2.GetChannelLEDConfig(const aChannel: byte): byte;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_GET_CHANNEL_LED_CONFIG, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletIndustrialQuadRelayV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletIndustrialQuadRelayV2.SetBootloaderMode(const aMode: byte): byte;
@@ -386,33 +388,33 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletIndustrialQuadRelayV2.SetWriteFirmwarePointer(const aPointer: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialQuadRelayV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletIndustrialQuadRelayV2.WriteFirmware(const aData: array of byte): byte;
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletIndustrialQuadRelayV2.SetStatusLEDConfig(const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -460,7 +462,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelayV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialQuadRelayV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -468,11 +470,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialQuadRelayV2.CallbackWrapperMonoflopDone(const aPacket: TDynamicByteArray);
