@@ -26,8 +26,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletMotionDetectorV2 = class;
-  TBrickletMotionDetectorV2NotifyMotionDetected = procedure(sender: TBrickletMotionDetectorV2) of object;
-  TBrickletMotionDetectorV2NotifyDetectionCycleEnded = procedure(sender: TBrickletMotionDetectorV2) of object;
+  TBrickletMotionDetectorV2NotifyMotionDetected = procedure(aSender: TBrickletMotionDetectorV2) of object;
+  TBrickletMotionDetectorV2NotifyDetectionCycleEnded = procedure(aSender: TBrickletMotionDetectorV2) of object;
 
   /// <summary>
   ///  Passive infrared (PIR) motion sensor with 12m range and dimmable backlight
@@ -64,7 +64,7 @@ type
     ///  
     ///  So you will have to find a good sensitivity for your application by trial and error.
     /// </summary>
-    procedure SetSensitivity(const sensitivity: byte); virtual;
+    procedure SetSensitivity(const aSensitivity: byte); virtual;
 
     /// <summary>
     ///  Returns the sensitivity as set by <see cref="BrickletMotionDetectorV2.TBrickletMotionDetectorV2.SetSensitivity"/>.
@@ -77,12 +77,12 @@ type
     ///  (0-255). A value of 0 turns the LED off and a value of 255 turns the LED
     ///  to full brightness.
     /// </summary>
-    procedure SetIndicator(const topLeft: byte; const topRight: byte; const bottom: byte); virtual;
+    procedure SetIndicator(const aTopLeft: byte; const aTopRight: byte; const aBottom: byte); virtual;
 
     /// <summary>
     ///  Returns the indicator configuration as set by <see cref="BrickletMotionDetectorV2.TBrickletMotionDetectorV2.SetIndicator"/>.
     /// </summary>
-    procedure GetIndicator(out topLeft: byte; out topRight: byte; out bottom: byte); virtual;
+    procedure GetIndicator(out aTopLeft: byte; out aTopRight: byte; out aBottom: byte); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -97,7 +97,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -125,7 +126,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -137,7 +138,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -148,7 +149,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletMotionDetectorV2.TBrickletMotionDetectorV2.SetStatusLEDConfig"/>
@@ -200,7 +201,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is called after a motion was detected.
@@ -263,12 +265,12 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletMotionDetectorV2.SetSensitivity(const sensitivity: byte);
+procedure TBrickletMotionDetectorV2.SetSensitivity(const aSensitivity: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_SET_SENSITIVITY, 9);
-  LEConvertUInt8To(sensitivity, 8, _request);
+  LEConvertUInt8To(aSensitivity, 8, _request);
   SendRequest(_request);
 end;
 
@@ -281,38 +283,38 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletMotionDetectorV2.SetIndicator(const topLeft: byte; const topRight: byte; const bottom: byte);
+procedure TBrickletMotionDetectorV2.SetIndicator(const aTopLeft: byte; const aTopRight: byte; const aBottom: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_SET_INDICATOR, 11);
-  LEConvertUInt8To(topLeft, 8, _request);
-  LEConvertUInt8To(topRight, 9, _request);
-  LEConvertUInt8To(bottom, 10, _request);
+  LEConvertUInt8To(aTopLeft, 8, _request);
+  LEConvertUInt8To(aTopRight, 9, _request);
+  LEConvertUInt8To(aBottom, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletMotionDetectorV2.GetIndicator(out topLeft: byte; out topRight: byte; out bottom: byte);
+procedure TBrickletMotionDetectorV2.GetIndicator(out aTopLeft: byte; out aTopRight: byte; out aBottom: byte);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_GET_INDICATOR, 8);
   _response:= SendRequest(_request);
-  topLeft:= LEConvertUInt8From(8, _response);
-  topRight:= LEConvertUInt8From(9, _response);
-  bottom:= LEConvertUInt8From(10, _response);
+  aTopLeft:= LEConvertUInt8From(8, _response);
+  aTopRight:= LEConvertUInt8From(9, _response);
+  aBottom:= LEConvertUInt8From(10, _response);
 end;
 
-procedure TBrickletMotionDetectorV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletMotionDetectorV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletMotionDetectorV2.SetBootloaderMode(const aMode: byte): byte;
@@ -334,32 +336,32 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletMotionDetectorV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletMotionDetectorV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletMotionDetectorV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletMotionDetectorV2.WriteFirmware(const aData: array of byte): byte;
 var 
 _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletMotionDetectorV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletMotionDetectorV2.SetStatusLEDConfig(const aConfig: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -407,17 +409,17 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletMotionDetectorV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletMotionDetectorV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
 var 
 _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MOTION_DETECTOR_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
   deviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
