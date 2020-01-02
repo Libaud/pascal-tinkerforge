@@ -27,9 +27,9 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletIO16V2 = class;
-  TBrickletIO16V2NotifyInputValue = procedure(sender: TBrickletIO16V2; const channel: byte; const changed: boolean; const value: boolean) of object;
-  TBrickletIO16V2NotifyAllInputValue = procedure(sender: TBrickletIO16V2; const changed: TArray0To15OfBoolean; const value: TArray0To15OfBoolean) of object;
-  TBrickletIO16V2NotifyMonoflopDone = procedure(sender: TBrickletIO16V2; const channel: byte; const value: boolean) of object;
+  TBrickletIO16V2NotifyInputValue = procedure(aSender: TBrickletIO16V2; const aChannel: byte; const aChanged: boolean; const aValue: boolean) of object;
+  TBrickletIO16V2NotifyAllInputValue = procedure(aSender: TBrickletIO16V2; const aChanged: TArray0To15OfBoolean; const aValue: TArray0To15OfBoolean) of object;
+  TBrickletIO16V2NotifyMonoflopDone = procedure(aSender: TBrickletIO16V2; const aChannel: byte; const aValue: boolean) of object;
 
   /// <summary>
   ///  16-channel digital input/output
@@ -65,7 +65,7 @@ type
     ///   resistors can be switched on with <see cref="BrickletIO16V2.TBrickletIO16V2.SetConfiguration"/>.
     ///  </note>
     /// </summary>
-    procedure SetValue(const value: array of boolean); virtual;
+    procedure SetValue(const aValue: array of boolean); virtual;
 
     /// <summary>
     ///  Returns the logic levels that are currently measured on the channels.
@@ -85,7 +85,7 @@ type
     ///   resistors can be switched on with <see cref="BrickletIO16V2.TBrickletIO16V2.SetConfiguration"/>.
     ///  </note>
     /// </summary>
-    procedure SetSelectedValue(const channel: byte; const value: boolean); virtual;
+    procedure SetSelectedValue(const aChannel: byte; const aValue: boolean); virtual;
 
     /// <summary>
     ///  Configures the value and direction of a specific channel. Possible directions
@@ -107,12 +107,12 @@ type
     ///  A running monoflop timer for the specific channel will be aborted if this
     ///  function is called.
     /// </summary>
-    procedure SetConfiguration(const channel: byte; const direction: char; const value: boolean); virtual;
+    procedure SetConfiguration(const aChannel: byte; const aDirection: char; const aValue: boolean); virtual;
 
     /// <summary>
     ///  Returns the channel configuration as set by <see cref="BrickletIO16V2.TBrickletIO16V2.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(const channel: byte; out direction: char; out aValue: boolean); virtual;
+    procedure GetConfiguration(const aChannel: byte; out aDirection: char; out aValue: boolean); virtual;
 
     /// <summary>
     ///  This callback can be configured per channel.
@@ -127,32 +127,32 @@ type
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetInputValueCallbackConfiguration(const channel: byte; const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetInputValueCallbackConfiguration(const aChannel: byte; const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletIO16V2.TBrickletIO16V2.SetInputValueCallbackConfiguration"/>.
     /// </summary>
-    procedure GetInputValueCallbackConfiguration(const channel: byte; out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetInputValueCallbackConfiguration(const aChannel: byte; out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletIO16V2.TBrickletIO16V2.OnAllInputValue"/>
     ///  callback is triggered periodically. A value of 0 turns the callback off.
     ///  
     ///  If the `value has to change`-parameter is set to true, the callback is only
-    ///  triggered after the value has changed. If the value didn't change within the
+    ///  triggered after the value has changed. If the value didn't change within the             valueHasToChange
     ///  period, the callback is triggered immediately on change.
     ///  
     ///  If it is set to false, the callback is continuously triggered with the period,
     ///  independent of the value.
     /// </summary>
-    procedure SetAllInputValueCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetAllInputValueCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
     ///  <see cref="BrickletIO16V2.TBrickletIO16V2.SetAllInputValueCallbackConfiguration"/>.
     /// </summary>
-    procedure GetAllInputValueCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetAllInputValueCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Configures a monoflop of the specified channel.
@@ -173,7 +173,7 @@ type
     ///  time. If now the RS485 connection is lost, then channel 0 will be opened in at
     ///  most two seconds.
     /// </summary>
-    procedure SetMonoflop(const channel: byte; const value: boolean; const time: longword); virtual;
+    procedure SetMonoflop(const aChannel: byte; const aValue: boolean; const aTime: longword); virtual;
 
     /// <summary>
     ///  Returns (for the given channel) the current value and the time as set by
@@ -182,7 +182,7 @@ type
     ///  If the timer is not running currently, the remaining time will be returned
     ///  as 0.
     /// </summary>
-    procedure GetMonoflop(const channel: byte; out aValue: boolean; out time: longword; out timeRemaining: longword); virtual;
+    procedure GetMonoflop(const aChannel: byte; out aValue: boolean; out aTime: longword; out aTimeRemaining: longword); virtual;
 
     /// <summary>
     ///  Returns the current value of the edge counter for the selected channel. You can
@@ -191,7 +191,7 @@ type
     ///  If you set the reset counter to *true*, the count is set back to 0
     ///  directly after it is read.
     /// </summary>
-    function GetEdgeCount(const channel: byte; const resetCounter: boolean): longword; virtual;
+    function GetEdgeCount(const aChannel: byte; const aResetCounter: boolean): longword; virtual;
 
     /// <summary>
     ///  Configures the edge counter for a specific channel.
@@ -208,13 +208,13 @@ type
     ///  If you don't know what any of this means, just leave it at default. The
     ///  default configuration is very likely OK for you.
     /// </summary>
-    procedure SetEdgeCountConfiguration(const channel: byte; const edgeType: byte; const debounce: byte); virtual;
+    procedure SetEdgeCountConfiguration(const aChannel: byte; const aEdgeType: byte; const aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the edge type and debounce time for the selected channel as set by
     ///  <see cref="BrickletIO16V2.TBrickletIO16V2.SetEdgeCountConfiguration"/>.
     /// </summary>
-    procedure GetEdgeCountConfiguration(const channel: byte; out edgeType: byte; out debounce: byte); virtual;
+    procedure GetEdgeCountConfiguration(const aChannel: byte; out aEdgeType: byte; out aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -229,7 +229,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -257,7 +258,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -269,7 +270,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -280,7 +281,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletIO16V2.TBrickletIO16V2.SetStatusLEDConfig"/>
@@ -332,7 +333,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -411,174 +413,178 @@ begin
   aCallBacks[BRICKLET_IO16_V2_CALLBACK_MONOFLOP_DONE]:= {$ifdef FPC}@{$endif}CallbackWrapperMonoflopDone;
 end;
 
-procedure TBrickletIO16V2.SetValue(const value: array of boolean);
+procedure TBrickletIO16V2.SetValue(const aValue: array of boolean);
 var 
-_request: TDynamicByteArray; _i: longint; valueBits: array [0..1] of byte;
+  _request: TDynamicByteArray;
+  _i: longint;
+  _valueBits: array [0..1] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_VALUE, 10);
-  if (Length(value) <> 16) then raise EInvalidParameterException.Create('Value has to be exactly 16 items long');
-  FillChar(valueBits[0], Length(valueBits) * SizeOf(valueBits[0]), 0);
-  for _i:= 0 to 15 do if value[_i] then valueBits[Floor(_i / 8)]:= valueBits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 1 do LEConvertUInt8To(valueBits[_i], 8 + (_i * 1), _request);
+  if (Length(aValue) <> 16) then raise EInvalidParameterException.Create('Value has to be exactly 16 items long');
+  FillChar(_valueBits[0], Length(_valueBits) * SizeOf(_valueBits[0]), 0);
+  for _i:= 0 to 15 do if aValue[_i] then _valueBits[Floor(_i / 8)]:= _valueBits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 1 do LEConvertUInt8To(_valueBits[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
 function TBrickletIO16V2.GetValue: TArray0To15OfBoolean;
 var 
-_request, _response: TDynamicByteArray; _i: longint; valueBits: array [0..1] of byte;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
+  _valueBits: array [0..1] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_VALUE, 8);
   _response:= SendRequest(_request);
-  FillChar(valueBits[0], Length(valueBits) * SizeOf(valueBits[0]), 0);
-  for _i:= 0 to 1 do valueBits[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  for _i:= 0 to 15 do Result[_i]:= ((valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_valueBits[0], Length(_valueBits) * SizeOf(_valueBits[0]), 0);
+  for _i:= 0 to 1 do _valueBits[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  for _i:= 0 to 15 do Result[_i]:= ((_valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 end;
 
-procedure TBrickletIO16V2.SetSelectedValue(const channel: byte; const value: boolean);
+procedure TBrickletIO16V2.SetSelectedValue(const aChannel: byte; const aValue: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_SELECTED_VALUE, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(value, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aValue, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16V2.SetConfiguration(const channel: byte; const direction: char; const value: boolean);
+procedure TBrickletIO16V2.SetConfiguration(const aChannel: byte; const aDirection: char; const aValue: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_CONFIGURATION, 11);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertCharTo(direction, 9, _request);
-  LEConvertBooleanTo(value, 10, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertCharTo(aDirection, 9, _request);
+  LEConvertBooleanTo(aValue, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16V2.GetConfiguration(const channel: byte; out direction: char; out aValue: boolean);
+procedure TBrickletIO16V2.GetConfiguration(const aChannel: byte; out aDirection: char; out aValue: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_CONFIGURATION, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  direction:= LEConvertCharFrom(8, _response);
+  aDirection:= LEConvertCharFrom(8, _response);
   aValue:= LEConvertBooleanFrom(9, _response);
 end;
 
-procedure TBrickletIO16V2.SetInputValueCallbackConfiguration(const channel: byte; const period: longword; const valueHasToChange: boolean);
+procedure TBrickletIO16V2.SetInputValueCallbackConfiguration(const aChannel: byte; const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_INPUT_VALUE_CALLBACK_CONFIGURATION, 14);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt32To(period, 9, _request);
-  LEConvertBooleanTo(valueHasToChange, 13, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt32To(aPeriod, 9, _request);
+  LEConvertBooleanTo(aValueHasToChange, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16V2.GetInputValueCallbackConfiguration(const channel: byte; out period: longword; out valueHasToChange: boolean);
+procedure TBrickletIO16V2.GetInputValueCallbackConfiguration(const aChannel: byte; out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_INPUT_VALUE_CALLBACK_CONFIGURATION, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletIO16V2.SetAllInputValueCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletIO16V2.SetAllInputValueCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_ALL_INPUT_VALUE_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16V2.GetAllInputValueCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletIO16V2.GetAllInputValueCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_ALL_INPUT_VALUE_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletIO16V2.SetMonoflop(const channel: byte; const value: boolean; const time: longword);
+procedure TBrickletIO16V2.SetMonoflop(const aChannel: byte; const aValue: boolean; const aTime: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_MONOFLOP, 14);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(value, 9, _request);
-  LEConvertUInt32To(time, 10, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aValue, 9, _request);
+  LEConvertUInt32To(aTime, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16V2.GetMonoflop(const channel: byte; out aValue: boolean; out time: longword; out timeRemaining: longword);
+procedure TBrickletIO16V2.GetMonoflop(const aChannel: byte; out aValue: boolean; out aTime: longword; out aTimeRemaining: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_MONOFLOP, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   aValue:= LEConvertBooleanFrom(8, _response);
-  time:= LEConvertUInt32From(9, _response);
-  timeRemaining:= LEConvertUInt32From(13, _response);
+  aTime:= LEConvertUInt32From(9, _response);
+  aTimeRemaining:= LEConvertUInt32From(13, _response);
 end;
 
-function TBrickletIO16V2.GetEdgeCount(const channel: byte; const resetCounter: boolean): longword;
+function TBrickletIO16V2.GetEdgeCount(const aChannel: byte; const aResetCounter: boolean): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_EDGE_COUNT, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertBooleanTo(resetCounter, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertBooleanTo(aResetCounter, 9, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIO16V2.SetEdgeCountConfiguration(const channel: byte; const edgeType: byte; const debounce: byte);
+procedure TBrickletIO16V2.SetEdgeCountConfiguration(const aChannel: byte; const aEdgeType: byte; const aDebounce: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_EDGE_COUNT_CONFIGURATION, 11);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt8To(edgeType, 9, _request);
-  LEConvertUInt8To(debounce, 10, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt8To(aEdgeType, 9, _request);
+  LEConvertUInt8To(aDebounce, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16V2.GetEdgeCountConfiguration(const channel: byte; out edgeType: byte; out debounce: byte);
+procedure TBrickletIO16V2.GetEdgeCountConfiguration(const aChannel: byte; out aEdgeType: byte; out aDebounce: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_EDGE_COUNT_CONFIGURATION, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  edgeType:= LEConvertUInt8From(8, _response);
-  debounce:= LEConvertUInt8From(9, _response);
+  aEdgeType:= LEConvertUInt8From(8, _response);
+  aDebounce:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletIO16V2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletIO16V2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletIO16V2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -588,45 +594,46 @@ end;
 
 function TBrickletIO16V2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIO16V2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletIO16V2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIO16V2.WriteFirmware(const data: array of byte): byte;
+function TBrickletIO16V2.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIO16V2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletIO16V2.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIO16V2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -635,7 +642,7 @@ end;
 
 function TBrickletIO16V2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -644,7 +651,7 @@ end;
 
 procedure TBrickletIO16V2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -652,7 +659,7 @@ end;
 
 procedure TBrickletIO16V2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -661,62 +668,73 @@ end;
 
 function TBrickletIO16V2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIO16V2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIO16V2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIO16V2.CallbackWrapperInputValue(const aPacket: TDynamicByteArray);
-var channel: byte; changed: boolean; value: boolean;
+var
+  _channel: byte;
+  _changed: boolean;
+  _value: boolean;
 begin
-  channel:= LEConvertUInt8From(8, aPacket);
-  changed:= LEConvertBooleanFrom(9, aPacket);
-  value:= LEConvertBooleanFrom(10, aPacket);
+  _channel:= LEConvertUInt8From(8, aPacket);
+  _changed:= LEConvertBooleanFrom(9, aPacket);
+  _value:= LEConvertBooleanFrom(10, aPacket);
 
   if (Assigned(fInputValueCallback)) then begin
-    fInputValueCallback(self, channel, changed, value);
+    fInputValueCallback(self, _channel, _changed, _value);
   end;
 end;
 
 procedure TBrickletIO16V2.CallbackWrapperAllInputValue(const aPacket: TDynamicByteArray);
-var changed: TArray0To15OfBoolean; value: TArray0To15OfBoolean; _i: longint; changedBits: array [0..1] of byte; valueBits: array [0..1] of byte;
+var
+  _changed: TArray0To15OfBoolean;
+  _value: TArray0To15OfBoolean;
+  _i: longint;
+  _changedBits: array [0..1] of byte;
+  _valueBits: array [0..1] of byte;
 begin
-  FillChar(changedBits[0], Length(changedBits) * SizeOf(changedBits[0]), 0);
-  for _i:= 0 to 1 do changedBits[_i]:= LEConvertUInt8From(8 + (_i * 1), aPacket);
-  for _i:= 0 to 15 do changed[_i]:= ((changedBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  FillChar(valueBits[0], Length(valueBits) * SizeOf(valueBits[0]), 0);
-  for _i:= 0 to 1 do valueBits[_i]:= LEConvertUInt8From(10 + (_i * 1), aPacket);
-  for _i:= 0 to 15 do value[_i]:= ((valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_changedBits[0], Length(_changedBits) * SizeOf(_changedBits[0]), 0);
+  for _i:= 0 to 1 do _changedBits[_i]:= LEConvertUInt8From(8 + (_i * 1), aPacket);
+  for _i:= 0 to 15 do _changed[_i]:= ((_changedBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_valueBits[0], Length(_valueBits) * SizeOf(_valueBits[0]), 0);
+  for _i:= 0 to 1 do _valueBits[_i]:= LEConvertUInt8From(10 + (_i * 1), aPacket);
+  for _i:= 0 to 15 do _value[_i]:= ((_valueBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 
   if (Assigned(fAllInputValueCallback)) then begin
-    fAllInputValueCallback(self, changed, value);
+    fAllInputValueCallback(self, _changed, _value);
   end;
 end;
 
 procedure TBrickletIO16V2.CallbackWrapperMonoflopDone(const aPacket: TDynamicByteArray);
-var channel: byte; value: boolean;
+var
+  _channel: byte;
+  _value: boolean;
 begin
-  channel:= LEConvertUInt8From(8, aPacket);
-  value:= LEConvertBooleanFrom(9, aPacket);
+  _channel:= LEConvertUInt8From(8, aPacket);
+  _value:= LEConvertBooleanFrom(9, aPacket);
 
   if (Assigned(fMonoflopDoneCallback)) then begin
-    fMonoflopDoneCallback(self, channel, value);
+    fMonoflopDoneCallback(self, _channel, _value);
   end;
 end;
 

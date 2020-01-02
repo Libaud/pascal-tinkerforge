@@ -26,14 +26,15 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletIsolator = class;
-  TBrickletIsolatorNotifyStatistics = procedure(sender: TBrickletIsolator; const messagesFromBrick: longword; const messagesFromBricklet: longword; const connectedBrickletDeviceIdentifier: word; const connectedBrickletUID: string) of object;
+  TBrickletIsolatorNotifyStatistics = procedure(aSender: TBrickletIsolator; const aMessagesFromBrick: longword; const aMessagesFromBricklet: longword;
+                                                const aConnectedBrickletDeviceIdentifier: word; const aConnectedBrickletUID: string) of object;
 
   /// <summary>
   ///  Galvanically isolates any Bricklet from any Brick
   /// </summary>
   TBrickletIsolator = class(TDevice)
   private
-    statisticsCallback: TBrickletIsolatorNotifyStatistics;
+    fStatisticsCallback: TBrickletIsolatorNotifyStatistics;
     procedure CallbackWrapperStatistics(const aPacket: TDynamicByteArray); virtual;
   protected
     // Inherited method's
@@ -44,7 +45,8 @@ type
     /// <summary>
     ///  Returns statistics for the Isolator Bricklet.
     /// </summary>
-    procedure GetStatistics(out messagesFromBrick: longword; out messagesFromBricklet: longword; out connectedBrickletDeviceIdentifier: word; out connectedBrickletUID: string); virtual;
+    procedure GetStatistics(out aMessagesFromBrick: longword; out aMessagesFromBricklet: longword;
+                            out aConnectedBrickletDeviceIdentifier: word; out aConnectedBrickletUID: string); virtual;
 
     /// <summary>
     ///  The SPITF protocol can be used with a dynamic baudrate. If the dynamic baudrate is
@@ -69,12 +71,12 @@ type
     ///  <see cref="BrickletIsolator.TBrickletIsolator.SetSPITFPBaudrate"/>. If the dynamic baudrate is disabled, the baudrate
     ///  as set by <see cref="BrickletIsolator.TBrickletIsolator.SetSPITFPBaudrate"/> will be used statically.
     /// </summary>
-    procedure SetSPITFPBaudrateConfig(const enableDynamicBaudrate: boolean; const minimumDynamicBaudrate: longword); virtual;
+    procedure SetSPITFPBaudrateConfig(const aEnableDynamicBaudrate: boolean; const aMinimumDynamicBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the baudrate config, see <see cref="BrickletIsolator.TBrickletIsolator.SetSPITFPBaudrateConfig"/>.
     /// </summary>
-    procedure GetSPITFPBaudrateConfig(out enableDynamicBaudrate: boolean; out minimumDynamicBaudrate: longword); virtual;
+    procedure GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword); virtual;
 
     /// <summary>
     ///  Sets the baudrate for a the communication between Isolator Bricklet
@@ -93,7 +95,7 @@ type
     ///  or similar is necessary in you applications we recommend to not change
     ///  the baudrate.
     /// </summary>
-    procedure SetSPITFPBaudrate(const baudrate: longword); virtual;
+    procedure SetSPITFPBaudrate(const aBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the baudrate, see <see cref="BrickletIsolator.TBrickletIsolator.SetSPITFPBaudrate"/>.
@@ -112,7 +114,8 @@ type
     ///  * framing errors and
     ///  * overflow errors.
     /// </summary>
-    procedure GetIsolatorSPITFPErrorCount(out errorCountACKChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetIsolatorSPITFPErrorCount(out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                          out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletIsolator.TBrickletIsolator.OnStatistics"/>
@@ -127,7 +130,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetStatisticsCallbackConfiguration(const period: longword; const valueHasToChange: boolean); virtual;
+    procedure SetStatisticsCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by
@@ -135,7 +138,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure GetStatisticsCallbackConfiguration(out period: longword; out valueHasToChange: boolean); virtual;
+    procedure GetStatisticsCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -150,7 +153,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -178,7 +182,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -190,7 +194,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -201,7 +205,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletIsolator.TBrickletIsolator.SetStatusLEDConfig"/>
@@ -253,7 +257,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -263,7 +268,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    property OnStatistics: TBrickletIsolatorNotifyStatistics read statisticsCallback write statisticsCallback;
+    property OnStatistics: TBrickletIsolatorNotifyStatistics read fStatisticsCallback write fStatisticsCallback;
   end;
 
 implementation
@@ -307,44 +312,44 @@ begin
   aCallBacks[BRICKLET_ISOLATOR_CALLBACK_STATISTICS]:= {$ifdef FPC}@{$endif}CallbackWrapperStatistics;
 end;
 
-procedure TBrickletIsolator.GetStatistics(out messagesFromBrick: longword; out messagesFromBricklet: longword; out connectedBrickletDeviceIdentifier: word; out connectedBrickletUID: string);
+procedure TBrickletIsolator.GetStatistics(out aMessagesFromBrick: longword; out aMessagesFromBricklet: longword; out aConnectedBrickletDeviceIdentifier: word; out aConnectedBrickletUID: string);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_STATISTICS, 8);
   _response:= SendRequest(_request);
-  messagesFromBrick:= LEConvertUInt32From(8, _response);
-  messagesFromBricklet:= LEConvertUInt32From(12, _response);
-  connectedBrickletDeviceIdentifier:= LEConvertUInt16From(16, _response);
-  connectedBrickletUID:= LEConvertStringFrom(18, 8, _response);
+  aMessagesFromBrick:= LEConvertUInt32From(8, _response);
+  aMessagesFromBricklet:= LEConvertUInt32From(12, _response);
+  aConnectedBrickletDeviceIdentifier:= LEConvertUInt16From(16, _response);
+  aConnectedBrickletUID:= LEConvertStringFrom(18, 8, _response);
 end;
 
-procedure TBrickletIsolator.SetSPITFPBaudrateConfig(const enableDynamicBaudrate: boolean; const minimumDynamicBaudrate: longword);
+procedure TBrickletIsolator.SetSPITFPBaudrateConfig(const aEnableDynamicBaudrate: boolean; const aMinimumDynamicBaudrate: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_SET_SPITFP_BAUDRATE_CONFIG, 13);
-  LEConvertBooleanTo(enableDynamicBaudrate, 8, _request);
-  LEConvertUInt32To(minimumDynamicBaudrate, 9, _request);
+  LEConvertBooleanTo(aEnableDynamicBaudrate, 8, _request);
+  LEConvertUInt32To(aMinimumDynamicBaudrate, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIsolator.GetSPITFPBaudrateConfig(out enableDynamicBaudrate: boolean; out minimumDynamicBaudrate: longword);
+procedure TBrickletIsolator.GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_SPITFP_BAUDRATE_CONFIG, 8);
   _response:= SendRequest(_request);
-  enableDynamicBaudrate:= LEConvertBooleanFrom(8, _response);
-  minimumDynamicBaudrate:= LEConvertUInt32From(9, _response);
+  aEnableDynamicBaudrate:= LEConvertBooleanFrom(8, _response);
+  aMinimumDynamicBaudrate:= LEConvertUInt32From(9, _response);
 end;
 
-procedure TBrickletIsolator.SetSPITFPBaudrate(const baudrate: longword);
+procedure TBrickletIsolator.SetSPITFPBaudrate(const aBaudrate: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_SET_SPITFP_BAUDRATE, 12);
-  LEConvertUInt32To(baudrate, 8, _request);
+  LEConvertUInt32To(aBaudrate, 8, _request);
   SendRequest(_request);
 end;
 
@@ -357,53 +362,53 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIsolator.GetIsolatorSPITFPErrorCount(out errorCountACKChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletIsolator.GetIsolatorSPITFPErrorCount(out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_ISOLATOR_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountACKChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountACKChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
-procedure TBrickletIsolator.SetStatisticsCallbackConfiguration(const period: longword; const valueHasToChange: boolean);
+procedure TBrickletIsolator.SetStatisticsCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_SET_STATISTICS_CALLBACK_CONFIGURATION, 13);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIsolator.GetStatisticsCallbackConfiguration(out period: longword; out valueHasToChange: boolean);
+procedure TBrickletIsolator.GetStatisticsCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_STATISTICS_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
 end;
 
-procedure TBrickletIsolator.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletIsolator.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletIsolator.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -413,40 +418,40 @@ end;
 
 function TBrickletIsolator.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIsolator.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletIsolator.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIsolator.WriteFirmware(const data: array of byte): byte;
+function TBrickletIsolator.WriteFirmware(const aData: array of byte): byte;
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIsolator.SetStatusLEDConfig(const config: byte);
+procedure TBrickletIsolator.SetStatusLEDConfig(const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -478,7 +483,7 @@ end;
 
 procedure TBrickletIsolator.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -494,7 +499,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIsolator.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIsolator.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -502,24 +507,27 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_ISOLATOR_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIsolator.CallbackWrapperStatistics(const aPacket: TDynamicByteArray);
 var
-  messagesFromBrick: longword; messagesFromBricklet: longword; connectedBrickletDeviceIdentifier: word; connectedBrickletUID: string;
+  _messagesFromBrick: longword;
+  _messagesFromBricklet: longword;
+  _connectedBrickletDeviceIdentifier: word;
+  _connectedBrickletUID: string;
 begin
-  messagesFromBrick:= LEConvertUInt32From(8, aPacket);
-  messagesFromBricklet:= LEConvertUInt32From(12, aPacket);
-  connectedBrickletDeviceIdentifier:= LEConvertUInt16From(16, aPacket);
-  connectedBrickletUID:= LEConvertStringFrom(18, 8, aPacket);
+  _messagesFromBrick:= LEConvertUInt32From(8, aPacket);
+  _messagesFromBricklet:= LEConvertUInt32From(12, aPacket);
+  _connectedBrickletDeviceIdentifier:= LEConvertUInt16From(16, aPacket);
+  _connectedBrickletUID:= LEConvertStringFrom(18, 8, aPacket);
 
-  if (Assigned(statisticsCallback)) then begin
-    statisticsCallback(self, messagesFromBrick, messagesFromBricklet, connectedBrickletDeviceIdentifier, connectedBrickletUID);
+  if (Assigned(fStatisticsCallback)) then begin
+    fStatisticsCallback(self, _messagesFromBrick, _messagesFromBricklet, _connectedBrickletDeviceIdentifier, _connectedBrickletUID);
   end;
 end;
 
