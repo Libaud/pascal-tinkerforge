@@ -26,10 +26,10 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletTemperatureIR = class;
-  TBrickletTemperatureIRNotifyAmbientTemperature = procedure(aSender: TBrickletTemperatureIR; const temperature: smallint) of object;
-  TBrickletTemperatureIRNotifyObjectTemperature = procedure(aSender: TBrickletTemperatureIR; const temperature: smallint) of object;
-  TBrickletTemperatureIRNotifyAmbientTemperatureReached = procedure(aSender: TBrickletTemperatureIR; const temperature: smallint) of object;
-  TBrickletTemperatureIRNotifyObjectTemperatureReached = procedure(aSender: TBrickletTemperatureIR; const temperature: smallint) of object;
+  TBrickletTemperatureIRNotifyAmbientTemperature = procedure(aSender: TBrickletTemperatureIR; const aTemperature: smallint) of object;
+  TBrickletTemperatureIRNotifyObjectTemperature = procedure(aSender: TBrickletTemperatureIR; const aTemperature: smallint) of object;
+  TBrickletTemperatureIRNotifyAmbientTemperatureReached = procedure(aSender: TBrickletTemperatureIR; const aTemperature: smallint) of object;
+  TBrickletTemperatureIRNotifyObjectTemperatureReached = procedure(aSender: TBrickletTemperatureIR; const aTemperature: smallint) of object;
 
   /// <summary>
   ///  Measures contactless object temperature between -70°C and +380°C
@@ -94,7 +94,7 @@ type
     ///  
     ///  The emissivity is stored in non-volatile memory and will still be used after a restart or power cycle of the Bricklet.
     /// </summary>
-    procedure SetEmissivity(const emissivity: word); virtual;
+    procedure SetEmissivity(const aEmissivity: word); virtual;
 
     /// <summary>
     ///  Returns the emissivity as set by <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.SetEmissivity"/>.
@@ -108,7 +108,7 @@ type
     ///  The <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.OnAmbientTemperature"/> callback is only triggered if the temperature has
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetAmbientTemperatureCallbackPeriod(const period: longword); virtual;
+    procedure SetAmbientTemperatureCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.SetAmbientTemperatureCallbackPeriod"/>.
@@ -122,7 +122,7 @@ type
     ///  The <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.OnObjectTemperature"/> callback is only triggered if the temperature
     ///  has changed since the last triggering.
     /// </summary>
-    procedure SetObjectTemperatureCallbackPeriod(const period: longword); virtual;
+    procedure SetObjectTemperatureCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.SetObjectTemperatureCallbackPeriod"/>.
@@ -144,12 +144,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the ambient temperature is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetAmbientTemperatureCallbackThreshold(const option: char; const min: smallint; const max: smallint); virtual;
+    procedure SetAmbientTemperatureCallbackThreshold(const aOption: char; const aMin: smallint; const aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.SetAmbientTemperatureCallbackThreshold"/>.
     /// </summary>
-    procedure GetAmbientTemperatureCallbackThreshold(out option: char; out min: smallint; out max: smallint); virtual;
+    procedure GetAmbientTemperatureCallbackThreshold(out aOption: char; out aMin: smallint; out aMax: smallint); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.OnObjectTemperatureReached"/> callback.
@@ -166,12 +166,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the object temperature is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetObjectTemperatureCallbackThreshold(const option: char; const min: smallint; const max: smallint); virtual;
+    procedure SetObjectTemperatureCallbackThreshold(const aOption: char; const aMin: smallint; const aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.SetObjectTemperatureCallbackThreshold"/>.
     /// </summary>
-    procedure GetObjectTemperatureCallbackThreshold(out option: char; out min: smallint; out max: smallint); virtual;
+    procedure GetObjectTemperatureCallbackThreshold(out aOption: char; out aMin: smallint; out aMax: smallint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -186,7 +186,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletTemperatureIR.TBrickletTemperatureIR.SetDebouncePeriod"/>.
@@ -203,7 +203,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -284,7 +285,7 @@ end;
 
 function TBrickletTemperatureIR.GetAmbientTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_AMBIENT_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -293,180 +294,185 @@ end;
 
 function TBrickletTemperatureIR.GetObjectTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_OBJECT_TEMPERATURE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletTemperatureIR.SetEmissivity(const emissivity: word);
+procedure TBrickletTemperatureIR.SetEmissivity(const aEmissivity: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_SET_EMISSIVITY, 10);
-  LEConvertUInt16To(emissivity, 8, _request);
+  LEConvertUInt16To(aEmissivity, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletTemperatureIR.GetEmissivity: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_EMISSIVITY, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletTemperatureIR.SetAmbientTemperatureCallbackPeriod(const period: longword);
+procedure TBrickletTemperatureIR.SetAmbientTemperatureCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_SET_AMBIENT_TEMPERATURE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletTemperatureIR.GetAmbientTemperatureCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_AMBIENT_TEMPERATURE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletTemperatureIR.SetObjectTemperatureCallbackPeriod(const period: longword);
+procedure TBrickletTemperatureIR.SetObjectTemperatureCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_SET_OBJECT_TEMPERATURE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletTemperatureIR.GetObjectTemperatureCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_OBJECT_TEMPERATURE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletTemperatureIR.SetAmbientTemperatureCallbackThreshold(const option: char; const min: smallint; const max: smallint);
+procedure TBrickletTemperatureIR.SetAmbientTemperatureCallbackThreshold(const aOption: char; const aMin: smallint; const aMax: smallint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_SET_AMBIENT_TEMPERATURE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt16To(min, 9, _request);
-  LEConvertInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt16To(aMin, 9, _request);
+  LEConvertInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletTemperatureIR.GetAmbientTemperatureCallbackThreshold(out option: char; out min: smallint; out max: smallint);
+procedure TBrickletTemperatureIR.GetAmbientTemperatureCallbackThreshold(out aOption: char; out aMin: smallint; out aMax: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_AMBIENT_TEMPERATURE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt16From(9, _response);
-  max:= LEConvertInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt16From(9, _response);
+  aMax:= LEConvertInt16From(11, _response);
 end;
 
-procedure TBrickletTemperatureIR.SetObjectTemperatureCallbackThreshold(const option: char; const min: smallint; const max: smallint);
+procedure TBrickletTemperatureIR.SetObjectTemperatureCallbackThreshold(const aOption: char; const aMin: smallint; const aMax: smallint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_SET_OBJECT_TEMPERATURE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt16To(min, 9, _request);
-  LEConvertInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt16To(aMin, 9, _request);
+  LEConvertInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletTemperatureIR.GetObjectTemperatureCallbackThreshold(out option: char; out min: smallint; out max: smallint);
+procedure TBrickletTemperatureIR.GetObjectTemperatureCallbackThreshold(out aOption: char; out aMin: smallint; out aMax: smallint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_OBJECT_TEMPERATURE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt16From(9, _response);
-  max:= LEConvertInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt16From(9, _response);
+  aMax:= LEConvertInt16From(11, _response);
 end;
 
-procedure TBrickletTemperatureIR.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletTemperatureIR.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletTemperatureIR.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletTemperatureIR.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletTemperatureIR.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TEMPERATURE_IR_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletTemperatureIR.CallbackWrapperAmbientTemperature(const aPacket: TDynamicByteArray);
-var temperature: smallint;
+var
+  _temperature: smallint;
 begin
-  temperature:= LEConvertInt16From(8, aPacket);
+  _temperature:= LEConvertInt16From(8, aPacket);
 
   if (Assigned(fAmbientTemperatureCallback)) then begin
-    fAmbientTemperatureCallback(self, temperature);
+    fAmbientTemperatureCallback(self, _temperature);
   end;
 end;
 
 procedure TBrickletTemperatureIR.CallbackWrapperObjectTemperature(const aPacket: TDynamicByteArray);
-var temperature: smallint;
+var
+  _temperature: smallint;
 begin
-  temperature:= LEConvertInt16From(8, aPacket);
+  _temperature:= LEConvertInt16From(8, aPacket);
 
   if (Assigned(fObjectTemperatureCallback)) then begin
-    fObjectTemperatureCallback(self, temperature);
+    fObjectTemperatureCallback(self, _temperature);
   end;
 end;
 
 procedure TBrickletTemperatureIR.CallbackWrapperAmbientTemperatureReached(const aPacket: TDynamicByteArray);
-var temperature: smallint;
+var
+  _temperature: smallint;
 begin
-  temperature:= LEConvertInt16From(8, aPacket);
+  _temperature:= LEConvertInt16From(8, aPacket);
 
   if (Assigned(fAmbientTemperatureReachedCallback)) then begin
-    fAmbientTemperatureReachedCallback(self, temperature);
+    fAmbientTemperatureReachedCallback(self, _temperature);
   end;
 end;
 
 procedure TBrickletTemperatureIR.CallbackWrapperObjectTemperatureReached(const aPacket: TDynamicByteArray);
-var temperature: smallint;
+var
+  _temperature: smallint;
 begin
-  temperature:= LEConvertInt16From(8, aPacket);
+  _temperature:= LEConvertInt16From(8, aPacket);
 
   if (Assigned(fObjectTemperatureReachedCallback)) then begin
-    fObjectTemperatureReachedCallback(self, temperature);
+    fObjectTemperatureReachedCallback(self, _temperature);
   end;
 end;
 

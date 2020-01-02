@@ -26,8 +26,8 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletUVLight = class;
-  TBrickletUVLightNotifyUVLight = procedure(aSender: TBrickletUVLight; const uvLight: longword) of object;
-  TBrickletUVLightNotifyUVLightReached = procedure(aSender: TBrickletUVLight; const uvLight: longword) of object;
+  TBrickletUVLightNotifyUVLight = procedure(aSender: TBrickletUVLight; const aUVLight: longword) of object;
+  TBrickletUVLightNotifyUVLightReached = procedure(aSender: TBrickletUVLight; const aUVLight: longword) of object;
 
   /// <summary>
   ///  Measures UV light
@@ -66,7 +66,7 @@ type
     ///  The <see cref="BrickletUVLight.TBrickletUVLight.OnUVLight"/> callback is only triggered if the intensity has changed since
     ///  the last triggering.
     /// </summary>
-    procedure SetUVLightCallbackPeriod(const period: longword); virtual;
+    procedure SetUVLightCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletUVLight.TBrickletUVLight.SetUVLightCallbackPeriod"/>.
@@ -90,12 +90,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetUVLightCallbackThreshold(const option: char; const min: longword; const max: longword); virtual;
+    procedure SetUVLightCallbackThreshold(const aOption: char; const aMin: longword; const aMax: longword); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletUVLight.TBrickletUVLight.SetUVLightCallbackThreshold"/>.
     /// </summary>
-    procedure GetUVLightCallbackThreshold(out option: char; out min: longword; out max: longword); virtual;
+    procedure GetUVLightCallbackThreshold(out aOption: char; out aMin: longword; out aMax: longword); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -108,7 +108,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletUVLight.TBrickletUVLight.SetDebouncePeriod"/>.
@@ -125,7 +125,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -177,102 +178,105 @@ end;
 
 function TBrickletUVLight.GetUVLight: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_GET_UV_LIGHT, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletUVLight.SetUVLightCallbackPeriod(const period: longword);
+procedure TBrickletUVLight.SetUVLightCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_SET_UV_LIGHT_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletUVLight.GetUVLightCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_GET_UV_LIGHT_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletUVLight.SetUVLightCallbackThreshold(const option: char; const min: longword; const max: longword);
+procedure TBrickletUVLight.SetUVLightCallbackThreshold(const aOption: char; const aMin: longword; const aMax: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_SET_UV_LIGHT_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt32To(min, 9, _request);
-  LEConvertUInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt32To(aMin, 9, _request);
+  LEConvertUInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletUVLight.GetUVLightCallbackThreshold(out option: char; out min: longword; out max: longword);
+procedure TBrickletUVLight.GetUVLightCallbackThreshold(out aOption: char; out aMin: longword; out aMax: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_GET_UV_LIGHT_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt32From(9, _response);
-  max:= LEConvertUInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt32From(9, _response);
+  aMax:= LEConvertUInt32From(13, _response);
 end;
 
-procedure TBrickletUVLight.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletUVLight.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletUVLight.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletUVLight.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletUVLight.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletUVLight.CallbackWrapperUVLight(const aPacket: TDynamicByteArray);
-var uvLight: longword;
+var
+  _uvLight: longword;
 begin
-  uvLight:= LEConvertUInt32From(8, aPacket);
+  _uvLight:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(fUVLightCallback)) then begin
-    fUVLightCallback(self, uvLight);
+    fUVLightCallback(self, _uvLight);
   end;
 end;
 
 procedure TBrickletUVLight.CallbackWrapperUVLightReached(const aPacket: TDynamicByteArray);
-var uvLight: longword;
+var
+  _uvLight: longword;
 begin
-  uvLight:= LEConvertUInt32From(8, aPacket);
+  _uvLight:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(fUVLightReachedCallback)) then begin
-    fUVLightReachedCallback(self, uvLight);
+    fUVLightReachedCallback(self, _uvLight);
   end;
 end;
 

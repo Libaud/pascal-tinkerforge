@@ -26,7 +26,7 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletTilt = class;
-  TBrickletTiltNotifyTiltState = procedure(aSender: TBrickletTilt; const state: byte) of object;
+  TBrickletTiltNotifyTiltState = procedure(aSender: TBrickletTilt; const aState: byte) of object;
 
   /// <summary>
   ///  Detects inclination of Bricklet (tilt switch open/closed)
@@ -82,7 +82,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback provides the current tilt state. It is called every time the
@@ -150,28 +151,29 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletTilt.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletTilt.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
-  _request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_TILT_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletTilt.CallbackWrapperTiltState(const aPacket: TDynamicByteArray);
 var
-  state: byte;
+  _state: byte;
 begin
-  state:= LEConvertUInt8From(8, aPacket);
+  _state:= LEConvertUInt8From(8, aPacket);
 
   if (Assigned(fTiltStateCallback)) then begin
-    fTiltStateCallback(self, state);
+    fTiltStateCallback(self, _state);
   end;
 end;
 

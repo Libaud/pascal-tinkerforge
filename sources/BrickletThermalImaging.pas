@@ -34,14 +34,24 @@ type
   TArrayOfUInt16 = array of word;
   TArrayOfUInt8 = array of byte;
 
-  THighContrastImageHighLevelCallbackState = record data: TArrayOfUInt8; length: word; end;
-  TTemperatureImageHighLevelCallbackState = record data: TArrayOfUInt16; length: word; end;
+  THighContrastImageHighLevelCallbackState = record
+    data: TArrayOfUInt8;
+    length: word;
+  end;
+
+  TTemperatureImageHighLevelCallbackState = record
+    data: TArrayOfUInt16;
+    length: word;
+  end;
 
   TBrickletThermalImaging = class;
-  TBrickletThermalImagingNotifyHighContrastImageLowLevel = procedure(aSender: TBrickletThermalImaging; const imageChunkOffset: word; const imageChunkData: TArray0To61OfUInt8) of object;
-  TBrickletThermalImagingNotifyHighContrastImage = procedure(aSender: TBrickletThermalImaging; const image: TArrayOfUInt8) of object;
-  TBrickletThermalImagingNotifyTemperatureImageLowLevel = procedure(aSender: TBrickletThermalImaging; const imageChunkOffset: word; const imageChunkData: TArray0To30OfUInt16) of object;
-  TBrickletThermalImagingNotifyTemperatureImage = procedure(aSender: TBrickletThermalImaging; const image: TArrayOfUInt16) of object;
+
+  TBrickletThermalImagingNotifyHighContrastImageLowLevel = procedure(aSender: TBrickletThermalImaging; const aImageChunkOffset: word;
+                                                                     const aImageChunkData: TArray0To61OfUInt8) of object;
+  TBrickletThermalImagingNotifyHighContrastImage = procedure(aSender: TBrickletThermalImaging; const aImage: TArrayOfUInt8) of object;
+  TBrickletThermalImagingNotifyTemperatureImageLowLevel = procedure(aSender: TBrickletThermalImaging; const aImageChunkOffset: word;
+                                                                    const aImageChunkData: TArray0To30OfUInt16) of object;
+  TBrickletThermalImagingNotifyTemperatureImage = procedure(aSender: TBrickletThermalImaging; const aImage: TArrayOfUInt16) of object;
 
   /// <summary>
   ///  80x60 pixel thermal imaging camera
@@ -166,7 +176,8 @@ type
     ///  * Index 0: Shutter lockout (if true shutter is locked out because temperature is outside -10°C to +65°C)
     ///  * Index 1: Overtemperature shut down imminent (goes true 10 seconds before shutdown)
     /// </summary>
-    procedure GetStatistics(out aSpotmeterStatistics: TArray0To3OfUInt16; out aTemperatures: TArray0To3OfUInt16; out resolution: byte; out ffcStatus: byte; out temperatureWarning: TArray0To1OfBoolean); virtual;
+    procedure GetStatistics(out aSpotmeterStatistics: TArray0To3OfUInt16; out aTemperatures: TArray0To3OfUInt16; out aResolution: byte;
+                            out affcStatus: byte; out aTemperatureWarning: TArray0To1OfBoolean); virtual;
 
     /// <summary>
     ///  Sets the resolution. The Thermal Imaging Bricklet can either measure
@@ -293,7 +304,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -396,7 +408,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  <see cref="BrickletThermalImaging.TBrickletThermalImaging.OnHighContrastImage"/>
@@ -501,7 +514,8 @@ end;
 
 procedure TBrickletThermalImaging.GetHighContrastImageLowLevel(out aImageChunkOffset: word; out aImageChunkData: TArray0To61OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_HIGH_CONTRAST_IMAGE_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
@@ -511,49 +525,49 @@ end;
 
 function TBrickletThermalImaging.GetHighContrastImage: TArrayOfUInt8;
 var
-  image: TArrayOfUInt8;
-  imageCurrentLength: word;
-  imageLength: word;
-  imageChunkOffset: word;
-  imageChunkData: TArray0To61OfUInt8;
-  imageOutOfSync: boolean;
-  imageChunkLength: word;
+  _image: TArrayOfUInt8;
+  _imageCurrentLength: word;
+  _imageLength: word;
+  _imageChunkOffset: word;
+  _imageChunkData: TArray0To61OfUInt8;
+  _imageOutOfSync: boolean;
+  _imageChunkLength: word;
 begin
   SetLength(Result, 0);
-  SetLength(image, 0);
+  SetLength(_image, 0);
   streamMutex.Acquire;
   try
-    imageLength:= 4800;
-    GetHighContrastImageLowLevel(imageChunkOffset, imageChunkData);
-    SetLength(image, imageLength);
+    _imageLength:= 4800;
+    GetHighContrastImageLowLevel(_imageChunkOffset, _imageChunkData);
+    SetLength(_image, _imageLength);
 
-    if (imageChunkOffset = ((1 shl 16) - 1)) then begin { Maximum chunk offset -> stream has no data }
-      SetLength(image, 0);
+    if (_imageChunkOffset = ((1 shl 16) - 1)) then begin { Maximum chunk offset -> stream has no data }
+      SetLength(_image, 0);
       exit;
     end;
 
-    imageOutOfSync:= (imageChunkOffset <> 0);
+    _imageOutOfSync:= (_imageChunkOffset <> 0);
 
-    if ((not imageOutOfSync) and (imageLength > 0)) then begin
-      imageChunkLength:= imageLength - imageChunkOffset;
-      if (imageChunkLength > 62) then imageChunkLength:= 62;
-      Move(imageChunkData, image[0], SizeOf(byte) * imageChunkLength);
-      imageCurrentLength:= imageChunkLength;
+    if ((not _imageOutOfSync) and (_imageLength > 0)) then begin
+      _imageChunkLength:= _imageLength - _imageChunkOffset;
+      if (_imageChunkLength > 62) then _imageChunkLength:= 62;
+      Move(_imageChunkData, _image[0], SizeOf(byte) * _imageChunkLength);
+      _imageCurrentLength:= _imageChunkLength;
 
-      while ((not imageOutOfSync) and (imageCurrentLength < imageLength)) do begin
-        GetHighContrastImageLowLevel(imageChunkOffset, imageChunkData);
-        imageOutOfSync:= imageChunkOffset <> imageCurrentLength;
-        imageChunkLength:= imageLength - imageChunkOffset;
-        if (imageChunkLength > 62) then imageChunkLength:= 62;
-        Move(imageChunkData, image[imageCurrentLength], SizeOf(byte) * imageChunkLength);
-        Inc(imageCurrentLength, imageChunkLength);
+      while ((not _imageOutOfSync) and (_imageCurrentLength < _imageLength)) do begin
+        GetHighContrastImageLowLevel(_imageChunkOffset, _imageChunkData);
+        _imageOutOfSync:= _imageChunkOffset <> _imageCurrentLength;
+        _imageChunkLength:= _imageLength - _imageChunkOffset;
+        if (_imageChunkLength > 62) then _imageChunkLength:= 62;
+        Move(_imageChunkData, _image[_imageCurrentLength], SizeOf(byte) * _imageChunkLength);
+        Inc(_imageCurrentLength, _imageChunkLength);
       end;
     end;
 
-    if (imageOutOfSync) then begin
+    if (_imageOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
-      while (imageChunkOffset + 62 < imageLength) do begin
-        GetHighContrastImageLowLevel(imageChunkOffset, imageChunkData);
+      while (_imageChunkOffset + 62 < _imageLength) do begin
+        GetHighContrastImageLowLevel(_imageChunkOffset, _imageChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('Image stream out-of-sync');
@@ -561,12 +575,13 @@ begin
   finally
     streamMutex.Release;
   end;
-  Result:= image;
+  Result:= _image;
 end;
 
 procedure TBrickletThermalImaging.GetTemperatureImageLowLevel(out aImageChunkOffset: word; out aImageChunkData: TArray0To30OfUInt16);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_TEMPERATURE_IMAGE_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
@@ -576,49 +591,49 @@ end;
 
 function TBrickletThermalImaging.GetTemperatureImage: TArrayOfUInt16;
 var
-  image: TArrayOfUInt16;
-  imageCurrentLength: word;
-  imageLength: word;
-  imageChunkOffset: word;
-  imageChunkData: TArray0To30OfUInt16;
-  imageOutOfSync: boolean;
-  imageChunkLength: word;
+  _image: TArrayOfUInt16;
+  _imageCurrentLength: word;
+  _imageLength: word;
+  _imageChunkOffset: word;
+  _imageChunkData: TArray0To30OfUInt16;
+  _imageOutOfSync: boolean;
+  _imageChunkLength: word;
 begin
   SetLength(Result, 0);
-  SetLength(image, 0);
+  SetLength(_image, 0);
   streamMutex.Acquire;
   try
-    imageLength:= 4800;
-    GetTemperatureImageLowLevel(imageChunkOffset, imageChunkData);
-    SetLength(image, imageLength);
+    _imageLength:= 4800;
+    GetTemperatureImageLowLevel(_imageChunkOffset, _imageChunkData);
+    SetLength(_image, _imageLength);
 
-    if (imageChunkOffset = ((1 shl 16) - 1)) then begin { Maximum chunk offset -> stream has no data }
-      SetLength(image, 0);
+    if (_imageChunkOffset = ((1 shl 16) - 1)) then begin { Maximum chunk offset -> stream has no data }
+      SetLength(_image, 0);
       exit;
     end;
 
-    imageOutOfSync:= (imageChunkOffset <> 0);
+    _imageOutOfSync:= (_imageChunkOffset <> 0);
 
-    if ((not imageOutOfSync) and (imageLength > 0)) then begin
-      imageChunkLength:= imageLength - imageChunkOffset;
-      if (imageChunkLength > 31) then imageChunkLength:= 31;
-      Move(imageChunkData, image[0], SizeOf(word) * imageChunkLength);
-      imageCurrentLength:= imageChunkLength;
+    if ((not _imageOutOfSync) and (_imageLength > 0)) then begin
+      _imageChunkLength:= _imageLength - _imageChunkOffset;
+      if (_imageChunkLength > 31) then _imageChunkLength:= 31;
+      Move(_imageChunkData, _image[0], SizeOf(word) * _imageChunkLength);
+      _imageCurrentLength:= _imageChunkLength;
 
-      while ((not imageOutOfSync) and (imageCurrentLength < imageLength)) do begin
-        GetTemperatureImageLowLevel(imageChunkOffset, imageChunkData);
-        imageOutOfSync:= imageChunkOffset <> imageCurrentLength;
-        imageChunkLength:= imageLength - imageChunkOffset;
-        if (imageChunkLength > 31) then imageChunkLength:= 31;
-        Move(imageChunkData, image[imageCurrentLength], SizeOf(word) * imageChunkLength);
-        Inc(imageCurrentLength, imageChunkLength);
+      while ((not _imageOutOfSync) and (_imageCurrentLength < _imageLength)) do begin
+        GetTemperatureImageLowLevel(_imageChunkOffset, _imageChunkData);
+        _imageOutOfSync:= _imageChunkOffset <> _imageCurrentLength;
+        _imageChunkLength:= _imageLength - _imageChunkOffset;
+        if (_imageChunkLength > 31) then _imageChunkLength:= 31;
+        Move(_imageChunkData, _image[_imageCurrentLength], SizeOf(word) * _imageChunkLength);
+        Inc(_imageCurrentLength, _imageChunkLength);
       end;
     end;
 
-    if (imageOutOfSync) then begin
+    if (_imageOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
-      while (imageChunkOffset + 31 < imageLength) do begin
-        GetTemperatureImageLowLevel(imageChunkOffset, imageChunkData);
+      while (_imageChunkOffset + 31 < _imageLength) do begin
+        GetTemperatureImageLowLevel(_imageChunkOffset, _imageChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('Image stream out-of-sync');
@@ -626,27 +641,29 @@ begin
   finally
     streamMutex.Release;
   end;
-  Result:= image;
+  Result:= _image;
 end;
 
-procedure TBrickletThermalImaging.GetStatistics(out aSpotmeterStatistics: TArray0To3OfUInt16; out aTemperatures: TArray0To3OfUInt16; out resolution: byte; out ffcStatus: byte; out temperatureWarning: TArray0To1OfBoolean);
+procedure TBrickletThermalImaging.GetStatistics(out aSpotmeterStatistics: TArray0To3OfUInt16; out aTemperatures: TArray0To3OfUInt16; out aResolution: byte; out affcStatus: byte; out aTemperatureWarning: TArray0To1OfBoolean);
 var 
-_request, _response: TDynamicByteArray; _i: longint; temperatureWarningBits: array [0..0] of byte;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
+  _temperatureWarningBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_STATISTICS, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 3 do aSpotmeterStatistics[_i]:= LEConvertUInt16From(8 + (_i * 2), _response);
   for _i:= 0 to 3 do aTemperatures[_i]:= LEConvertUInt16From(16 + (_i * 2), _response);
-  resolution:= LEConvertUInt8From(24, _response);
-  ffcStatus:= LEConvertUInt8From(25, _response);
-  FillChar(temperatureWarningBits[0], Length(temperatureWarningBits) * SizeOf(temperatureWarningBits[0]), 0);
-  for _i:= 0 to 0 do temperatureWarningBits[_i]:= LEConvertUInt8From(26 + (_i * 1), _response);
-  for _i:= 0 to 1 do temperatureWarning[_i]:= ((temperatureWarningBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  aResolution:= LEConvertUInt8From(24, _response);
+  affcStatus:= LEConvertUInt8From(25, _response);
+  FillChar(_temperatureWarningBits[0], Length(_temperatureWarningBits) * SizeOf(_temperatureWarningBits[0]), 0);
+  for _i:= 0 to 0 do _temperatureWarningBits[_i]:= LEConvertUInt8From(26 + (_i * 1), _response);
+  for _i:= 0 to 1 do aTemperatureWarning[_i]:= ((_temperatureWarningBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
 end;
 
 procedure TBrickletThermalImaging.SetResolution(const aResolution: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_RESOLUTION, 9);
   LEConvertUInt8To(aResolution, 8, _request);
@@ -655,7 +672,7 @@ end;
 
 function TBrickletThermalImaging.GetResolution: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_RESOLUTION, 8);
   _response:= SendRequest(_request);
@@ -664,7 +681,8 @@ end;
 
 procedure TBrickletThermalImaging.SetSpotmeterConfig(const aRegionOfInterest: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_SPOTMETER_CONFIG, 12);
   if (Length(aRegionOfInterest) <> 4) then raise EInvalidParameterException.Create('Region Of Interest has to be exactly 4 items long');
@@ -674,7 +692,8 @@ end;
 
 function TBrickletThermalImaging.GetSpotmeterConfig: TArray0To3OfUInt8;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_SPOTMETER_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -683,7 +702,8 @@ end;
 
 procedure TBrickletThermalImaging.SetHighContrastConfig(const aRegionOfInterest: array of byte; const aDampeningFactor: word; const aClipLimit: array of word; const aEmptyCounts: word);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_HIGH_CONTRAST_CONFIG, 20);
   if (Length(aRegionOfInterest) <> 4) then raise EInvalidParameterException.Create('Region Of Interest has to be exactly 4 items long');
@@ -697,7 +717,8 @@ end;
 
 procedure TBrickletThermalImaging.GetHighContrastConfig(out aRegionOfInterest: TArray0To3OfUInt8; out aDampeningFactor: word; out aClipLimit: TArray0To1OfUInt16; out aEmptyCounts: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_HIGH_CONTRAST_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -709,7 +730,7 @@ end;
 
 procedure TBrickletThermalImaging.SetImageTransferConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_IMAGE_TRANSFER_CONFIG, 9);
   LEConvertUInt8To(aConfig, 8, _request);
@@ -718,7 +739,7 @@ end;
 
 function TBrickletThermalImaging.GetImageTransferConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_IMAGE_TRANSFER_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -727,7 +748,7 @@ end;
 
 procedure TBrickletThermalImaging.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
@@ -739,7 +760,7 @@ end;
 
 function TBrickletThermalImaging.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -749,7 +770,7 @@ end;
 
 function TBrickletThermalImaging.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
@@ -758,7 +779,7 @@ end;
 
 procedure TBrickletThermalImaging.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
   LEConvertUInt32To(aPointer, 8, _request);
@@ -767,7 +788,8 @@ end;
 
 function TBrickletThermalImaging.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_WRITE_FIRMWARE, 72);
   if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
@@ -778,7 +800,7 @@ end;
 
 procedure TBrickletThermalImaging.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_SET_STATUS_LED_CONFIG, 9);
   LEConvertUInt8To(aConfig, 8, _request);
@@ -787,7 +809,7 @@ end;
 
 function TBrickletThermalImaging.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -796,7 +818,7 @@ end;
 
 function TBrickletThermalImaging.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -805,7 +827,7 @@ end;
 
 procedure TBrickletThermalImaging.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -813,7 +835,7 @@ end;
 
 procedure TBrickletThermalImaging.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -822,7 +844,7 @@ end;
 
 function TBrickletThermalImaging.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
@@ -831,7 +853,7 @@ end;
 
 procedure TBrickletThermalImaging.GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_THERMAL_IMAGING_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
@@ -844,20 +866,24 @@ begin
 end;
 
 procedure TBrickletThermalImaging.CallbackWrapperHighContrastImageLowLevel(const aPacket: TDynamicByteArray);
-var imageChunkOffset: word; imageChunkData: TArray0To61OfUInt8; imageChunkLength: word; _i: longint;
+var
+  _imageChunkOffset: word;
+  _imageChunkData: TArray0To61OfUInt8;
+  _imageChunkLength: word;
+  _i: longint;
 begin
-  imageChunkOffset:= LEConvertUInt16From(8, aPacket);
-  for _i:= 0 to 61 do imageChunkData[_i]:= LEConvertUInt8From(10 + (_i * 1), aPacket);
+  _imageChunkOffset:= LEConvertUInt16From(8, aPacket);
+  for _i:= 0 to 61 do _imageChunkData[_i]:= LEConvertUInt8From(10 + (_i * 1), aPacket);
 
-  imageChunkLength:= 4800 - imageChunkOffset;
-  if (imageChunkLength > 62) then begin
-    imageChunkLength:= 62;
+  _imageChunkLength:= 4800 - _imageChunkOffset;
+  if (_imageChunkLength > 62) then begin
+    _imageChunkLength:= 62;
   end;
   if (highContrastImageHighLevelCallbackState.data = nil) then begin { No stream in-progress }
-    if (imageChunkOffset = 0) then begin { Stream starts }
+    if (_imageChunkOffset = 0) then begin { Stream starts }
       SetLength(highContrastImageHighLevelCallbackState.data, 4800);
-      Move(imageChunkData[0], highContrastImageHighLevelCallbackState.data[0], SizeOf(byte) * imageChunkLength);
-      highContrastImageHighLevelCallbackState.length:= imageChunkLength;
+      Move(_imageChunkData[0], highContrastImageHighLevelCallbackState.data[0], SizeOf(byte) * _imageChunkLength);
+      highContrastImageHighLevelCallbackState.length:= _imageChunkLength;
 
       if (highContrastImageHighLevelCallbackState.length >= 4800) then begin { Stream complete }
         if (Assigned(highContrastImageCallback)) then begin
@@ -870,7 +896,7 @@ begin
     end;
   end
   else begin { Stream in-progress }
-    if (imageChunkOffset <> highContrastImageHighLevelCallbackState.length) then begin { Stream out-of-sync }
+    if (_imageChunkOffset <> highContrastImageHighLevelCallbackState.length) then begin { Stream out-of-sync }
       SetLength(highContrastImageHighLevelCallbackState.data, 0);
       highContrastImageHighLevelCallbackState.data:= nil;
       highContrastImageHighLevelCallbackState.length:= 0;
@@ -879,8 +905,8 @@ begin
       end;
     end
     else begin { Stream in-sync }
-      Move(imageChunkData[0], highContrastImageHighLevelCallbackState.data[highContrastImageHighLevelCallbackState.length], SizeOf(byte) * imageChunkLength);
-      Inc(highContrastImageHighLevelCallbackState.length, imageChunkLength);
+      Move(_imageChunkData[0], highContrastImageHighLevelCallbackState.data[highContrastImageHighLevelCallbackState.length], SizeOf(byte) * _imageChunkLength);
+      Inc(highContrastImageHighLevelCallbackState.length, _imageChunkLength);
 
       if highContrastImageHighLevelCallbackState.length >= 4800 then begin { Stream complete }
         if (Assigned(highContrastImageCallback)) then begin
@@ -894,25 +920,29 @@ begin
   end;
 
   if (Assigned(highContrastImageLowLevelCallback)) then begin
-    highContrastImageLowLevelCallback(self, imageChunkOffset, imageChunkData);
+    highContrastImageLowLevelCallback(self, _imageChunkOffset, _imageChunkData);
   end;
 end;
 
 procedure TBrickletThermalImaging.CallbackWrapperTemperatureImageLowLevel(const aPacket: TDynamicByteArray);
-var imageChunkOffset: word; imageChunkData: TArray0To30OfUInt16; imageChunkLength: word; _i: longint;
+var
+  _imageChunkOffset: word;
+  _imageChunkData: TArray0To30OfUInt16;
+  _imageChunkLength: word;
+  _i: longint;
 begin
-  imageChunkOffset:= LEConvertUInt16From(8, aPacket);
-  for _i:= 0 to 30 do imageChunkData[_i]:= LEConvertUInt16From(10 + (_i * 2), aPacket);
+  _imageChunkOffset:= LEConvertUInt16From(8, aPacket);
+  for _i:= 0 to 30 do _imageChunkData[_i]:= LEConvertUInt16From(10 + (_i * 2), aPacket);
 
-  imageChunkLength:= 4800 - imageChunkOffset;
-  if (imageChunkLength > 31) then begin
-    imageChunkLength:= 31;
+  _imageChunkLength:= 4800 - _imageChunkOffset;
+  if (_imageChunkLength > 31) then begin
+    _imageChunkLength:= 31;
   end;
   if (temperatureImageHighLevelCallbackState.data = nil) then begin { No stream in-progress }
-    if (imageChunkOffset = 0) then begin { Stream starts }
+    if (_imageChunkOffset = 0) then begin { Stream starts }
       SetLength(temperatureImageHighLevelCallbackState.data, 4800);
-      Move(imageChunkData[0], temperatureImageHighLevelCallbackState.data[0], SizeOf(word) * imageChunkLength);
-      temperatureImageHighLevelCallbackState.length:= imageChunkLength;
+      Move(_imageChunkData[0], temperatureImageHighLevelCallbackState.data[0], SizeOf(word) * _imageChunkLength);
+      temperatureImageHighLevelCallbackState.length:= _imageChunkLength;
 
       if (temperatureImageHighLevelCallbackState.length >= 4800) then begin { Stream complete }
         if (Assigned(temperatureImageCallback)) then begin
@@ -925,7 +955,7 @@ begin
     end;
   end
   else begin { Stream in-progress }
-    if (imageChunkOffset <> temperatureImageHighLevelCallbackState.length) then begin { Stream out-of-sync }
+    if (_imageChunkOffset <> temperatureImageHighLevelCallbackState.length) then begin { Stream out-of-sync }
       SetLength(temperatureImageHighLevelCallbackState.data, 0);
       temperatureImageHighLevelCallbackState.data:= nil;
       temperatureImageHighLevelCallbackState.length:= 0;
@@ -934,8 +964,8 @@ begin
       end;
     end
     else begin { Stream in-sync }
-      Move(imageChunkData[0], temperatureImageHighLevelCallbackState.data[temperatureImageHighLevelCallbackState.length], SizeOf(word) * imageChunkLength);
-      Inc(temperatureImageHighLevelCallbackState.length, imageChunkLength);
+      Move(_imageChunkData[0], temperatureImageHighLevelCallbackState.data[temperatureImageHighLevelCallbackState.length], SizeOf(word) * _imageChunkLength);
+      Inc(temperatureImageHighLevelCallbackState.length, _imageChunkLength);
 
       if temperatureImageHighLevelCallbackState.length >= 4800 then begin { Stream complete }
         if (Assigned(temperatureImageCallback)) then begin
@@ -949,7 +979,7 @@ begin
   end;
 
   if (Assigned(temperatureImageLowLevelCallback)) then begin
-    temperatureImageLowLevelCallback(self, imageChunkOffset, imageChunkData);
+    temperatureImageLowLevelCallback(self, _imageChunkOffset, _imageChunkData);
   end;
 end;
 

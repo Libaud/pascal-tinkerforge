@@ -27,8 +27,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletTemperatureIRV2 = class;
-  TBrickletTemperatureIRV2NotifyAmbientTemperature = procedure(sender: TBrickletTemperatureIRV2; const aTemperature: smallint) of object;
-  TBrickletTemperatureIRV2NotifyObjectTemperature = procedure(sender: TBrickletTemperatureIRV2; const aTemperature: smallint) of object;
+  TBrickletTemperatureIRV2NotifyAmbientTemperature = procedure(aSender: TBrickletTemperatureIRV2; const aTemperature: smallint) of object;
+  TBrickletTemperatureIRV2NotifyObjectTemperature = procedure(aSender: TBrickletTemperatureIRV2; const aTemperature: smallint) of object;
 
   /// <summary>
   ///  Measures contactless object temperature between -70°C and +380°C
