@@ -26,8 +26,8 @@ type
   TArray0To7OfUInt8 = array [0..7] of byte;
 
   TBrickletLCD20x4 = class;
-  TBrickletLCD20x4NotifyButtonPressed = procedure(aSender: TBrickletLCD20x4; const button: byte) of object;
-  TBrickletLCD20x4NotifyButtonReleased = procedure(aSender: TBrickletLCD20x4; const button: byte) of object;
+  TBrickletLCD20x4NotifyButtonPressed = procedure(aSender: TBrickletLCD20x4; const aButton: byte) of object;
+  TBrickletLCD20x4NotifyButtonReleased = procedure(aSender: TBrickletLCD20x4; const aButton: byte) of object;
 
   /// <summary>
   ///  20x4 character alphanumeric display with blue backlight
@@ -57,7 +57,7 @@ type
     ///  for details. The Unicode example above shows how to specify non-ASCII characters
     ///  and how to translate from Unicode to the LCD charset.
     /// </summary>
-    procedure WriteLine(const line: byte; const position: byte; const text: string); virtual;
+    procedure WriteLine(const aLine: byte; const aPosition: byte; const aText: string); virtual;
 
     /// <summary>
     ///  Deletes all characters from the display.
@@ -85,12 +85,12 @@ type
     ///  is one character behind the the last text written with
     ///  <see cref="BrickletLCD20x4.TBrickletLCD20x4.WriteLine"/>.
     /// </summary>
-    procedure SetConfig(const cursor: boolean; const blinking: boolean); virtual;
+    procedure SetConfig(const aCursor: boolean; const aBlinking: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletLCD20x4.TBrickletLCD20x4.SetConfig"/>.
     /// </summary>
-    procedure GetConfig(out cursor: boolean; out blinking: boolean); virtual;
+    procedure GetConfig(out aCursor: boolean; out aBlinking: boolean); virtual;
 
     /// <summary>
     ///  Returns *true* if the button (0 to 2 or 0 to 3 since hardware version 1.2)
@@ -99,7 +99,7 @@ type
     ///  If you want to react on button presses and releases it is recommended to use
     ///  the <see cref="BrickletLCD20x4.TBrickletLCD20x4.OnButtonPressed"/> and <see cref="BrickletLCD20x4.TBrickletLCD20x4.OnButtonReleased"/> callbacks.
     /// </summary>
-    function IsButtonPressed(const button: byte): boolean; virtual;
+    function IsButtonPressed(const aButton: byte): boolean; virtual;
 
     /// <summary>
     ///  The LCD 20x4 Bricklet can store up to 8 custom characters. The characters
@@ -127,7 +127,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SetCustomCharacter(const index: byte; const character: array of byte); virtual;
+    procedure SetCustomCharacter(const aIndex: byte; const aCharacter: array of byte); virtual;
 
     /// <summary>
     ///  Returns the custom character for a given index, as set with
@@ -135,7 +135,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    function GetCustomCharacter(const index: byte): TArray0To7OfUInt8; virtual;
+    function GetCustomCharacter(const aIndex: byte): TArray0To7OfUInt8; virtual;
 
     /// <summary>
     ///  Sets the default text for lines 0-3. The max number of characters
@@ -146,7 +146,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetDefaultText(const line: byte; const text: string); virtual;
+    procedure SetDefaultText(const aLine: byte; const aText: string); virtual;
 
     /// <summary>
     ///  Returns the default text for a given line (0-3) as set by
@@ -154,7 +154,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    function GetDefaultText(const line: byte): string; virtual;
+    function GetDefaultText(const aLine: byte): string; virtual;
 
     /// <summary>
     ///  Sets the default text counter in ms. This counter is decremented each
@@ -173,7 +173,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetDefaultTextCounter(const counter: longint); virtual;
+    procedure SetDefaultTextCounter(const aCounter: longint); virtual;
 
     /// <summary>
     ///  Returns the current value of the default text counter.
@@ -192,7 +192,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered when a button is pressed. The parameter is
@@ -244,20 +245,20 @@ begin
   aCallBacks[BRICKLET_LCD_20X4_CALLBACK_BUTTON_RELEASED]:= {$ifdef FPC}@{$endif}CallbackWrapperButtonReleased;
 end;
 
-procedure TBrickletLCD20x4.WriteLine(const line: byte; const position: byte; const text: string);
+procedure TBrickletLCD20x4.WriteLine(const aLine: byte; const aPosition: byte; const aText: string);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_WRITE_LINE, 30);
-  LEConvertUInt8To(line, 8, _request);
-  LEConvertUInt8To(position, 9, _request);
-  LEConvertStringTo(text, 10, 20, _request);
+  LEConvertUInt8To(aLine, 8, _request);
+  LEConvertUInt8To(aPosition, 9, _request);
+  LEConvertStringTo(aText, 10, 20, _request);
   SendRequest(_request);
 end;
 
 procedure TBrickletLCD20x4.ClearDisplay;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_CLEAR_DISPLAY, 8);
   SendRequest(_request);
@@ -265,7 +266,7 @@ end;
 
 procedure TBrickletLCD20x4.BacklightOn;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_BACKLIGHT_ON, 8);
   SendRequest(_request);
@@ -273,7 +274,7 @@ end;
 
 procedure TBrickletLCD20x4.BacklightOff;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_BACKLIGHT_OFF, 8);
   SendRequest(_request);
@@ -281,133 +282,138 @@ end;
 
 function TBrickletLCD20x4.IsBacklightOn: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_IS_BACKLIGHT_ON, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletLCD20x4.SetConfig(const cursor: boolean; const blinking: boolean);
+procedure TBrickletLCD20x4.SetConfig(const aCursor: boolean; const aBlinking: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_SET_CONFIG, 10);
-  LEConvertBooleanTo(cursor, 8, _request);
-  LEConvertBooleanTo(blinking, 9, _request);
+  LEConvertBooleanTo(aCursor, 8, _request);
+  LEConvertBooleanTo(aBlinking, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLCD20x4.GetConfig(out cursor: boolean; out blinking: boolean);
+procedure TBrickletLCD20x4.GetConfig(out aCursor: boolean; out aBlinking: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_GET_CONFIG, 8);
   _response:= SendRequest(_request);
-  cursor:= LEConvertBooleanFrom(8, _response);
-  blinking:= LEConvertBooleanFrom(9, _response);
+  aCursor:= LEConvertBooleanFrom(8, _response);
+  aBlinking:= LEConvertBooleanFrom(9, _response);
 end;
 
-function TBrickletLCD20x4.IsButtonPressed(const button: byte): boolean;
+function TBrickletLCD20x4.IsButtonPressed(const aButton: byte): boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_IS_BUTTON_PRESSED, 9);
-  LEConvertUInt8To(button, 8, _request);
+  LEConvertUInt8To(aButton, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletLCD20x4.SetCustomCharacter(const index: byte; const character: array of byte);
+procedure TBrickletLCD20x4.SetCustomCharacter(const aIndex: byte; const aCharacter: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_SET_CUSTOM_CHARACTER, 17);
-  LEConvertUInt8To(index, 8, _request);
-  if (Length(character) <> 8) then raise EInvalidParameterException.Create('Character has to be exactly 8 items long');
-  for _i:= 0 to Length(character) - 1 do LEConvertUInt8To(character[_i], 9 + (_i * 1), _request);
+  LEConvertUInt8To(aIndex, 8, _request);
+  if (Length(aCharacter) <> 8) then raise EInvalidParameterException.Create('Character has to be exactly 8 items long');
+  for _i:= 0 to Length(aCharacter) - 1 do LEConvertUInt8To(aCharacter[_i], 9 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-function TBrickletLCD20x4.GetCustomCharacter(const index: byte): TArray0To7OfUInt8;
+function TBrickletLCD20x4.GetCustomCharacter(const aIndex: byte): TArray0To7OfUInt8;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_GET_CUSTOM_CHARACTER, 9);
-  LEConvertUInt8To(index, 8, _request);
+  LEConvertUInt8To(aIndex, 8, _request);
   _response:= SendRequest(_request);
   for _i:= 0 to 7 do Result[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
 end;
 
-procedure TBrickletLCD20x4.SetDefaultText(const line: byte; const text: string);
+procedure TBrickletLCD20x4.SetDefaultText(const aLine: byte; const aText: string);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_SET_DEFAULT_TEXT, 29);
-  LEConvertUInt8To(line, 8, _request);
-  LEConvertStringTo(text, 9, 20, _request);
+  LEConvertUInt8To(aLine, 8, _request);
+  LEConvertStringTo(aText, 9, 20, _request);
   SendRequest(_request);
 end;
 
-function TBrickletLCD20x4.GetDefaultText(const line: byte): string;
+function TBrickletLCD20x4.GetDefaultText(const aLine: byte): string;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_GET_DEFAULT_TEXT, 9);
-  LEConvertUInt8To(line, 8, _request);
+  LEConvertUInt8To(aLine, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertStringFrom(8, 20, _response);
 end;
 
-procedure TBrickletLCD20x4.SetDefaultTextCounter(const counter: longint);
+procedure TBrickletLCD20x4.SetDefaultTextCounter(const aCounter: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_SET_DEFAULT_TEXT_COUNTER, 12);
-  LEConvertInt32To(counter, 8, _request);
+  LEConvertInt32To(aCounter, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLCD20x4.GetDefaultTextCounter: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_GET_DEFAULT_TEXT_COUNTER, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletLCD20x4.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletLCD20x4.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LCD_20X4_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletLCD20x4.CallbackWrapperButtonPressed(const aPacket: TDynamicByteArray);
-var button: byte;
+var
+  _button: byte;
 begin
-  button:= LEConvertUInt8From(8, aPacket);
+  _button:= LEConvertUInt8From(8, aPacket);
 
   if (Assigned(fButtonPressedCallback)) then begin
-    fButtonPressedCallback(self, button);
+    fButtonPressedCallback(self, _button);
   end;
 end;
 
 procedure TBrickletLCD20x4.CallbackWrapperButtonReleased(const aPacket: TDynamicByteArray);
-var button: byte;
+var
+  _button: byte;
 begin
-  button:= LEConvertUInt8From(8, aPacket);
+  _button:= LEConvertUInt8From(8, aPacket);
 
   if (Assigned(fButtonReleasedCallback)) then begin
-    fButtonReleasedCallback(self, button);
+    fButtonReleasedCallback(self, _button);
   end;
 end;
 
