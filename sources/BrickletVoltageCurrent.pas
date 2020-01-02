@@ -25,12 +25,12 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletVoltageCurrent = class;
-  TBrickletVoltageCurrentNotifyCurrent = procedure(aSender: TBrickletVoltageCurrent; const current: longint) of object;
-  TBrickletVoltageCurrentNotifyVoltage = procedure(aSender: TBrickletVoltageCurrent; const voltage: longint) of object;
-  TBrickletVoltageCurrentNotifyPower = procedure(aSender: TBrickletVoltageCurrent; const power: longint) of object;
-  TBrickletVoltageCurrentNotifyCurrentReached = procedure(aSender: TBrickletVoltageCurrent; const current: longint) of object;
-  TBrickletVoltageCurrentNotifyVoltageReached = procedure(aSender: TBrickletVoltageCurrent; const voltage: longint) of object;
-  TBrickletVoltageCurrentNotifyPowerReached = procedure(aSender: TBrickletVoltageCurrent; const power: longint) of object;
+  TBrickletVoltageCurrentNotifyCurrent = procedure(aSender: TBrickletVoltageCurrent; const aCurrent: longint) of object;
+  TBrickletVoltageCurrentNotifyVoltage = procedure(aSender: TBrickletVoltageCurrent; const aVoltage: longint) of object;
+  TBrickletVoltageCurrentNotifyPower = procedure(aSender: TBrickletVoltageCurrent; const aPower: longint) of object;
+  TBrickletVoltageCurrentNotifyCurrentReached = procedure(aSender: TBrickletVoltageCurrent; const aCurrent: longint) of object;
+  TBrickletVoltageCurrentNotifyVoltageReached = procedure(aSender: TBrickletVoltageCurrent; const aVoltage: longint) of object;
+  TBrickletVoltageCurrentNotifyPowerReached = procedure(aSender: TBrickletVoltageCurrent; const aPower: longint) of object;
 
   /// <summary>
   ///  Measures power, DC voltage and DC current up to 720W/36V/20A
@@ -123,12 +123,12 @@ type
     ///  The default values are 3, 4 and 4 (64, 1.1ms, 1.1ms) for averaging, voltage
     ///  conversion and current conversion.
     /// </summary>
-    procedure SetConfiguration(const averaging: byte; const voltageConversionTime: byte; const currentConversionTime: byte); virtual;
+    procedure SetConfiguration(const aAveraging: byte; const aVoltageConversionTime: byte; const aCurrentConversionTime: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out averaging: byte; out voltageConversionTime: byte; out currentConversionTime: byte); virtual;
+    procedure GetConfiguration(out aAveraging: byte; out aVoltageConversionTime: byte; out aCurrentConversionTime: byte); virtual;
 
     /// <summary>
     ///  Since the shunt resistor that is used to measure the current is not
@@ -139,12 +139,12 @@ type
     ///  are measuring 1023mA, you can calibrate the Voltage/Current Bricklet
     ///  by setting the multiplier to 1000 and the divisor to 1023.
     /// </summary>
-    procedure SetCalibration(const gainMultiplier: word; const gainDivisor: word); virtual;
+    procedure SetCalibration(const aGainMultiplier: word; const aGainDivisor: word); virtual;
 
     /// <summary>
     ///  Returns the calibration as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetCalibration"/>.
     /// </summary>
-    procedure GetCalibration(out gainMultiplier: word; out gainDivisor: word); virtual;
+    procedure GetCalibration(out aGainMultiplier: word; out aGainDivisor: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.OnCurrent"/> callback is triggered
@@ -153,7 +153,7 @@ type
     ///  The <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.OnCurrent"/> callback is only triggered if the current has changed since
     ///  the last triggering.
     /// </summary>
-    procedure SetCurrentCallbackPeriod(const period: longword); virtual;
+    procedure SetCurrentCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetCurrentCallbackPeriod"/>.
@@ -167,7 +167,7 @@ type
     ///  The <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.OnVoltage"/> callback is only triggered if the voltage has changed since
     ///  the last triggering.
     /// </summary>
-    procedure SetVoltageCallbackPeriod(const period: longword); virtual;
+    procedure SetVoltageCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetVoltageCallbackPeriod"/>.
@@ -181,7 +181,7 @@ type
     ///  The <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.OnPower"/> callback is only triggered if the power has changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetPowerCallbackPeriod(const period: longword); virtual;
+    procedure SetPowerCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.GetPowerCallbackPeriod"/>.
@@ -205,12 +205,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetCurrentCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetCurrentCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetCurrentCallbackThreshold"/>.
     /// </summary>
-    procedure GetCurrentCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetCurrentCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.OnVoltageReached"/> callback.
@@ -229,12 +229,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetVoltageCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetVoltageCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetVoltageCallbackThreshold"/>.
     /// </summary>
-    procedure GetVoltageCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetVoltageCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.OnPowerReached"/> callback.
@@ -253,12 +253,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).                                                   _responseExpected
     /// </summary>
-    procedure SetPowerCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetPowerCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetPowerCallbackThreshold"/>.
     /// </summary>
-    procedure GetPowerCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetPowerCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -275,7 +275,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletVoltageCurrent.TBrickletVoltageCurrent.SetDebouncePeriod"/>.
@@ -292,7 +292,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -427,54 +428,54 @@ begin
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetConfiguration(const averaging: byte; const voltageConversionTime: byte; const currentConversionTime: byte);
+procedure TBrickletVoltageCurrent.SetConfiguration(const aAveraging: byte; const aVoltageConversionTime: byte; const aCurrentConversionTime: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_CONFIGURATION, 11);
-  LEConvertUInt8To(averaging, 8, _request);
-  LEConvertUInt8To(voltageConversionTime, 9, _request);
-  LEConvertUInt8To(currentConversionTime, 10, _request);
+  LEConvertUInt8To(aAveraging, 8, _request);
+  LEConvertUInt8To(aVoltageConversionTime, 9, _request);
+  LEConvertUInt8To(aCurrentConversionTime, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltageCurrent.GetConfiguration(out averaging: byte; out voltageConversionTime: byte; out currentConversionTime: byte);
+procedure TBrickletVoltageCurrent.GetConfiguration(out aAveraging: byte; out aVoltageConversionTime: byte; out aCurrentConversionTime: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  averaging:= LEConvertUInt8From(8, _response);
-  voltageConversionTime:= LEConvertUInt8From(9, _response);
-  currentConversionTime:= LEConvertUInt8From(10, _response);
+  aAveraging:= LEConvertUInt8From(8, _response);
+  aVoltageConversionTime:= LEConvertUInt8From(9, _response);
+  aCurrentConversionTime:= LEConvertUInt8From(10, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetCalibration(const gainMultiplier: word; const gainDivisor: word);
+procedure TBrickletVoltageCurrent.SetCalibration(const aGainMultiplier: word; const aGainDivisor: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_CALIBRATION, 12);
-  LEConvertUInt16To(gainMultiplier, 8, _request);
-  LEConvertUInt16To(gainDivisor, 10, _request);
+  LEConvertUInt16To(aGainMultiplier, 8, _request);
+  LEConvertUInt16To(aGainDivisor, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltageCurrent.GetCalibration(out gainMultiplier: word; out gainDivisor: word);
+procedure TBrickletVoltageCurrent.GetCalibration(out aGainMultiplier: word; out aGainDivisor: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_GET_CALIBRATION, 8);
   _response:= SendRequest(_request);
-  gainMultiplier:= LEConvertUInt16From(8, _response);
-  gainDivisor:= LEConvertUInt16From(10, _response);
+  aGainMultiplier:= LEConvertUInt16From(8, _response);
+  aGainDivisor:= LEConvertUInt16From(10, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetCurrentCallbackPeriod(const period: longword);
+procedure TBrickletVoltageCurrent.SetCurrentCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_CURRENT_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -487,12 +488,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetVoltageCallbackPeriod(const period: longword);
+procedure TBrickletVoltageCurrent.SetVoltageCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_VOLTAGE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -505,12 +506,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetPowerCallbackPeriod(const period: longword);
+procedure TBrickletVoltageCurrent.SetPowerCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_POWER_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -523,78 +524,78 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetCurrentCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletVoltageCurrent.SetCurrentCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_CURRENT_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltageCurrent.GetCurrentCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletVoltageCurrent.GetCurrentCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_GET_CURRENT_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetVoltageCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletVoltageCurrent.SetVoltageCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_VOLTAGE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltageCurrent.GetVoltageCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletVoltageCurrent.GetVoltageCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_GET_VOLTAGE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetPowerCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletVoltageCurrent.SetPowerCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_POWER_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltageCurrent.GetPowerCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletVoltageCurrent.GetPowerCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_GET_POWER_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletVoltageCurrent.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletVoltageCurrent.SetDebouncePeriod(const aDebounce: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
@@ -607,7 +608,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletVoltageCurrent.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletVoltageCurrent.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -615,43 +616,43 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_CURRENT_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletVoltageCurrent.CallbackWrapperCurrent(const aPacket: TDynamicByteArray);
 var
-  current: longint;
+  _current: longint;
 begin
-  current:= LEConvertInt32From(8, aPacket);
+  _current:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fCurrentCallback)) then begin
-    fCurrentCallback(self, current);
+    fCurrentCallback(self, _current);
   end;
 end;
 
 procedure TBrickletVoltageCurrent.CallbackWrapperVoltage(const aPacket: TDynamicByteArray);
 var
-  voltage: longint;
+  _voltage: longint;
 begin
-  voltage:= LEConvertInt32From(8, aPacket);
+  _voltage:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fVoltageCallback)) then begin
-    fVoltageCallback(self, voltage);
+    fVoltageCallback(self, _voltage);
   end;
 end;
 
 procedure TBrickletVoltageCurrent.CallbackWrapperPower(const aPacket: TDynamicByteArray);
 var
-  power: longint;
+  _power: longint;
 begin
-  power:= LEConvertInt32From(8, aPacket);
+  _power:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fPowerCallback)) then begin
-    fPowerCallback(self, power);
+    fPowerCallback(self, _power);
   end;
 end;
 

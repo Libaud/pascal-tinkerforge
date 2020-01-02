@@ -29,12 +29,12 @@ type
   TArray0To5OfUInt8 = array [0..5] of byte;
 
   TBrickMaster = class;
-  TBrickMasterNotifyStackCurrent = procedure(aSender: TBrickMaster; const current: word) of object;
-  TBrickMasterNotifyStackVoltage = procedure(aSender: TBrickMaster; const voltage: word) of object;
-  TBrickMasterNotifyUSBVoltage = procedure(aSender: TBrickMaster; const voltage: word) of object;
-  TBrickMasterNotifyStackCurrentReached = procedure(aSender: TBrickMaster; const current: word) of object;
-  TBrickMasterNotifyStackVoltageReached = procedure(aSender: TBrickMaster; const voltage: word) of object;
-  TBrickMasterNotifyUSBVoltageReached = procedure(aSender: TBrickMaster; const voltage: word) of object;
+  TBrickMasterNotifyStackCurrent = procedure(aSender: TBrickMaster; const aCurrent: word) of object;
+  TBrickMasterNotifyStackVoltage = procedure(aSender: TBrickMaster; const aVoltage: word) of object;
+  TBrickMasterNotifyUSBVoltage = procedure(aSender: TBrickMaster; const aVoltage: word) of object;
+  TBrickMasterNotifyStackCurrentReached = procedure(aSender: TBrickMaster; const aCurrent: word) of object;
+  TBrickMasterNotifyStackVoltageReached = procedure(aSender: TBrickMaster; const aVoltage: word) of object;
+  TBrickMasterNotifyUSBVoltageReached = procedure(aSender: TBrickMaster; const aVoltage: word) of object;
 
   /// <summary>
   ///  Basis to build stacks and has 4 Bricklet ports
@@ -47,13 +47,13 @@ type
     fStackCurrentReachedCallback: TBrickMasterNotifyStackCurrentReached;
     fStackVoltageReachedCallback: TBrickMasterNotifyStackVoltageReached;
     fUSBVoltageReachedCallback: TBrickMasterNotifyUSBVoltageReached;
-  protected
     procedure CallbackWrapperStackCurrent(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperStackVoltage(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperUSBVoltage(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperStackCurrentReached(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperStackVoltageReached(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperUSBVoltageReached(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
@@ -93,12 +93,12 @@ type
     ///  The extension type is already set when bought and it can be set with the
     ///  Brick Viewer, it is unlikely that you need this function.
     /// </summary>
-    procedure SetExtensionType(const extension: byte; const exttype: longword); virtual;
+    procedure SetExtensionType(const aExtension: byte; const aExttype: longword); virtual;
 
     /// <summary>
     ///  Returns the type for a given extension as set by <see cref="BrickMaster.TBrickMaster.SetExtensionType"/>.
     /// </summary>
-    function GetExtensionType(const extension: byte): longword; virtual;
+    function GetExtensionType(const aExtension: byte): longword; virtual;
 
     /// <summary>
     ///  Returns *true* if the Master Brick is at position 0 in the stack and a Chibi
@@ -113,7 +113,7 @@ type
     ///  saved in the EEPROM of the Chibi Extension, it does not
     ///  have to be set on every startup.
     /// </summary>
-    procedure SetChibiAddress(const address: byte); virtual;
+    procedure SetChibiAddress(const aAddress: byte); virtual;
 
     /// <summary>
     ///  Returns the address as set by <see cref="BrickMaster.TBrickMaster.SetChibiAddress"/>.
@@ -128,7 +128,7 @@ type
     ///  saved in the EEPROM of the Chibi Extension, it does not
     ///  have to be set on every startup.
     /// </summary>
-    procedure SetChibiMasterAddress(const address: byte); virtual;
+    procedure SetChibiMasterAddress(const aAddress: byte); virtual;
 
     /// <summary>
     ///  Returns the address as set by <see cref="BrickMaster.TBrickMaster.SetChibiMasterAddress"/>.
@@ -152,13 +152,13 @@ type
     ///  The slave addresses will be saved in the EEPROM of the Chibi Extension, they
     ///  don't have to be set on every startup.
     /// </summary>
-    procedure SetChibiSlaveAddress(const num: byte; const address: byte); virtual;
+    procedure SetChibiSlaveAddress(const aNum: byte; const aAddress: byte); virtual;
 
     /// <summary>
     ///  Returns the slave address for a given num as set by
     ///  <see cref="BrickMaster.TBrickMaster.SetChibiSlaveAddress"/>.
     /// </summary>
-    function GetChibiSlaveAddress(const num: byte): byte; virtual;
+    function GetChibiSlaveAddress(const aNum: byte): byte; virtual;
 
     /// <summary>
     ///  Returns the signal strength in dBm. The signal strength updates every time a
@@ -172,7 +172,7 @@ type
     ///  distance between two Chibi stacks is becoming too big or there are
     ///  interferences.
     /// </summary>
-    procedure GetChibiErrorLog(out underrun: word; out crcError: word; out noAck: word; out overflow: word); virtual;
+    procedure GetChibiErrorLog(out aUnderrun: word; out aCRCError: word; out aNOAck: word; out aOverflow: word); virtual;
 
     /// <summary>
     ///  Sets the Chibi frequency range for the Chibi Extension. Possible values are:
@@ -190,7 +190,7 @@ type
     ///  saved in the EEPROM of the Chibi Extension, it does not
     ///  have to be set on every startup.
     /// </summary>
-    procedure SetChibiFrequency(const frequency: byte); virtual;
+    procedure SetChibiFrequency(const aFrequency: byte); virtual;
 
     /// <summary>
     ///  Returns the frequency value as set by <see cref="BrickMaster.TBrickMaster.SetChibiFrequency"/>.
@@ -214,7 +214,7 @@ type
     ///  saved in the EEPROM of the Chibi Extension, it does not
     ///  have to be set on every startup.
     /// </summary>
-    procedure SetChibiChannel(const channel: byte); virtual;
+    procedure SetChibiChannel(const aChannel: byte); virtual;
 
     /// <summary>
     ///  Returns the channel as set by <see cref="BrickMaster.TBrickMaster.SetChibiChannel"/>.
@@ -261,13 +261,13 @@ type
     ///  The slave addresses will be saved in the EEPROM of the Chibi Extension, they
     ///  don't have to be set on every startup.
     /// </summary>
-    procedure SetRS485SlaveAddress(const num: byte; const address: byte); virtual;
+    procedure SetRS485SlaveAddress(const aNum: byte; const aAddress: byte); virtual;
 
     /// <summary>
     ///  Returns the slave address for a given ``num`` as set by
     ///  <see cref="BrickMaster.TBrickMaster.SetRS485SlaveAddress"/>.
     /// </summary>
-    function GetRS485SlaveAddress(const num: byte): byte; virtual;
+    function GetRS485SlaveAddress(const aNum: byte): byte; virtual;
 
     /// <summary>
     ///  Returns CRC error counts of the RS485 communication.
@@ -291,12 +291,12 @@ type
     ///  The values are stored in the EEPROM and only applied on startup. That means
     ///  you have to restart the Master Brick after configuration.
     /// </summary>
-    procedure SetRS485Configuration(const speed: longword; const parity: char; const stopbits: byte); virtual;
+    procedure SetRS485Configuration(const aSpeed: longword; const aParity: char; const aStopbits: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickMaster.TBrickMaster.SetRS485Configuration"/>.
     /// </summary>
-    procedure GetRS485Configuration(out speed: longword; out parity: char; out stopbits: byte); virtual;
+    procedure GetRS485Configuration(out aSpeed: longword; out aParity: char; out aStopbits: byte); virtual;
 
     /// <summary>
     ///  Returns *true* if the Master Brick is at position 0 in the stack and a WIFI
@@ -333,14 +333,14 @@ type
     ///  
     ///  It is recommended to use the Brick Viewer to set the WIFI configuration.
     /// </summary>
-    procedure SetWifiConfiguration(const ssid: string; const connection: byte; const ip: array of byte; const subnetMask: array of byte;
-                                   const gateway: array of byte; const aPort: word); virtual;
+    procedure SetWifiConfiguration(const aSSID: string; const aConnection: byte; const aIP: array of byte; const aSubnetMask: array of byte;
+                                   const aGateway: array of byte; const aPort: word); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickMaster.TBrickMaster.SetWifiConfiguration"/>.
     /// </summary>
-    procedure GetWifiConfiguration(out ssid: string; out connection: byte; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8;
-                                   out gateway: TArray0To3OfUInt8; out port: word); virtual;
+    procedure GetWifiConfiguration(out aSSID: string; out aConnection: byte; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8;
+                                   out aGateway: TArray0To3OfUInt8; out aPort: word); virtual;
 
     /// <summary>
     ///  Sets the encryption of the WIFI Extension. The first parameter is the
@@ -387,7 +387,8 @@ type
     ///  
     ///  It is recommended to use the Brick Viewer to set the Wi-Fi encryption.
     /// </summary>
-    procedure SetWifiEncryption(const encryption: byte; const key: string; const keyIndex: byte; const eapOptions: byte; const caCertificateLength: word; const clientCertificateLength: word; const privateKeyLength: word); virtual;
+    procedure SetWifiEncryption(const aEncryption: byte; const aKey: string; const aKeyIndex: byte; const aEAPOptions: byte; const aCACertificateLength: word;
+                                const aClientCertificateLength: word; const aPrivateKeyLength: word); virtual;
 
     /// <summary>
     ///  Returns the encryption as set by <see cref="BrickMaster.TBrickMaster.SetWifiEncryption"/>.
@@ -396,7 +397,8 @@ type
     ///   Since Master Brick Firmware version 2.4.4 the key is not returned anymore.
     ///  </note>
     /// </summary>
-    procedure GetWifiEncryption(out encryption: byte; out key: string; out keyIndex: byte; out eapOptions: byte; out caCertificateLength: word; out clientCertificateLength: word; out privateKeyLength: word); virtual;
+    procedure GetWifiEncryption(out aEncryption: byte; out aKey: string; out aKeyIndex: byte; out aEAPOptions: byte; out aCACertificateLength: word;
+                                out aClientCertificateLength: word; out aPrivateKeyLength: word); virtual;
 
     /// <summary>
     ///  Returns the status of the WIFI Extension. The ``state`` is updated automatically,
@@ -415,7 +417,8 @@ type
     ///   "255", "Not initialized yet"
     ///  </code>
     /// </summary>
-    procedure GetWifiStatus(out macAddress: TArray0To5OfUInt8; out bssid: TArray0To5OfUInt8; out channel: byte; out rssi: smallint; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out rxCount: longword; out txCount: longword; out state: byte); virtual;
+    procedure GetWifiStatus(out aMacAddress: TArray0To5OfUInt8; out aBSSID: TArray0To5OfUInt8; out aChannel: byte; out aRSSI: smallint; out aIP: TArray0To3OfUInt8;
+                            out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aRXCount: longword; out aTXCount: longword; out aState: byte); virtual;
 
     /// <summary>
     ///  Refreshes the Wi-Fi status (see <see cref="BrickMaster.TBrickMaster.GetWifiStatus"/>). To read the status
@@ -447,12 +450,12 @@ type
     ///  It is recommended to use the Brick Viewer to set the certificate, username
     ///  and password.
     /// </summary>
-    procedure SetWifiCertificate(const index: word; const data: array of byte; const dataLength: byte); virtual;
+    procedure SetWifiCertificate(const aIndex: word; const aData: array of byte; const aDataLength: byte); virtual;
 
     /// <summary>
     ///  Returns the certificate for a given index as set by <see cref="BrickMaster.TBrickMaster.SetWifiCertificate"/>.
     /// </summary>
-    procedure GetWifiCertificate(const index: word; out data: TArray0To31OfUInt8; out dataLength: byte); virtual;
+    procedure GetWifiCertificate(const aIndex: word; out aData: TArray0To31OfUInt8; out aDataLength: byte); virtual;
 
     /// <summary>
     ///  Sets the power mode of the WIFI Extension. Possible modes are:
@@ -489,7 +492,7 @@ type
     ///  Try to not send more then 50 messages at a time without any kind of
     ///  break between them.
     /// </summary>
-    procedure GetWifiBufferInfo(out overflow: longword; out lowWatermark: word; out used: word); virtual;
+    procedure GetWifiBufferInfo(out aOverflow: longword; out aLowWatermark: word; out aUsed: word); virtual;
 
     /// <summary>
     ///  Sets the regulatory domain of the WIFI Extension. Possible domains are:
@@ -504,7 +507,7 @@ type
     ///  
     ///  The default value is 1 (ETSI).
     /// </summary>
-    procedure SetWifiRegulatoryDomain(const domain: byte); virtual;
+    procedure SetWifiRegulatoryDomain(const aDomain: byte); virtual;
 
     /// <summary>
     ///  Returns the regulatory domain as set by <see cref="BrickMaster.TBrickMaster.SetWifiRegulatoryDomain"/>.
@@ -527,7 +530,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Firmware)
     /// </summary>
-    procedure SetLongWifiKey(const key: string); virtual;
+    procedure SetLongWifiKey(const aKey: string); virtual;
 
     /// <summary>
     ///  Returns the encryption key as set by <see cref="BrickMaster.TBrickMaster.SetLongWifiKey"/>.
@@ -548,7 +551,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifiHostname(const hostname: string); virtual;
+    procedure SetWifiHostname(const aHostname: string); virtual;
 
     /// <summary>
     ///  Returns the hostname as set by <see cref="BrickMaster.TBrickMaster.SetWifiHostname"/>.
@@ -568,7 +571,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetStackCurrentCallbackPeriod(const period: longword); virtual;
+    procedure SetStackCurrentCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickMaster.TBrickMaster.SetStackCurrentCallbackPeriod"/>.
@@ -586,7 +589,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetStackVoltageCallbackPeriod(const period: longword); virtual;
+    procedure SetStackVoltageCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickMaster.TBrickMaster.SetStackVoltageCallbackPeriod"/>.
@@ -604,7 +607,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetUSBVoltageCallbackPeriod(const period: longword); virtual;
+    procedure SetUSBVoltageCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickMaster.TBrickMaster.SetUSBVoltageCallbackPeriod"/>.
@@ -632,14 +635,14 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetStackCurrentCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetStackCurrentCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickMaster.TBrickMaster.SetStackCurrentCallbackThreshold"/>.
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure GetStackCurrentCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetStackCurrentCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickMaster.TBrickMaster.OnStackVoltageReached"/> callback.
@@ -660,14 +663,14 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetStackVoltageCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetStackVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickMaster.TBrickMaster.SetStackVoltageCallbackThreshold"/>.
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure GetStackVoltageCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetStackVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickMaster.TBrickMaster.OnUSBVoltageReached"/> callback.
@@ -688,14 +691,14 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetUSBVoltageCallbackThreshold(const option: char; const min: word; const max: word); virtual;
+    procedure SetUSBVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickMaster.TBrickMaster.SetUSBVoltageCallbackThreshold"/>.
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure GetUSBVoltageCallbackThreshold(out option: char; out min: word; out max: word); virtual;
+    procedure GetUSBVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -714,7 +717,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.5$nbsp;(Firmware)
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickMaster.TBrickMaster.SetDebouncePeriod"/>.
@@ -758,14 +761,16 @@ type
     ///  
     ///  .. versionadded:: 2.1.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetEthernetConfiguration(const connection: byte; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const aPort: word); virtual;
+    procedure SetEthernetConfiguration(const aConnection: byte; const aIP: array of byte; const aSubnetMask: array of byte;
+                                       const aGateway: array of byte; const aPort: word); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickMaster.TBrickMaster.SetEthernetConfiguration"/>.
     ///  
     ///  .. versionadded:: 2.1.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetEthernetConfiguration(out connection: byte; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out port: word); virtual;
+    procedure GetEthernetConfiguration(out aConnection: byte; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8;
+                                       out aGateway: TArray0To3OfUInt8; out aPort: word); virtual;
 
     /// <summary>
     ///  Returns the status of the Ethernet Extension.
@@ -780,7 +785,8 @@ type
     ///  
     ///  .. versionadded:: 2.1.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetEthernetStatus(out macAddress: TArray0To5OfUInt8; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out rxCount: longword; out txCount: longword; out hostname: string); virtual;
+    procedure GetEthernetStatus(out aMacAddress: TArray0To5OfUInt8; out aIP: TArray0To3OfUInt8; out asubnetMask: TArray0To3OfUInt8;
+                                out aGateway: TArray0To3OfUInt8; out aRXCount: longword; out aTXCount: longword; out aHostname: string); virtual;
 
     /// <summary>
     ///  Sets the hostname of the Ethernet Extension. The hostname will be displayed
@@ -792,7 +798,7 @@ type
     ///  
     ///  .. versionadded:: 2.1.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetEthernetHostname(const hostname: string); virtual;
+    procedure SetEthernetHostname(const aHostname: string); virtual;
 
     /// <summary>
     ///  Sets the MAC address of the Ethernet Extension. The Ethernet Extension should
@@ -803,7 +809,7 @@ type
     ///  
     ///  .. versionadded:: 2.1.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetEthernetMACAddress(const macAddress: array of byte); virtual;
+    procedure SetEthernetMACAddress(const aMacAddress: array of byte); virtual;
 
     /// <summary>
     ///  Sets the Ethernet WebSocket configuration. The first parameter sets the number of socket
@@ -823,14 +829,14 @@ type
     ///  
     ///  .. versionadded:: 2.2.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetEthernetWebsocketConfiguration(const sockets: byte; const aPort: word); virtual;
+    procedure SetEthernetWebsocketConfiguration(const aSockets: byte; const aPort: word); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickMaster.TBrickMaster.SetEthernetConfiguration"/>.
     ///  
     ///  .. versionadded:: 2.2.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetEthernetWebsocketConfiguration(out sockets: byte; out port: word); virtual;
+    procedure GetEthernetWebsocketConfiguration(out aSockets: byte; out aPort: word); virtual;
 
     /// <summary>
     ///  Sets the Ethernet authentication secret. The secret can be a string of up to 64
@@ -848,7 +854,7 @@ type
     ///  
     ///  .. versionadded:: 2.2.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetEthernetAuthenticationSecret(const secret: string); virtual;
+    procedure SetEthernetAuthenticationSecret(const aSecret: string); virtual;
 
     /// <summary>
     ///  Returns the authentication secret as set by
@@ -874,7 +880,7 @@ type
     ///  
     ///  .. versionadded:: 2.2.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifiAuthenticationSecret(const secret: string); virtual;
+    procedure SetWifiAuthenticationSecret(const aSecret: string); virtual;
 
     /// <summary>
     ///  Returns the authentication secret as set by
@@ -928,7 +934,7 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    function WriteWifi2SerialPort(const data: array of byte; const length_: byte): shortint; virtual;
+    function WriteWifi2SerialPort(const aData: array of byte; const aLength: byte): shortint; virtual;
 
     /// <summary>
     ///  Reads up to 60 bytes (number of bytes to be read specified by ``length``)
@@ -943,7 +949,7 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure ReadWifi2SerialPort(const length_: byte; out data: TArray0To59OfUInt8; out Result: byte); virtual;
+    procedure ReadWifi2SerialPort(const aLength: byte; out aData: TArray0To59OfUInt8; out aResult: byte); virtual;
 
     /// <summary>
     ///  Sets the WIFI authentication secret. The secret can be a string of up to 64
@@ -961,7 +967,7 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2AuthenticationSecret(const secret: string); virtual;
+    procedure SetWifi2AuthenticationSecret(const aSecret: string); virtual;
 
     /// <summary>
     ///  Returns the WIFI authentication secret as set by
@@ -1004,21 +1010,27 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2Configuration(const aPort: word; const websocketPort: word; const websitePort: word; const phyMode: byte; const sleepMode: byte; const website: byte); virtual;
+    procedure SetWifi2Configuration(const aPort: word; const aWebsocketPort: word; const aWebsitePort: word; const aPhyMode: byte;
+                                    const aSleepMode: byte; const aWebsite: byte); virtual;
 
     /// <summary>
     ///  Returns the general configuration as set by <see cref="BrickMaster.TBrickMaster.SetWifi2Configuration"/>.
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2Configuration(out port: word; out websocketPort: word; out websitePort: word; out phyMode: byte; out sleepMode: byte; out website: byte); virtual;
+    procedure GetWifi2Configuration(out aPort: word; out aWebsocketPort: word; out aWebsitePort: word; out aPhyMode: byte;
+                                    out aSleepMode: byte; out aWebsite: byte); virtual;
 
     /// <summary>
     ///  Returns the client and access point status of the WIFI Extension 2.0.
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2Status(out clientEnabled: boolean; out clientStatus: byte; out clientIP: TArray0To3OfUInt8; out clientSubnetMask: TArray0To3OfUInt8; out clientGateway: TArray0To3OfUInt8; out clientMACAddress: TArray0To5OfUInt8; out clientRXCount: longword; out clientTXCount: longword; out clientRSSI: shortint; out apEnabled: boolean; out apIP: TArray0To3OfUInt8; out apSubnetMask: TArray0To3OfUInt8; out apGateway: TArray0To3OfUInt8; out apMACAddress: TArray0To5OfUInt8; out apRXCount: longword; out apTXCount: longword; out apConnectedCount: byte); virtual;
+    procedure GetWifi2Status(out aClientEnabled: boolean; out aClientStatus: byte; out aClientIP: TArray0To3OfUInt8; out aClientSubnetMask: TArray0To3OfUInt8;
+                             out aClientGateway: TArray0To3OfUInt8; out aClientMACAddress: TArray0To5OfUInt8; out aClientRXCount: longword;
+                             out aClientTXCount: longword; out aClientRSSI: shortint; out aAPEnabled: boolean; out aAIP: TArray0To3OfUInt8;
+                             out aAPSubnetMask: TArray0To3OfUInt8; out aAPGateway: TArray0To3OfUInt8; out aAPMACAddress: TArray0To5OfUInt8;
+                             out aAPRXCount: longword; out aAPTXCount: longword; out aAPConnectedCount: byte); virtual;
 
     /// <summary>
     ///  Sets the client specific configuration of the WIFI Extension 2.0.
@@ -1051,14 +1063,16 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2ClientConfiguration(const enable: boolean; const ssid: string; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const macAddress: array of byte; const bssid: array of byte); virtual;
+    procedure SetWifi2ClientConfiguration(const aEnable: boolean; const aSSID: string; const aIP: array of byte; const aSubnetMask: array of byte;
+                                          const aGateway: array of byte; const aMacAddress: array of byte; const aBSSID: array of byte); virtual;
 
     /// <summary>
     ///  Returns the client configuration as set by <see cref="BrickMaster.TBrickMaster.SetWifi2ClientConfiguration"/>.
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2ClientConfiguration(out enable: boolean; out ssid: string; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out macAddress: TArray0To5OfUInt8; out bssid: TArray0To5OfUInt8); virtual;
+    procedure GetWifi2ClientConfiguration(out aEnable: boolean; out aSSID: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8;
+                                          out aGateway: TArray0To3OfUInt8; out aMacAddress: TArray0To5OfUInt8; out aBSSID: TArray0To5OfUInt8); virtual;
 
     /// <summary>
     ///  Sets the client hostname (up to 32 characters) of the WIFI Extension 2.0. The
@@ -1073,7 +1087,7 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2ClientHostname(const hostname: string); virtual;
+    procedure SetWifi2ClientHostname(const aHostname: string); virtual;
 
     /// <summary>
     ///  Returns the client hostname as set by <see cref="BrickMaster.TBrickMaster.SetWifi2ClientHostname"/>.
@@ -1093,7 +1107,7 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2ClientPassword(const password: string); virtual;
+    procedure SetWifi2ClientPassword(const aPassword: string); virtual;
 
     /// <summary>
     ///  Returns the client password as set by <see cref="BrickMaster.TBrickMaster.SetWifi2ClientPassword"/>.
@@ -1143,14 +1157,19 @@ type
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2APConfiguration(const enable: boolean; const ssid: string; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const encryption: byte; const hidden: boolean; const channel: byte; const macAddress: array of byte); virtual;
+    procedure SetWifi2APConfiguration(const aEnable: boolean; const aSSID: string; const aIP: array of byte; const aSubnetMask: array of byte;
+                                      const aGateway: array of byte; const aEncryption: byte; const aHidden: boolean; const aChannel: byte;
+                                      const aMacAddress: array of byte); virtual;
 
     /// <summary>
     ///  Returns the access point configuration as set by <see cref="BrickMaster.TBrickMaster.SetWifi2APConfiguration"/>.
     ///  
     ///  .. versionadded:: 2.4.0$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2APConfiguration(out enable: boolean; out ssid: string; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out encryption: byte; out hidden: boolean; out channel: byte; out macAddress: TArray0To5OfUInt8); virtual;
+    procedure GetWifi2APConfiguration(out aEnable: boolean; out aSSID: string; out aIP: TArray0To3OfUInt8;
+                                      out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8;
+                                      out aEncryption: byte; out aHidden: boolean; out aChannel: byte;
+                                      out aMacAddress: TArray0To5OfUInt8); virtual;
 
     /// <summary>
     ///  Sets the access point password (at least 8 and up to 63 chars) for the configured encryption
@@ -1253,7 +1272,9 @@ type
     ///  
     ///  .. versionadded:: 2.4.2$nbsp;(Firmware)
     /// </summary>
-    procedure SetWifi2MeshConfiguration(const aEnable: boolean; const aRootIP: array of byte; const aRootSubnetMask: array of byte; const aRootGateway: array of byte; const aRouterBSSID: array of byte; const aGroupID: array of byte; const aGroupSSIDPrefix: string; const aGatewayIP: array of byte; const aGatewayPort: word); virtual;
+    procedure SetWifi2MeshConfiguration(const aEnable: boolean; const aRootIP: array of byte; const aRootSubnetMask: array of byte;
+                                        const aRootGateway: array of byte; const aRouterBSSID: array of byte; const aGroupID: array of byte;
+                                        const aGroupSSIDPrefix: string; const aGatewayIP: array of byte; const aGatewayPort: word); virtual;
 
     /// <summary>
     ///  Requires WIFI Extension 2.0 firmware 2.1.0.
@@ -1262,7 +1283,9 @@ type
     ///  
     ///  .. versionadded:: 2.4.2$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2MeshConfiguration(out aEnable: boolean; out aRootIP: TArray0To3OfUInt8; out aRootSubnetMask: TArray0To3OfUInt8; out aRootGateway: TArray0To3OfUInt8; out aRouterBSSID: TArray0To5OfUInt8; out aGroupID: TArray0To5OfUInt8; out aGroupSSIDPrefix: string; out aGatewayIP: TArray0To3OfUInt8; out aGatewayPort: word); virtual;
+    procedure GetWifi2MeshConfiguration(out aEnable: boolean; out aRootIP: TArray0To3OfUInt8; out aRootSubnetMask: TArray0To3OfUInt8;
+                                        out aRootGateway: TArray0To3OfUInt8; out aRouterBSSID: TArray0To5OfUInt8; out aGroupID: TArray0To5OfUInt8;
+                                        out aGroupSSIDPrefix: string; out aGatewayIP: TArray0To3OfUInt8; out aGatewayPort: word); virtual;
 
     /// <summary>
     ///  Requires WIFI Extension 2.0 firmware 2.1.0.
@@ -1325,7 +1348,8 @@ type
     ///  
     ///  .. versionadded:: 2.4.2$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2MeshCommonStatus(out aStatus: byte; out aRootNode: boolean; out aRootCandidate: boolean; out aConnectedNodes: word; out aRXCount: longword; out aTXCount: longword); virtual;
+    procedure GetWifi2MeshCommonStatus(out aStatus: byte; out aRootNode: boolean; out aRootCandidate: boolean; out aConnectedNodes: word;
+                                       out aRXCount: longword; out aTXCount: longword); virtual;
 
     /// <summary>
     ///  Requires WIFI Extension 2.0 firmware 2.1.0.
@@ -1334,7 +1358,8 @@ type
     ///  
     ///  .. versionadded:: 2.4.2$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2MeshClientStatus(out aHostname: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aMACAddress: TArray0To5OfUInt8); virtual;
+    procedure GetWifi2MeshClientStatus(out aHostname: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8;
+                                       out aMACAddress: TArray0To5OfUInt8); virtual;
 
     /// <summary>
     ///  Requires WIFI Extension 2.0 firmware 2.1.0.
@@ -1343,7 +1368,8 @@ type
     ///  
     ///  .. versionadded:: 2.4.2$nbsp;(Firmware)
     /// </summary>
-    procedure GetWifi2MeshAPStatus(out aSSID: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aMACAddress: TArray0To5OfUInt8); virtual;
+    procedure GetWifi2MeshAPStatus(out aSSID: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8;
+                                   out aGateway: TArray0To3OfUInt8; out aMACAddress: TArray0To5OfUInt8); virtual;
 
     /// <summary>
     ///  The SPITF protocol can be used with a dynamic baudrate. If the dynamic baudrate is
@@ -1378,7 +1404,7 @@ type
     ///  
     ///  .. versionadded:: 2.4.6$nbsp;(Firmware)
     /// </summary>
-    procedure GetSPITFPBaudrateConfig(out enableDynamicBaudrate: boolean; out minimumDynamicBaudrate: longword); virtual;
+    procedure GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the timeout count for the different communication methods.
@@ -1436,7 +1462,9 @@ type
     ///  
     ///  .. versionadded:: 2.4.3$nbsp;(Firmware)
     /// </summary>
-    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword;
+                                  out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword;
+                                  out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Enables the status LED.
@@ -1476,7 +1504,8 @@ type
     ///  This functions sole purpose is to allow automatic flashing of v1.x.y Bricklet
     ///  plugins.
     /// </summary>
-    procedure GetProtocol1BrickletName(const aPort: char; out aProtocolVersion: byte; out aFirmwareVersion: TArray0To2OfUInt8; out aName: string); virtual;
+    procedure GetProtocol1BrickletName(const aPort: char; out aProtocolVersion: byte; out aFirmwareVersion: TArray0To2OfUInt8;
+                                       out aName: string); virtual;
 
     /// <summary>
     ///  Returns the temperature in °C/10 as measured inside the microcontroller. The
@@ -1508,7 +1537,9 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char;
+                          out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber;
+                          out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -1746,22 +1777,22 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickMaster.SetExtensionType(const extension: byte; const exttype: longword);
+procedure TBrickMaster.SetExtensionType(const aExtension: byte; const aExttype: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_EXTENSION_TYPE, 13);
-  LEConvertUInt8To(extension, 8, _request);
-  LEConvertUInt32To(exttype, 9, _request);
+  LEConvertUInt8To(aExtension, 8, _request);
+  LEConvertUInt32To(aExttype, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickMaster.GetExtensionType(const extension: byte): longword;
+function TBrickMaster.GetExtensionType(const aExtension: byte): longword;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_EXTENSION_TYPE, 9);
-  LEConvertUInt8To(extension, 8, _request);
+  LEConvertUInt8To(aExtension, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
@@ -1775,12 +1806,12 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickMaster.SetChibiAddress(const address: byte);
+procedure TBrickMaster.SetChibiAddress(const aAddress: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_CHIBI_ADDRESS, 9);
-  LEConvertUInt8To(address, 8, _request);
+  LEConvertUInt8To(aAddress, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1793,12 +1824,12 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickMaster.SetChibiMasterAddress(const address: byte);
+procedure TBrickMaster.SetChibiMasterAddress(const aAddress: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_CHIBI_MASTER_ADDRESS, 9);
-  LEConvertUInt8To(address, 8, _request);
+  LEConvertUInt8To(aAddress, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1811,22 +1842,22 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickMaster.SetChibiSlaveAddress(const num: byte; const address: byte);
+procedure TBrickMaster.SetChibiSlaveAddress(const aNum: byte; const aAddress: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_CHIBI_SLAVE_ADDRESS, 10);
-  LEConvertUInt8To(num, 8, _request);
-  LEConvertUInt8To(address, 9, _request);
+  LEConvertUInt8To(aNum, 8, _request);
+  LEConvertUInt8To(aAddress, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickMaster.GetChibiSlaveAddress(const num: byte): byte;
+function TBrickMaster.GetChibiSlaveAddress(const aNum: byte): byte;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_CHIBI_SLAVE_ADDRESS, 9);
-  LEConvertUInt8To(num, 8, _request);
+  LEConvertUInt8To(aNum, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
@@ -1840,24 +1871,24 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickMaster.GetChibiErrorLog(out underrun: word; out crcError: word; out noAck: word; out overflow: word);
+procedure TBrickMaster.GetChibiErrorLog(out aUnderrun: word; out aCRCError: word; out aNOAck: word; out aOverflow: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_CHIBI_ERROR_LOG, 8);
   _response:= SendRequest(_request);
-  underrun:= LEConvertUInt16From(8, _response);
-  crcError:= LEConvertUInt16From(10, _response);
-  noAck:= LEConvertUInt16From(12, _response);
-  overflow:= LEConvertUInt16From(14, _response);
+  aUnderrun:= LEConvertUInt16From(8, _response);
+  aCRCError:= LEConvertUInt16From(10, _response);
+  aNOAck:= LEConvertUInt16From(12, _response);
+  aOverflow:= LEConvertUInt16From(14, _response);
 end;
 
-procedure TBrickMaster.SetChibiFrequency(const frequency: byte);
+procedure TBrickMaster.SetChibiFrequency(const aFrequency: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_CHIBI_FREQUENCY, 9);
-  LEConvertUInt8To(frequency, 8, _request);
+  LEConvertUInt8To(aFrequency, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1870,12 +1901,12 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickMaster.SetChibiChannel(const channel: byte);
+procedure TBrickMaster.SetChibiChannel(const aChannel: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_CHIBI_CHANNEL, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1915,22 +1946,22 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickMaster.SetRS485SlaveAddress(const num: byte; const address: byte);
+procedure TBrickMaster.SetRS485SlaveAddress(const aNum: byte; const aAddress: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_RS485_SLAVE_ADDRESS, 10);
-  LEConvertUInt8To(num, 8, _request);
-  LEConvertUInt8To(address, 9, _request);
+  LEConvertUInt8To(aNum, 8, _request);
+  LEConvertUInt8To(aAddress, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickMaster.GetRS485SlaveAddress(const num: byte): byte;
+function TBrickMaster.GetRS485SlaveAddress(const aNum: byte): byte;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_RS485_SLAVE_ADDRESS, 9);
-  LEConvertUInt8To(num, 8, _request);
+  LEConvertUInt8To(aNum, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
@@ -1944,26 +1975,26 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickMaster.SetRS485Configuration(const speed: longword; const parity: char; const stopbits: byte);
+procedure TBrickMaster.SetRS485Configuration(const aSpeed: longword; const aParity: char; const aStopbits: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_RS485_CONFIGURATION, 14);
-  LEConvertUInt32To(speed, 8, _request);
-  LEConvertCharTo(parity, 12, _request);
-  LEConvertUInt8To(stopbits, 13, _request);
+  LEConvertUInt32To(aSpeed, 8, _request);
+  LEConvertCharTo(aParity, 12, _request);
+  LEConvertUInt8To(aStopbits, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetRS485Configuration(out speed: longword; out parity: char; out stopbits: byte);
+procedure TBrickMaster.GetRS485Configuration(out aSpeed: longword; out aParity: char; out aStopbits: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_RS485_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  speed:= LEConvertUInt32From(8, _response);
-  parity:= LEConvertCharFrom(12, _response);
-  stopbits:= LEConvertUInt8From(13, _response);
+  aSpeed:= LEConvertUInt32From(8, _response);
+  aParity:= LEConvertCharFrom(12, _response);
+  aStopbits:= LEConvertUInt8From(13, _response);
 end;
 
 function TBrickMaster.IsWifiPresent: boolean;
@@ -1975,83 +2006,83 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickMaster.SetWifiConfiguration(const ssid: string; const connection: byte; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const aPort: word);
+procedure TBrickMaster.SetWifiConfiguration(const aSSID: string; const aConnection: byte; const aIP: array of byte; const aSubnetMask: array of byte; const aGateway: array of byte; const aPort: word);
 var
   _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI_CONFIGURATION, 55);
-  LEConvertStringTo(ssid, 8, 32, _request);
-  LEConvertUInt8To(connection, 40, _request);
-  if (Length(ip) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
-  for _i:= 0 to Length(ip) - 1 do LEConvertUInt8To(ip[_i], 41 + (_i * 1), _request);
-  if (Length(subnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
-  for _i:= 0 to Length(subnetMask) - 1 do LEConvertUInt8To(subnetMask[_i], 45 + (_i * 1), _request);
-  if (Length(gateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
-  for _i:= 0 to Length(gateway) - 1 do LEConvertUInt8To(gateway[_i], 49 + (_i * 1), _request);
+  LEConvertStringTo(aSSID, 8, 32, _request);
+  LEConvertUInt8To(aConnection, 40, _request);
+  if (Length(aIP) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
+  for _i:= 0 to Length(aIP) - 1 do LEConvertUInt8To(aIP[_i], 41 + (_i * 1), _request);
+  if (Length(aSubnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
+  for _i:= 0 to Length(aSubnetMask) - 1 do LEConvertUInt8To(aSubnetMask[_i], 45 + (_i * 1), _request);
+  if (Length(aGateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
+  for _i:= 0 to Length(aGateway) - 1 do LEConvertUInt8To(aGateway[_i], 49 + (_i * 1), _request);
   LEConvertUInt16To(aPort, 53, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifiConfiguration(out ssid: string; out connection: byte; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out port: word);
+procedure TBrickMaster.GetWifiConfiguration(out aSSID: string; out aConnection: byte; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aPort: word);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  ssid:= LEConvertStringFrom(8, 32, _response);
-  connection:= LEConvertUInt8From(40, _response);
-  for _i:= 0 to 3 do ip[_i]:= LEConvertUInt8From(41 + (_i * 1), _response);
-  for _i:= 0 to 3 do subnetMask[_i]:= LEConvertUInt8From(45 + (_i * 1), _response);
-  for _i:= 0 to 3 do gateway[_i]:= LEConvertUInt8From(49 + (_i * 1), _response);
-  port:= LEConvertUInt16From(53, _response);
+  aSSID:= LEConvertStringFrom(8, 32, _response);
+  aConnection:= LEConvertUInt8From(40, _response);
+  for _i:= 0 to 3 do aIP[_i]:= LEConvertUInt8From(41 + (_i * 1), _response);
+  for _i:= 0 to 3 do aSubnetMask[_i]:= LEConvertUInt8From(45 + (_i * 1), _response);
+  for _i:= 0 to 3 do aGateway[_i]:= LEConvertUInt8From(49 + (_i * 1), _response);
+  aPort:= LEConvertUInt16From(53, _response);
 end;
 
-procedure TBrickMaster.SetWifiEncryption(const encryption: byte; const key: string; const keyIndex: byte; const eapOptions: byte; const caCertificateLength: word; const clientCertificateLength: word; const privateKeyLength: word);
+procedure TBrickMaster.SetWifiEncryption(const aEncryption: byte; const aKey: string; const aKeyIndex: byte; const aEAPOptions: byte; const aCACertificateLength: word; const aClientCertificateLength: word; const aPrivateKeyLength: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI_ENCRYPTION, 67);
-  LEConvertUInt8To(encryption, 8, _request);
-  LEConvertStringTo(key, 9, 50, _request);
-  LEConvertUInt8To(keyIndex, 59, _request);
-  LEConvertUInt8To(eapOptions, 60, _request);
-  LEConvertUInt16To(caCertificateLength, 61, _request);
-  LEConvertUInt16To(clientCertificateLength, 63, _request);
-  LEConvertUInt16To(privateKeyLength, 65, _request);
+  LEConvertUInt8To(aEncryption, 8, _request);
+  LEConvertStringTo(aKey, 9, 50, _request);
+  LEConvertUInt8To(aKeyIndex, 59, _request);
+  LEConvertUInt8To(aEAPOptions, 60, _request);
+  LEConvertUInt16To(aCACertificateLength, 61, _request);
+  LEConvertUInt16To(aClientCertificateLength, 63, _request);
+  LEConvertUInt16To(aPrivateKeyLength, 65, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifiEncryption(out encryption: byte; out key: string; out keyIndex: byte; out eapOptions: byte; out caCertificateLength: word; out clientCertificateLength: word; out privateKeyLength: word);
+procedure TBrickMaster.GetWifiEncryption(out aEncryption: byte; out aKey: string; out aKeyIndex: byte; out aEAPOptions: byte; out aCACertificateLength: word; out aClientCertificateLength: word; out aPrivateKeyLength: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI_ENCRYPTION, 8);
   _response:= SendRequest(_request);
-  encryption:= LEConvertUInt8From(8, _response);
-  key:= LEConvertStringFrom(9, 50, _response);
-  keyIndex:= LEConvertUInt8From(59, _response);
-  eapOptions:= LEConvertUInt8From(60, _response);
-  caCertificateLength:= LEConvertUInt16From(61, _response);
-  clientCertificateLength:= LEConvertUInt16From(63, _response);
-  privateKeyLength:= LEConvertUInt16From(65, _response);
+  aEncryption:= LEConvertUInt8From(8, _response);
+  aKey:= LEConvertStringFrom(9, 50, _response);
+  aKeyIndex:= LEConvertUInt8From(59, _response);
+  aEAPOptions:= LEConvertUInt8From(60, _response);
+  aCACertificateLength:= LEConvertUInt16From(61, _response);
+  aClientCertificateLength:= LEConvertUInt16From(63, _response);
+  aPrivateKeyLength:= LEConvertUInt16From(65, _response);
 end;
 
-procedure TBrickMaster.GetWifiStatus(out macAddress: TArray0To5OfUInt8; out bssid: TArray0To5OfUInt8; out channel: byte; out rssi: smallint; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out rxCount: longword; out txCount: longword; out state: byte);
+procedure TBrickMaster.GetWifiStatus(out aMacAddress: TArray0To5OfUInt8; out abssid: TArray0To5OfUInt8; out aChannel: byte; out aRSSI: smallint; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aRXCount: longword; out aTXCount: longword; out aState: byte);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI_STATUS, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 5 do macAddress[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  for _i:= 0 to 5 do bssid[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
-  channel:= LEConvertUInt8From(20, _response);
-  rssi:= LEConvertInt16From(21, _response);
-  for _i:= 0 to 3 do ip[_i]:= LEConvertUInt8From(23 + (_i * 1), _response);
-  for _i:= 0 to 3 do subnetMask[_i]:= LEConvertUInt8From(27 + (_i * 1), _response);
-  for _i:= 0 to 3 do gateway[_i]:= LEConvertUInt8From(31 + (_i * 1), _response);
-  rxCount:= LEConvertUInt32From(35, _response);
-  txCount:= LEConvertUInt32From(39, _response);
-  state:= LEConvertUInt8From(43, _response);
+  for _i:= 0 to 5 do aMacAddress[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  for _i:= 0 to 5 do abssid[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
+  aChannel:= LEConvertUInt8From(20, _response);
+  aRSSI:= LEConvertInt16From(21, _response);
+  for _i:= 0 to 3 do aIP[_i]:= LEConvertUInt8From(23 + (_i * 1), _response);
+  for _i:= 0 to 3 do aSubnetMask[_i]:= LEConvertUInt8From(27 + (_i * 1), _response);
+  for _i:= 0 to 3 do aGateway[_i]:= LEConvertUInt8From(31 + (_i * 1), _response);
+  aRXCount:= LEConvertUInt32From(35, _response);
+  aTXCount:= LEConvertUInt32From(39, _response);
+  aState:= LEConvertUInt8From(43, _response);
 end;
 
 procedure TBrickMaster.RefreshWifiStatus;
@@ -2062,27 +2093,27 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.SetWifiCertificate(const index: word; const data: array of byte; const dataLength: byte);
+procedure TBrickMaster.SetWifiCertificate(const aIndex: word; const aData: array of byte; const aDataLength: byte);
 var 
 _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI_CERTIFICATE, 43);
-  LEConvertUInt16To(index, 8, _request);
-  if (Length(data) <> 32) then raise EInvalidParameterException.Create('Data has to be exactly 32 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 10 + (_i * 1), _request);
-  LEConvertUInt8To(dataLength, 42, _request);
+  LEConvertUInt16To(aIndex, 8, _request);
+  if (Length(aData) <> 32) then raise EInvalidParameterException.Create('Data has to be exactly 32 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 10 + (_i * 1), _request);
+  LEConvertUInt8To(aDataLength, 42, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifiCertificate(const index: word; out data: TArray0To31OfUInt8; out dataLength: byte);
+procedure TBrickMaster.GetWifiCertificate(const aIndex: word; out aData: TArray0To31OfUInt8; out aDataLength: byte);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI_CERTIFICATE, 10);
-  LEConvertUInt16To(index, 8, _request);
+  LEConvertUInt16To(aIndex, 8, _request);
   _response:= SendRequest(_request);
-  for _i:= 0 to 31 do data[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  dataLength:= LEConvertUInt8From(40, _response);
+  for _i:= 0 to 31 do aData[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  aDataLength:= LEConvertUInt8From(40, _response);
 end;
 
 procedure TBrickMaster.SetWifiPowerMode(const aMode: byte);
@@ -2103,23 +2134,23 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickMaster.GetWifiBufferInfo(out overflow: longword; out lowWatermark: word; out used: word);
+procedure TBrickMaster.GetWifiBufferInfo(out aOverflow: longword; out aLowWatermark: word; out aUsed: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI_BUFFER_INFO, 8);
   _response:= SendRequest(_request);
-  overflow:= LEConvertUInt32From(8, _response);
-  lowWatermark:= LEConvertUInt16From(12, _response);
-  used:= LEConvertUInt16From(14, _response);
+  aOverflow:= LEConvertUInt32From(8, _response);
+  aLowWatermark:= LEConvertUInt16From(12, _response);
+  aUsed:= LEConvertUInt16From(14, _response);
 end;
 
-procedure TBrickMaster.SetWifiRegulatoryDomain(const domain: byte);
+procedure TBrickMaster.SetWifiRegulatoryDomain(const aDomain: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI_REGULATORY_DOMAIN, 9);
-  LEConvertUInt8To(domain, 8, _request);
+  LEConvertUInt8To(aDomain, 8, _request);
   SendRequest(_request);
 end;
 
@@ -2141,12 +2172,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickMaster.SetLongWifiKey(const key: string);
+procedure TBrickMaster.SetLongWifiKey(const aKey: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_LONG_WIFI_KEY, 72);
-  LEConvertStringTo(key, 8, 64, _request);
+  LEConvertStringTo(aKey, 8, 64, _request);
   SendRequest(_request);
 end;
 
@@ -2159,12 +2190,12 @@ begin
   Result:= LEConvertStringFrom(8, 64, _response);
 end;
 
-procedure TBrickMaster.SetWifiHostname(const hostname: string);
+procedure TBrickMaster.SetWifiHostname(const aHostname: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI_HOSTNAME, 24);
-  LEConvertStringTo(hostname, 8, 16, _request);
+  LEConvertStringTo(aHostname, 8, 16, _request);
   SendRequest(_request);
 end;
 
@@ -2177,12 +2208,12 @@ begin
   Result:= LEConvertStringFrom(8, 16, _response);
 end;
 
-procedure TBrickMaster.SetStackCurrentCallbackPeriod(const period: longword);
+procedure TBrickMaster.SetStackCurrentCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_STACK_CURRENT_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -2195,12 +2226,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickMaster.SetStackVoltageCallbackPeriod(const period: longword);
+procedure TBrickMaster.SetStackVoltageCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_STACK_VOLTAGE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -2213,12 +2244,12 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickMaster.SetUSBVoltageCallbackPeriod(const period: longword);
+procedure TBrickMaster.SetUSBVoltageCallbackPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_USB_VOLTAGE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -2231,78 +2262,78 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickMaster.SetStackCurrentCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickMaster.SetStackCurrentCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_STACK_CURRENT_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetStackCurrentCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickMaster.GetStackCurrentCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_STACK_CURRENT_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickMaster.SetStackVoltageCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickMaster.SetStackVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_STACK_VOLTAGE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetStackVoltageCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickMaster.GetStackVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_STACK_VOLTAGE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickMaster.SetUSBVoltageCallbackThreshold(const option: char; const min: word; const max: word);
+procedure TBrickMaster.SetUSBVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_USB_VOLTAGE_CALLBACK_THRESHOLD, 13);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetUSBVoltageCallbackThreshold(out option: char; out min: word; out max: word);
+procedure TBrickMaster.GetUSBVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_USB_VOLTAGE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickMaster.SetDebouncePeriod(const debounce: longword);
+procedure TBrickMaster.SetDebouncePeriod(const aDebounce: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
@@ -2324,95 +2355,95 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickMaster.SetEthernetConfiguration(const connection: byte; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const aPort: word);
+procedure TBrickMaster.SetEthernetConfiguration(const aConnection: byte; const aIP: array of byte; const aSubnetMask: array of byte; const aGateway: array of byte; const aPort: word);
 var
   _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_ETHERNET_CONFIGURATION, 23);
-  LEConvertUInt8To(connection, 8, _request);
-  if (Length(ip) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
-  for _i:= 0 to Length(ip) - 1 do LEConvertUInt8To(ip[_i], 9 + (_i * 1), _request);
-  if (Length(subnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
-  for _i:= 0 to Length(subnetMask) - 1 do LEConvertUInt8To(subnetMask[_i], 13 + (_i * 1), _request);
-  if (Length(gateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
-  for _i:= 0 to Length(gateway) - 1 do LEConvertUInt8To(gateway[_i], 17 + (_i * 1), _request);
+  LEConvertUInt8To(aConnection, 8, _request);
+  if (Length(aIP) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
+  for _i:= 0 to Length(aIP) - 1 do LEConvertUInt8To(aIP[_i], 9 + (_i * 1), _request);
+  if (Length(aSubnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
+  for _i:= 0 to Length(aSubnetMask) - 1 do LEConvertUInt8To(aSubnetMask[_i], 13 + (_i * 1), _request);
+  if (Length(aGateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
+  for _i:= 0 to Length(aGateway) - 1 do LEConvertUInt8To(aGateway[_i], 17 + (_i * 1), _request);
   LEConvertUInt16To(aPort, 21, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetEthernetConfiguration(out connection: byte; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out port: word);
+procedure TBrickMaster.GetEthernetConfiguration(out aConnection: byte; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aPort: word);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_ETHERNET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  connection:= LEConvertUInt8From(8, _response);
-  for _i:= 0 to 3 do ip[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
-  for _i:= 0 to 3 do subnetMask[_i]:= LEConvertUInt8From(13 + (_i * 1), _response);
-  for _i:= 0 to 3 do gateway[_i]:= LEConvertUInt8From(17 + (_i * 1), _response);
-  port:= LEConvertUInt16From(21, _response);
+  aConnection:= LEConvertUInt8From(8, _response);
+  for _i:= 0 to 3 do aIP[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
+  for _i:= 0 to 3 do aSubnetMask[_i]:= LEConvertUInt8From(13 + (_i * 1), _response);
+  for _i:= 0 to 3 do aGateway[_i]:= LEConvertUInt8From(17 + (_i * 1), _response);
+  aPort:= LEConvertUInt16From(21, _response);
 end;
 
-procedure TBrickMaster.GetEthernetStatus(out macAddress: TArray0To5OfUInt8; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out rxCount: longword; out txCount: longword; out hostname: string);
+procedure TBrickMaster.GetEthernetStatus(out aMacAddress: TArray0To5OfUInt8; out aIP: TArray0To3OfUInt8; out asubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aRXCount: longword; out aTXCount: longword; out aHostname: string);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_ETHERNET_STATUS, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 5 do macAddress[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  for _i:= 0 to 3 do ip[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
-  for _i:= 0 to 3 do subnetMask[_i]:= LEConvertUInt8From(18 + (_i * 1), _response);
-  for _i:= 0 to 3 do gateway[_i]:= LEConvertUInt8From(22 + (_i * 1), _response);
-  rxCount:= LEConvertUInt32From(26, _response);
-  txCount:= LEConvertUInt32From(30, _response);
-  hostname:= LEConvertStringFrom(34, 32, _response);
+  for _i:= 0 to 5 do aMacAddress[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  for _i:= 0 to 3 do aIP[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
+  for _i:= 0 to 3 do asubnetMask[_i]:= LEConvertUInt8From(18 + (_i * 1), _response);
+  for _i:= 0 to 3 do aGateway[_i]:= LEConvertUInt8From(22 + (_i * 1), _response);
+  aRXCount:= LEConvertUInt32From(26, _response);
+  aTXCount:= LEConvertUInt32From(30, _response);
+  aHostname:= LEConvertStringFrom(34, 32, _response);
 end;
 
-procedure TBrickMaster.SetEthernetHostname(const hostname: string);
+procedure TBrickMaster.SetEthernetHostname(const aHostname: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_ETHERNET_HOSTNAME, 40);
-  LEConvertStringTo(hostname, 8, 32, _request);
+  LEConvertStringTo(aHostname, 8, 32, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.SetEthernetMACAddress(const macAddress: array of byte);
+procedure TBrickMaster.SetEthernetMACAddress(const aMacAddress: array of byte);
 var
   _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_ETHERNET_MAC_ADDRESS, 14);
-  if (Length(macAddress) <> 6) then raise EInvalidParameterException.Create('MAC Address has to be exactly 6 items long');
-  for _i:= 0 to Length(macAddress) - 1 do LEConvertUInt8To(macAddress[_i], 8 + (_i * 1), _request);
+  if (Length(aMacAddress) <> 6) then raise EInvalidParameterException.Create('MAC Address has to be exactly 6 items long');
+  for _i:= 0 to Length(aMacAddress) - 1 do LEConvertUInt8To(aMacAddress[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.SetEthernetWebsocketConfiguration(const sockets: byte; const aPort: word);
+procedure TBrickMaster.SetEthernetWebsocketConfiguration(const aSockets: byte; const aPort: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_ETHERNET_WEBSOCKET_CONFIGURATION, 11);
-  LEConvertUInt8To(sockets, 8, _request);
+  LEConvertUInt8To(aSockets, 8, _request);
   LEConvertUInt16To(aPort, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetEthernetWebsocketConfiguration(out sockets: byte; out port: word);
+procedure TBrickMaster.GetEthernetWebsocketConfiguration(out aSockets: byte; out aPort: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_ETHERNET_WEBSOCKET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  sockets:= LEConvertUInt8From(8, _response);
-  port:= LEConvertUInt16From(9, _response);
+  aSockets:= LEConvertUInt8From(8, _response);
+  aPort:= LEConvertUInt16From(9, _response);
 end;
 
-procedure TBrickMaster.SetEthernetAuthenticationSecret(const secret: string);
+procedure TBrickMaster.SetEthernetAuthenticationSecret(const aSecret: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_ETHERNET_AUTHENTICATION_SECRET, 72);
-  LEConvertStringTo(secret, 8, 64, _request);
+  LEConvertStringTo(aSecret, 8, 64, _request);
   SendRequest(_request);
 end;
 
@@ -2425,12 +2456,12 @@ begin
   Result:= LEConvertStringFrom(8, 64, _response);
 end;
 
-procedure TBrickMaster.SetWifiAuthenticationSecret(const secret: string);
+procedure TBrickMaster.SetWifiAuthenticationSecret(const aSecret: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI_AUTHENTICATION_SECRET, 72);
-  LEConvertStringTo(secret, 8, 64, _request);
+  LEConvertStringTo(aSecret, 8, 64, _request);
   SendRequest(_request);
 end;
 
@@ -2470,35 +2501,35 @@ begin
   Result:= LEConvertInt8From(8, _response);
 end;
 
-function TBrickMaster.WriteWifi2SerialPort(const data: array of byte; const length_: byte): shortint;
+function TBrickMaster.WriteWifi2SerialPort(const aData: array of byte; const aLength: byte): shortint;
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_WRITE_WIFI2_SERIAL_PORT, 69);
-  if (Length(data) <> 60) then raise EInvalidParameterException.Create('Data has to be exactly 60 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
-  LEConvertUInt8To(length_, 68, _request);
+  if (Length(aData) <> 60) then raise EInvalidParameterException.Create('Data has to be exactly 60 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
+  LEConvertUInt8To(aLength, 68, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertInt8From(8, _response);
 end;
 
-procedure TBrickMaster.ReadWifi2SerialPort(const length_: byte; out data: TArray0To59OfUInt8; out Result: byte);
+procedure TBrickMaster.ReadWifi2SerialPort(const aLength: byte; out aData: TArray0To59OfUInt8; out aResult: byte);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_READ_WIFI2_SERIAL_PORT, 9);
-  LEConvertUInt8To(length_, 8, _request);
+  LEConvertUInt8To(aLength, 8, _request);
   _response:= SendRequest(_request);
-  for _i:= 0 to 59 do data[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  Result:= LEConvertUInt8From(68, _response);
+  for _i:= 0 to 59 do aData[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  aResult:= LEConvertUInt8From(68, _response);
 end;
 
-procedure TBrickMaster.SetWifi2AuthenticationSecret(const secret: string);
+procedure TBrickMaster.SetWifi2AuthenticationSecret(const aSecret: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI2_AUTHENTICATION_SECRET, 72);
-  LEConvertStringTo(secret, 8, 64, _request);
+  LEConvertStringTo(aSecret, 8, 64, _request);
   SendRequest(_request);
 end;
 
@@ -2511,106 +2542,106 @@ begin
   Result:= LEConvertStringFrom(8, 64, _response);
 end;
 
-procedure TBrickMaster.SetWifi2Configuration(const aPort: word; const websocketPort: word; const websitePort: word; const phyMode: byte; const sleepMode: byte; const website: byte);
+procedure TBrickMaster.SetWifi2Configuration(const aPort: word; const aWebsocketPort: word; const aWebsitePort: word; const aPhyMode: byte; const aSleepMode: byte; const aWebsite: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI2_CONFIGURATION, 17);
   LEConvertUInt16To(aPort, 8, _request);
-  LEConvertUInt16To(websocketPort, 10, _request);
-  LEConvertUInt16To(websitePort, 12, _request);
-  LEConvertUInt8To(phyMode, 14, _request);
-  LEConvertUInt8To(sleepMode, 15, _request);
-  LEConvertUInt8To(website, 16, _request);
+  LEConvertUInt16To(aWebsocketPort, 10, _request);
+  LEConvertUInt16To(aWebsitePort, 12, _request);
+  LEConvertUInt8To(aPhyMode, 14, _request);
+  LEConvertUInt8To(aSleepMode, 15, _request);
+  LEConvertUInt8To(aWebsite, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifi2Configuration(out port: word; out websocketPort: word; out websitePort: word; out phyMode: byte; out sleepMode: byte; out website: byte);
+procedure TBrickMaster.GetWifi2Configuration(out aPort: word; out aWebsocketPort: word; out aWebsitePort: word; out aPhyMode: byte; out aSleepMode: byte; out aWebsite: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI2_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  port:= LEConvertUInt16From(8, _response);
-  websocketPort:= LEConvertUInt16From(10, _response);
-  websitePort:= LEConvertUInt16From(12, _response);
-  phyMode:= LEConvertUInt8From(14, _response);
-  sleepMode:= LEConvertUInt8From(15, _response);
-  website:= LEConvertUInt8From(16, _response);
+  aPort:= LEConvertUInt16From(8, _response);
+  aWebsocketPort:= LEConvertUInt16From(10, _response);
+  aWebsitePort:= LEConvertUInt16From(12, _response);
+  aPhyMode:= LEConvertUInt8From(14, _response);
+  aSleepMode:= LEConvertUInt8From(15, _response);
+  aWebsite:= LEConvertUInt8From(16, _response);
 end;
 
-procedure TBrickMaster.GetWifi2Status(out clientEnabled: boolean; out clientStatus: byte; out clientIP: TArray0To3OfUInt8; out clientSubnetMask: TArray0To3OfUInt8;
-                                      out clientGateway: TArray0To3OfUInt8; out clientMACAddress: TArray0To5OfUInt8; out clientRXCount: longword;
-                                      out clientTXCount: longword; out clientRSSI: shortint; out apEnabled: boolean; out apIP: TArray0To3OfUInt8;
-                                      out apSubnetMask: TArray0To3OfUInt8; out apGateway: TArray0To3OfUInt8; out apMACAddress: TArray0To5OfUInt8;
-                                      out apRXCount: longword; out apTXCount: longword; out apConnectedCount: byte);
+procedure TBrickMaster.GetWifi2Status(out aClientEnabled: boolean; out aClientStatus: byte; out aClientIP: TArray0To3OfUInt8; out aClientSubnetMask: TArray0To3OfUInt8;
+                                      out aClientGateway: TArray0To3OfUInt8; out aClientMACAddress: TArray0To5OfUInt8; out aClientRXCount: longword;
+                                      out aClientTXCount: longword; out aClientRSSI: shortint; out aAPEnabled: boolean; out aAIP: TArray0To3OfUInt8;
+                                      out aAPSubnetMask: TArray0To3OfUInt8; out aAPGateway: TArray0To3OfUInt8; out aAPMACAddress: TArray0To5OfUInt8;
+                                      out aAPRXCount: longword; out aAPTXCount: longword; out aAPConnectedCount: byte);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI2_STATUS, 8);
   _response:= SendRequest(_request);
-  clientEnabled:= LEConvertBooleanFrom(8, _response);
-  clientStatus:= LEConvertUInt8From(9, _response);
-  for _i:= 0 to 3 do clientIP[_i]:= LEConvertUInt8From(10 + (_i * 1), _response);
-  for _i:= 0 to 3 do clientSubnetMask[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
-  for _i:= 0 to 3 do clientGateway[_i]:= LEConvertUInt8From(18 + (_i * 1), _response);
-  for _i:= 0 to 5 do clientMACAddress[_i]:= LEConvertUInt8From(22 + (_i * 1), _response);
-  clientRXCount:= LEConvertUInt32From(28, _response);
-  clientTXCount:= LEConvertUInt32From(32, _response);
-  clientRSSI:= LEConvertInt8From(36, _response);
-  apEnabled:= LEConvertBooleanFrom(37, _response);
-  for _i:= 0 to 3 do apIP[_i]:= LEConvertUInt8From(38 + (_i * 1), _response);
-  for _i:= 0 to 3 do apSubnetMask[_i]:= LEConvertUInt8From(42 + (_i * 1), _response);
-  for _i:= 0 to 3 do apGateway[_i]:= LEConvertUInt8From(46 + (_i * 1), _response);
-  for _i:= 0 to 5 do apMACAddress[_i]:= LEConvertUInt8From(50 + (_i * 1), _response);
-  apRXCount:= LEConvertUInt32From(56, _response);
-  apTXCount:= LEConvertUInt32From(60, _response);
-  apConnectedCount:= LEConvertUInt8From(64, _response);
+  aClientEnabled:= LEConvertBooleanFrom(8, _response);
+  aClientStatus:= LEConvertUInt8From(9, _response);
+  for _i:= 0 to 3 do aClientIP[_i]:= LEConvertUInt8From(10 + (_i * 1), _response);
+  for _i:= 0 to 3 do aClientSubnetMask[_i]:= LEConvertUInt8From(14 + (_i * 1), _response);
+  for _i:= 0 to 3 do aClientGateway[_i]:= LEConvertUInt8From(18 + (_i * 1), _response);
+  for _i:= 0 to 5 do aClientMACAddress[_i]:= LEConvertUInt8From(22 + (_i * 1), _response);
+  aClientRXCount:= LEConvertUInt32From(28, _response);
+  aClientTXCount:= LEConvertUInt32From(32, _response);
+  aClientRSSI:= LEConvertInt8From(36, _response);
+  aAPEnabled:= LEConvertBooleanFrom(37, _response);
+  for _i:= 0 to 3 do aAIP[_i]:= LEConvertUInt8From(38 + (_i * 1), _response);
+  for _i:= 0 to 3 do aAPSubnetMask[_i]:= LEConvertUInt8From(42 + (_i * 1), _response);
+  for _i:= 0 to 3 do aAPGateway[_i]:= LEConvertUInt8From(46 + (_i * 1), _response);
+  for _i:= 0 to 5 do aAPMACAddress[_i]:= LEConvertUInt8From(50 + (_i * 1), _response);
+  aAPRXCount:= LEConvertUInt32From(56, _response);
+  aAPTXCount:= LEConvertUInt32From(60, _response);
+  aAPConnectedCount:= LEConvertUInt8From(64, _response);
 end;
 
-procedure TBrickMaster.SetWifi2ClientConfiguration(const enable: boolean; const ssid: string; const ip: array of byte; const subnetMask: array of byte;
-                                                   const gateway: array of byte; const macAddress: array of byte; const bssid: array of byte);
+procedure TBrickMaster.SetWifi2ClientConfiguration(const aEnable: boolean; const aSSID: string; const aIP: array of byte; const aSubnetMask: array of byte;
+                                                   const aGateway: array of byte; const aMacAddress: array of byte; const aBSSID: array of byte);
 var
   _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI2_CLIENT_CONFIGURATION, 65);
-  LEConvertBooleanTo(enable, 8, _request);
-  LEConvertStringTo(ssid, 9, 32, _request);
-  if (Length(ip) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
-  for _i:= 0 to Length(ip) - 1 do LEConvertUInt8To(ip[_i], 41 + (_i * 1), _request);
-  if (Length(subnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
-  for _i:= 0 to Length(subnetMask) - 1 do LEConvertUInt8To(subnetMask[_i], 45 + (_i * 1), _request);
-  if (Length(gateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
-  for _i:= 0 to Length(gateway) - 1 do LEConvertUInt8To(gateway[_i], 49 + (_i * 1), _request);
-  if (Length(macAddress) <> 6) then raise EInvalidParameterException.Create('MAC Address has to be exactly 6 items long');
-  for _i:= 0 to Length(macAddress) - 1 do LEConvertUInt8To(macAddress[_i], 53 + (_i * 1), _request);
-  if (Length(bssid) <> 6) then raise EInvalidParameterException.Create('BSSID has to be exactly 6 items long');
-  for _i:= 0 to Length(bssid) - 1 do LEConvertUInt8To(bssid[_i], 59 + (_i * 1), _request);
+  LEConvertBooleanTo(aEnable, 8, _request);
+  LEConvertStringTo(aSSID, 9, 32, _request);
+  if (Length(aIP) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
+  for _i:= 0 to Length(aIP) - 1 do LEConvertUInt8To(aIP[_i], 41 + (_i * 1), _request);
+  if (Length(aSubnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
+  for _i:= 0 to Length(aSubnetMask) - 1 do LEConvertUInt8To(aSubnetMask[_i], 45 + (_i * 1), _request);
+  if (Length(aGateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
+  for _i:= 0 to Length(aGateway) - 1 do LEConvertUInt8To(aGateway[_i], 49 + (_i * 1), _request);
+  if (Length(aMacAddress) <> 6) then raise EInvalidParameterException.Create('MAC Address has to be exactly 6 items long');
+  for _i:= 0 to Length(aMacAddress) - 1 do LEConvertUInt8To(aMacAddress[_i], 53 + (_i * 1), _request);
+  if (Length(aBSSID) <> 6) then raise EInvalidParameterException.Create('BSSID has to be exactly 6 items long');
+  for _i:= 0 to Length(aBSSID) - 1 do LEConvertUInt8To(aBSSID[_i], 59 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifi2ClientConfiguration(out enable: boolean; out ssid: string; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8;
-                                                   out gateway: TArray0To3OfUInt8; out macAddress: TArray0To5OfUInt8; out bssid: TArray0To5OfUInt8);
+procedure TBrickMaster.GetWifi2ClientConfiguration(out aEnable: boolean; out aSSID: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8;
+                                                   out aGateway: TArray0To3OfUInt8; out aMacAddress: TArray0To5OfUInt8; out aBSSID: TArray0To5OfUInt8);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI2_CLIENT_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  enable:= LEConvertBooleanFrom(8, _response);
-  ssid:= LEConvertStringFrom(9, 32, _response);
-  for _i:= 0 to 3 do ip[_i]:= LEConvertUInt8From(41 + (_i * 1), _response);
-  for _i:= 0 to 3 do subnetMask[_i]:= LEConvertUInt8From(45 + (_i * 1), _response);
-  for _i:= 0 to 3 do gateway[_i]:= LEConvertUInt8From(49 + (_i * 1), _response);
-  for _i:= 0 to 5 do macAddress[_i]:= LEConvertUInt8From(53 + (_i * 1), _response);
-  for _i:= 0 to 5 do bssid[_i]:= LEConvertUInt8From(59 + (_i * 1), _response);
+  aEnable:= LEConvertBooleanFrom(8, _response);
+  aSSID:= LEConvertStringFrom(9, 32, _response);
+  for _i:= 0 to 3 do aIP[_i]:= LEConvertUInt8From(41 + (_i * 1), _response);
+  for _i:= 0 to 3 do aSubnetMask[_i]:= LEConvertUInt8From(45 + (_i * 1), _response);
+  for _i:= 0 to 3 do aGateway[_i]:= LEConvertUInt8From(49 + (_i * 1), _response);
+  for _i:= 0 to 5 do aMacAddress[_i]:= LEConvertUInt8From(53 + (_i * 1), _response);
+  for _i:= 0 to 5 do aBSSID[_i]:= LEConvertUInt8From(59 + (_i * 1), _response);
 end;
 
-procedure TBrickMaster.SetWifi2ClientHostname(const hostname: string);
+procedure TBrickMaster.SetWifi2ClientHostname(const aHostname: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI2_CLIENT_HOSTNAME, 40);
-  LEConvertStringTo(hostname, 8, 32, _request);
+  LEConvertStringTo(aHostname, 8, 32, _request);
   SendRequest(_request);
 end;
 
@@ -2623,12 +2654,12 @@ begin
   Result:= LEConvertStringFrom(8, 32, _response);
 end;
 
-procedure TBrickMaster.SetWifi2ClientPassword(const password: string);
+procedure TBrickMaster.SetWifi2ClientPassword(const aPassword: string);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI2_CLIENT_PASSWORD, 72);
-  LEConvertStringTo(password, 8, 64, _request);
+  LEConvertStringTo(aPassword, 8, 64, _request);
   SendRequest(_request);
 end;
 
@@ -2641,43 +2672,43 @@ begin
   Result:= LEConvertStringFrom(8, 64, _response);
 end;
 
-procedure TBrickMaster.SetWifi2APConfiguration(const enable: boolean; const ssid: string; const ip: array of byte; const subnetMask: array of byte; const gateway: array of byte; const encryption: byte; const hidden: boolean; const channel: byte; const macAddress: array of byte);
+procedure TBrickMaster.SetWifi2APConfiguration(const aEnable: boolean; const aSSID: string; const aIP: array of byte; const aSubnetMask: array of byte; const aGateway: array of byte; const aEncryption: byte; const aHidden: boolean; const aChannel: byte; const aMacAddress: array of byte);
 var
   _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_SET_WIFI2_AP_CONFIGURATION, 62);
-  LEConvertBooleanTo(enable, 8, _request);
-  LEConvertStringTo(ssid, 9, 32, _request);
-  if (Length(ip) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
-  for _i:= 0 to Length(ip) - 1 do LEConvertUInt8To(ip[_i], 41 + (_i * 1), _request);
-  if (Length(subnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
-  for _i:= 0 to Length(subnetMask) - 1 do LEConvertUInt8To(subnetMask[_i], 45 + (_i * 1), _request);
-  if (Length(gateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
-  for _i:= 0 to Length(gateway) - 1 do LEConvertUInt8To(gateway[_i], 49 + (_i * 1), _request);
-  LEConvertUInt8To(encryption, 53, _request);
-  LEConvertBooleanTo(hidden, 54, _request);
-  LEConvertUInt8To(channel, 55, _request);
-  if (Length(macAddress) <> 6) then raise EInvalidParameterException.Create('MAC Address has to be exactly 6 items long');
-  for _i:= 0 to Length(macAddress) - 1 do LEConvertUInt8To(macAddress[_i], 56 + (_i * 1), _request);
+  LEConvertBooleanTo(aEnable, 8, _request);
+  LEConvertStringTo(aSSID, 9, 32, _request);
+  if (Length(aIP) <> 4) then raise EInvalidParameterException.Create('IP has to be exactly 4 items long');
+  for _i:= 0 to Length(aIP) - 1 do LEConvertUInt8To(aIP[_i], 41 + (_i * 1), _request);
+  if (Length(aSubnetMask) <> 4) then raise EInvalidParameterException.Create('Subnet Mask has to be exactly 4 items long');
+  for _i:= 0 to Length(aSubnetMask) - 1 do LEConvertUInt8To(aSubnetMask[_i], 45 + (_i * 1), _request);
+  if (Length(aGateway) <> 4) then raise EInvalidParameterException.Create('Gateway has to be exactly 4 items long');
+  for _i:= 0 to Length(aGateway) - 1 do LEConvertUInt8To(aGateway[_i], 49 + (_i * 1), _request);
+  LEConvertUInt8To(aEncryption, 53, _request);
+  LEConvertBooleanTo(aHidden, 54, _request);
+  LEConvertUInt8To(aChannel, 55, _request);
+  if (Length(aMacAddress) <> 6) then raise EInvalidParameterException.Create('MAC Address has to be exactly 6 items long');
+  for _i:= 0 to Length(aMacAddress) - 1 do LEConvertUInt8To(aMacAddress[_i], 56 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetWifi2APConfiguration(out enable: boolean; out ssid: string; out ip: TArray0To3OfUInt8; out subnetMask: TArray0To3OfUInt8; out gateway: TArray0To3OfUInt8; out encryption: byte; out hidden: boolean; out channel: byte; out macAddress: TArray0To5OfUInt8);
+procedure TBrickMaster.GetWifi2APConfiguration(out aEnable: boolean; out aSSID: string; out aIP: TArray0To3OfUInt8; out aSubnetMask: TArray0To3OfUInt8; out aGateway: TArray0To3OfUInt8; out aEncryption: byte; out aHidden: boolean; out aChannel: byte; out aMacAddress: TArray0To5OfUInt8);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_WIFI2_AP_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  enable:= LEConvertBooleanFrom(8, _response);
-  ssid:= LEConvertStringFrom(9, 32, _response);
-  for _i:= 0 to 3 do ip[_i]:= LEConvertUInt8From(41 + (_i * 1), _response);
-  for _i:= 0 to 3 do subnetMask[_i]:= LEConvertUInt8From(45 + (_i * 1), _response);
-  for _i:= 0 to 3 do gateway[_i]:= LEConvertUInt8From(49 + (_i * 1), _response);
-  encryption:= LEConvertUInt8From(53, _response);
-  hidden:= LEConvertBooleanFrom(54, _response);
-  channel:= LEConvertUInt8From(55, _response);
-  for _i:= 0 to 5 do macAddress[_i]:= LEConvertUInt8From(56 + (_i * 1), _response);
+  aEnable:= LEConvertBooleanFrom(8, _response);
+  aSSID:= LEConvertStringFrom(9, 32, _response);
+  for _i:= 0 to 3 do aIP[_i]:= LEConvertUInt8From(41 + (_i * 1), _response);
+  for _i:= 0 to 3 do aSubnetMask[_i]:= LEConvertUInt8From(45 + (_i * 1), _response);
+  for _i:= 0 to 3 do aGateway[_i]:= LEConvertUInt8From(49 + (_i * 1), _response);
+  aEncryption:= LEConvertUInt8From(53, _response);
+  aHidden:= LEConvertBooleanFrom(54, _response);
+  aChannel:= LEConvertUInt8From(55, _response);
+  for _i:= 0 to 5 do aMacAddress[_i]:= LEConvertUInt8From(56 + (_i * 1), _response);
 end;
 
 procedure TBrickMaster.SetWifi2APPassword(const aPassword: string);
@@ -2872,14 +2903,14 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickMaster.GetSPITFPBaudrateConfig(out enableDynamicBaudrate: boolean; out minimumDynamicBaudrate: longword);
+procedure TBrickMaster.GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_MASTER_FUNCTION_GET_SPITFP_BAUDRATE_CONFIG, 8);
   _response:= SendRequest(_request);
-  enableDynamicBaudrate:= LEConvertBooleanFrom(8, _response);
-  minimumDynamicBaudrate:= LEConvertUInt32From(9, _response);
+  aEnableDynamicBaudrate:= LEConvertBooleanFrom(8, _response);
+  aMinimumDynamicBaudrate:= LEConvertUInt32From(9, _response);
 end;
 
 function TBrickMaster.GetSendTimeoutCount(const aCommunicationMethod: byte): longword;

@@ -121,12 +121,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetVoltageCallbackThreshold(const aOption: char; const min: word; const max: word); virtual;
+    procedure SetVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletVoltage.TBrickletVoltage.SetVoltageCallbackThreshold"/>.
     /// </summary>
-    procedure GetVoltageCallbackThreshold(out aOption: char; out min: word; out max: word); virtual;
+    procedure GetVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletVoltage.TBrickletVoltage.OnAnalogValueReached"/> callback.
@@ -145,12 +145,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetAnalogValueCallbackThreshold(const aOption: char; const min: word; const max: word); virtual;
+    procedure SetAnalogValueCallbackThreshold(const aOption: char; const aMin: word; const aMax: word); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletVoltage.TBrickletVoltage.SetAnalogValueCallbackThreshold"/>.
     /// </summary>
-    procedure GetAnalogValueCallbackThreshold(out aOption: char; out min: word; out max: word); virtual;
+    procedure GetAnalogValueCallbackThreshold(out aOption: char; out aMin: word; out aMax: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callbacks
@@ -165,7 +165,7 @@ type
     ///  
     ///  keep being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletVoltage.TBrickletVoltage.SetDebouncePeriod"/>.
@@ -182,7 +182,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -313,56 +314,56 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletVoltage.SetVoltageCallbackThreshold(const aOption: char; const min: word; const max: word);
+procedure TBrickletVoltage.SetVoltageCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_FUNCTION_SET_VOLTAGE_CALLBACK_THRESHOLD, 13);
   LEConvertCharTo(aOption, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltage.GetVoltageCallbackThreshold(out aOption: char; out min: word; out max: word);
+procedure TBrickletVoltage.GetVoltageCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_FUNCTION_GET_VOLTAGE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
   aOption:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletVoltage.SetAnalogValueCallbackThreshold(const aOption: char; const min: word; const max: word);
+procedure TBrickletVoltage.SetAnalogValueCallbackThreshold(const aOption: char; const aMin: word; const aMax: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_FUNCTION_SET_ANALOG_VALUE_CALLBACK_THRESHOLD, 13);
   LEConvertCharTo(aOption, 8, _request);
-  LEConvertUInt16To(min, 9, _request);
-  LEConvertUInt16To(max, 11, _request);
+  LEConvertUInt16To(aMin, 9, _request);
+  LEConvertUInt16To(aMax, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletVoltage.GetAnalogValueCallbackThreshold(out aOption: char; out min: word; out max: word);
+procedure TBrickletVoltage.GetAnalogValueCallbackThreshold(out aOption: char; out aMin: word; out aMax: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_FUNCTION_GET_ANALOG_VALUE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
   aOption:= LEConvertCharFrom(8, _response);
-  min:= LEConvertUInt16From(9, _response);
-  max:= LEConvertUInt16From(11, _response);
+  aMin:= LEConvertUInt16From(9, _response);
+  aMax:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletVoltage.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletVoltage.SetDebouncePeriod(const aDebounce: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
@@ -375,7 +376,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletVoltage.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletVoltage.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -383,10 +384,10 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_VOLTAGE_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
   deviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 

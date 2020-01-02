@@ -28,12 +28,14 @@ type
   TArray0To61OfUInt8 = array [0..61] of byte;
 
   TBrickRED = class;
-  TBrickREDNotifyAsyncFileRead = procedure(aSender: TBrickRED; const fileId: word; const errorCode: byte; const buffer: TArray0To59OfUInt8; const lengthRead: byte) of object;
-  TBrickREDNotifyAsyncFileWrite = procedure(aSender: TBrickRED; const fileId: word; const errorCode: byte; const lengthWritten: byte) of object;
-  TBrickREDNotifyFileEventsOccurred = procedure(aSender: TBrickRED; const fileId: word; const events: word) of object;
-  TBrickREDNotifyProcessStateChanged = procedure(aSender: TBrickRED; const processId: word; const state: byte; const timestamp: uint64; const exitCode: byte) of object;
-  TBrickREDNotifyProgramSchedulerStateChanged = procedure(aSender: TBrickRED; const programId: word) of object;
-  TBrickREDNotifyProgramProcessSpawned = procedure(aSender: TBrickRED; const programId: word) of object;
+  TBrickREDNotifyAsyncFileRead = procedure(aSender: TBrickRED; const aFileId: word; const aErrorCode: byte;
+                                           const aBuffer: TArray0To59OfUInt8; const aLengthRead: byte) of object;
+  TBrickREDNotifyAsyncFileWrite = procedure(aSender: TBrickRED; const aFileId: word; const aErrorCode: byte; const aLengthWritten: byte) of object;
+  TBrickREDNotifyFileEventsOccurred = procedure(aSender: TBrickRED; const aFileId: word; const aEvents: word) of object;
+  TBrickREDNotifyProcessStateChanged = procedure(aSender: TBrickRED; const aProcessId: word; const aState: byte;
+                                                 const aTimestamp: uint64; const aExitCode: byte) of object;
+  TBrickREDNotifyProgramSchedulerStateChanged = procedure(aSender: TBrickRED; const aProgramId: word) of object;
+  TBrickREDNotifyProgramProcessSpawned = procedure(aSender: TBrickRED; const aProgramId: word) of object;
 
   /// <summary>
   ///  Executes user programs and controls other Bricks/Bricklets standalone
@@ -46,13 +48,13 @@ type
     processStateChangedCallback: TBrickREDNotifyProcessStateChanged;
     programSchedulerStateChangedCallback: TBrickREDNotifyProgramSchedulerStateChanged;
     programProcessSpawnedCallback: TBrickREDNotifyProgramProcessSpawned;
-  protected
     procedure CallbackWrapperAsyncFileRead(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperAsyncFileWrite(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperFileEventsOccurred(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperProcessStateChanged(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperProgramSchedulerStateChanged(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperProgramProcessSpawned(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
