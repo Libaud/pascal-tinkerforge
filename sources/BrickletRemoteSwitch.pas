@@ -44,7 +44,7 @@ type
     /// <summary>
     ///  This function is deprecated, use <see cref="BrickletRemoteSwitch.TBrickletRemoteSwitch.SwitchSocketA"/> instead.
     /// </summary>
-    procedure SwitchSocket(const houseCode: byte; const receiverCode: byte; const switchTo: byte); virtual;
+    procedure SwitchSocket(const aHouseCode: byte; const aReceiverCode: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  Returns the current switching state. If the current state is busy, the
@@ -66,7 +66,7 @@ type
     ///  
     ///  The default value is 5.
     /// </summary>
-    procedure SetRepeats(const repeats: byte); virtual;
+    procedure SetRepeats(const aRepeats: byte); virtual;
 
     /// <summary>
     ///  Returns the number of repeats as set by <see cref="BrickletRemoteSwitch.TBrickletRemoteSwitch.SetRepeats"/>.
@@ -84,7 +84,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SwitchSocketA(const houseCode: byte; const receiverCode: byte; const switchTo: byte); virtual;
+    procedure SwitchSocketA(const aHouseCode: byte; const aReceiverCode: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  To switch a type B socket you have to give the address, unit and the state
@@ -99,7 +99,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SwitchSocketB(const address: longword; const unit_: byte; const switchTo: byte); virtual;
+    procedure SwitchSocketB(const aAddress: longword; const aUnit: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  To control a type B dimmer you have to give the address, unit and the
@@ -113,7 +113,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure DimSocketB(const address: longword; const unit_: byte; const dimValue: byte); virtual;
+    procedure DimSocketB(const aAddress: longword; const aUnit: byte; const aDimValue: byte); virtual;
 
     /// <summary>
     ///  To switch a type C socket you have to give the system code, device code and the
@@ -127,7 +127,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SwitchSocketC(const systemCode: char; const deviceCode: byte; const switchTo: byte); virtual;
+    procedure SwitchSocketC(const aSystemCode: char; const aDeviceCode: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -139,7 +139,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever the switching state changes
@@ -175,14 +176,14 @@ begin
   aCallBacks[BRICKLET_REMOTE_SWITCH_CALLBACK_SWITCHING_DONE]:= {$ifdef FPC}@{$endif}CallbackWrapperSwitchingDone;
 end;
 
-procedure TBrickletRemoteSwitch.SwitchSocket(const houseCode: byte; const receiverCode: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitch.SwitchSocket(const aHouseCode: byte; const aReceiverCode: byte; const aSwitchTo: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_SWITCH_SOCKET, 11);
-  LEConvertUInt8To(houseCode, 8, _request);
-  LEConvertUInt8To(receiverCode, 9, _request);
-  LEConvertUInt8To(switchTo, 10, _request);
+  LEConvertUInt8To(aHouseCode, 8, _request);
+  LEConvertUInt8To(aReceiverCode, 9, _request);
+  LEConvertUInt8To(aSwitchTo, 10, _request);
   SendRequest(_request);
 end;
 
@@ -195,12 +196,12 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitch.SetRepeats(const repeats: byte);
+procedure TBrickletRemoteSwitch.SetRepeats(const aRepeats: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_SET_REPEATS, 9);
-  LEConvertUInt8To(repeats, 8, _request);
+  LEConvertUInt8To(aRepeats, 8, _request);
   SendRequest(_request);
 end;
 
@@ -213,51 +214,51 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitch.SwitchSocketA(const houseCode: byte; const receiverCode: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitch.SwitchSocketA(const aHouseCode: byte; const aReceiverCode: byte; const aSwitchTo: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_SWITCH_SOCKET_A, 11);
-  LEConvertUInt8To(houseCode, 8, _request);
-  LEConvertUInt8To(receiverCode, 9, _request);
-  LEConvertUInt8To(switchTo, 10, _request);
+  LEConvertUInt8To(aHouseCode, 8, _request);
+  LEConvertUInt8To(aReceiverCode, 9, _request);
+  LEConvertUInt8To(aSwitchTo, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitch.SwitchSocketB(const address: longword; const unit_: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitch.SwitchSocketB(const aAddress: longword; const aUnit: byte; const aSwitchTo: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_SWITCH_SOCKET_B, 14);
-  LEConvertUInt32To(address, 8, _request);
-  LEConvertUInt8To(unit_, 12, _request);
-  LEConvertUInt8To(switchTo, 13, _request);
+  LEConvertUInt32To(aAddress, 8, _request);
+  LEConvertUInt8To(aUnit, 12, _request);
+  LEConvertUInt8To(aSwitchTo, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitch.DimSocketB(const address: longword; const unit_: byte; const dimValue: byte);
+procedure TBrickletRemoteSwitch.DimSocketB(const aAddress: longword; const aUnit: byte; const aDimValue: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_DIM_SOCKET_B, 14);
-  LEConvertUInt32To(address, 8, _request);
-  LEConvertUInt8To(unit_, 12, _request);
-  LEConvertUInt8To(dimValue, 13, _request);
+  LEConvertUInt32To(aAddress, 8, _request);
+  LEConvertUInt8To(aUnit, 12, _request);
+  LEConvertUInt8To(aDimValue, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitch.SwitchSocketC(const systemCode: char; const deviceCode: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitch.SwitchSocketC(const aSystemCode: char; const aDeviceCode: byte; const aSwitchTo: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_SWITCH_SOCKET_C, 11);
-  LEConvertCharTo(systemCode, 8, _request);
-  LEConvertUInt8To(deviceCode, 9, _request);
-  LEConvertUInt8To(switchTo, 10, _request);
+  LEConvertCharTo(aSystemCode, 8, _request);
+  LEConvertUInt8To(aDeviceCode, 9, _request);
+  LEConvertUInt8To(aSwitchTo, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitch.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRemoteSwitch.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -265,11 +266,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletRemoteSwitch.CallbackWrapperSwitchingDone(const aPacket: TDynamicByteArray);

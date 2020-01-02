@@ -26,10 +26,13 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletRemoteSwitchV2 = class;
-  TBrickletRemoteSwitchV2NotifySwitchingDone = procedure(sender: TBrickletRemoteSwitchV2) of object;
-  TBrickletRemoteSwitchV2NotifyRemoteStatusA = procedure(sender: TBrickletRemoteSwitchV2; const houseCode: byte; const receiverCode: byte; const switchTo: byte; const repeats: word) of object;
-  TBrickletRemoteSwitchV2NotifyRemoteStatusB = procedure(sender: TBrickletRemoteSwitchV2; const address: longword; const unit_: byte; const switchTo: byte; const dimValue: byte; const repeats: word) of object;
-  TBrickletRemoteSwitchV2NotifyRemoteStatusC = procedure(sender: TBrickletRemoteSwitchV2; const systemCode: char; const deviceCode: byte; const switchTo: byte; const repeats: word) of object;
+  TBrickletRemoteSwitchV2NotifySwitchingDone = procedure(aSender: TBrickletRemoteSwitchV2) of object;
+  TBrickletRemoteSwitchV2NotifyRemoteStatusA = procedure(aSender: TBrickletRemoteSwitchV2; const aHouseCode: byte; const aReceiverCode: byte;
+                                                         const aSwitchTo: byte; const aRepeats: word) of object;
+  TBrickletRemoteSwitchV2NotifyRemoteStatusB = procedure(aSender: TBrickletRemoteSwitchV2; const aAddress: longword; const aUnit: byte;
+                                                         const aSwitchTo: byte; const aDimValue: byte; const aRepeats: word) of object;
+  TBrickletRemoteSwitchV2NotifyRemoteStatusC = procedure(aSender: TBrickletRemoteSwitchV2; const aSystemCode: char; const aDeviceCode: byte;
+                                                         const aSwitchTo: byte; const aRepeats: word) of object;
 
   /// <summary>
   ///  Controls remote mains switches and receives signals from remotes
@@ -71,7 +74,7 @@ type
     ///  
     ///  The default value is 5.
     /// </summary>
-    procedure SetRepeats(const repeats: byte); virtual;
+    procedure SetRepeats(const aRepeats: byte); virtual;
 
     /// <summary>
     ///  Returns the number of repeats as set by <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.SetRepeats"/>.
@@ -87,7 +90,7 @@ type
     ///  A detailed description on how you can figure out the house and receiver code
     ///  can be found :ref:`here &lt;remote_switch_bricklet_type_a_house_and_receiver_code&gt;`.
     /// </summary>
-    procedure SwitchSocketA(const houseCode: byte; const receiverCode: byte; const switchTo: byte); virtual;
+    procedure SwitchSocketA(const aHouseCode: byte; const aReceiverCode: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  To switch a type B socket you have to give the address, unit and the state
@@ -100,7 +103,7 @@ type
     ///  A detailed description on how you can teach a socket the address and unit can
     ///  be found :ref:`here &lt;remote_switch_bricklet_type_b_address_and_unit&gt;`.
     /// </summary>
-    procedure SwitchSocketB(const address: longword; const unit_: byte; const switchTo: byte); virtual;
+    procedure SwitchSocketB(const aAddress: longword; const aUnit: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  To control a type B dimmer you have to give the address, unit and the
@@ -112,7 +115,7 @@ type
     ///  A detailed description on how you can teach a dimmer the address and unit can
     ///  be found :ref:`here &lt;remote_switch_bricklet_type_b_address_and_unit&gt;`.
     /// </summary>
-    procedure DimSocketB(const address: longword; const unit_: byte; const dimValue: byte); virtual;
+    procedure DimSocketB(const aAddress: longword; const aUnit: byte; const aDimValue: byte); virtual;
 
     /// <summary>
     ///  To switch a type C socket you have to give the system code, device code and the
@@ -124,7 +127,7 @@ type
     ///  A detailed description on how you can figure out the system and device code
     ///  can be found :ref:`here &lt;remote_switch_bricklet_type_c_system_and_device_code&gt;`.
     /// </summary>
-    procedure SwitchSocketC(const systemCode: char; const deviceCode: byte; const switchTo: byte); virtual;
+    procedure SwitchSocketC(const aSystemCode: char; const aDeviceCode: byte; const aSwitchTo: byte); virtual;
 
     /// <summary>
     ///  Sets the configuration for **receiving** data from a remote of type A, B or C.
@@ -137,12 +140,12 @@ type
     ///  
     ///  Default is ('A', 2, false).
     /// </summary>
-    procedure SetRemoteConfiguration(const remoteType: byte; const minimumRepeats: word; const callbackEnabled: boolean); virtual;
+    procedure SetRemoteConfiguration(const aRemoteType: byte; const aMinimumRepeats: word; const aCallbackEnabled: boolean); virtual;
 
     /// <summary>
     ///  Returns the remote configuration as set by <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.SetRemoteConfiguration"/>
     /// </summary>
-    procedure GetRemoteConfiguration(out remoteType: byte; out minimumRepeats: word; out callbackEnabled: boolean); virtual;
+    procedure GetRemoteConfiguration(out aRemoteType: byte; out aMinimumRepeats: word; out aCallbackEnabled: boolean); virtual;
 
     /// <summary>
     ///  Returns the house code, receiver code, switch state (on/off) and number of
@@ -156,7 +159,7 @@ type
     ///  Use the callback to get this data automatically when a button is pressed,
     ///  see <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.SetRemoteConfiguration"/> and <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.OnRemoteStatusA"/> callback.
     /// </summary>
-    procedure GetRemoteStatusA(out houseCode: byte; out receiverCode: byte; out switchTo: byte; out repeats: word); virtual;
+    procedure GetRemoteStatusA(out aHouseCode: byte; out aReceiverCode: byte; out aSwitchTo: byte; out aRepeats: word); virtual;
 
     /// <summary>
     ///  Returns the address (unique per remote), unit (button number), switch state
@@ -171,7 +174,7 @@ type
     ///  Use the callback to get this data automatically when a button is pressed,
     ///  see <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.SetRemoteConfiguration"/> and <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.OnRemoteStatusB"/> callback.
     /// </summary>
-    procedure GetRemoteStatusB(out address: longword; out unit_: byte; out switchTo: byte; out dimValue: byte; out repeats: word); virtual;
+    procedure GetRemoteStatusB(out aAddress: longword; out aUnit: byte; out aSwitchTo: byte; out aDimValue: byte; out aRepeats: word); virtual;
 
     /// <summary>
     ///  Returns the system code, device code, switch state (on/off) and number of repeats for
@@ -184,7 +187,7 @@ type
     ///  Use the callback to get this data automatically when a button is pressed,
     ///  see <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.SetRemoteConfiguration"/> and <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.OnRemoteStatusC"/> callback.
     /// </summary>
-    procedure GetRemoteStatusC(out systemCode: char; out deviceCode: byte; out switchTo: byte; out repeats: word); virtual;
+    procedure GetRemoteStatusC(out aSystemCode: char; out aDeviceCode: byte; out aSwitchTo: byte; out aRepeats: word); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -199,7 +202,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -227,7 +231,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -239,7 +243,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -250,7 +254,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletRemoteSwitchV2.TBrickletRemoteSwitchV2.SetStatusLEDConfig"/>
@@ -302,7 +306,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever the switching state changes
@@ -402,149 +407,149 @@ end;
 
 function TBrickletRemoteSwitchV2.GetSwitchingState: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_SWITCHING_STATE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.SetRepeats(const repeats: byte);
+procedure TBrickletRemoteSwitchV2.SetRepeats(const aRepeats: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SET_REPEATS, 9);
-  LEConvertUInt8To(repeats, 8, _request);
+  LEConvertUInt8To(aRepeats, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRemoteSwitchV2.GetRepeats: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_REPEATS, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.SwitchSocketA(const houseCode: byte; const receiverCode: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitchV2.SwitchSocketA(const aHouseCode: byte; const aReceiverCode: byte; const aSwitchTo: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SWITCH_SOCKET_A, 11);
-  LEConvertUInt8To(houseCode, 8, _request);
-  LEConvertUInt8To(receiverCode, 9, _request);
-  LEConvertUInt8To(switchTo, 10, _request);
+  LEConvertUInt8To(aHouseCode, 8, _request);
+  LEConvertUInt8To(aReceiverCode, 9, _request);
+  LEConvertUInt8To(aSwitchTo, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitchV2.SwitchSocketB(const address: longword; const unit_: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitchV2.SwitchSocketB(const aAddress: longword; const aUnit: byte; const aSwitchTo: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SWITCH_SOCKET_B, 14);
-  LEConvertUInt32To(address, 8, _request);
-  LEConvertUInt8To(unit_, 12, _request);
-  LEConvertUInt8To(switchTo, 13, _request);
+  LEConvertUInt32To(aAddress, 8, _request);
+  LEConvertUInt8To(aUnit, 12, _request);
+  LEConvertUInt8To(aSwitchTo, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitchV2.DimSocketB(const address: longword; const unit_: byte; const dimValue: byte);
+procedure TBrickletRemoteSwitchV2.DimSocketB(const aAddress: longword; const aUnit: byte; const aDimValue: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_DIM_SOCKET_B, 14);
-  LEConvertUInt32To(address, 8, _request);
-  LEConvertUInt8To(unit_, 12, _request);
-  LEConvertUInt8To(dimValue, 13, _request);
+  LEConvertUInt32To(aAddress, 8, _request);
+  LEConvertUInt8To(aUnit, 12, _request);
+  LEConvertUInt8To(aDimValue, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitchV2.SwitchSocketC(const systemCode: char; const deviceCode: byte; const switchTo: byte);
+procedure TBrickletRemoteSwitchV2.SwitchSocketC(const aSystemCode: char; const aDeviceCode: byte; const aSwitchTo: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SWITCH_SOCKET_C, 11);
-  LEConvertCharTo(systemCode, 8, _request);
-  LEConvertUInt8To(deviceCode, 9, _request);
-  LEConvertUInt8To(switchTo, 10, _request);
+  LEConvertCharTo(aSystemCode, 8, _request);
+  LEConvertUInt8To(aDeviceCode, 9, _request);
+  LEConvertUInt8To(aSwitchTo, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitchV2.SetRemoteConfiguration(const remoteType: byte; const minimumRepeats: word; const callbackEnabled: boolean);
+procedure TBrickletRemoteSwitchV2.SetRemoteConfiguration(const aRemoteType: byte; const aMinimumRepeats: word; const aCallbackEnabled: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SET_REMOTE_CONFIGURATION, 12);
-  LEConvertUInt8To(remoteType, 8, _request);
-  LEConvertUInt16To(minimumRepeats, 9, _request);
-  LEConvertBooleanTo(callbackEnabled, 11, _request);
+  LEConvertUInt8To(aRemoteType, 8, _request);
+  LEConvertUInt16To(aMinimumRepeats, 9, _request);
+  LEConvertBooleanTo(aCallbackEnabled, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRemoteSwitchV2.GetRemoteConfiguration(out remoteType: byte; out minimumRepeats: word; out callbackEnabled: boolean);
+procedure TBrickletRemoteSwitchV2.GetRemoteConfiguration(out aRemoteType: byte; out aMinimumRepeats: word; out aCallbackEnabled: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_REMOTE_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  remoteType:= LEConvertUInt8From(8, _response);
-  minimumRepeats:= LEConvertUInt16From(9, _response);
-  callbackEnabled:= LEConvertBooleanFrom(11, _response);
+  aRemoteType:= LEConvertUInt8From(8, _response);
+  aMinimumRepeats:= LEConvertUInt16From(9, _response);
+  aCallbackEnabled:= LEConvertBooleanFrom(11, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.GetRemoteStatusA(out houseCode: byte; out receiverCode: byte; out switchTo: byte; out repeats: word);
+procedure TBrickletRemoteSwitchV2.GetRemoteStatusA(out aHouseCode: byte; out aReceiverCode: byte; out aSwitchTo: byte; out aRepeats: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_REMOTE_STATUS_A, 8);
   _response:= SendRequest(_request);
-  houseCode:= LEConvertUInt8From(8, _response);
-  receiverCode:= LEConvertUInt8From(9, _response);
-  switchTo:= LEConvertUInt8From(10, _response);
-  repeats:= LEConvertUInt16From(11, _response);
+  aHouseCode:= LEConvertUInt8From(8, _response);
+  aReceiverCode:= LEConvertUInt8From(9, _response);
+  aSwitchTo:= LEConvertUInt8From(10, _response);
+  aRepeats:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.GetRemoteStatusB(out address: longword; out unit_: byte; out switchTo: byte; out dimValue: byte; out repeats: word);
+procedure TBrickletRemoteSwitchV2.GetRemoteStatusB(out aAddress: longword; out aUnit: byte; out aSwitchTo: byte; out aDimValue: byte; out aRepeats: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_REMOTE_STATUS_B, 8);
   _response:= SendRequest(_request);
-  address:= LEConvertUInt32From(8, _response);
-  unit_:= LEConvertUInt8From(12, _response);
-  switchTo:= LEConvertUInt8From(13, _response);
-  dimValue:= LEConvertUInt8From(14, _response);
-  repeats:= LEConvertUInt16From(15, _response);
+  aAddress:= LEConvertUInt32From(8, _response);
+  aUnit:= LEConvertUInt8From(12, _response);
+  aSwitchTo:= LEConvertUInt8From(13, _response);
+  aDimValue:= LEConvertUInt8From(14, _response);
+  aRepeats:= LEConvertUInt16From(15, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.GetRemoteStatusC(out systemCode: char; out deviceCode: byte; out switchTo: byte; out repeats: word);
+procedure TBrickletRemoteSwitchV2.GetRemoteStatusC(out aSystemCode: char; out aDeviceCode: byte; out aSwitchTo: byte; out aRepeats: word);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_REMOTE_STATUS_C, 8);
   _response:= SendRequest(_request);
-  systemCode:= LEConvertCharFrom(8, _response);
-  deviceCode:= LEConvertUInt8From(9, _response);
-  switchTo:= LEConvertUInt8From(10, _response);
-  repeats:= LEConvertUInt16From(11, _response);
+  aSystemCode:= LEConvertCharFrom(8, _response);
+  aDeviceCode:= LEConvertUInt8From(9, _response);
+  aSwitchTo:= LEConvertUInt8From(10, _response);
+  aRepeats:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletRemoteSwitchV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletRemoteSwitchV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -554,45 +559,46 @@ end;
 
 function TBrickletRemoteSwitchV2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletRemoteSwitchV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletRemoteSwitchV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletRemoteSwitchV2.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletRemoteSwitchV2.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRemoteSwitchV2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -601,7 +607,7 @@ end;
 
 function TBrickletRemoteSwitchV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -610,7 +616,7 @@ end;
 
 procedure TBrickletRemoteSwitchV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -618,7 +624,7 @@ end;
 
 procedure TBrickletRemoteSwitchV2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -627,25 +633,26 @@ end;
 
 function TBrickletRemoteSwitchV2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletRemoteSwitchV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRemoteSwitchV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REMOTE_SWITCH_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletRemoteSwitchV2.CallbackWrapperSwitchingDone(const aPacket: TDynamicByteArray);
@@ -658,42 +665,55 @@ begin
 end;
 
 procedure TBrickletRemoteSwitchV2.CallbackWrapperRemoteStatusA(const aPacket: TDynamicByteArray);
-var houseCode: byte; receiverCode: byte; switchTo: byte; repeats: word;
+var
+  _houseCode: byte;
+  _receiverCode: byte;
+  _switchTo: byte;
+  _repeats: word;
 begin
-  houseCode:= LEConvertUInt8From(8, aPacket);
-  receiverCode:= LEConvertUInt8From(9, aPacket);
-  switchTo:= LEConvertUInt8From(10, aPacket);
-  repeats:= LEConvertUInt16From(11, aPacket);
+  _houseCode:= LEConvertUInt8From(8, aPacket);
+  _receiverCode:= LEConvertUInt8From(9, aPacket);
+  _switchTo:= LEConvertUInt8From(10, aPacket);
+  _repeats:= LEConvertUInt16From(11, aPacket);
 
   if (Assigned(fRemoteStatusACallback)) then begin
-    fRemoteStatusACallback(self, houseCode, receiverCode, switchTo, repeats);
+    fRemoteStatusACallback(self, _houseCode, _receiverCode, _switchTo, _repeats);
   end;
 end;
 
 procedure TBrickletRemoteSwitchV2.CallbackWrapperRemoteStatusB(const aPacket: TDynamicByteArray);
-var address: longword; unit_: byte; switchTo: byte; dimValue: byte; repeats: word;
+var
+  _address: longword;
+  _unit: byte;
+  _switchTo: byte;
+  _dimValue: byte;
+  _repeats: word;
 begin
-  address:= LEConvertUInt32From(8, aPacket);
-  unit_:= LEConvertUInt8From(12, aPacket);
-  switchTo:= LEConvertUInt8From(13, aPacket);
-  dimValue:= LEConvertUInt8From(14, aPacket);
-  repeats:= LEConvertUInt16From(15, aPacket);
+  _address:= LEConvertUInt32From(8, aPacket);
+  _unit:= LEConvertUInt8From(12, aPacket);
+  _switchTo:= LEConvertUInt8From(13, aPacket);
+  _dimValue:= LEConvertUInt8From(14, aPacket);
+  _repeats:= LEConvertUInt16From(15, aPacket);
 
   if (Assigned(fRemoteStatusBCallback)) then begin
-    fRemoteStatusBCallback(self, address, unit_, switchTo, dimValue, repeats);
+    fRemoteStatusBCallback(self, _address, _unit, _switchTo, _dimValue, _repeats);
   end;
 end;
 
 procedure TBrickletRemoteSwitchV2.CallbackWrapperRemoteStatusC(const aPacket: TDynamicByteArray);
-var systemCode: char; deviceCode: byte; switchTo: byte; repeats: word;
+var
+  _systemCode: char;
+  _deviceCode: byte;
+  _switchTo: byte;
+  _repeats: word;
 begin
-  systemCode:= LEConvertCharFrom(8, aPacket);
-  deviceCode:= LEConvertUInt8From(9, aPacket);
-  switchTo:= LEConvertUInt8From(10, aPacket);
-  repeats:= LEConvertUInt16From(11, aPacket);
+  _systemCode:= LEConvertCharFrom(8, aPacket);
+  _deviceCode:= LEConvertUInt8From(9, aPacket);
+  _switchTo:= LEConvertUInt8From(10, aPacket);
+  _repeats:= LEConvertUInt16From(11, aPacket);
 
   if (Assigned(fRemoteStatusCCallback)) then begin
-    fRemoteStatusCCallback(self, systemCode, deviceCode, switchTo, repeats);
+    fRemoteStatusCCallback(self, _systemCode, _deviceCode, _switchTo, _repeats);
   end;
 end;
 
