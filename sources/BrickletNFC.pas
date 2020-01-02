@@ -25,9 +25,9 @@ uses
 type
   TBrickletNFC = class;
 
-  TBrickletNFCNotifyReaderStateChanged = procedure(aSender: TBrickletNFC; const state: byte; const idle: boolean) of object;
-  TBrickletNFCNotifyCardemuStateChanged = procedure(aSender: TBrickletNFC; const state: byte; const idle: boolean) of object;
-  TBrickletNFCNotifyP2PStateChanged = procedure(aSender: TBrickletNFC; const state: byte; const idle: boolean) of object;
+  TBrickletNFCNotifyReaderStateChanged = procedure(aSender: TBrickletNFC; const aState: byte; const aIdle: boolean) of object;
+  TBrickletNFCNotifyCardemuStateChanged = procedure(aSender: TBrickletNFC; const aState: byte; const aIdle: boolean) of object;
+  TBrickletNFCNotifyP2PStateChanged = procedure(aSender: TBrickletNFC; const aState: byte; const aIdle: boolean) of object;
 
   /// <summary>
   ///  NFC tag read/write, NFC P2P and Card Emulation
@@ -562,7 +562,8 @@ type
     ///  Bricks have a similar function that returns the errors on the Brick side.
 
     /// </summary>
-    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -665,7 +666,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is called if the reader state of the NFC Bricklet changes.
@@ -748,7 +750,7 @@ end;
 
 procedure TBrickletNFC.SetMode(const aMode: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_SET_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -757,7 +759,7 @@ end;
 
 function TBrickletNFC.GetMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_MODE, 8);
   _response:= SendRequest(_request);
@@ -766,7 +768,7 @@ end;
 
 procedure TBrickletNFC.Reader_requestTagID;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_REQUEST_TAG_ID, 8);
   SendRequest(_request);
@@ -774,7 +776,8 @@ end;
 
 procedure TBrickletNFC.ReaderGetTagIDLowLevel(out aTagType: byte; out aTagIDLength: byte; out aTagIDData: TArray0To31OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_GET_TAG_ID_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
@@ -785,17 +788,17 @@ end;
 
 procedure TBrickletNFC.ReaderGetTagID(out aTagType: byte; out aTagID: TArrayOfUInt8);
 var
-  tagIDLength: byte;
-  tagIDData: TArray0To31OfUInt8;
+  _tagIDLength: byte;
+  _tagIDData: TArray0To31OfUInt8;
 begin
-  ReaderGetTagIDLowLevel(aTagType, tagIDLength, tagIDData);
-  SetLength(aTagID, tagIDLength);
-  Move(tagIDData, aTagID[0], SizeOf(byte) * tagIDLength);
+  ReaderGetTagIDLowLevel(aTagType, _tagIDLength, _tagIDData);
+  SetLength(aTagID, _tagIDLength);
+  Move(_tagIDData, aTagID[0], SizeOf(byte) * _tagIDLength);
 end;
 
 procedure TBrickletNFC.ReaderGetState(out aState: byte; out aIdle: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_GET_STATE, 8);
   _response:= SendRequest(_request);
@@ -805,7 +808,8 @@ end;
 
 procedure TBrickletNFC.ReaderWriteNDEFLowLevel(const aNDefLength: word; const aNDefChunkOffset: word; const aNDefChunkData: TArray0To59OfUInt8);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_WRITE_NDEF_LOW_LEVEL, 72);
   LEConvertUInt16To(aNDefLength, 8, _request);
@@ -816,35 +820,35 @@ end;
 
 procedure TBrickletNFC.ReaderWriteNDEF(const aNDEF: array of byte);
 var
-  ndefChunkOffset: word;
-  ndefChunkData: TArray0To59OfUInt8;
-  ndefChunkLength: word;
-  ndefLength: word;
+  _ndefChunkOffset: word;
+  _ndefChunkData: TArray0To59OfUInt8;
+  _ndefChunkLength: word;
+  _ndefLength: word;
 begin
   if (Length(aNDEF) > 65535) then begin
     raise EInvalidParameterException.Create('NDEF can be at most 65535 items long');
   end;
 
-  ndefLength:= Length(aNDEF);
-  ndefChunkOffset:= 0;
+  _ndefLength:= Length(aNDEF);
+  _ndefChunkOffset:= 0;
 
-  if (ndefLength = 0) then begin
-    FillChar(ndefChunkData[0], SizeOf(byte) * 60, 0);
-    ReaderWriteNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
+  if (_ndefLength = 0) then begin
+    FillChar(_ndefChunkData[0], SizeOf(byte) * 60, 0);
+    ReaderWriteNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
   end
   else begin
     StreamMutex.Acquire;
     try
-      while (ndefChunkOffset < ndefLength) do begin
-        ndefChunkLength:= ndefLength - ndefChunkOffset;
+      while (_ndefChunkOffset < _ndefLength) do begin
+        _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
 
-        if (ndefChunkLength > 60) then ndefChunkLength:= 60;
+        if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
 
-        FillChar(ndefChunkData[0], SizeOf(byte) * 60, 0);
-        Move(aNDEF[ndefChunkOffset], ndefChunkData[0], SizeOf(byte) * ndefChunkLength);
+        FillChar(_ndefChunkData[0], SizeOf(byte) * 60, 0);
+        Move(aNDEF[_ndefChunkOffset], _ndefChunkData[0], SizeOf(byte) * _ndefChunkLength);
 
-        ReaderWriteNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-        Inc(ndefChunkOffset, 60);
+        ReaderWriteNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+        Inc(_ndefChunkOffset, 60);
       end;
     finally
       StreamMutex.Release;
@@ -854,7 +858,7 @@ end;
 
 procedure TBrickletNFC.Reader_requestNDEF;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_REQUEST_NDEF, 8);
   SendRequest(_request);
@@ -862,7 +866,8 @@ end;
 
 procedure TBrickletNFC.ReaderReadNDEFLowLevel(out aNDefLength: word; out aNDefChunkOffset: word; out aNDefChunkData: TArray0To59OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_READ_NDEF_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
@@ -873,43 +878,43 @@ end;
 
 function TBrickletNFC.ReaderReadNDEF: TArrayOfUInt8;
 var
-  ndef: TArrayOfUInt8;
-  ndefCurrentLength: word;
-  ndefLength: word;
-  ndefChunkOffset: word;
-  ndefChunkData: TArray0To59OfUInt8;
-  ndefOutOfSync: boolean;
-  ndefChunkLength: word;
+  _ndef: TArrayOfUInt8;
+  _ndefCurrentLength: word;
+  _ndefLength: word;
+  _ndefChunkOffset: word;
+  _ndefChunkData: TArray0To59OfUInt8;
+  _ndefOutOfSync: boolean;
+  _ndefChunkLength: word;
 begin
   SetLength(Result, 0);
-  SetLength(ndef, 0);
+  SetLength(_ndef, 0);
   StreamMutex.Acquire;
   try
-    ndefLength:= 0;
-    ReaderReadNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-    SetLength(ndef, ndefLength);
-    ndefOutOfSync:= (ndefChunkOffset <> 0);
+    _ndefLength:= 0;
+    ReaderReadNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+    SetLength(_ndef, _ndefLength);
+    _ndefOutOfSync:= (_ndefChunkOffset <> 0);
 
-    if ((not ndefOutOfSync) and (ndefLength > 0)) then begin
-      ndefChunkLength:= ndefLength - ndefChunkOffset;
-      if (ndefChunkLength > 60) then ndefChunkLength:= 60;
-      Move(ndefChunkData, ndef[0], SizeOf(byte) * ndefChunkLength);
-      ndefCurrentLength:= ndefChunkLength;
+    if ((not _ndefOutOfSync) and (_ndefLength > 0)) then begin
+      _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
+      if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
+      Move(_ndefChunkData, _ndef[0], SizeOf(byte) * _ndefChunkLength);
+      _ndefCurrentLength:= _ndefChunkLength;
 
-      while ((not ndefOutOfSync) and (ndefCurrentLength < ndefLength)) do begin
-        ReaderReadNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-        ndefOutOfSync:= ndefChunkOffset <> ndefCurrentLength;
-        ndefChunkLength:= ndefLength - ndefChunkOffset;
-        if (ndefChunkLength > 60) then ndefChunkLength:= 60;
-        Move(ndefChunkData, ndef[ndefCurrentLength], SizeOf(byte) * ndefChunkLength);
-        Inc(ndefCurrentLength, ndefChunkLength);
+      while ((not _ndefOutOfSync) and (_ndefCurrentLength < _ndefLength)) do begin
+        ReaderReadNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+        _ndefOutOfSync:= _ndefChunkOffset <> _ndefCurrentLength;
+        _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
+        if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
+        Move(_ndefChunkData, _ndef[_ndefCurrentLength], SizeOf(byte) * _ndefChunkLength);
+        Inc(_ndefCurrentLength, _ndefChunkLength);
       end;
     end;
 
-    if (ndefOutOfSync) then begin
+    if (_ndefOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
-      while (ndefChunkOffset + 60 < ndefLength) do begin
-        ReaderReadNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
+      while (_ndefChunkOffset + 60 < _ndefLength) do begin
+        ReaderReadNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('NDEF stream out-of-sync');
@@ -917,12 +922,13 @@ begin
   finally
     StreamMutex.Release;
   end;
-  Result:= ndef;
+  Result:= _ndef;
 end;
 
 procedure TBrickletNFC.ReaderAuthenticateMifareClassicPage(const aPage: word; const aKeyNumber: byte; const aKey: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_AUTHENTICATE_MIFARE_CLASSIC_PAGE, 17);
   LEConvertUInt16To(aPage, 8, _request);
@@ -934,7 +940,8 @@ end;
 
 procedure TBrickletNFC.ReaderWritePageLowLevel(const aPage: word; const aDataLength: word; const aDataChunkOffset: word; const aDataChunkData: TArray0To57OfUInt8);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_WRITE_PAGE_LOW_LEVEL, 72);
   LEConvertUInt16To(aPage, 8, _request);
@@ -946,35 +953,35 @@ end;
 
 procedure TBrickletNFC.ReaderWritePage(const aPage: word; const aData: array of byte);
 var
-  dataChunkOffset: word;
-  dataChunkData: TArray0To57OfUInt8;
-  dataChunkLength: word;
-  dataLength: word;
+  _dataChunkOffset: word;
+  _dataChunkData: TArray0To57OfUInt8;
+  _dataChunkLength: word;
+  _dataLength: word;
 begin
   if (Length(aData) > 65535) then begin
     raise EInvalidParameterException.Create('Data can be at most 65535 items long');
   end;
 
-  dataLength:= Length(aData);
-  dataChunkOffset:= 0;
+  _dataLength:= Length(aData);
+  _dataChunkOffset:= 0;
 
-  if (dataLength = 0) then begin
-    FillChar(dataChunkData[0], SizeOf(byte) * 58, 0);
-    ReaderWritePageLowLevel(aPage, dataLength, dataChunkOffset, dataChunkData);
+  if (_dataLength = 0) then begin
+    FillChar(_dataChunkData[0], SizeOf(byte) * 58, 0);
+    ReaderWritePageLowLevel(aPage, _dataLength, _dataChunkOffset, _dataChunkData);
   end
   else begin
     StreamMutex.Acquire;
     try
-      while (dataChunkOffset < dataLength) do begin
-        dataChunkLength:= dataLength - dataChunkOffset;
+      while (_dataChunkOffset < _dataLength) do begin
+        _dataChunkLength:= _dataLength - _dataChunkOffset;
 
-        if (dataChunkLength > 58) then dataChunkLength:= 58;
+        if (_dataChunkLength > 58) then _dataChunkLength:= 58;
 
-        FillChar(dataChunkData[0], SizeOf(byte) * 58, 0);
-        Move(aData[dataChunkOffset], dataChunkData[0], SizeOf(byte) * dataChunkLength);
+        FillChar(_dataChunkData[0], SizeOf(byte) * 58, 0);
+        Move(aData[_dataChunkOffset], _dataChunkData[0], SizeOf(byte) * _dataChunkLength);
 
-        ReaderWritePageLowLevel(aPage, dataLength, dataChunkOffset, dataChunkData);
-        Inc(dataChunkOffset, 58);
+        ReaderWritePageLowLevel(aPage, _dataLength, _dataChunkOffset, _dataChunkData);
+        Inc(_dataChunkOffset, 58);
       end;
     finally
       StreamMutex.Release;
@@ -984,7 +991,7 @@ end;
 
 procedure TBrickletNFC.Reader_requestPage(const aPage: word; const aLength: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_REQUEST_PAGE, 12);
   LEConvertUInt16To(aPage, 8, _request);
@@ -994,7 +1001,8 @@ end;
 
 procedure TBrickletNFC.ReaderReadPageLowLevel(out aDataLength: word; out aDataChunkOffset: word; out aDataChunkData: TArray0To59OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_READER_READ_PAGE_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
@@ -1005,43 +1013,43 @@ end;
 
 function TBrickletNFC.ReaderReadPage: TArrayOfUInt8;
 var
-  data: TArrayOfUInt8;
-  dataCurrentLength: word;
-  dataLength: word;
-  dataChunkOffset: word;
-  dataChunkData: TArray0To59OfUInt8;
-  dataOutOfSync: boolean;
-  dataChunkLength: word;
+  _data: TArrayOfUInt8;
+  _dataCurrentLength: word;
+  _dataLength: word;
+  _dataChunkOffset: word;
+  _dataChunkData: TArray0To59OfUInt8;
+  _dataOutOfSync: boolean;
+  _dataChunkLength: word;
 begin
   SetLength(Result, 0);
-  SetLength(data, 0);
+  SetLength(_data, 0);
   StreamMutex.Acquire;
   try
-    dataLength:= 0;
-    ReaderReadPageLowLevel(dataLength, dataChunkOffset, dataChunkData);
-    SetLength(data, dataLength);
-    dataOutOfSync:= (dataChunkOffset <> 0);
+    _dataLength:= 0;
+    ReaderReadPageLowLevel(_dataLength, _dataChunkOffset, _dataChunkData);
+    SetLength(_data, _dataLength);
+    _dataOutOfSync:= (_dataChunkOffset <> 0);
 
-    if ((not dataOutOfSync) and (dataLength > 0)) then begin
-      dataChunkLength:= dataLength - dataChunkOffset;
-      if (dataChunkLength > 60) then dataChunkLength:= 60;
-      Move(dataChunkData, data[0], SizeOf(byte) * dataChunkLength);
-      dataCurrentLength:= dataChunkLength;
+    if ((not _dataOutOfSync) and (_dataLength > 0)) then begin
+      _dataChunkLength:= _dataLength - _dataChunkOffset;
+      if (_dataChunkLength > 60) then _dataChunkLength:= 60;
+      Move(_dataChunkData, _data[0], SizeOf(byte) * _dataChunkLength);
+      _dataCurrentLength:= _dataChunkLength;
 
-      while ((not dataOutOfSync) and (dataCurrentLength < dataLength)) do begin
-        ReaderReadPageLowLevel(dataLength, dataChunkOffset, dataChunkData);
-        dataOutOfSync:= dataChunkOffset <> dataCurrentLength;
-        dataChunkLength:= dataLength - dataChunkOffset;
-        if (dataChunkLength > 60) then dataChunkLength:= 60;
-        Move(dataChunkData, data[dataCurrentLength], SizeOf(byte) * dataChunkLength);
-        Inc(dataCurrentLength, dataChunkLength);
+      while ((not _dataOutOfSync) and (_dataCurrentLength < _dataLength)) do begin
+        ReaderReadPageLowLevel(_dataLength, _dataChunkOffset, _dataChunkData);
+        _dataOutOfSync:= _dataChunkOffset <> _dataCurrentLength;
+        _dataChunkLength:= _dataLength - _dataChunkOffset;
+        if (_dataChunkLength > 60) then _dataChunkLength:= 60;
+        Move(_dataChunkData, _data[_dataCurrentLength], SizeOf(byte) * _dataChunkLength);
+        Inc(_dataCurrentLength, _dataChunkLength);
       end;
     end;
 
-    if (dataOutOfSync) then begin
+    if (_dataOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
-      while (dataChunkOffset + 60 < dataLength) do begin
-        ReaderReadPageLowLevel(dataLength, dataChunkOffset, dataChunkData);
+      while (_dataChunkOffset + 60 < _dataLength) do begin
+        ReaderReadPageLowLevel(_dataLength, _dataChunkOffset, _dataChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('Data stream out-of-sync');
@@ -1049,12 +1057,12 @@ begin
   finally
     StreamMutex.Release;
   end;
-  Result:= data;
+  Result:= _data;
 end;
 
 procedure TBrickletNFC.CardemuGetState(out aState: byte; out aIdle: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_CARDEMU_GET_STATE, 8);
   _response:= SendRequest(_request);
@@ -1064,7 +1072,7 @@ end;
 
 procedure TBrickletNFC.CardemuStartDiscovery;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_CARDEMU_START_DISCOVERY, 8);
   SendRequest(_request);
@@ -1072,7 +1080,8 @@ end;
 
 procedure TBrickletNFC.CardemuWriteNDEFLowLevel(const aNDefLength: word; const aNDefChunkOffset: word; const aNDefChunkData: TArray0To59OfUInt8);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_CARDEMU_WRITE_NDEF_LOW_LEVEL, 72);
   LEConvertUInt16To(aNDefLength, 8, _request);
@@ -1083,35 +1092,35 @@ end;
 
 procedure TBrickletNFC.CardemuWriteNDEF(const aNDef: array of byte);
 var
-  ndefChunkOffset: word;
-  ndefChunkData: TArray0To59OfUInt8;
-  ndefChunkLength: word;
-  ndefLength: word;
+  _ndefChunkOffset: word;
+  _ndefChunkData: TArray0To59OfUInt8;
+  _ndefChunkLength: word;
+  _ndefLength: word;
 begin
   if (Length(aNDef) > 65535) then begin
     raise EInvalidParameterException.Create('NDEF can be at most 65535 items long');
   end;
 
-  ndefLength:= Length(aNDef);
-  ndefChunkOffset:= 0;
+  _ndefLength:= Length(aNDef);
+  _ndefChunkOffset:= 0;
 
-  if (ndefLength = 0) then begin
-    FillChar(ndefChunkData[0], SizeOf(byte) * 60, 0);
-    CardemuWriteNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
+  if (_ndefLength = 0) then begin
+    FillChar(_ndefChunkData[0], SizeOf(byte) * 60, 0);
+    CardemuWriteNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
   end
   else begin
     StreamMutex.Acquire;
     try
-      while (ndefChunkOffset < ndefLength) do begin
-        ndefChunkLength:= ndefLength - ndefChunkOffset;
+      while (_ndefChunkOffset < _ndefLength) do begin
+        _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
 
-        if (ndefChunkLength > 60) then ndefChunkLength:= 60;
+        if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
 
-        FillChar(ndefChunkData[0], SizeOf(byte) * 60, 0);
-        Move(aNDef[ndefChunkOffset], ndefChunkData[0], SizeOf(byte) * ndefChunkLength);
+        FillChar(_ndefChunkData[0], SizeOf(byte) * 60, 0);
+        Move(aNDef[_ndefChunkOffset], _ndefChunkData[0], SizeOf(byte) * _ndefChunkLength);
 
-        CardemuWriteNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-        Inc(ndefChunkOffset, 60);
+        CardemuWriteNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+        Inc(_ndefChunkOffset, 60);
       end;
     finally
       StreamMutex.Release;
@@ -1121,7 +1130,7 @@ end;
 
 procedure TBrickletNFC.CardemuStartTransfer(const aTransfer: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_CARDEMU_START_TRANSFER, 9);
   LEConvertUInt8To(aTransfer, 8, _request);
@@ -1130,7 +1139,7 @@ end;
 
 procedure TBrickletNFC.P2PGetState(out aState: byte; out aIdle: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_P2P_GET_STATE, 8);
   _response:= SendRequest(_request);
@@ -1140,7 +1149,7 @@ end;
 
 procedure TBrickletNFC.P2PStartDiscovery;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_P2P_START_DISCOVERY, 8);
   SendRequest(_request);
@@ -1148,7 +1157,8 @@ end;
 
 procedure TBrickletNFC.P2PWriteNDEFLowLevel(const aNDefLength: word; const aNDefChunkOffset: word; const aNDefChunkData: TArray0To59OfUInt8);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_P2P_WRITE_NDEF_LOW_LEVEL, 72);
   LEConvertUInt16To(aNDefLength, 8, _request);
@@ -1159,35 +1169,35 @@ end;
 
 procedure TBrickletNFC.P2PWriteNDEF(const aNDef: array of byte);
 var
-  ndefChunkOffset: word;
-  ndefChunkData: TArray0To59OfUInt8;
-  ndefChunkLength: word;
-  ndefLength: word;
+  _ndefChunkOffset: word;
+  _ndefChunkData: TArray0To59OfUInt8;
+  _ndefChunkLength: word;
+  _ndefLength: word;
 begin
   if (Length(aNDef) > 65535) then begin
     raise EInvalidParameterException.Create('NDEF can be at most 65535 items long');
   end;
 
-  ndefLength:= Length(aNDef);
-  ndefChunkOffset:= 0;
+  _ndefLength:= Length(aNDef);
+  _ndefChunkOffset:= 0;
 
-  if (ndefLength = 0) then begin
-    FillChar(ndefChunkData[0], SizeOf(byte) * 60, 0);
-    P2PWriteNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
+  if (_ndefLength = 0) then begin
+    FillChar(_ndefChunkData[0], SizeOf(byte) * 60, 0);
+    P2PWriteNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
   end
   else begin
     StreamMutex.Acquire;
     try
-      while (ndefChunkOffset < ndefLength) do begin
-        ndefChunkLength:= ndefLength - ndefChunkOffset;
+      while (_ndefChunkOffset < _ndefLength) do begin
+        _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
 
-        if (ndefChunkLength > 60) then ndefChunkLength:= 60;
+        if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
 
-        FillChar(ndefChunkData[0], SizeOf(byte) * 60, 0);
-        Move(aNDef[ndefChunkOffset], ndefChunkData[0], SizeOf(byte) * ndefChunkLength);
+        FillChar(_ndefChunkData[0], SizeOf(byte) * 60, 0);
+        Move(aNDef[_ndefChunkOffset], _ndefChunkData[0], SizeOf(byte) * _ndefChunkLength);
 
-        P2PWriteNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-        Inc(ndefChunkOffset, 60);
+        P2PWriteNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+        Inc(_ndefChunkOffset, 60);
       end;
     finally
       StreamMutex.Release;
@@ -1197,7 +1207,7 @@ end;
 
 procedure TBrickletNFC.P2PStartTransfer(const aTransfer: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_P2P_START_TRANSFER, 9);
   LEConvertUInt8To(aTransfer, 8, _request);
@@ -1206,7 +1216,8 @@ end;
 
 procedure TBrickletNFC.P2PReadNDEFLowLevel(out aNDefLength: word; out aNDefChunkOffset: word; out aNDefChunkData: TArray0To59OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_P2P_READ_NDEF_LOW_LEVEL, 8);
   _response:= SendRequest(_request);
@@ -1217,43 +1228,43 @@ end;
 
 function TBrickletNFC.P2PReadNDEF: TArrayOfUInt8;
 var
-  ndef: TArrayOfUInt8;
-  ndefCurrentLength: word;
-  ndefLength: word;
-  ndefChunkOffset: word;
-  ndefChunkData: TArray0To59OfUInt8;
-  ndefOutOfSync: boolean;
-  ndefChunkLength: word;
+  _ndef: TArrayOfUInt8;
+  _ndefCurrentLength: word;
+  _ndefLength: word;
+  _ndefChunkOffset: word;
+  _ndefChunkData: TArray0To59OfUInt8;
+  _ndefOutOfSync: boolean;
+  _ndefChunkLength: word;
 begin
   SetLength(Result, 0);
-  SetLength(ndef, 0);
+  SetLength(_ndef, 0);
   StreamMutex.Acquire;
   try
-    ndefLength:= 0;
-    P2PReadNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-    SetLength(ndef, ndefLength);
-    ndefOutOfSync:= (ndefChunkOffset <> 0);
+    _ndefLength:= 0;
+    P2PReadNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+    SetLength(_ndef, _ndefLength);
+    _ndefOutOfSync:= (_ndefChunkOffset <> 0);
 
-    if ((not ndefOutOfSync) and (ndefLength > 0)) then begin
-      ndefChunkLength:= ndefLength - ndefChunkOffset;
-      if (ndefChunkLength > 60) then ndefChunkLength:= 60;
-      Move(ndefChunkData, ndef[0], SizeOf(byte) * ndefChunkLength);
-      ndefCurrentLength:= ndefChunkLength;
+    if ((not _ndefOutOfSync) and (_ndefLength > 0)) then begin
+      _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
+      if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
+      Move(_ndefChunkData, _ndef[0], SizeOf(byte) * _ndefChunkLength);
+      _ndefCurrentLength:= _ndefChunkLength;
 
-      while ((not ndefOutOfSync) and (ndefCurrentLength < ndefLength)) do begin
-        P2PReadNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
-        ndefOutOfSync:= ndefChunkOffset <> ndefCurrentLength;
-        ndefChunkLength:= ndefLength - ndefChunkOffset;
-        if (ndefChunkLength > 60) then ndefChunkLength:= 60;
-        Move(ndefChunkData, ndef[ndefCurrentLength], SizeOf(byte) * ndefChunkLength);
-        Inc(ndefCurrentLength, ndefChunkLength);
+      while ((not _ndefOutOfSync) and (_ndefCurrentLength < _ndefLength)) do begin
+        P2PReadNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
+        _ndefOutOfSync:= _ndefChunkOffset <> _ndefCurrentLength;
+        _ndefChunkLength:= _ndefLength - _ndefChunkOffset;
+        if (_ndefChunkLength > 60) then _ndefChunkLength:= 60;
+        Move(_ndefChunkData, _ndef[_ndefCurrentLength], SizeOf(byte) * _ndefChunkLength);
+        Inc(_ndefCurrentLength, _ndefChunkLength);
       end;
     end;
 
-    if (ndefOutOfSync) then begin
+    if (_ndefOutOfSync) then begin
       { Discard remaining stream to bring it back in-sync }
-      while (ndefChunkOffset + 60 < ndefLength) do begin
-        P2PReadNDEFLowLevel(ndefLength, ndefChunkOffset, ndefChunkData);
+      while (_ndefChunkOffset + 60 < _ndefLength) do begin
+        P2PReadNDEFLowLevel(_ndefLength, _ndefChunkOffset, _ndefChunkData);
       end;
 
       raise EStreamOutOfSyncException.Create('NDEF stream out-of-sync');
@@ -1261,12 +1272,12 @@ begin
   finally
     StreamMutex.Release;
   end;
-  Result:= ndef;
+  Result:= _ndef;
 end;
 
 procedure TBrickletNFC.SetDetectionLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_SET_DETECTION_LED_CONFIG, 9);
   LEConvertUInt8To(aConfig, 8, _request);
@@ -1275,7 +1286,7 @@ end;
 
 function TBrickletNFC.GetDetectionLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_DETECTION_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -1284,7 +1295,7 @@ end;
 
 procedure TBrickletNFC.SetMaximumTimeout(const aTimeout: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_SET_MAXIMUM_TIMEOUT, 10);
   LEConvertUInt16To(aTimeout, 8, _request);
@@ -1293,7 +1304,7 @@ end;
 
 function TBrickletNFC.GetMaximumTimeout: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_MAXIMUM_TIMEOUT, 8);
   _response:= SendRequest(_request);
@@ -1302,7 +1313,7 @@ end;
 
 procedure TBrickletNFC.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
@@ -1314,7 +1325,7 @@ end;
 
 function TBrickletNFC.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -1324,7 +1335,7 @@ end;
 
 function TBrickletNFC.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
@@ -1333,7 +1344,7 @@ end;
 
 procedure TBrickletNFC.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
   LEConvertUInt32To(aPointer, 8, _request);
@@ -1342,7 +1353,8 @@ end;
 
 function TBrickletNFC.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_WRITE_FIRMWARE, 72);
   if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
@@ -1353,7 +1365,7 @@ end;
 
 procedure TBrickletNFC.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_SET_STATUS_LED_CONFIG, 9);
   LEConvertUInt8To(aConfig, 8, _request);
@@ -1362,7 +1374,7 @@ end;
 
 function TBrickletNFC.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -1371,7 +1383,7 @@ end;
 
 function TBrickletNFC.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -1380,7 +1392,7 @@ end;
 
 procedure TBrickletNFC.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -1421,40 +1433,40 @@ end;
 
 procedure TBrickletNFC.CallbackWrapperReaderStateChanged(const aPacket: TDynamicByteArray);
 var
-  state: byte;
-  idle: boolean;
+  _state: byte;
+  _idle: boolean;
 begin
-  state:= LEConvertUInt8From(8, aPacket);
-  idle:= LEConvertBooleanFrom(9, aPacket);
+  _state:= LEConvertUInt8From(8, aPacket);
+  _idle:= LEConvertBooleanFrom(9, aPacket);
 
   if (Assigned(fReaderStateChangedCallback)) then begin
-    fReaderStateChangedCallback(self, state, idle);
+    fReaderStateChangedCallback(self, _state, _idle);
   end;
 end;
 
 procedure TBrickletNFC.CallbackWrapperCardemuStateChanged(const aPacket: TDynamicByteArray);
 var
-  state: byte;
-  idle: boolean;
+  _state: byte;
+  _idle: boolean;
 begin
-  state:= LEConvertUInt8From(8, aPacket);
-  idle:= LEConvertBooleanFrom(9, aPacket);
+  _state:= LEConvertUInt8From(8, aPacket);
+  _idle:= LEConvertBooleanFrom(9, aPacket);
 
   if (Assigned(fCardemuStateChangedCallback)) then begin
-    fCardemuStateChangedCallback(self, state, idle);
+    fCardemuStateChangedCallback(self, _state, _idle);
   end;
 end;
 
 procedure TBrickletNFC.CallbackWrapperP2PStateChanged(const aPacket: TDynamicByteArray);
 var
-  state: byte;
-  idle: boolean;
+  _state: byte;
+  _idle: boolean;
 begin
-  state:= LEConvertUInt8From(8, aPacket);
-  idle:= LEConvertBooleanFrom(9, aPacket);
+  _state:= LEConvertUInt8From(8, aPacket);
+  _idle:= LEConvertBooleanFrom(9, aPacket);
 
   if (Assigned(fP2PStateChangedCallback)) then begin
-    fP2PStateChangedCallback(self, state, idle);
+    fP2PStateChangedCallback(self, _state, _idle);
   end;
 end;
 

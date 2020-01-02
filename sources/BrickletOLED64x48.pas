@@ -204,7 +204,8 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickletOLED64x48.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
+procedure TBrickletOLED64x48.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                                         out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;

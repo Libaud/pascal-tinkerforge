@@ -25,7 +25,7 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletMultiTouch = class;
-  TBrickletMultiTouchNotifyTouchState = procedure(aSender: TBrickletMultiTouch; const state: word) of object;
+  TBrickletMultiTouchNotifyTouchState = procedure(aSender: TBrickletMultiTouch; const aState: word) of object;
 
   /// <summary>
   ///  Capacitive touch sensor for 12 electrodes
@@ -85,7 +85,7 @@ type
     ///  
     ///  Default: 8191 = 0x1FFF = 0b1111111111111 (all electrodes enabled)
     /// </summary>
-    procedure SetElectrodeConfig(const enabledElectrodes: word); virtual;
+    procedure SetElectrodeConfig(const aEnabledElectrodes: word); virtual;
 
     /// <summary>
     ///  Returns the electrode configuration, as set by <see cref="BrickletMultiTouch.TBrickletMultiTouch.SetElectrodeConfig"/>.
@@ -103,7 +103,7 @@ type
     ///  After a new sensitivity is set, you likely want to call <see cref="BrickletMultiTouch.TBrickletMultiTouch.Recalibrate"/>
     ///  to calibrate the electrodes with the newly defined sensitivity.
     /// </summary>
-    procedure SetElectrodeSensitivity(const sensitivity: byte); virtual;
+    procedure SetElectrodeSensitivity(const aSensitivity: byte); virtual;
 
     /// <summary>
     ///  Returns the current sensitivity, as set by <see cref="BrickletMultiTouch.TBrickletMultiTouch.SetElectrodeSensitivity"/>.
@@ -120,7 +120,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
 
     /// <summary>
     ///  Returns the current touch state, see <see cref="BrickletMultiTouch.TBrickletMultiTouch.GetTouchState"/> for
@@ -173,12 +174,12 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickletMultiTouch.SetElectrodeConfig(const enabledElectrodes: word);
+procedure TBrickletMultiTouch.SetElectrodeConfig(const aEnabledElectrodes: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MULTI_TOUCH_FUNCTION_SET_ELECTRODE_CONFIG, 10);
-  LEConvertUInt16To(enabledElectrodes, 8, _request);
+  LEConvertUInt16To(aEnabledElectrodes, 8, _request);
   SendRequest(_request);
 end;
 
@@ -191,12 +192,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletMultiTouch.SetElectrodeSensitivity(const sensitivity: byte);
+procedure TBrickletMultiTouch.SetElectrodeSensitivity(const aSensitivity: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MULTI_TOUCH_FUNCTION_SET_ELECTRODE_SENSITIVITY, 9);
-  LEConvertUInt8To(sensitivity, 8, _request);
+  LEConvertUInt8To(aSensitivity, 8, _request);
   SendRequest(_request);
 end;
 
@@ -209,7 +210,7 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletMultiTouch.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletMultiTouch.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -217,21 +218,21 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_MULTI_TOUCH_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
   deviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletMultiTouch.CallbackWrapperTouchState(const aPacket: TDynamicByteArray);
 var
-  state: word;
+  _State: word;
 begin
-  state:= LEConvertUInt16From(8, aPacket);
+  _State:= LEConvertUInt16From(8, aPacket);
 
   if (Assigned(fTouchStateCallback)) then begin
-    fTouchStateCallback(self, state);
+    fTouchStateCallback(self, _State);
   end;
 end;
 

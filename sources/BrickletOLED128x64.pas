@@ -59,13 +59,13 @@ type
     ///  and the next two the second row and so on. To fill the whole display
     ///  you need to call <see cref="BrickletOLED128x64.TBrickletOLED128x64.Write"/> 16 times.
     /// </summary>
-    procedure Write(const data: array of byte); virtual;
+    procedure Write(const aData: array of byte); virtual;
 
     /// <summary>
     ///  Sets the window in which you can write with <see cref="BrickletOLED128x64.TBrickletOLED128x64.Write"/>. One row
     ///  has a height of 8 pixels.
     /// </summary>
-    procedure NewWindow(const columnFrom: byte; const columnTo: byte; const rowFrom: byte; const rowTo: byte); virtual;
+    procedure NewWindow(const aColumnFrom: byte; const aColumnTo: byte; const aRowFrom: byte; const aRowTo: byte); virtual;
 
     /// <summary>
     ///  Clears the current content of the window as set by <see cref="BrickletOLED128x64.TBrickletOLED128x64.NewWindow"/>.
@@ -78,12 +78,12 @@ type
     ///  You can set a contrast value from 0 to 255 and you can invert the color
     ///  (black/white) of the display.
     /// </summary>
-    procedure SetDisplayConfiguration(const contrast: byte; const invert: boolean); virtual;
+    procedure SetDisplayConfiguration(const aContrast: byte; const aInvert: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletOLED128x64.TBrickletOLED128x64.SetDisplayConfiguration"/>.
     /// </summary>
-    procedure GetDisplayConfiguration(out contrast: byte; out invert: boolean); virtual;
+    procedure GetDisplayConfiguration(out aContrast: byte; out aInvert: boolean); virtual;
 
     /// <summary>
     ///  Writes text to a specific line with a specific position.
@@ -98,7 +98,7 @@ type
     ///  The display uses a special 5x7 pixel charset. You can view the characters
     ///  of the charset in Brick Viewer.
     /// </summary>
-    procedure WriteLine(const line: byte; const position: byte; const text: string); virtual;
+    procedure WriteLine(const aLine: byte; const aPosition: byte; const aText: string); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -110,7 +110,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
   end;
 
 implementation
@@ -141,69 +142,69 @@ begin
   // do nothing
 end;
 
-procedure TBrickletOLED128x64.Write(const data: array of byte);
+procedure TBrickletOLED128x64.Write(const aData: array of byte);
 var 
   _request: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_WRITE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletOLED128x64.NewWindow(const columnFrom: byte; const columnTo: byte; const rowFrom: byte; const rowTo: byte);
+procedure TBrickletOLED128x64.NewWindow(const aColumnFrom: byte; const aColumnTo: byte; const aRowFrom: byte; const aRowTo: byte);
 var 
 _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_NEW_WINDOW, 12);
-  LEConvertUInt8To(columnFrom, 8, _request);
-  LEConvertUInt8To(columnTo, 9, _request);
-  LEConvertUInt8To(rowFrom, 10, _request);
-  LEConvertUInt8To(rowTo, 11, _request);
+  LEConvertUInt8To(aColumnFrom, 8, _request);
+  LEConvertUInt8To(aColumnTo, 9, _request);
+  LEConvertUInt8To(aRowFrom, 10, _request);
+  LEConvertUInt8To(aRowTo, 11, _request);
   SendRequest(_request);
 end;
 
 procedure TBrickletOLED128x64.ClearDisplay;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_CLEAR_DISPLAY, 8);
   SendRequest(_request);
 end;
 
-procedure TBrickletOLED128x64.SetDisplayConfiguration(const contrast: byte; const invert: boolean);
+procedure TBrickletOLED128x64.SetDisplayConfiguration(const aContrast: byte; const aInvert: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_SET_DISPLAY_CONFIGURATION, 10);
-  LEConvertUInt8To(contrast, 8, _request);
-  LEConvertBooleanTo(invert, 9, _request);
+  LEConvertUInt8To(aContrast, 8, _request);
+  LEConvertBooleanTo(aInvert, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletOLED128x64.GetDisplayConfiguration(out contrast: byte; out invert: boolean);
+procedure TBrickletOLED128x64.GetDisplayConfiguration(out aContrast: byte; out aInvert: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_GET_DISPLAY_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  contrast:= LEConvertUInt8From(8, _response);
-  invert:= LEConvertBooleanFrom(9, _response);
+  aContrast:= LEConvertUInt8From(8, _response);
+  aInvert:= LEConvertBooleanFrom(9, _response);
 end;
 
-procedure TBrickletOLED128x64.WriteLine(const line: byte; const position: byte; const text: string);
+procedure TBrickletOLED128x64.WriteLine(const aLine: byte; const aPosition: byte; const aText: string);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_WRITE_LINE, 36);
-  LEConvertUInt8To(line, 8, _request);
-  LEConvertUInt8To(position, 9, _request);
-  LEConvertStringTo(text, 10, 26, _request);
+  LEConvertUInt8To(aLine, 8, _request);
+  LEConvertUInt8To(aPosition, 9, _request);
+  LEConvertStringTo(aText, 10, 26, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletOLED128x64.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletOLED128x64.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -211,11 +212,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_OLED_128X64_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 end.

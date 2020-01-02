@@ -28,7 +28,7 @@ type
   TArray0To6OfUInt8 = array [0..6] of byte;
 
   TBrickletNFCRFID = class;
-  TBrickletNFCRFIDNotifyStateChanged = procedure(aSender: TBrickletNFCRFID; const state: byte; const idle: boolean) of object;
+  TBrickletNFCRFIDNotifyStateChanged = procedure(aSender: TBrickletNFCRFID; const aState: byte; const aIdle: boolean) of object;
 
   /// <summary>
   ///  Reads and writes NFC and RFID tags
@@ -74,7 +74,7 @@ type
     ///  In case of any *Error* state the selection is lost and you have to
     ///  start again by calling <see cref="BrickletNFCRFID.TBrickletNFCRFID._requestTagID"/>.
     /// </summary>
-    procedure _requestTagID(const tagType: byte); virtual;
+    procedure _requestTagID(const aTagType: byte); virtual;
 
     /// <summary>
     ///  Returns the tag type, tag ID and the length of the tag ID
@@ -89,7 +89,7 @@ type
     ///     <see cref="BrickletNFCRFID.TBrickletNFCRFID.OnStateChanged"/> callback)
     ///  3. Call <see cref="BrickletNFCRFID.TBrickletNFCRFID.GetTagID"/>
     /// </summary>
-    procedure GetTagID(out tagType: byte; out tidLength: byte; out tid: TArray0To6OfUInt8); virtual;
+    procedure GetTagID(out aTagType: byte; out aTidLength: byte; out aTid: TArray0To6OfUInt8); virtual;
 
     /// <summary>
     ///  Returns the current state of the NFC/RFID Bricklet.
@@ -107,7 +107,7 @@ type
     ///  
     ///  The same approach is used analogously for the other API functions.
     /// </summary>
-    procedure GetState(out state: byte; out idle: boolean); virtual;
+    procedure GetState(out aState: byte; out aIdle: boolean); virtual;
 
     /// <summary>
     ///  Mifare Classic tags use authentication. If you want to read from or write to
@@ -129,7 +129,7 @@ type
     ///     <see cref="BrickletNFCRFID.TBrickletNFCRFID.GetState"/> or <see cref="BrickletNFCRFID.TBrickletNFCRFID.OnStateChanged"/> callback)
     ///  6. Call <see cref="BrickletNFCRFID.TBrickletNFCRFID._requestPage"/> or <see cref="BrickletNFCRFID.TBrickletNFCRFID.WritePage"/> to read/write page
     /// </summary>
-    procedure AuthenticateMifareClassicPage(const page: word; const keyNumber: byte; const key: array of byte); virtual;
+    procedure AuthenticateMifareClassicPage(const aPage: word; const aKeyNumber: byte; const aKey: array of byte); virtual;
 
     /// <summary>
     ///  Writes 16 bytes starting from the given page. How many pages are written
@@ -153,7 +153,7 @@ type
     ///  If you use a Mifare Classic tag you have to authenticate a page before you
     ///  can write to it. See <see cref="BrickletNFCRFID.TBrickletNFCRFID.AuthenticateMifareClassicPage"/>.
     /// </summary>
-    procedure WritePage(const page: word; const data: array of byte); virtual;
+    procedure WritePage(const aPage: word; const aData: array of byte); virtual;
 
     /// <summary>
     ///  Reads 16 bytes starting from the given page and stores them into a buffer.
@@ -180,7 +180,7 @@ type
     ///  If you use a Mifare Classic tag you have to authenticate a page before you
     ///  can read it. See <see cref="BrickletNFCRFID.TBrickletNFCRFID.AuthenticateMifareClassicPage"/>.
     /// </summary>
-    procedure _requestPage(const page: word); virtual;
+    procedure _requestPage(const aPage: word); virtual;
 
     /// <summary>
     ///  Returns 16 bytes of data from an internal buffer. To fill the buffer
@@ -198,7 +198,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is called if the state of the NFC/RFID Bricklet changes.
@@ -236,99 +237,106 @@ begin
   aCallBacks[BRICKLET_NFC_RFID_CALLBACK_STATE_CHANGED]:= {$ifdef FPC}@{$endif}CallbackWrapperStateChanged;
 end;
 
-procedure TBrickletNFCRFID._requestTagID(const tagType: byte);
+procedure TBrickletNFCRFID._requestTagID(const aTagType: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_REQUEST_TAG_ID, 9);
-  LEConvertUInt8To(tagType, 8, _request);
+  LEConvertUInt8To(aTagType, 8, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletNFCRFID.GetTagID(out tagType: byte; out tidLength: byte; out tid: TArray0To6OfUInt8);
+procedure TBrickletNFCRFID.GetTagID(out aTagType: byte; out aTidLength: byte; out aTid: TArray0To6OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_GET_TAG_ID, 8);
   _response:= SendRequest(_request);
-  tagType:= LEConvertUInt8From(8, _response);
-  tidLength:= LEConvertUInt8From(9, _response);
-  for _i:= 0 to 6 do tid[_i]:= LEConvertUInt8From(10 + (_i * 1), _response);
+  aTagType:= LEConvertUInt8From(8, _response);
+  aTidLength:= LEConvertUInt8From(9, _response);
+  for _i:= 0 to 6 do aTid[_i]:= LEConvertUInt8From(10 + (_i * 1), _response);
 end;
 
-procedure TBrickletNFCRFID.GetState(out state: byte; out idle: boolean);
+procedure TBrickletNFCRFID.GetState(out aState: byte; out aIdle: boolean);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_GET_STATE, 8);
   _response:= SendRequest(_request);
-  state:= LEConvertUInt8From(8, _response);
-  idle:= LEConvertBooleanFrom(9, _response);
+  aState:= LEConvertUInt8From(8, _response);
+  aIdle:= LEConvertBooleanFrom(9, _response);
 end;
 
-procedure TBrickletNFCRFID.AuthenticateMifareClassicPage(const page: word; const keyNumber: byte; const key: array of byte);
+procedure TBrickletNFCRFID.AuthenticateMifareClassicPage(const aPage: word; const aKeyNumber: byte; const aKey: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_AUTHENTICATE_MIFARE_CLASSIC_PAGE, 17);
-  LEConvertUInt16To(page, 8, _request);
-  LEConvertUInt8To(keyNumber, 10, _request);
-  if (Length(key) <> 6) then raise EInvalidParameterException.Create('Key has to be exactly 6 items long');
-  for _i:= 0 to Length(key) - 1 do LEConvertUInt8To(key[_i], 11 + (_i * 1), _request);
+  LEConvertUInt16To(aPage, 8, _request);
+  LEConvertUInt8To(aKeyNumber, 10, _request);
+  if (Length(aKey) <> 6) then raise EInvalidParameterException.Create('Key has to be exactly 6 items long');
+  for _i:= 0 to Length(aKey) - 1 do LEConvertUInt8To(aKey[_i], 11 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletNFCRFID.WritePage(const page: word; const data: array of byte);
+procedure TBrickletNFCRFID.WritePage(const aPage: word; const aData: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_WRITE_PAGE, 26);
-  LEConvertUInt16To(page, 8, _request);
-  if (Length(data) <> 16) then raise EInvalidParameterException.Create('Data has to be exactly 16 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 10 + (_i * 1), _request);
+  LEConvertUInt16To(aPage, 8, _request);
+  if (Length(aData) <> 16) then raise EInvalidParameterException.Create('Data has to be exactly 16 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 10 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletNFCRFID._requestPage(const page: word);
+procedure TBrickletNFCRFID._requestPage(const aPage: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_REQUEST_PAGE, 10);
-  LEConvertUInt16To(page, 8, _request);
+  LEConvertUInt16To(aPage, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletNFCRFID.GetPage: TArray0To15OfUInt8;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_GET_PAGE, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 15 do Result[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
 end;
 
-procedure TBrickletNFCRFID.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletNFCRFID.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_NFC_RFID_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletNFCRFID.CallbackWrapperStateChanged(const aPacket: TDynamicByteArray);
-var state: byte; idle: boolean;
+var
+  _state: byte;
+  _idle: boolean;
 begin
-  state:= LEConvertUInt8From(8, aPacket);
-  idle:= LEConvertBooleanFrom(9, aPacket);
+  _state:= LEConvertUInt8From(8, aPacket);
+  _idle:= LEConvertBooleanFrom(9, aPacket);
 
   if (Assigned(fStateChangedCallback)) then begin
-    fStateChangedCallback(self, state, idle);
+    fStateChangedCallback(self, _state, _idle);
   end;
 end;
 
