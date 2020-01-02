@@ -139,7 +139,8 @@ end;
 
 procedure TBrickletSegmentDisplay4x7.SetSegments(const aSegments: array of byte; const aBrightness: byte; const aColon: boolean);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_FUNCTION_SET_SEGMENTS, 14);
   if (Length(aSegments) <> 4) then raise EInvalidParameterException.Create('Segments has to be exactly 4 items long');
@@ -151,7 +152,8 @@ end;
 
 procedure TBrickletSegmentDisplay4x7.GetSegments(out aSegments: TArray0To3OfUInt8; out aBrightness: byte; out aColon: boolean);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_FUNCTION_GET_SEGMENTS, 8);
   _response:= SendRequest(_request);
@@ -162,7 +164,7 @@ end;
 
 procedure TBrickletSegmentDisplay4x7.StartCounter(const aValueFrom: smallint; const aValueTo: smallint; const aIncrement: smallint; const aLength: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_FUNCTION_START_COUNTER, 18);
   LEConvertInt16To(aValueFrom, 8, _request);
@@ -174,7 +176,7 @@ end;
 
 function TBrickletSegmentDisplay4x7.GetCounterValue: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_FUNCTION_GET_COUNTER_VALUE, 8);
   _response:= SendRequest(_request);
@@ -183,7 +185,8 @@ end;
 
 procedure TBrickletSegmentDisplay4x7.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);

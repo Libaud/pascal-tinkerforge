@@ -25,7 +25,7 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletSolidStateRelay = class;
-  TBrickletSolidStateRelayNotifyMonoflopDone = procedure(aSender: TBrickletSolidStateRelay; const state: boolean) of object;
+  TBrickletSolidStateRelayNotifyMonoflopDone = procedure(aSender: TBrickletSolidStateRelay; const aState: boolean) of object;
 
   /// <summary>
   ///  Controls AC and DC Solid State Relays
@@ -48,7 +48,7 @@ type
     ///  
     ///  The default value is *false*.
     /// </summary>
-    procedure SetState(const state: boolean); virtual;
+    procedure SetState(const aState: boolean); virtual;
 
     /// <summary>
     ///  Returns the state of the relay, *true* means on and *false* means off.
@@ -69,7 +69,7 @@ type
     ///  of two seconds. The relay will be on all the time. If now the RS485
     ///  connection is lost, the relay will turn off in at most two seconds.
     /// </summary>
-    procedure SetMonoflop(const state: boolean; const time: longword); virtual;
+    procedure SetMonoflop(const aState: boolean; const aTime: longword); virtual;
 
     /// <summary>
     ///  Returns the current state and the time as set by
@@ -78,7 +78,7 @@ type
     ///  If the timer is not running currently, the remaining time will be returned
     ///  as 0.
     /// </summary>
-    procedure GetMonoflop(out state: boolean; out time: longword; out timeRemaining: longword); virtual;
+    procedure GetMonoflop(out aState: boolean; out aTime: longword; out aTimeRemaining: longword); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -90,7 +90,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever the monoflop timer reaches 0.
@@ -123,66 +124,68 @@ begin
   aCallBacks[BRICKLET_SOLID_STATE_RELAY_CALLBACK_MONOFLOP_DONE]:= {$ifdef FPC}@{$endif}CallbackWrapperMonoflopDone;
 end;
 
-procedure TBrickletSolidStateRelay.SetState(const state: boolean);
+procedure TBrickletSolidStateRelay.SetState(const aState: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SOLID_STATE_RELAY_FUNCTION_SET_STATE, 9);
-  LEConvertBooleanTo(state, 8, _request);
+  LEConvertBooleanTo(aState, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletSolidStateRelay.GetState: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SOLID_STATE_RELAY_FUNCTION_GET_STATE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletSolidStateRelay.SetMonoflop(const state: boolean; const time: longword);
+procedure TBrickletSolidStateRelay.SetMonoflop(const aState: boolean; const aTime: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SOLID_STATE_RELAY_FUNCTION_SET_MONOFLOP, 13);
-  LEConvertBooleanTo(state, 8, _request);
-  LEConvertUInt32To(time, 9, _request);
+  LEConvertBooleanTo(aState, 8, _request);
+  LEConvertUInt32To(aTime, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletSolidStateRelay.GetMonoflop(out state: boolean; out time: longword; out timeRemaining: longword);
+procedure TBrickletSolidStateRelay.GetMonoflop(out aState: boolean; out aTime: longword; out aTimeRemaining: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SOLID_STATE_RELAY_FUNCTION_GET_MONOFLOP, 8);
   _response:= SendRequest(_request);
-  state:= LEConvertBooleanFrom(8, _response);
-  time:= LEConvertUInt32From(9, _response);
-  timeRemaining:= LEConvertUInt32From(13, _response);
+  aState:= LEConvertBooleanFrom(8, _response);
+  aTime:= LEConvertUInt32From(9, _response);
+  aTimeRemaining:= LEConvertUInt32From(13, _response);
 end;
 
-procedure TBrickletSolidStateRelay.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletSolidStateRelay.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SOLID_STATE_RELAY_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletSolidStateRelay.CallbackWrapperMonoflopDone(const aPacket: TDynamicByteArray);
-var state: boolean;
+var
+  _state: boolean;
 begin
-  state:= LEConvertBooleanFrom(8, aPacket);
+  _state:= LEConvertBooleanFrom(8, aPacket);
 
   if (Assigned(fMonoflopDoneCallback)) then begin
-    fMonoflopDoneCallback(self, state);
+    fMonoflopDoneCallback(self, _state);
   end;
 end;
 

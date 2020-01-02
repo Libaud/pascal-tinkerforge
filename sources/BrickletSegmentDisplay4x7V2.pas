@@ -57,19 +57,21 @@ type
     ///     :alt: Indices of segments
     ///     :align: center
     /// </summary>
-    procedure SetSegments(const digit0: array of boolean; const digit1: array of boolean; const digit2: array of boolean; const digit3: array of boolean; const colon: array of boolean; const tick: boolean); virtual;
+    procedure SetSegments(const aDigit0: array of boolean; const aDigit1: array of boolean; const aDigit2: array of boolean;
+                          const aDigit3: array of boolean; const aColon: array of boolean; const aTick: boolean); virtual;
 
     /// <summary>
     ///  Returns the segment data as set by <see cref="BrickletSegmentDisplay4x7V2.TBrickletSegmentDisplay4x7V2.SetSegments"/>.
     /// </summary>
-    procedure GetSegments(out digit0: TArray0To7OfBoolean; out digit1: TArray0To7OfBoolean; out digit2: TArray0To7OfBoolean; out digit3: TArray0To7OfBoolean; out colon: TArray0To1OfBoolean; out tick: boolean); virtual;
+    procedure GetSegments(out aDigit0: TArray0To7OfBoolean; out aDigit1: TArray0To7OfBoolean; out aDigit2: TArray0To7OfBoolean;
+                          out aDigit3: TArray0To7OfBoolean; out aColon: TArray0To1OfBoolean; out aTick: boolean); virtual;
 
     /// <summary>
     ///  The brightness can be set between 0 (dark) and 7 (bright).
     ///  
     ///  The default value is 7.
     /// </summary>
-    procedure SetBrightness(const brightness: byte); virtual;
+    procedure SetBrightness(const aBrightness: byte); virtual;
 
     /// <summary>
     ///  Returns the brightness as set by <see cref="BrickletSegmentDisplay4x7V2.TBrickletSegmentDisplay4x7V2.SetBrightness"/>.
@@ -92,7 +94,7 @@ type
     ///  
     ///  Example: A call with [-2, -1, 4, 2] will Result in a display of "- 42".
     /// </summary>
-    procedure SetNumericValue(const value: array of shortint); virtual;
+    procedure SetNumericValue(const aValue: array of shortint); virtual;
 
     /// <summary>
     ///  Turns one specified segment on or off.
@@ -104,12 +106,12 @@ type
     ///     :alt: Indices of selected segments
     ///     :align: center
     /// </summary>
-    procedure SetSelectedSegment(const segment: byte; const value: boolean); virtual;
+    procedure SetSelectedSegment(const aSegment: byte; const aValue: boolean); virtual;
 
     /// <summary>
     ///  Returns the value of a single segment.
     /// </summary>
-    function GetSelectedSegment(const segment: byte): boolean; virtual;
+    function GetSelectedSegment(const aSegment: byte): boolean; virtual;
 
     /// <summary>
     ///  Starts a counter with the *from* value that counts to the *to*
@@ -128,7 +130,7 @@ type
     ///  You can stop the counter at every time by calling <see cref="BrickletSegmentDisplay4x7V2.TBrickletSegmentDisplay4x7V2.SetSegments"/>
     ///  or <see cref="BrickletSegmentDisplay4x7V2.TBrickletSegmentDisplay4x7V2.SetNumericValue"/>.
     /// </summary>
-    procedure StartCounter(const valueFrom: smallint; const valueTo: smallint; const increment: smallint; const length_: longword); virtual;
+    procedure StartCounter(const aValueFrom: smallint; const aValueTo: smallint; const aIncrement: smallint; const aLength: longword); virtual;
 
     /// <summary>
     ///  Returns the counter value that is currently shown on the display.
@@ -150,7 +152,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -178,7 +181,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -190,7 +193,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -201,7 +204,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletSegmentDisplay4x7V2.TBrickletSegmentDisplay4x7V2.SetStatusLEDConfig"/>
@@ -253,7 +256,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered when the counter (see <see cref="BrickletSegmentDisplay4x7V2.TBrickletSegmentDisplay4x7V2.StartCounter"/>) is
@@ -304,77 +308,77 @@ begin
   aCallBacks[BRICKLET_SEGMENT_DISPLAY_4X7_V2_CALLBACK_COUNTER_FINISHED]:= {$ifdef FPC}@{$endif}CallbackWrapperCounterFinished;
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.SetSegments(const digit0: array of boolean; const digit1: array of boolean; const digit2: array of boolean; const digit3: array of boolean; const colon: array of boolean; const tick: boolean);
+procedure TBrickletSegmentDisplay4x7V2.SetSegments(const aDigit0: array of boolean; const aDigit1: array of boolean; const aDigit2: array of boolean; const aDigit3: array of boolean; const aColon: array of boolean; const aTick: boolean);
 var
   _request: TDynamicByteArray;
   _i: longint;
-  digit0Bits: array [0..0] of byte;
-  digit1Bits: array [0..0] of byte;
-  digit2Bits: array [0..0] of byte;
-  digit3Bits: array [0..0] of byte;
-  colonBits: array [0..0] of byte;
+  _digit0Bits: array [0..0] of byte;
+  _digit1Bits: array [0..0] of byte;
+  _digit2Bits: array [0..0] of byte;
+  _digit3Bits: array [0..0] of byte;
+  _colonBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_SET_SEGMENTS, 14);
-  if (Length(digit0) <> 8) then raise EInvalidParameterException.Create('Digit0 has to be exactly 8 items long');
-  FillChar(digit0Bits[0], Length(digit0Bits) * SizeOf(digit0Bits[0]), 0);
-  for _i:= 0 to 7 do if digit0[_i] then digit0Bits[Floor(_i / 8)]:= digit0Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 0 do LEConvertUInt8To(digit0Bits[_i], 8 + (_i * 1), _request);
-  if (Length(digit1) <> 8) then raise EInvalidParameterException.Create('Digit1 has to be exactly 8 items long');
-  FillChar(digit1Bits[0], Length(digit1Bits) * SizeOf(digit1Bits[0]), 0);
-  for _i:= 0 to 7 do if digit1[_i] then digit1Bits[Floor(_i / 8)]:= digit1Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 0 do LEConvertUInt8To(digit1Bits[_i], 9 + (_i * 1), _request);
-  if (Length(digit2) <> 8) then raise EInvalidParameterException.Create('Digit2 has to be exactly 8 items long');
-  FillChar(digit2Bits[0], Length(digit2Bits) * SizeOf(digit2Bits[0]), 0);
-  for _i:= 0 to 7 do if digit2[_i] then digit2Bits[Floor(_i / 8)]:= digit2Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 0 do LEConvertUInt8To(digit2Bits[_i], 10 + (_i * 1), _request);
-  if (Length(digit3) <> 8) then raise EInvalidParameterException.Create('Digit3 has to be exactly 8 items long');
-  FillChar(digit3Bits[0], Length(digit3Bits) * SizeOf(digit3Bits[0]), 0);
-  for _i:= 0 to 7 do if digit3[_i] then digit3Bits[Floor(_i / 8)]:= digit3Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 0 do LEConvertUInt8To(digit3Bits[_i], 11 + (_i * 1), _request);
-  if (Length(colon) <> 2) then raise EInvalidParameterException.Create('Colon has to be exactly 2 items long');
-  FillChar(colonBits[0], Length(colonBits) * SizeOf(colonBits[0]), 0);
-  for _i:= 0 to 1 do if colon[_i] then colonBits[Floor(_i / 8)]:= colonBits[Floor(_i / 8)] or (1 shl (_i mod 8));
-  for _i:= 0 to 0 do LEConvertUInt8To(colonBits[_i], 12 + (_i * 1), _request);
-  LEConvertBooleanTo(tick, 13, _request);
+  if (Length(aDigit0) <> 8) then raise EInvalidParameterException.Create('Digit0 has to be exactly 8 items long');
+  FillChar(_digit0Bits[0], Length(_digit0Bits) * SizeOf(_digit0Bits[0]), 0);
+  for _i:= 0 to 7 do if aDigit0[_i] then _digit0Bits[Floor(_i / 8)]:= _digit0Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 0 do LEConvertUInt8To(_digit0Bits[_i], 8 + (_i * 1), _request);
+  if (Length(aDigit1) <> 8) then raise EInvalidParameterException.Create('Digit1 has to be exactly 8 items long');
+  FillChar(_digit1Bits[0], Length(_digit1Bits) * SizeOf(_digit1Bits[0]), 0);
+  for _i:= 0 to 7 do if aDigit1[_i] then _digit1Bits[Floor(_i / 8)]:= _digit1Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 0 do LEConvertUInt8To(_digit1Bits[_i], 9 + (_i * 1), _request);
+  if (Length(aDigit2) <> 8) then raise EInvalidParameterException.Create('Digit2 has to be exactly 8 items long');
+  FillChar(_digit2Bits[0], Length(_digit2Bits) * SizeOf(_digit2Bits[0]), 0);
+  for _i:= 0 to 7 do if aDigit2[_i] then _digit2Bits[Floor(_i / 8)]:= _digit2Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 0 do LEConvertUInt8To(_digit2Bits[_i], 10 + (_i * 1), _request);
+  if (Length(aDigit3) <> 8) then raise EInvalidParameterException.Create('Digit3 has to be exactly 8 items long');
+  FillChar(_digit3Bits[0], Length(_digit3Bits) * SizeOf(_digit3Bits[0]), 0);
+  for _i:= 0 to 7 do if aDigit3[_i] then _digit3Bits[Floor(_i / 8)]:= _digit3Bits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 0 do LEConvertUInt8To(_digit3Bits[_i], 11 + (_i * 1), _request);
+  if (Length(aColon) <> 2) then raise EInvalidParameterException.Create('Colon has to be exactly 2 items long');
+  FillChar(_colonBits[0], Length(_colonBits) * SizeOf(_colonBits[0]), 0);
+  for _i:= 0 to 1 do if aColon[_i] then _colonBits[Floor(_i / 8)]:= _colonBits[Floor(_i / 8)] or (1 shl (_i mod 8));
+  for _i:= 0 to 0 do LEConvertUInt8To(_colonBits[_i], 12 + (_i * 1), _request);
+  LEConvertBooleanTo(aTick, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.GetSegments(out digit0: TArray0To7OfBoolean; out digit1: TArray0To7OfBoolean; out digit2: TArray0To7OfBoolean; out digit3: TArray0To7OfBoolean; out colon: TArray0To1OfBoolean; out tick: boolean);
+procedure TBrickletSegmentDisplay4x7V2.GetSegments(out aDigit0: TArray0To7OfBoolean; out aDigit1: TArray0To7OfBoolean; out aDigit2: TArray0To7OfBoolean; out aDigit3: TArray0To7OfBoolean; out aColon: TArray0To1OfBoolean; out aTick: boolean);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
-  digit0Bits: array [0..0] of byte;
-  digit1Bits: array [0..0] of byte;
-  digit2Bits: array [0..0] of byte;
-  digit3Bits: array [0..0] of byte;
-  colonBits: array [0..0] of byte;
+  _digit0Bits: array [0..0] of byte;
+  _digit1Bits: array [0..0] of byte;
+  _digit2Bits: array [0..0] of byte;
+  _digit3Bits: array [0..0] of byte;
+  _colonBits: array [0..0] of byte;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_GET_SEGMENTS, 8);
   _response:= SendRequest(_request);
-  FillChar(digit0Bits[0], Length(digit0Bits) * SizeOf(digit0Bits[0]), 0);
-  for _i:= 0 to 0 do digit0Bits[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  for _i:= 0 to 7 do digit0[_i]:= ((digit0Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  FillChar(digit1Bits[0], Length(digit1Bits) * SizeOf(digit1Bits[0]), 0);
-  for _i:= 0 to 0 do digit1Bits[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
-  for _i:= 0 to 7 do digit1[_i]:= ((digit1Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  FillChar(digit2Bits[0], Length(digit2Bits) * SizeOf(digit2Bits[0]), 0);
-  for _i:= 0 to 0 do digit2Bits[_i]:= LEConvertUInt8From(10 + (_i * 1), _response);
-  for _i:= 0 to 7 do digit2[_i]:= ((digit2Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  FillChar(digit3Bits[0], Length(digit3Bits) * SizeOf(digit3Bits[0]), 0);
-  for _i:= 0 to 0 do digit3Bits[_i]:= LEConvertUInt8From(11 + (_i * 1), _response);
-  for _i:= 0 to 7 do digit3[_i]:= ((digit3Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  FillChar(colonBits[0], Length(colonBits) * SizeOf(colonBits[0]), 0);
-  for _i:= 0 to 0 do colonBits[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
-  for _i:= 0 to 1 do colon[_i]:= ((colonBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
-  tick:= LEConvertBooleanFrom(13, _response);
+  FillChar(_digit0Bits[0], Length(_digit0Bits) * SizeOf(_digit0Bits[0]), 0);
+  for _i:= 0 to 0 do _digit0Bits[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  for _i:= 0 to 7 do aDigit0[_i]:= ((_digit0Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_digit1Bits[0], Length(_digit1Bits) * SizeOf(_digit1Bits[0]), 0);
+  for _i:= 0 to 0 do _digit1Bits[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
+  for _i:= 0 to 7 do aDigit1[_i]:= ((_digit1Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_digit2Bits[0], Length(_digit2Bits) * SizeOf(_digit2Bits[0]), 0);
+  for _i:= 0 to 0 do _digit2Bits[_i]:= LEConvertUInt8From(10 + (_i * 1), _response);
+  for _i:= 0 to 7 do aDigit2[_i]:= ((_digit2Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_digit3Bits[0], Length(_digit3Bits) * SizeOf(_digit3Bits[0]), 0);
+  for _i:= 0 to 0 do _digit3Bits[_i]:= LEConvertUInt8From(11 + (_i * 1), _response);
+  for _i:= 0 to 7 do aDigit3[_i]:= ((_digit3Bits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  FillChar(_colonBits[0], Length(_colonBits) * SizeOf(_colonBits[0]), 0);
+  for _i:= 0 to 0 do _colonBits[_i]:= LEConvertUInt8From(12 + (_i * 1), _response);
+  for _i:= 0 to 1 do aColon[_i]:= ((_colonBits[Floor(_i / 8)] and (1 shl (_i mod 8))) <> 0);
+  aTick:= LEConvertBooleanFrom(13, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.SetBrightness(const brightness: byte);
+procedure TBrickletSegmentDisplay4x7V2.SetBrightness(const aBrightness: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_SET_BRIGHTNESS, 9);
-  LEConvertUInt8To(brightness, 8, _request);
+  LEConvertUInt8To(aBrightness, 8, _request);
   SendRequest(_request);
 end;
 
@@ -387,46 +391,46 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.SetNumericValue(const value: array of shortint);
+procedure TBrickletSegmentDisplay4x7V2.SetNumericValue(const aValue: array of shortint);
 var
   _request: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_SET_NUMERIC_VALUE, 12);
-  if (Length(value) <> 4) then raise EInvalidParameterException.Create('Value has to be exactly 4 items long');
-  for _i:= 0 to Length(value) - 1 do LEConvertInt8To(value[_i], 8 + (_i * 1), _request);
+  if (Length(aValue) <> 4) then raise EInvalidParameterException.Create('Value has to be exactly 4 items long');
+  for _i:= 0 to Length(aValue) - 1 do LEConvertInt8To(aValue[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.SetSelectedSegment(const segment: byte; const value: boolean);
+procedure TBrickletSegmentDisplay4x7V2.SetSelectedSegment(const aSegment: byte; const aValue: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_SET_SELECTED_SEGMENT, 10);
-  LEConvertUInt8To(segment, 8, _request);
-  LEConvertBooleanTo(value, 9, _request);
+  LEConvertUInt8To(aSegment, 8, _request);
+  LEConvertBooleanTo(aValue, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletSegmentDisplay4x7V2.GetSelectedSegment(const segment: byte): boolean;
+function TBrickletSegmentDisplay4x7V2.GetSelectedSegment(const aSegment: byte): boolean;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_GET_SELECTED_SEGMENT, 9);
-  LEConvertUInt8To(segment, 8, _request);
+  LEConvertUInt8To(aSegment, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.StartCounter(const valueFrom: smallint; const valueTo: smallint; const increment: smallint; const length_: longword);
+procedure TBrickletSegmentDisplay4x7V2.StartCounter(const aValueFrom: smallint; const aValueTo: smallint; const aIncrement: smallint; const aLength: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_START_COUNTER, 18);
-  LEConvertInt16To(valueFrom, 8, _request);
-  LEConvertInt16To(valueTo, 10, _request);
-  LEConvertInt16To(increment, 12, _request);
-  LEConvertUInt32To(length_, 14, _request);
+  LEConvertInt16To(aValueFrom, 8, _request);
+  LEConvertInt16To(aValueTo, 10, _request);
+  LEConvertInt16To(aIncrement, 12, _request);
+  LEConvertUInt32To(aLength, 14, _request);
   SendRequest(_request);
 end;
 
@@ -439,16 +443,16 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletSegmentDisplay4x7V2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletSegmentDisplay4x7V2.SetBootloaderMode(const aMode: byte): byte;
@@ -470,33 +474,33 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletSegmentDisplay4x7V2.SetWriteFirmwarePointer(const aPointer: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletSegmentDisplay4x7V2.WriteFirmware(const data: array of byte): byte;
+function TBrickletSegmentDisplay4x7V2.WriteFirmware(const aData: array of byte): byte;
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletSegmentDisplay4x7V2.SetStatusLEDConfig(const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -544,7 +548,7 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletSegmentDisplay4x7V2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletSegmentDisplay4x7V2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -552,11 +556,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_SEGMENT_DISPLAY_4X7_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletSegmentDisplay4x7V2.CallbackWrapperCounterFinished(const aPacket: TDynamicByteArray);
