@@ -27,7 +27,7 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletIndustrialDualAnalogInV2 = class;
-  TBrickletIndustrialDualAnalogInV2NotifyVoltage = procedure(aSender: TBrickletIndustrialDualAnalogInV2; const channel: byte; const voltage: longint) of object;
+  TBrickletIndustrialDualAnalogInV2NotifyVoltage = procedure(aSender: TBrickletIndustrialDualAnalogInV2; const aChannel: byte; const aVoltage: longint) of object;
 
   /// <summary>
   ///  Measures two DC voltages between -35V and +35V with 24bit resolution each
@@ -51,7 +51,7 @@ type
     ///  <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.OnVoltage"/> callback. You can set the callback configuration
     ///  with <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetVoltageCallbackConfiguration"/>.
     /// </summary>
-    function GetVoltage(const channel: byte): longint; virtual;
+    function GetVoltage(const aChannel: byte): longint; virtual;
 
     /// <summary>
     ///  The period is the period with which the <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.OnVoltage"/> callback is triggered
@@ -82,19 +82,21 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetVoltageCallbackConfiguration(const channel: byte; const period: longword; const valueHasToChange: boolean; const option: char; const min: longint; const max: longint); virtual;
+    procedure SetVoltageCallbackConfiguration(const aChannel: byte; const aPeriod: longword; const aValueHasToChange: boolean;
+                                              const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetVoltageCallbackConfiguration"/>.
     /// </summary>
-    procedure GetVoltageCallbackConfiguration(const channel: byte; out period: longword; out valueHasToChange: boolean; out option: char; out min: longint; out max: longint); virtual;
+    procedure GetVoltageCallbackConfiguration(const aChannel: byte; out aPeriod: longword; out aValueHasToChange: boolean;
+                                              out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the sample rate. The sample rate can be between 1 sample per second
     ///  and 976 samples per second. Decreasing the sample rate will also decrease the
     ///  noise on the data.
     /// </summary>
-    procedure SetSampleRate(const rate: byte); virtual;
+    procedure SetSampleRate(const aRate: byte); virtual;
 
     /// <summary>
     ///  Returns the sample rate as set by <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetSampleRate"/>.
@@ -108,12 +110,12 @@ type
     ///  is already factory calibrated by Tinkerforge. It should not be necessary
     ///  for you to use this function
     /// </summary>
-    procedure SetCalibration(const offset: array of longint; const gain: array of longint); virtual;
+    procedure SetCalibration(const aOffset: array of longint; const aGain: array of longint); virtual;
 
     /// <summary>
     ///  Returns the calibration as set by <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetCalibration"/>.
     /// </summary>
-    procedure GetCalibration(out offset: TArray0To1OfInt32; out gain: TArray0To1OfInt32); virtual;
+    procedure GetCalibration(out aOffset: TArray0To1OfInt32; out aGain: TArray0To1OfInt32); virtual;
 
     /// <summary>
     ///  Returns the ADC values as given by the MCP3911 IC. This function
@@ -131,12 +133,12 @@ type
     ///  
     ///  By default all channel LEDs are configured as "Channel Status".
     /// </summary>
-    procedure SetChannelLEDConfig(const channel: byte; const config: byte); virtual;
+    procedure SetChannelLEDConfig(const aChannel: byte; const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the channel LED configuration as set by <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetChannelLEDConfig"/>
     /// </summary>
-    function GetChannelLEDConfig(const channel: byte): byte; virtual;
+    function GetChannelLEDConfig(const aChannel: byte): byte; virtual;
 
     /// <summary>
     ///  Sets the channel LED status config. This config is used if the channel LED is
@@ -160,13 +162,13 @@ type
     ///  min value is greater than the max value, the LED brightness is scaled the other
     ///  way around.
     /// </summary>
-    procedure SetChannelLEDStatusConfig(const channel: byte; const min: longint; const max: longint; const config: byte); virtual;
+    procedure SetChannelLEDStatusConfig(const aChannel: byte; const aMin: longint; const aMax: longint; const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the channel LED status configuration as set by
     ///  <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetChannelLEDStatusConfig"/>.
     /// </summary>
-    procedure GetChannelLEDStatusConfig(const channel: byte; out min: longint; out max: longint; out config: byte); virtual;
+    procedure GetChannelLEDStatusConfig(const aChannel: byte; out aMin: longint; out aMax: longint; out aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -181,7 +183,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -209,7 +212,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -221,7 +224,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -232,7 +235,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletIndustrialDualAnalogInV2.TBrickletIndustrialDualAnalogInV2.SetStatusLEDConfig"/>
@@ -284,7 +287,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -340,152 +344,155 @@ begin
   aCallBacks[BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_CALLBACK_VOLTAGE]:= {$ifdef FPC}@{$endif}CallbackWrapperVoltage;
 end;
 
-function TBrickletIndustrialDualAnalogInV2.GetVoltage(const channel: byte): longint;
+function TBrickletIndustrialDualAnalogInV2.GetVoltage(const aChannel: byte): longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_VOLTAGE, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetVoltageCallbackConfiguration(const channel: byte; const period: longword; const valueHasToChange: boolean; const option: char; const min: longint; const max: longint);
+procedure TBrickletIndustrialDualAnalogInV2.SetVoltageCallbackConfiguration(const aChannel: byte; const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_VOLTAGE_CALLBACK_CONFIGURATION, 23);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt32To(period, 9, _request);
-  LEConvertBooleanTo(valueHasToChange, 13, _request);
-  LEConvertCharTo(option, 14, _request);
-  LEConvertInt32To(min, 15, _request);
-  LEConvertInt32To(max, 19, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt32To(aPeriod, 9, _request);
+  LEConvertBooleanTo(aValueHasToChange, 13, _request);
+  LEConvertCharTo(aOption, 14, _request);
+  LEConvertInt32To(aMin, 15, _request);
+  LEConvertInt32To(aMax, 19, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.GetVoltageCallbackConfiguration(const channel: byte; out period: longword; out valueHasToChange: boolean; out option: char; out min: longint; out max: longint);
+procedure TBrickletIndustrialDualAnalogInV2.GetVoltageCallbackConfiguration(const aChannel: byte; out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_VOLTAGE_CALLBACK_CONFIGURATION, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertInt32From(14, _response);
-  max:= LEConvertInt32From(18, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertInt32From(14, _response);
+  aMax:= LEConvertInt32From(18, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetSampleRate(const rate: byte);
+procedure TBrickletIndustrialDualAnalogInV2.SetSampleRate(const aRate: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_SAMPLE_RATE, 9);
-  LEConvertUInt8To(rate, 8, _request);
+  LEConvertUInt8To(aRate, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDualAnalogInV2.GetSampleRate: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_SAMPLE_RATE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetCalibration(const offset: array of longint; const gain: array of longint);
+procedure TBrickletIndustrialDualAnalogInV2.SetCalibration(const aOffset: array of longint; const aGain: array of longint);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_CALIBRATION, 24);
-  if (Length(offset) <> 2) then raise EInvalidParameterException.Create('Offset has to be exactly 2 items long');
-  for _i:= 0 to Length(offset) - 1 do LEConvertInt32To(offset[_i], 8 + (_i * 4), _request);
-  if (Length(gain) <> 2) then raise EInvalidParameterException.Create('Gain has to be exactly 2 items long');
-  for _i:= 0 to Length(gain) - 1 do LEConvertInt32To(gain[_i], 16 + (_i * 4), _request);
+  if (Length(aOffset) <> 2) then raise EInvalidParameterException.Create('Offset has to be exactly 2 items long');
+  for _i:= 0 to Length(aOffset) - 1 do LEConvertInt32To(aOffset[_i], 8 + (_i * 4), _request);
+  if (Length(aGain) <> 2) then raise EInvalidParameterException.Create('Gain has to be exactly 2 items long');
+  for _i:= 0 to Length(aGain) - 1 do LEConvertInt32To(aGain[_i], 16 + (_i * 4), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.GetCalibration(out offset: TArray0To1OfInt32; out gain: TArray0To1OfInt32);
+procedure TBrickletIndustrialDualAnalogInV2.GetCalibration(out aOffset: TArray0To1OfInt32; out aGain: TArray0To1OfInt32);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_CALIBRATION, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 1 do offset[_i]:= LEConvertInt32From(8 + (_i * 4), _response);
-  for _i:= 0 to 1 do gain[_i]:= LEConvertInt32From(16 + (_i * 4), _response);
+  for _i:= 0 to 1 do aOffset[_i]:= LEConvertInt32From(8 + (_i * 4), _response);
+  for _i:= 0 to 1 do aGain[_i]:= LEConvertInt32From(16 + (_i * 4), _response);
 end;
 
 function TBrickletIndustrialDualAnalogInV2.GetADCValues: TArray0To1OfInt32;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_ADC_VALUES, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 1 do Result[_i]:= LEConvertInt32From(8 + (_i * 4), _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetChannelLEDConfig(const channel: byte; const config: byte);
+procedure TBrickletIndustrialDualAnalogInV2.SetChannelLEDConfig(const aChannel: byte; const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_CHANNEL_LED_CONFIG, 10);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertUInt8To(config, 9, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertUInt8To(aConfig, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialDualAnalogInV2.GetChannelLEDConfig(const channel: byte): byte;
+function TBrickletIndustrialDualAnalogInV2.GetChannelLEDConfig(const aChannel: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_CHANNEL_LED_CONFIG, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetChannelLEDStatusConfig(const channel: byte; const min: longint; const max: longint; const config: byte);
+procedure TBrickletIndustrialDualAnalogInV2.SetChannelLEDStatusConfig(const aChannel: byte; const aMin: longint; const aMax: longint; const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_CHANNEL_LED_STATUS_CONFIG, 18);
-  LEConvertUInt8To(channel, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
-  LEConvertUInt8To(config, 17, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
+  LEConvertUInt8To(aConfig, 17, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.GetChannelLEDStatusConfig(const channel: byte; out min: longint; out max: longint; out config: byte);
+procedure TBrickletIndustrialDualAnalogInV2.GetChannelLEDStatusConfig(const aChannel: byte; out aMin: longint; out aMax: longint; out aConfig: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_CHANNEL_LED_STATUS_CONFIG, 9);
-  LEConvertUInt8To(channel, 8, _request);
+  LEConvertUInt8To(aChannel, 8, _request);
   _response:= SendRequest(_request);
-  min:= LEConvertInt32From(8, _response);
-  max:= LEConvertInt32From(12, _response);
-  config:= LEConvertUInt8From(16, _response);
+  aMin:= LEConvertInt32From(8, _response);
+  aMax:= LEConvertInt32From(12, _response);
+  aConfig:= LEConvertUInt8From(16, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletIndustrialDualAnalogInV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletIndustrialDualAnalogInV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -495,45 +502,45 @@ end;
 
 function TBrickletIndustrialDualAnalogInV2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletIndustrialDualAnalogInV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIndustrialDualAnalogInV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletIndustrialDualAnalogInV2.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletIndustrialDualAnalogInV2.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIndustrialDualAnalogInV2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -542,7 +549,7 @@ end;
 
 function TBrickletIndustrialDualAnalogInV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -551,7 +558,7 @@ end;
 
 procedure TBrickletIndustrialDualAnalogInV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -559,7 +566,7 @@ end;
 
 procedure TBrickletIndustrialDualAnalogInV2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -568,35 +575,38 @@ end;
 
 function TBrickletIndustrialDualAnalogInV2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIndustrialDualAnalogInV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialDualAnalogInV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_DUAL_ANALOG_IN_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialDualAnalogInV2.CallbackWrapperVoltage(const aPacket: TDynamicByteArray);
-var channel: byte; voltage: longint;
+var
+  _channel: byte;
+  _voltage: longint;
 begin
-  channel:= LEConvertUInt8From(8, aPacket);
-  voltage:= LEConvertInt32From(9, aPacket);
+  _channel:= LEConvertUInt8From(8, aPacket);
+  _voltage:= LEConvertInt32From(9, aPacket);
 
   if (Assigned(fVoltageCallback)) then begin
-    fVoltageCallback(self, channel, voltage);
+    fVoltageCallback(self, _channel, _voltage);
   end;
 end;
 
