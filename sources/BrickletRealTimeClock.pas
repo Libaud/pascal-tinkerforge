@@ -25,8 +25,12 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletRealTimeClock = class;
-  TBrickletRealTimeClockNotifyDateTime = procedure(aSender: TBrickletRealTimeClock; const year: word; const month: byte; const day: byte; const hour: byte; const minute: byte; const second: byte; const centisecond: byte; const weekday: byte; const timestamp: int64) of object;
-  TBrickletRealTimeClockNotifyAlarm = procedure(aSender: TBrickletRealTimeClock; const year: word; const month: byte; const day: byte; const hour: byte; const minute: byte; const second: byte; const centisecond: byte; const weekday: byte; const timestamp: int64) of object;
+  TBrickletRealTimeClockNotifyDateTime = procedure(aSender: TBrickletRealTimeClock; const aYear: word; const aMonth: byte; const aDay: byte;
+                                                   const aHour: byte; const aMinute: byte; const aSecond: byte; const aCentisecond: byte;
+                                                   const aWeekday: byte; const aTimestamp: int64) of object;
+  TBrickletRealTimeClockNotifyAlarm = procedure(aSender: TBrickletRealTimeClock; const aYear: word; const aMonth: byte; const aDay: byte;
+                                                const aHour: byte; const aMinute: byte; const aSecond: byte; const aCentisecond: byte;
+                                                const aWeekday: byte; const aTimestamp: int64) of object;
 
   /// <summary>
   ///  Battery-backed real-time clock
@@ -66,13 +70,16 @@ type
     ///  accordingly. But leap seconds, time zones and daylight saving time are not
     ///  handled.
     /// </summary>
-    procedure SetDateTime(const year: word; const month: byte; const day: byte; const hour: byte; const minute: byte; const second: byte; const centisecond: byte; const weekday: byte); virtual;
+    procedure SetDateTime(const aYear: word; const aMonth: byte; const aDay: byte; const aHour: byte;
+                          const aMinute: byte; const aSecond: byte; const aCentisecond: byte;
+                          const aWeekday: byte); virtual;
 
     /// <summary>
     ///  Returns the current date (including weekday) and the current time of the
     ///  real-time clock with hundredths of a second resolution.
     /// </summary>
-    procedure GetDateTime(out year: word; out month: byte; out day: byte; out hour: byte; out minute: byte; out second: byte; out centisecond: byte; out weekday: byte); virtual;
+    procedure GetDateTime(out aYear: word; out aMonth: byte; out aDay: byte; out aHour: byte;
+                          out aMinute: byte; out second: byte; out aCentisecond: byte; out aWeekday: byte); virtual;
 
     /// <summary>
     ///  Returns the current date and the time of the real-time clock converted to
@@ -108,7 +115,7 @@ type
     ///  The offset is saved in the EEPROM of the Bricklet and only needs to be
     ///  configured once.
     /// </summary>
-    procedure SetOffset(const offset: shortint); virtual;
+    procedure SetOffset(const aOffset: shortint); virtual;
 
     /// <summary>
     ///  Returns the offset as set by <see cref="BrickletRealTimeClock.TBrickletRealTimeClock.SetOffset"/>.
@@ -124,7 +131,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SetDateTimeCallbackPeriod(const period: longword); virtual;
+    procedure SetDateTimeCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletRealTimeClock.TBrickletRealTimeClock.SetDateTimeCallbackPeriod"/>.
@@ -161,14 +168,16 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SetAlarm(const month: shortint; const day: shortint; const hour: shortint; const minute: shortint; const second: shortint; const weekday: shortint; const interval: longint); virtual;
+    procedure SetAlarm(const aMonth: shortint; const aDay: shortint; const hour: shortint; const aMinute: shortint;
+                       const aSecond: shortint; const aWeekday: shortint; const aInterval: longint); virtual;
 
     /// <summary>
     ///  Returns the alarm configuration as set by <see cref="BrickletRealTimeClock.TBrickletRealTimeClock.SetAlarm"/>.
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure GetAlarm(out month: shortint; out day: shortint; out hour: shortint; out minute: shortint; out second: shortint; out weekday: shortint; out interval: longint); virtual;
+    procedure GetAlarm(out aMonth: shortint; out aDay: shortint; out aHour: shortint; out aMinute: shortint;
+                       out aSecond: shortint; out aWeekday: shortint; out aInterval: longint); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -180,7 +189,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -233,160 +243,179 @@ begin
   aCallBacks[BRICKLET_REAL_TIME_CLOCK_CALLBACK_ALARM]:= {$ifdef FPC}@{$endif}CallbackWrapperAlarm;
 end;
 
-procedure TBrickletRealTimeClock.SetDateTime(const year: word; const month: byte; const day: byte; const hour: byte; const minute: byte; const second: byte; const centisecond: byte; const weekday: byte);
+procedure TBrickletRealTimeClock.SetDateTime(const aYear: word; const aMonth: byte; const aDay: byte; const aHour: byte; const aMinute: byte; const aSecond: byte; const aCentisecond: byte; const aWeekday: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_SET_DATE_TIME, 17);
-  LEConvertUInt16To(year, 8, _request);
-  LEConvertUInt8To(month, 10, _request);
-  LEConvertUInt8To(day, 11, _request);
-  LEConvertUInt8To(hour, 12, _request);
-  LEConvertUInt8To(minute, 13, _request);
-  LEConvertUInt8To(second, 14, _request);
-  LEConvertUInt8To(centisecond, 15, _request);
-  LEConvertUInt8To(weekday, 16, _request);
+  LEConvertUInt16To(aYear, 8, _request);
+  LEConvertUInt8To(aMonth, 10, _request);
+  LEConvertUInt8To(aDay, 11, _request);
+  LEConvertUInt8To(aHour, 12, _request);
+  LEConvertUInt8To(aMinute, 13, _request);
+  LEConvertUInt8To(aSecond, 14, _request);
+  LEConvertUInt8To(aCentisecond, 15, _request);
+  LEConvertUInt8To(aWeekday, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRealTimeClock.GetDateTime(out year: word; out month: byte; out day: byte; out hour: byte; out minute: byte; out second: byte; out centisecond: byte; out weekday: byte);
+procedure TBrickletRealTimeClock.GetDateTime(out aYear: word; out aMonth: byte; out aDay: byte; out aHour: byte; out aMinute: byte; out second: byte; out aCentisecond: byte; out aWeekday: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_GET_DATE_TIME, 8);
   _response:= SendRequest(_request);
-  year:= LEConvertUInt16From(8, _response);
-  month:= LEConvertUInt8From(10, _response);
-  day:= LEConvertUInt8From(11, _response);
-  hour:= LEConvertUInt8From(12, _response);
-  minute:= LEConvertUInt8From(13, _response);
+  aYear:= LEConvertUInt16From(8, _response);
+  aMonth:= LEConvertUInt8From(10, _response);
+  aDay:= LEConvertUInt8From(11, _response);
+  aHour:= LEConvertUInt8From(12, _response);
+  aMinute:= LEConvertUInt8From(13, _response);
   second:= LEConvertUInt8From(14, _response);
-  centisecond:= LEConvertUInt8From(15, _response);
-  weekday:= LEConvertUInt8From(16, _response);
+  aCentisecond:= LEConvertUInt8From(15, _response);
+  aWeekday:= LEConvertUInt8From(16, _response);
 end;
 
 function TBrickletRealTimeClock.GetTimestamp: int64;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_GET_TIMESTAMP, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt64From(8, _response);
 end;
 
-procedure TBrickletRealTimeClock.SetOffset(const offset: shortint);
+procedure TBrickletRealTimeClock.SetOffset(const aOffset: shortint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_SET_OFFSET, 9);
-  LEConvertInt8To(offset, 8, _request);
+  LEConvertInt8To(aOffset, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRealTimeClock.GetOffset: shortint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_GET_OFFSET, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt8From(8, _response);
 end;
 
-procedure TBrickletRealTimeClock.SetDateTimeCallbackPeriod(const period: longword);
+procedure TBrickletRealTimeClock.SetDateTimeCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_SET_DATE_TIME_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRealTimeClock.GetDateTimeCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_GET_DATE_TIME_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletRealTimeClock.SetAlarm(const month: shortint; const day: shortint; const hour: shortint; const minute: shortint; const second: shortint; const weekday: shortint; const interval: longint);
+procedure TBrickletRealTimeClock.SetAlarm(const aMonth: shortint; const aDay: shortint; const hour: shortint; const aMinute: shortint; const aSecond: shortint; const aWeekday: shortint; const aInterval: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_SET_ALARM, 18);
-  LEConvertInt8To(month, 8, _request);
-  LEConvertInt8To(day, 9, _request);
+  LEConvertInt8To(aMonth, 8, _request);
+  LEConvertInt8To(aDay, 9, _request);
   LEConvertInt8To(hour, 10, _request);
-  LEConvertInt8To(minute, 11, _request);
-  LEConvertInt8To(second, 12, _request);
-  LEConvertInt8To(weekday, 13, _request);
-  LEConvertInt32To(interval, 14, _request);
+  LEConvertInt8To(aMinute, 11, _request);
+  LEConvertInt8To(aSecond, 12, _request);
+  LEConvertInt8To(aWeekday, 13, _request);
+  LEConvertInt32To(aInterval, 14, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRealTimeClock.GetAlarm(out month: shortint; out day: shortint; out hour: shortint; out minute: shortint; out second: shortint; out weekday: shortint; out interval: longint);
+procedure TBrickletRealTimeClock.GetAlarm(out aMonth: shortint; out aDay: shortint; out aHour: shortint; out aMinute: shortint; out aSecond: shortint; out aWeekday: shortint; out aInterval: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_GET_ALARM, 8);
   _response:= SendRequest(_request);
-  month:= LEConvertInt8From(8, _response);
-  day:= LEConvertInt8From(9, _response);
-  hour:= LEConvertInt8From(10, _response);
-  minute:= LEConvertInt8From(11, _response);
-  second:= LEConvertInt8From(12, _response);
-  weekday:= LEConvertInt8From(13, _response);
-  interval:= LEConvertInt32From(14, _response);
+  aMonth:= LEConvertInt8From(8, _response);
+  aDay:= LEConvertInt8From(9, _response);
+  aHour:= LEConvertInt8From(10, _response);
+  aMinute:= LEConvertInt8From(11, _response);
+  aSecond:= LEConvertInt8From(12, _response);
+  aWeekday:= LEConvertInt8From(13, _response);
+  aInterval:= LEConvertInt32From(14, _response);
 end;
 
-procedure TBrickletRealTimeClock.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRealTimeClock.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletRealTimeClock.CallbackWrapperDateTime(const aPacket: TDynamicByteArray);
-var year: word; month: byte; day: byte; hour: byte; minute: byte; second: byte; centisecond: byte; weekday: byte; timestamp: int64;
+var
+  _year: word;
+  _month: byte;
+  _day: byte;
+  _hour: byte;
+  _minute: byte;
+  _second: byte;
+  _centisecond: byte;
+  _weekday: byte;
+  _timestamp: int64;
 begin
-  year:= LEConvertUInt16From(8, aPacket);
-  month:= LEConvertUInt8From(10, aPacket);
-  day:= LEConvertUInt8From(11, aPacket);
-  hour:= LEConvertUInt8From(12, aPacket);
-  minute:= LEConvertUInt8From(13, aPacket);
-  second:= LEConvertUInt8From(14, aPacket);
-  centisecond:= LEConvertUInt8From(15, aPacket);
-  weekday:= LEConvertUInt8From(16, aPacket);
-  timestamp:= LEConvertInt64From(17, aPacket);
+  _year:= LEConvertUInt16From(8, aPacket);
+  _month:= LEConvertUInt8From(10, aPacket);
+  _day:= LEConvertUInt8From(11, aPacket);
+  _hour:= LEConvertUInt8From(12, aPacket);
+  _minute:= LEConvertUInt8From(13, aPacket);
+  _second:= LEConvertUInt8From(14, aPacket);
+  _centisecond:= LEConvertUInt8From(15, aPacket);
+  _weekday:= LEConvertUInt8From(16, aPacket);
+  _timestamp:= LEConvertInt64From(17, aPacket);
 
   if (Assigned(fDateTimeCallback)) then begin
-    fDateTimeCallback(self, year, month, day, hour, minute, second, centisecond, weekday, timestamp);
+    fDateTimeCallback(self, _year, _month, _day, _hour, _minute, _second, _centisecond, _weekday, _timestamp);
   end;
 end;
 
 procedure TBrickletRealTimeClock.CallbackWrapperAlarm(const aPacket: TDynamicByteArray);
-var year: word; month: byte; day: byte; hour: byte; minute: byte; second: byte; centisecond: byte; weekday: byte; timestamp: int64;
+var
+  _year: word;
+  _month: byte;
+  _day: byte;
+  _hour: byte;
+  _minute: byte;
+  _second: byte;
+  _centisecond: byte;
+  _weekday: byte;
+  _timestamp: int64;
 begin
-  year:= LEConvertUInt16From(8, aPacket);
-  month:= LEConvertUInt8From(10, aPacket);
-  day:= LEConvertUInt8From(11, aPacket);
-  hour:= LEConvertUInt8From(12, aPacket);
-  minute:= LEConvertUInt8From(13, aPacket);
-  second:= LEConvertUInt8From(14, aPacket);
-  centisecond:= LEConvertUInt8From(15, aPacket);
-  weekday:= LEConvertUInt8From(16, aPacket);
-  timestamp:= LEConvertInt64From(17, aPacket);
+  _year:= LEConvertUInt16From(8, aPacket);
+  _month:= LEConvertUInt8From(10, aPacket);
+  _day:= LEConvertUInt8From(11, aPacket);
+  _hour:= LEConvertUInt8From(12, aPacket);
+  _minute:= LEConvertUInt8From(13, aPacket);
+  _second:= LEConvertUInt8From(14, aPacket);
+  _centisecond:= LEConvertUInt8From(15, aPacket);
+  _weekday:= LEConvertUInt8From(16, aPacket);
+  _timestamp:= LEConvertInt64From(17, aPacket);
 
   if (Assigned(fAlarmCallback)) then begin
-    fAlarmCallback(self, year, month, day, hour, minute, second, centisecond, weekday, timestamp);
+    fAlarmCallback(self, _year, _month, _day, _hour, _minute, _second, _centisecond, _weekday, _timestamp);
   end;
 end;
 

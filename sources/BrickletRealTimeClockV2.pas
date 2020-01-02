@@ -471,7 +471,7 @@ end;
 
 function TBrickletRealTimeClockV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_REAL_TIME_CLOCK_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -578,38 +578,56 @@ begin
 end;
 
 procedure TBrickletRealTimeClockV2.CallbackWrapperDateTime(const aPacket: TDynamicByteArray);
-var year: word; month: byte; day: byte; hour: byte; minute: byte; second: byte; centisecond: byte; weekday: byte; timestamp: int64;
+var
+  _year: word;
+  _month: byte;
+  _day: byte;
+  _hour: byte;
+  _minute: byte;
+  _second: byte;
+  _centisecond: byte;
+  _weekday: byte;
+  _timestamp: int64;
 begin
-  year:= LEConvertUInt16From(8, aPacket);
-  month:= LEConvertUInt8From(10, aPacket);
-  day:= LEConvertUInt8From(11, aPacket);
-  hour:= LEConvertUInt8From(12, aPacket);
-  minute:= LEConvertUInt8From(13, aPacket);
-  second:= LEConvertUInt8From(14, aPacket);
-  centisecond:= LEConvertUInt8From(15, aPacket);
-  weekday:= LEConvertUInt8From(16, aPacket);
-  timestamp:= LEConvertInt64From(17, aPacket);
+  _year:= LEConvertUInt16From(8, aPacket);
+  _month:= LEConvertUInt8From(10, aPacket);
+  _day:= LEConvertUInt8From(11, aPacket);
+  _hour:= LEConvertUInt8From(12, aPacket);
+  _minute:= LEConvertUInt8From(13, aPacket);
+  _second:= LEConvertUInt8From(14, aPacket);
+  _centisecond:= LEConvertUInt8From(15, aPacket);
+  _weekday:= LEConvertUInt8From(16, aPacket);
+  _timestamp:= LEConvertInt64From(17, aPacket);
 
   if (Assigned(dateTimeCallback)) then begin
-    dateTimeCallback(self, year, month, day, hour, minute, second, centisecond, weekday, timestamp);
+    dateTimeCallback(self, _year, _month, _day, _hour, _minute, _second, _centisecond, _weekday, _timestamp);
   end;
 end;
 
 procedure TBrickletRealTimeClockV2.CallbackWrapperAlarm(const aPacket: TDynamicByteArray);
-var year: word; month: byte; day: byte; hour: byte; minute: byte; second: byte; centisecond: byte; weekday: byte; timestamp: int64;
+var
+  _year: word;
+  _month: byte;
+  _day: byte;
+  _hour: byte;
+  _minute: byte;
+  _second: byte;
+  _centisecond: byte;
+  _weekday: byte;
+  _timestamp: int64;
 begin
-  year:= LEConvertUInt16From(8, aPacket);
-  month:= LEConvertUInt8From(10, aPacket);
-  day:= LEConvertUInt8From(11, aPacket);
-  hour:= LEConvertUInt8From(12, aPacket);
-  minute:= LEConvertUInt8From(13, aPacket);
-  second:= LEConvertUInt8From(14, aPacket);
-  centisecond:= LEConvertUInt8From(15, aPacket);
-  weekday:= LEConvertUInt8From(16, aPacket);
-  timestamp:= LEConvertInt64From(17, aPacket);
+  _year:= LEConvertUInt16From(8, aPacket);
+  _month:= LEConvertUInt8From(10, aPacket);
+  _day:= LEConvertUInt8From(11, aPacket);
+  _hour:= LEConvertUInt8From(12, aPacket);
+  _minute:= LEConvertUInt8From(13, aPacket);
+  _second:= LEConvertUInt8From(14, aPacket);
+  _centisecond:= LEConvertUInt8From(15, aPacket);
+  _weekday:= LEConvertUInt8From(16, aPacket);
+  _timestamp:= LEConvertInt64From(17, aPacket);
 
   if (Assigned(alarmCallback)) then begin
-    alarmCallback(self, year, month, day, hour, minute, second, centisecond, weekday, timestamp);
+    alarmCallback(self, _year, _month, _day, _hour, _minute, _second, _centisecond, _weekday, _timestamp);
   end;
 end;
 
