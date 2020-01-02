@@ -54,7 +54,7 @@ type
     ///  The Piezo Speaker Bricklet can only approximate the frequency, it will play
     ///  the best possible match by applying the calibration (see <see cref="BrickletPiezoSpeaker.TBrickletPiezoSpeaker.Calibrate"/>).
     /// </summary>
-    procedure Beep(const duration: longword; const frequency: word); virtual;
+    procedure Beep(const aDuration: longword; const aFrequency: word); virtual;
 
     /// <summary>
     ///  Sets morse code that will be played by the piezo buzzer. The morse code
@@ -65,7 +65,7 @@ type
     ///  nine times with the durations "short short short long long long short
     ///  short short".
     /// </summary>
-    procedure MorseCode(const morse: string; const frequency: word); virtual;
+    procedure MorseCode(const aMorse: string; const aFrequency: word); virtual;
 
     /// <summary>
     ///  The Piezo Speaker Bricklet can play 512 different tones. This function
@@ -90,7 +90,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered if a beep set by <see cref="BrickletPiezoSpeaker.TBrickletPiezoSpeaker.Beep"/> is finished
@@ -127,23 +128,23 @@ begin
   aCallBacks[BRICKLET_PIEZO_SPEAKER_CALLBACK_MORSE_CODE_FINISHED]:= {$ifdef FPC}@{$endif}CallbackWrapperMorseCodeFinished;
 end;
 
-procedure TBrickletPiezoSpeaker.Beep(const duration: longword; const frequency: word);
+procedure TBrickletPiezoSpeaker.Beep(const aDuration: longword; const aFrequency: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PIEZO_SPEAKER_FUNCTION_BEEP, 14);
-  LEConvertUInt32To(duration, 8, _request);
-  LEConvertUInt16To(frequency, 12, _request);
+  LEConvertUInt32To(aDuration, 8, _request);
+  LEConvertUInt16To(aFrequency, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletPiezoSpeaker.MorseCode(const morse: string; const frequency: word);
+procedure TBrickletPiezoSpeaker.MorseCode(const aMorse: string; const aFrequency: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PIEZO_SPEAKER_FUNCTION_MORSE_CODE, 70);
-  LEConvertStringTo(morse, 8, 60, _request);
-  LEConvertUInt16To(frequency, 68, _request);
+  LEConvertStringTo(aMorse, 8, 60, _request);
+  LEConvertUInt16To(aFrequency, 68, _request);
   SendRequest(_request);
 end;
 
@@ -156,7 +157,7 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletPiezoSpeaker.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletPiezoSpeaker.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -164,11 +165,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PIEZO_SPEAKER_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletPiezoSpeaker.CallbackWrapperBeepFinished(const aPacket: TDynamicByteArray);
