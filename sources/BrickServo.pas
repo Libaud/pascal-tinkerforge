@@ -25,22 +25,23 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickServo = class;
-  TBrickServoNotifyUnderVoltage = procedure(aSender: TBrickServo; const voltage: word) of object;
-  TBrickServoNotifyPositionReached = procedure(aSender: TBrickServo; const servoNum: byte; const position: smallint) of object;
-  TBrickServoNotifyVelocityReached = procedure(aSender: TBrickServo; const servoNum: byte; const velocity: smallint) of object;
+
+  TBrickServoNotifyUnderVoltage = procedure(aSender: TBrickServo; const aVoltage: word) of object;
+  TBrickServoNotifyPositionReached = procedure(aSender: TBrickServo; const aServoNum: byte; const aPosition: smallint) of object;
+  TBrickServoNotifyVelocityReached = procedure(aSender: TBrickServo; const aServoNum: byte; const aVelocity: smallint) of object;
 
   /// <summary>
   ///  Drives up to 7 RC Servos with up to 3A
   /// </summary>
   TBrickServo = class(TDevice)
   private
-    underVoltageCallback: TBrickServoNotifyUnderVoltage;
-    positionReachedCallback: TBrickServoNotifyPositionReached;
-    velocityReachedCallback: TBrickServoNotifyVelocityReached;
-  protected
+    fUnderVoltageCallback: TBrickServoNotifyUnderVoltage;
+    fPositionReachedCallback: TBrickServoNotifyPositionReached;
+    fVelocityReachedCallback: TBrickServoNotifyVelocityReached;
     procedure CallbackWrapperUnderVoltage(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperPositionReached(const apacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperVelocityReached(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
@@ -96,7 +97,7 @@ type
     ///  
     ///  The default value is 65535.
     /// </summary>
-    procedure SetVelocity(const aServoNum: byte; const velocity: word); virtual;
+    procedure SetVelocity(const aServoNum: byte; const aVelocity: word); virtual;
 
     /// <summary>
     ///  Returns the velocity of the specified servo as set by <see cref="BrickServo.TBrickServo.SetVelocity"/>.
@@ -280,7 +281,7 @@ type
     ///  
     ///  The default value is 5V (5000mV).
     /// </summary>
-    procedure SetMinimumVoltage(const voltage: word); virtual;
+    procedure SetMinimumVoltage(const aVoltage: word); virtual;
 
     /// <summary>
     ///  Returns the minimum voltage as set by <see cref="BrickServo.TBrickServo.SetMinimumVoltage"/>
@@ -404,7 +405,7 @@ type
     ///  
     ///  .. versionadded:: 2.3.2$nbsp;(Firmware)
     /// </summary>
-    procedure SetSPITFPBaudrate(const aBrickletPort: char; const baudrate: longword); virtual;
+    procedure SetSPITFPBaudrate(const aBrickletPort: char; const aBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the baudrate for a given Bricklet port, see <see cref="BrickServo.TBrickServo.SetSPITFPBaudrate"/>.
@@ -428,7 +429,8 @@ type
     ///  
     ///  .. versionadded:: 2.3.2$nbsp;(Firmware)
     /// </summary>
-    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Enables the status LED.
@@ -500,14 +502,15 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUid: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered when the input voltage drops below the value set by
     ///  <see cref="BrickServo.TBrickServo.SetMinimumVoltage"/>. The parameter is the current voltage given
     ///  in mV.
     /// </summary>
-    property OnUnderVoltage: TBrickServoNotifyUnderVoltage read underVoltageCallback write underVoltageCallback;
+    property OnUnderVoltage: TBrickServoNotifyUnderVoltage read fUnderVoltageCallback write fUnderVoltageCallback;
 
     /// <summary>
     ///  This callback is triggered when a position set by <see cref="BrickServo.TBrickServo.SetPosition"/>
@@ -524,7 +527,7 @@ type
     ///   control value and the callback will be triggered too early.
     ///  </note>
     /// </summary>
-    property OnPositionReached: TBrickServoNotifyPositionReached read positionReachedCallback write positionReachedCallback;
+    property OnPositionReached: TBrickServoNotifyPositionReached read fPositionReachedCallback write fPositionReachedCallback;
 
     /// <summary>
     ///  This callback is triggered when a velocity set by <see cref="BrickServo.TBrickServo.SetVelocity"/>
@@ -539,7 +542,7 @@ type
     ///   control value and the callback will be triggered too early.
     ///  </note>
     /// </summary>
-    property OnVelocityReached: TBrickServoNotifyVelocityReached read velocityReachedCallback write velocityReachedCallback;
+    property OnVelocityReached: TBrickServoNotifyVelocityReached read fVelocityReachedCallback write fVelocityReachedCallback;
   end;
 
 implementation
@@ -664,13 +667,13 @@ begin
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickServo.SetVelocity(const aServoNum: byte; const velocity: word);
+procedure TBrickServo.SetVelocity(const aServoNum: byte; const aVelocity: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SERVO_FUNCTION_SET_VELOCITY, 11);
   LEConvertUInt8To(aServoNum, 8, _request);
-  LEConvertUInt16To(velocity, 9, _request);
+  LEConvertUInt16To(aVelocity, 9, _request);
   SendRequest(_request);
 end;
 
@@ -833,12 +836,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickServo.SetMinimumVoltage(const voltage: word);
+procedure TBrickServo.SetMinimumVoltage(const aVoltage: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SERVO_FUNCTION_SET_MINIMUM_VOLTAGE, 10);
-  LEConvertUInt16To(voltage, 8, _request);
+  LEConvertUInt16To(aVoltage, 8, _request);
   SendRequest(_request);
 end;
 
@@ -931,13 +934,13 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickServo.SetSPITFPBaudrate(const aBrickletPort: char; const baudrate: longword);
+procedure TBrickServo.SetSPITFPBaudrate(const aBrickletPort: char; const aBaudrate: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SERVO_FUNCTION_SET_SPITFP_BAUDRATE, 13);
   LEConvertCharTo(aBrickletPort, 8, _request);
-  LEConvertUInt32To(baudrate, 9, _request);
+  LEConvertUInt32To(aBaudrate, 9, _request);
   SendRequest(_request);
 end;
 
@@ -1040,8 +1043,8 @@ var
 begin
   _Voltage:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(underVoltageCallback)) then begin
-    underVoltageCallback(self, _Voltage);
+  if (Assigned(fUnderVoltageCallback)) then begin
+    fUnderVoltageCallback(self, _Voltage);
   end;
 end;
 
@@ -1053,8 +1056,8 @@ begin
   _servoNum:= LEConvertUInt8From(8, apacket);
   _position:= LEConvertInt16From(9, apacket);
 
-  if (Assigned(positionReachedCallback)) then begin
-    positionReachedCallback(self, _servoNum, _position);
+  if (Assigned(fPositionReachedCallback)) then begin
+    fPositionReachedCallback(self, _servoNum, _position);
   end;
 end;
 
@@ -1066,8 +1069,8 @@ begin
   _servoNum:= LEConvertUInt8From(8, aPacket);
   _velocity:= LEConvertInt16From(9, aPacket);
 
-  if (Assigned(velocityReachedCallback)) then begin
-    velocityReachedCallback(self, _servoNum, _velocity);
+  if (Assigned(fVelocityReachedCallback)) then begin
+    fVelocityReachedCallback(self, _servoNum, _velocity);
   end;
 end;
 

@@ -37,15 +37,15 @@ type
   /// </summary>
   TBrickSilentStepper = class(TDevice)
   private
-    underVoltageCallback: TBrickSilentStepperNotifyUnderVoltage;
-    positionReachedCallback: TBrickSilentStepperNotifyPositionReached;
-    allDataCallback: TBrickSilentStepperNotifyAllData;
-    newStateCallback: TBrickSilentStepperNotifyNewState;
-  protected
+    fUnderVoltageCallback: TBrickSilentStepperNotifyUnderVoltage;
+    fPositionReachedCallback: TBrickSilentStepperNotifyPositionReached;
+    fAllDataCallback: TBrickSilentStepperNotifyAllData;
+    fNewStateCallback: TBrickSilentStepperNotifyNewState;
     procedure CallbackWrapperUnderVoltage(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperPositionReached(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperAllData(const aPacket: TDynamicByteArray); virtual;
     procedure CallbackWrapperNewState(const aPacket: TDynamicByteArray); virtual;
+  protected
     // Inherited method's
     procedure InitializeVersion(var aVersion: TTFVersionNumber); override;
     procedure InitializeResponseExpected(var aResponseExpected: TTFResponseExpected); override;
@@ -378,16 +378,16 @@ type
     ///  * Comparator Blank Time: 1
     ///  * Fast Decay Without Comparator: false
     /// </summary>
-    procedure SetSpreadcycleConfiguration(const slowDecayDuration: byte; const enableRandomSlowDecay: boolean; const fastDecayDuration: byte;
-                                          const hysteresisStartValue: byte; const hysteresisEndValue: shortint; const sineWaveOffset: shortint;
-                                          const chopperMode: byte; const comparatorBlankTime: byte; const fastDecayWithoutComparator: boolean); virtual;
+    procedure SetSpreadcycleConfiguration(const aSlowDecayDuration: byte; const aEnableRandomSlowDecay: boolean; const aFastDecayDuration: byte;
+                                          const aHysteresisStartValue: byte; const aHysteresisEndValue: shortint; const aSineWaveOffset: shortint;
+                                          const aChopperMode: byte; const aComparatorBlankTime: byte; const aFastDecayWithoutComparator: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetBasicConfiguration"/>.
     /// </summary>
-    procedure GetSpreadcycleConfiguration(out slowDecayDuration: byte; out enableRandomSlowDecay: boolean; out fastDecayDuration: byte;
-                                          out hysteresisStartValue: byte; out hysteresisEndValue: shortint; out sineWaveOffset: shortint;
-                                          out chopperMode: byte; out comparatorBlankTime: byte; out fastDecayWithoutComparator: boolean); virtual;
+    procedure GetSpreadcycleConfiguration(out aSlowDecayDuration: byte; out aEnableRandomSlowDecay: boolean; out aFastDecayDuration: byte;
+                                          out aHysteresisStartValue: byte; out aHysteresisEndValue: shortint; out aSineWaveOffset: shortint;
+                                          out aChopperMode: byte; out aComparatorBlankTime: byte; out aFastDecayWithoutComparator: boolean); virtual;
 
     /// <summary>
     ///  Note: If you don't know what any of this means you can very likely keep all of
@@ -423,12 +423,14 @@ type
     ///  * Force Symmetric: false
     ///  * Freewheel Mode: 0 (Normal)
     /// </summary>
-    procedure SetStealthConfiguration(const enableStealth: boolean; const amplitude: byte; const gradient: byte; const enableAutoscale: boolean; const forceSymmetric: boolean; const freewheelMode: byte); virtual;
+    procedure SetStealthConfiguration(const aEnableStealth: boolean; const aAmplitude: byte; const aGradient: byte; const aEnableAutoscale: boolean;
+                                      const aForceSymmetric: boolean; const aFreewheelMode: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetStealthConfiguration"/>.
     /// </summary>
-    procedure GetStealthConfiguration(out enableStealth: boolean; out amplitude: byte; out gradient: byte; out enableAutoscale: boolean; out forceSymmetric: boolean; out freewheelMode: byte); virtual;
+    procedure GetStealthConfiguration(out aEnableStealth: boolean; out aAmplitude: byte; out aGradient: byte; out aEnableAutoscale: boolean;
+                                      out aForceSymmetric: boolean; out aFreewheelMode: byte); virtual;
 
     /// <summary>
     ///  Note: If you don't know what any of this means you can very likely keep all of
@@ -469,12 +471,16 @@ type
     ///  * Stallguard Threshold Value: 0
     ///  * Stallguard Mode: 0
     /// </summary>
-    procedure SetCoolstepConfiguration(const minimumStallguardValue: byte; const maximumStallguardValue: byte; const currentUpStepWidth: byte; const currentDownStepWidth: byte; const minimumCurrent: byte; const stallguardThresholdValue: shortint; const stallguardMode: byte); virtual;
+    procedure SetCoolstepConfiguration(const aMinimumStallguardValue: byte; const aMaximumStallguardValue: byte; const aCurrentUpStepWidth: byte;
+                                       const aCurrentDownStepWidth: byte; const aMinimumCurrent: byte; const aStallguardThresholdValue: shortint;
+                                       const aStallguardMode: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetCoolstepConfiguration"/>.
     /// </summary>
-    procedure GetCoolstepConfiguration(out minimumStallguardValue: byte; out maximumStallguardValue: byte; out currentUpStepWidth: byte; out currentDownStepWidth: byte; out minimumCurrent: byte; out stallguardThresholdValue: shortint; out stallguardMode: byte); virtual;
+    procedure GetCoolstepConfiguration(out aMinimumStallguardValue: byte; out aMaximumStallguardValue: byte; out aCurrentUpStepWidth: byte;
+                                       out aCurrentDownStepWidth: byte; out aMinimumCurrent: byte; out aStallguardThresholdValue: shortint;
+                                       out aStallguardMode: byte); virtual;
 
     /// <summary>
     ///  Note: If you don't know what any of this means you can very likely keep all of
@@ -496,12 +502,12 @@ type
     ///  * Disable Short To Ground Protection: 0
     ///  * Synchronize Phase Frequency: 0
     /// </summary>
-    procedure SetMiscConfiguration(const disableShortToGroundProtection: boolean; const synchronizePhaseFrequency: byte); virtual;
+    procedure SetMiscConfiguration(const aDisableShortToGroundProtection: boolean; const aSynchronizePhaseFrequency: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetMiscConfiguration"/>.
     /// </summary>
-    procedure GetMiscConfiguration(out disableShortToGroundProtection: boolean; out synchronizePhaseFrequency: byte); virtual;
+    procedure GetMiscConfiguration(out aDisableShortToGroundProtection: boolean; out aSynchronizePhaseFrequency: byte); virtual;
 
     /// <summary>
     ///  Returns the current driver status.
@@ -532,7 +538,9 @@ type
     ///  * Stealth Voltage Amplitude: Shows the actual PWM scaling. In Stealth mode it can be used to detect motor load and
     ///    stall if autoscale is enabled (see <see cref="BrickSilentStepper.TBrickSilentStepper.SetStealthConfiguration"/>).
     /// </summary>
-    procedure GetDriverStatus(out openLoad: byte; out shortToGround: byte; out overTemperature: byte; out motorStalled: boolean; out actualMotorCurrent: byte; out fullStepActive: boolean; out stallguardResult: byte; out stealthVoltageAmplitude: byte); virtual;
+    procedure GetDriverStatus(out aOpenLoad: byte; out aShortToGround: byte; out aOverTemperature: byte; out aMotorStalled: boolean;
+                              out aActualMotorCurrent: byte; out aFullStepActive: boolean; out aStallguardResult: byte;
+                              out aStealthVoltageAmplitude: byte); virtual;
 
     /// <summary>
     ///  Sets the minimum voltage in mV, below which the <see cref="BrickSilentStepper.TBrickSilentStepper.OnUnderVoltage"/> callback
@@ -544,7 +552,7 @@ type
     ///  
     ///  The default value is 8V.
     /// </summary>
-    procedure SetMinimumVoltage(const voltage: word); virtual;
+    procedure SetMinimumVoltage(const aVoltage: word); virtual;
 
     /// <summary>
     ///  Returns the minimum voltage as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetMinimumVoltage"/>.
@@ -561,7 +569,7 @@ type
     ///  
     ///  The default value is 1.
     /// </summary>
-    procedure SetTimeBase(const timeBase: longword); virtual;
+    procedure SetTimeBase(const aTimeBase: longword); virtual;
 
     /// <summary>
     ///  Returns the time base as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetTimeBase"/>.
@@ -583,13 +591,14 @@ type
     ///  
     ///  There is also a callback for this function, see <see cref="BrickSilentStepper.TBrickSilentStepper.OnAllData"/> callback.
     /// </summary>
-    procedure GetAllData(out currentVelocity: word; out currentPosition: longint; out remainingSteps: longint; out stackVoltage: word; out externalVoltage: word; out currentConsumption: word); virtual;
+    procedure GetAllData(out aCurrentVelocity: word; out aCurrentPosition: longint; out aRemainingSteps: longint;
+                         out aStackVoltage: word; out aExternalVoltage: word; out aCurrentConsumption: word); virtual;
 
     /// <summary>
     ///  Sets the period with which the <see cref="BrickSilentStepper.TBrickSilentStepper.OnAllData"/> callback is triggered
     ///  periodically. A value of 0 turns the callback off.
     /// </summary>
-    procedure SetAllDataPeriod(const period: longword); virtual;
+    procedure SetAllDataPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetAllDataPeriod"/>.
@@ -622,14 +631,14 @@ type
     ///  
     ///  .. versionadded:: 2.0.4$nbsp;(Firmware)
     /// </summary>
-    procedure SetSPITFPBaudrateConfig(const enableDynamicBaudrate: boolean; const minimumDynamicBaudrate: longword); virtual;
+    procedure SetSPITFPBaudrateConfig(const aEnableDynamicBaudrate: boolean; const aMinimumDynamicBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the baudrate config, see <see cref="BrickSilentStepper.TBrickSilentStepper.SetSPITFPBaudrateConfig"/>.
     ///  
     ///  .. versionadded:: 2.0.4$nbsp;(Firmware)
     /// </summary>
-    procedure GetSPITFPBaudrateConfig(out enableDynamicBaudrate: boolean; out minimumDynamicBaudrate: longword); virtual;
+    procedure GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the timeout count for the different communication methods.
@@ -639,7 +648,7 @@ type
     ///  This function is mostly used for debugging during development, in normal operation
     ///  the counters should nearly always stay at 0.
     /// </summary>
-    function GetSendTimeoutCount(const communicationMethod: byte): longword; virtual;
+    function GetSendTimeoutCount(const aCommunicationMethod: byte): longword; virtual;
 
     /// <summary>
     ///  Sets the baudrate for a specific Bricklet port ('a' - 'd'). The
@@ -659,12 +668,12 @@ type
     ///  
     ///  The default baudrate for all ports is 1400000.
     /// </summary>
-    procedure SetSPITFPBaudrate(const brickletPort: char; const baudrate: longword); virtual;
+    procedure SetSPITFPBaudrate(const aBrickletPort: char; const aBaudrate: longword); virtual;
 
     /// <summary>
     ///  Returns the baudrate for a given Bricklet port, see <see cref="BrickSilentStepper.TBrickSilentStepper.SetSPITFPBaudrate"/>.
     /// </summary>
-    function GetSPITFPBaudrate(const brickletPort: char): longword; virtual;
+    function GetSPITFPBaudrate(const aBrickletPort: char): longword; virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -679,7 +688,8 @@ type
     ///  The errors counts are for errors that occur on the Brick side. All
     ///  Bricklets have a similar function that returns the errors on the Bricklet side.
     /// </summary>
-    procedure GetSPITFPErrorCount(const brickletPort: char; out errorCountACKChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Enables the status LED.
@@ -713,7 +723,7 @@ type
     ///  This functions sole purpose is to allow automatic flashing of v1.x.y Bricklet
     ///  plugins.
     /// </summary>
-    procedure GetProtocol1BrickletName(const aPort: char; out protocolVersion: byte; out firmwareVersion: TArray0To2OfUInt8; out aName: string); virtual;
+    procedure GetProtocol1BrickletName(const aPort: char; out aProtocolVersion: byte; out aFirmwareVersion: TArray0To2OfUInt8; out aName: string); virtual;
 
     /// <summary>
     ///  Returns the temperature in °C/10 as measured inside the microcontroller. The
@@ -745,14 +755,15 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered when the input voltage drops below the value set by
     ///  <see cref="BrickSilentStepper.TBrickSilentStepper.SetMinimumVoltage"/>. The parameter is the current voltage given
     ///  in mV.
     /// </summary>
-    property OnUnderVoltage: TBrickSilentStepperNotifyUnderVoltage read underVoltageCallback write underVoltageCallback;
+    property OnUnderVoltage: TBrickSilentStepperNotifyUnderVoltage read fUnderVoltageCallback write fUnderVoltageCallback;
 
     /// <summary>
     ///  This callback is triggered when a position set by <see cref="BrickSilentStepper.TBrickSilentStepper.SetSteps"/> or
@@ -765,7 +776,7 @@ type
     ///   control value and the callback will be triggered too early.
     ///  </note>
     /// </summary>
-    property OnPositionReached: TBrickSilentStepperNotifyPositionReached read positionReachedCallback write positionReachedCallback;
+    property OnPositionReached: TBrickSilentStepperNotifyPositionReached read fPositionReachedCallback write fPositionReachedCallback;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -773,13 +784,13 @@ type
     ///  the current position, the remaining steps, the stack voltage, the external
     ///  voltage and the current consumption of the stepper motor.
     /// </summary>
-    property OnAllData: TBrickSilentStepperNotifyAllData read allDataCallback write allDataCallback;
+    property OnAllData: TBrickSilentStepperNotifyAllData read fAllDataCallback write fAllDataCallback;
 
     /// <summary>
     ///  This callback is triggered whenever the Silent Stepper Brick enters a new state.
     ///  It returns the new state as well as the previous state.
     /// </summary>
-    property OnNewState: TBrickSilentStepperNotifyNewState read newStateCallback write newStateCallback;
+    property OnNewState: TBrickSilentStepperNotifyNewState read fNewStateCallback write fNewStateCallback;
   end;
 
 implementation
@@ -1116,151 +1127,151 @@ begin
   aHighVelocityChopperMode:= LEConvertBooleanFrom(22, _response);
 end;
 
-procedure TBrickSilentStepper.SetSpreadcycleConfiguration(const slowDecayDuration: byte; const enableRandomSlowDecay: boolean; const fastDecayDuration: byte;
-                                                          const hysteresisStartValue: byte; const hysteresisEndValue: shortint; const sineWaveOffset: shortint;
-                                                          const chopperMode: byte; const comparatorBlankTime: byte; const fastDecayWithoutComparator: boolean);
+procedure TBrickSilentStepper.SetSpreadcycleConfiguration(const aSlowDecayDuration: byte; const aEnableRandomSlowDecay: boolean; const aFastDecayDuration: byte;
+                                                          const aHysteresisStartValue: byte; const aHysteresisEndValue: shortint; const aSineWaveOffset: shortint;
+                                                          const aChopperMode: byte; const aComparatorBlankTime: byte; const aFastDecayWithoutComparator: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_SPREADCYCLE_CONFIGURATION, 17);
-  LEConvertUInt8To(slowDecayDuration, 8, _request);
-  LEConvertBooleanTo(enableRandomSlowDecay, 9, _request);
-  LEConvertUInt8To(fastDecayDuration, 10, _request);
-  LEConvertUInt8To(hysteresisStartValue, 11, _request);
-  LEConvertInt8To(hysteresisEndValue, 12, _request);
-  LEConvertInt8To(sineWaveOffset, 13, _request);
-  LEConvertUInt8To(chopperMode, 14, _request);
-  LEConvertUInt8To(comparatorBlankTime, 15, _request);
-  LEConvertBooleanTo(fastDecayWithoutComparator, 16, _request);
+  LEConvertUInt8To(aSlowDecayDuration, 8, _request);
+  LEConvertBooleanTo(aEnableRandomSlowDecay, 9, _request);
+  LEConvertUInt8To(aFastDecayDuration, 10, _request);
+  LEConvertUInt8To(aHysteresisStartValue, 11, _request);
+  LEConvertInt8To(aHysteresisEndValue, 12, _request);
+  LEConvertInt8To(aSineWaveOffset, 13, _request);
+  LEConvertUInt8To(aChopperMode, 14, _request);
+  LEConvertUInt8To(aComparatorBlankTime, 15, _request);
+  LEConvertBooleanTo(aFastDecayWithoutComparator, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetSpreadcycleConfiguration(out slowDecayDuration: byte; out enableRandomSlowDecay: boolean; out fastDecayDuration: byte;
-                                                          out hysteresisStartValue: byte; out hysteresisEndValue: shortint; out sineWaveOffset: shortint;
-                                                          out chopperMode: byte; out comparatorBlankTime: byte; out fastDecayWithoutComparator: boolean);
+procedure TBrickSilentStepper.GetSpreadcycleConfiguration(out aSlowDecayDuration: byte; out aEnableRandomSlowDecay: boolean; out aFastDecayDuration: byte;
+                                                          out aHysteresisStartValue: byte; out aHysteresisEndValue: shortint; out aSineWaveOffset: shortint;
+                                                          out aChopperMode: byte; out aComparatorBlankTime: byte; out aFastDecayWithoutComparator: boolean);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_SPREADCYCLE_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  slowDecayDuration:= LEConvertUInt8From(8, _response);
-  enableRandomSlowDecay:= LEConvertBooleanFrom(9, _response);
-  fastDecayDuration:= LEConvertUInt8From(10, _response);
-  hysteresisStartValue:= LEConvertUInt8From(11, _response);
-  hysteresisEndValue:= LEConvertInt8From(12, _response);
-  sineWaveOffset:= LEConvertInt8From(13, _response);
-  chopperMode:= LEConvertUInt8From(14, _response);
-  comparatorBlankTime:= LEConvertUInt8From(15, _response);
-  fastDecayWithoutComparator:= LEConvertBooleanFrom(16, _response);
+  aSlowDecayDuration:= LEConvertUInt8From(8, _response);
+  aEnableRandomSlowDecay:= LEConvertBooleanFrom(9, _response);
+  aFastDecayDuration:= LEConvertUInt8From(10, _response);
+  aHysteresisStartValue:= LEConvertUInt8From(11, _response);
+  aHysteresisEndValue:= LEConvertInt8From(12, _response);
+  aSineWaveOffset:= LEConvertInt8From(13, _response);
+  aChopperMode:= LEConvertUInt8From(14, _response);
+  aComparatorBlankTime:= LEConvertUInt8From(15, _response);
+  aFastDecayWithoutComparator:= LEConvertBooleanFrom(16, _response);
 end;
 
-procedure TBrickSilentStepper.SetStealthConfiguration(const enableStealth: boolean; const amplitude: byte; const gradient: byte;
-                                                      const enableAutoscale: boolean; const forceSymmetric: boolean; const freewheelMode: byte);
+procedure TBrickSilentStepper.SetStealthConfiguration(const aEnableStealth: boolean; const aAmplitude: byte; const aGradient: byte;
+                                                      const aEnableAutoscale: boolean; const aForceSymmetric: boolean; const aFreewheelMode: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_STEALTH_CONFIGURATION, 14);
-  LEConvertBooleanTo(enableStealth, 8, _request);
-  LEConvertUInt8To(amplitude, 9, _request);
-  LEConvertUInt8To(gradient, 10, _request);
-  LEConvertBooleanTo(enableAutoscale, 11, _request);
-  LEConvertBooleanTo(forceSymmetric, 12, _request);
-  LEConvertUInt8To(freewheelMode, 13, _request);
+  LEConvertBooleanTo(aEnableStealth, 8, _request);
+  LEConvertUInt8To(aAmplitude, 9, _request);
+  LEConvertUInt8To(aGradient, 10, _request);
+  LEConvertBooleanTo(aEnableAutoscale, 11, _request);
+  LEConvertBooleanTo(aForceSymmetric, 12, _request);
+  LEConvertUInt8To(aFreewheelMode, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetStealthConfiguration(out enableStealth: boolean; out amplitude: byte; out gradient: byte; out enableAutoscale: boolean;
-                                                      out forceSymmetric: boolean; out freewheelMode: byte);
+procedure TBrickSilentStepper.GetStealthConfiguration(out aEnableStealth: boolean; out aAmplitude: byte; out aGradient: byte; out aEnableAutoscale: boolean;
+                                                      out aForceSymmetric: boolean; out aFreewheelMode: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_STEALTH_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  enableStealth:= LEConvertBooleanFrom(8, _response);
-  amplitude:= LEConvertUInt8From(9, _response);
-  gradient:= LEConvertUInt8From(10, _response);
-  enableAutoscale:= LEConvertBooleanFrom(11, _response);
-  forceSymmetric:= LEConvertBooleanFrom(12, _response);
-  freewheelMode:= LEConvertUInt8From(13, _response);
+  aEnableStealth:= LEConvertBooleanFrom(8, _response);
+  aAmplitude:= LEConvertUInt8From(9, _response);
+  aGradient:= LEConvertUInt8From(10, _response);
+  aEnableAutoscale:= LEConvertBooleanFrom(11, _response);
+  aForceSymmetric:= LEConvertBooleanFrom(12, _response);
+  aFreewheelMode:= LEConvertUInt8From(13, _response);
 end;
 
-procedure TBrickSilentStepper.SetCoolstepConfiguration(const minimumStallguardValue: byte; const maximumStallguardValue: byte; const currentUpStepWidth: byte;
-                                                       const currentDownStepWidth: byte; const minimumCurrent: byte; const stallguardThresholdValue: shortint;
-                                                       const stallguardMode: byte);
+procedure TBrickSilentStepper.SetCoolstepConfiguration(const aMinimumStallguardValue: byte; const aMaximumStallguardValue: byte; const aCurrentUpStepWidth: byte;
+                                                       const aCurrentDownStepWidth: byte; const aMinimumCurrent: byte; const aStallguardThresholdValue: shortint;
+                                                       const aStallguardMode: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_COOLSTEP_CONFIGURATION, 15);
-  LEConvertUInt8To(minimumStallguardValue, 8, _request);
-  LEConvertUInt8To(maximumStallguardValue, 9, _request);
-  LEConvertUInt8To(currentUpStepWidth, 10, _request);
-  LEConvertUInt8To(currentDownStepWidth, 11, _request);
-  LEConvertUInt8To(minimumCurrent, 12, _request);
-  LEConvertInt8To(stallguardThresholdValue, 13, _request);
-  LEConvertUInt8To(stallguardMode, 14, _request);
+  LEConvertUInt8To(aMinimumStallguardValue, 8, _request);
+  LEConvertUInt8To(aMaximumStallguardValue, 9, _request);
+  LEConvertUInt8To(aCurrentUpStepWidth, 10, _request);
+  LEConvertUInt8To(aCurrentDownStepWidth, 11, _request);
+  LEConvertUInt8To(aMinimumCurrent, 12, _request);
+  LEConvertInt8To(aStallguardThresholdValue, 13, _request);
+  LEConvertUInt8To(aStallguardMode, 14, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetCoolstepConfiguration(out minimumStallguardValue: byte; out maximumStallguardValue: byte; out currentUpStepWidth: byte;
-                                                       out currentDownStepWidth: byte; out minimumCurrent: byte; out stallguardThresholdValue: shortint;
-                                                       out stallguardMode: byte);
+procedure TBrickSilentStepper.GetCoolstepConfiguration(out aMinimumStallguardValue: byte; out aMaximumStallguardValue: byte; out aCurrentUpStepWidth: byte;
+                                                       out aCurrentDownStepWidth: byte; out aMinimumCurrent: byte; out aStallguardThresholdValue: shortint;
+                                                       out aStallguardMode: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_COOLSTEP_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  minimumStallguardValue:= LEConvertUInt8From(8, _response);
-  maximumStallguardValue:= LEConvertUInt8From(9, _response);
-  currentUpStepWidth:= LEConvertUInt8From(10, _response);
-  currentDownStepWidth:= LEConvertUInt8From(11, _response);
-  minimumCurrent:= LEConvertUInt8From(12, _response);
-  stallguardThresholdValue:= LEConvertInt8From(13, _response);
-  stallguardMode:= LEConvertUInt8From(14, _response);
+  aMinimumStallguardValue:= LEConvertUInt8From(8, _response);
+  aMaximumStallguardValue:= LEConvertUInt8From(9, _response);
+  aCurrentUpStepWidth:= LEConvertUInt8From(10, _response);
+  aCurrentDownStepWidth:= LEConvertUInt8From(11, _response);
+  aMinimumCurrent:= LEConvertUInt8From(12, _response);
+  aStallguardThresholdValue:= LEConvertInt8From(13, _response);
+  aStallguardMode:= LEConvertUInt8From(14, _response);
 end;
 
-procedure TBrickSilentStepper.SetMiscConfiguration(const disableShortToGroundProtection: boolean; const synchronizePhaseFrequency: byte);
+procedure TBrickSilentStepper.SetMiscConfiguration(const aDisableShortToGroundProtection: boolean; const aSynchronizePhaseFrequency: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_MISC_CONFIGURATION, 10);
-  LEConvertBooleanTo(disableShortToGroundProtection, 8, _request);
-  LEConvertUInt8To(synchronizePhaseFrequency, 9, _request);
+  LEConvertBooleanTo(aDisableShortToGroundProtection, 8, _request);
+  LEConvertUInt8To(aSynchronizePhaseFrequency, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetMiscConfiguration(out disableShortToGroundProtection: boolean; out synchronizePhaseFrequency: byte);
+procedure TBrickSilentStepper.GetMiscConfiguration(out aDisableShortToGroundProtection: boolean; out aSynchronizePhaseFrequency: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_MISC_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  disableShortToGroundProtection:= LEConvertBooleanFrom(8, _response);
-  synchronizePhaseFrequency:= LEConvertUInt8From(9, _response);
+  aDisableShortToGroundProtection:= LEConvertBooleanFrom(8, _response);
+  aSynchronizePhaseFrequency:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickSilentStepper.GetDriverStatus(out openLoad: byte; out shortToGround: byte; out overTemperature: byte; out motorStalled: boolean;
-                                              out actualMotorCurrent: byte; out fullStepActive: boolean; out stallguardResult: byte; out stealthVoltageAmplitude: byte);
+procedure TBrickSilentStepper.GetDriverStatus(out aOpenLoad: byte; out aShortToGround: byte; out aOverTemperature: byte; out aMotorStalled: boolean;
+                                              out aActualMotorCurrent: byte; out aFullStepActive: boolean; out aStallguardResult: byte; out aStealthVoltageAmplitude: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_DRIVER_STATUS, 8);
   _response:= SendRequest(_request);
-  openLoad:= LEConvertUInt8From(8, _response);
-  shortToGround:= LEConvertUInt8From(9, _response);
-  overTemperature:= LEConvertUInt8From(10, _response);
-  motorStalled:= LEConvertBooleanFrom(11, _response);
-  actualMotorCurrent:= LEConvertUInt8From(12, _response);
-  fullStepActive:= LEConvertBooleanFrom(13, _response);
-  stallguardResult:= LEConvertUInt8From(14, _response);
-  stealthVoltageAmplitude:= LEConvertUInt8From(15, _response);
+  aOpenLoad:= LEConvertUInt8From(8, _response);
+  aShortToGround:= LEConvertUInt8From(9, _response);
+  aOverTemperature:= LEConvertUInt8From(10, _response);
+  aMotorStalled:= LEConvertBooleanFrom(11, _response);
+  aActualMotorCurrent:= LEConvertUInt8From(12, _response);
+  aFullStepActive:= LEConvertBooleanFrom(13, _response);
+  aStallguardResult:= LEConvertUInt8From(14, _response);
+  aStealthVoltageAmplitude:= LEConvertUInt8From(15, _response);
 end;
 
-procedure TBrickSilentStepper.SetMinimumVoltage(const voltage: word);
+procedure TBrickSilentStepper.SetMinimumVoltage(const aVoltage: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_MINIMUM_VOLTAGE, 10);
-  LEConvertUInt16To(voltage, 8, _request);
+  LEConvertUInt16To(aVoltage, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1273,12 +1284,12 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetTimeBase(const timeBase: longword);
+procedure TBrickSilentStepper.SetTimeBase(const aTimeBase: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_TIME_BASE, 12);
-  LEConvertUInt32To(timeBase, 8, _request);
+  LEConvertUInt32To(aTimeBase, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1291,27 +1302,27 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.GetAllData(out currentVelocity: word; out currentPosition: longint; out remainingSteps: longint;
-                                         out stackVoltage: word; out externalVoltage: word; out currentConsumption: word);
+procedure TBrickSilentStepper.GetAllData(out aCurrentVelocity: word; out aCurrentPosition: longint; out aRemainingSteps: longint;
+                                         out aStackVoltage: word; out aExternalVoltage: word; out aCurrentConsumption: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_ALL_DATA, 8);
   _response:= SendRequest(_request);
-  currentVelocity:= LEConvertUInt16From(8, _response);
-  currentPosition:= LEConvertInt32From(10, _response);
-  remainingSteps:= LEConvertInt32From(14, _response);
-  stackVoltage:= LEConvertUInt16From(18, _response);
-  externalVoltage:= LEConvertUInt16From(20, _response);
-  currentConsumption:= LEConvertUInt16From(22, _response);
+  aCurrentVelocity:= LEConvertUInt16From(8, _response);
+  aCurrentPosition:= LEConvertInt32From(10, _response);
+  aRemainingSteps:= LEConvertInt32From(14, _response);
+  aStackVoltage:= LEConvertUInt16From(18, _response);
+  aExternalVoltage:= LEConvertUInt16From(20, _response);
+  aCurrentConsumption:= LEConvertUInt16From(22, _response);
 end;
 
-procedure TBrickSilentStepper.SetAllDataPeriod(const period: longword);
+procedure TBrickSilentStepper.SetAllDataPeriod(const aPeriod: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_ALL_DATA_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
@@ -1324,69 +1335,69 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetSPITFPBaudrateConfig(const enableDynamicBaudrate: boolean; const minimumDynamicBaudrate: longword);
+procedure TBrickSilentStepper.SetSPITFPBaudrateConfig(const aEnableDynamicBaudrate: boolean; const aMinimumDynamicBaudrate: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_SPITFP_BAUDRATE_CONFIG, 13);
-  LEConvertBooleanTo(enableDynamicBaudrate, 8, _request);
-  LEConvertUInt32To(minimumDynamicBaudrate, 9, _request);
+  LEConvertBooleanTo(aEnableDynamicBaudrate, 8, _request);
+  LEConvertUInt32To(aMinimumDynamicBaudrate, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetSPITFPBaudrateConfig(out enableDynamicBaudrate: boolean; out minimumDynamicBaudrate: longword);
+procedure TBrickSilentStepper.GetSPITFPBaudrateConfig(out aEnableDynamicBaudrate: boolean; out aMinimumDynamicBaudrate: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_SPITFP_BAUDRATE_CONFIG, 8);
   _response:= SendRequest(_request);
-  enableDynamicBaudrate:= LEConvertBooleanFrom(8, _response);
-  minimumDynamicBaudrate:= LEConvertUInt32From(9, _response);
+  aEnableDynamicBaudrate:= LEConvertBooleanFrom(8, _response);
+  aMinimumDynamicBaudrate:= LEConvertUInt32From(9, _response);
 end;
 
-function TBrickSilentStepper.GetSendTimeoutCount(const communicationMethod: byte): longword;
+function TBrickSilentStepper.GetSendTimeoutCount(const aCommunicationMethod: byte): longword;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_SEND_TIMEOUT_COUNT, 9);
-  LEConvertUInt8To(communicationMethod, 8, _request);
+  LEConvertUInt8To(aCommunicationMethod, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.SetSPITFPBaudrate(const brickletPort: char; const baudrate: longword);
+procedure TBrickSilentStepper.SetSPITFPBaudrate(const aBrickletPort: char; const aBaudrate: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_SET_SPITFP_BAUDRATE, 13);
-  LEConvertCharTo(brickletPort, 8, _request);
-  LEConvertUInt32To(baudrate, 9, _request);
+  LEConvertCharTo(aBrickletPort, 8, _request);
+  LEConvertUInt32To(aBaudrate, 9, _request);
   SendRequest(_request);
 end;
 
-function TBrickSilentStepper.GetSPITFPBaudrate(const brickletPort: char): longword;
+function TBrickSilentStepper.GetSPITFPBaudrate(const aBrickletPort: char): longword;
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_SPITFP_BAUDRATE, 9);
-  LEConvertCharTo(brickletPort, 8, _request);
+  LEConvertCharTo(aBrickletPort, 8, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickSilentStepper.GetSPITFPErrorCount(const brickletPort: char; out errorCountACKChecksum: longword;
-                                                  out errorCountMessageChecksum: longword; out errorCountFrame: longword;
-                                                  out errorCountOverflow: longword);
+procedure TBrickSilentStepper.GetSPITFPErrorCount(const aBrickletPort: char; out aErrorCountACKChecksum: longword;
+                                                  out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword;
+                                                  out aErrorCountOverflow: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_SPITFP_ERROR_COUNT, 9);
-  LEConvertCharTo(brickletPort, 8, _request);
+  LEConvertCharTo(aBrickletPort, 8, _request);
   _response:= SendRequest(_request);
-  errorCountACKChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountACKChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 procedure TBrickSilentStepper.EnableStatusLED;
@@ -1414,7 +1425,7 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickSilentStepper.GetProtocol1BrickletName(const aPort: char; out protocolVersion: byte; out firmwareVersion: TArray0To2OfUInt8; out aName: string);
+procedure TBrickSilentStepper.GetProtocol1BrickletName(const aPort: char; out aProtocolVersion: byte; out aFirmwareVersion: TArray0To2OfUInt8; out aName: string);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -1422,8 +1433,8 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_PROTOCOL1_BRICKLET_NAME, 9);
   LEConvertCharTo(aPort, 8, _request);
   _response:= SendRequest(_request);
-  protocolVersion:= LEConvertUInt8From(8, _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
+  aProtocolVersion:= LEConvertUInt8From(8, _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(9 + (_i * 1), _response);
   name:= LEConvertStringFrom(12, 40, _response);
 end;
 
@@ -1444,9 +1455,9 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickSilentStepper.GetIdentity(out aUID: string; out connectedUid: string; out position: char;
-                                          out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber;
-                                          out deviceIdentifier: word);
+procedure TBrickSilentStepper.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char;
+                                          out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber;
+                                          out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -1454,11 +1465,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICK_SILENT_STEPPER_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickSilentStepper.CallbackWrapperUnderVoltage(const aPacket: TDynamicByteArray);
@@ -1467,8 +1478,8 @@ var
 begin
   _Voltage:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(underVoltageCallback)) then begin
-    underVoltageCallback(self, _Voltage);
+  if (Assigned(fUnderVoltageCallback)) then begin
+    fUnderVoltageCallback(self, _Voltage);
   end;
 end;
 
@@ -1478,8 +1489,8 @@ var
 begin
   _Position:= LEConvertInt32From(8, aPacket);
 
-  if (Assigned(positionReachedCallback)) then begin
-    positionReachedCallback(self, _Position);
+  if (Assigned(fPositionReachedCallback)) then begin
+    fPositionReachedCallback(self, _Position);
   end;
 end;
 
@@ -1498,8 +1509,8 @@ begin
   _ExternalVoltage:= LEConvertUInt16From(20, aPacket);
   _CurrentConsumption:= LEConvertUInt16From(22, aPacket);
 
-  if (Assigned(allDataCallback)) then begin
-    allDataCallback(self, _CurrentVelocity, currentPosition, _RemainingSteps, _StackVoltage, _ExternalVoltage, _CurrentConsumption);
+  if (Assigned(fAllDataCallback)) then begin
+    fAllDataCallback(self, _CurrentVelocity, currentPosition, _RemainingSteps, _StackVoltage, _ExternalVoltage, _CurrentConsumption);
   end;
 end;
 
@@ -1511,8 +1522,8 @@ begin
   _StateNew:= LEConvertUInt8From(8, aPacket);
   _StatePrevious:= LEConvertUInt8From(9, aPacket);
 
-  if (Assigned(newStateCallback)) then begin
-    newStateCallback(self, _StateNew, _StatePrevious);
+  if (Assigned(fNewStateCallback)) then begin
+    fNewStateCallback(self, _StateNew, _StatePrevious);
   end;
 end;
 
