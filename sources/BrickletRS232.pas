@@ -26,8 +26,8 @@ type
   TArray0To59OfChar = array [0..59] of char;
 
   TBrickletRS232 = class;
-  TBrickletRS232NotifyRead = procedure(sender: TBrickletRS232; const message_: TArray0To59OfChar; const length_: byte) of object;
-  TBrickletRS232NotifyError = procedure(sender: TBrickletRS232; const error: byte) of object;
+  TBrickletRS232NotifyRead = procedure(aSender: TBrickletRS232; const aMessage: TArray0To59OfChar; const aLength: byte) of object;
+  TBrickletRS232NotifyError = procedure(aSender: TBrickletRS232; const aError: byte) of object;
 
   /// <summary>
   ///  Communicates with RS232 devices
@@ -56,7 +56,7 @@ type
     ///  See <see cref="BrickletRS232.TBrickletRS232.SetConfiguration"/> for configuration possibilities
     ///  regarding baudrate, parity and so on.
     /// </summary>
-    function Write(const message_: array of char; const length_: byte): byte; virtual;
+    function Write(const aMessage: array of char; const aLength: byte): byte; virtual;
 
     /// <summary>
     ///  Returns the currently buffered message. The maximum length
@@ -66,7 +66,7 @@ type
     ///  Instead of polling with this function, you can also use
     ///  callbacks. See <see cref="BrickletRS232.TBrickletRS232.EnableReadCallback"/> and <see cref="BrickletRS232.TBrickletRS232.OnRead"/> callback.
     /// </summary>
-    procedure Read(out message_: TArray0To59OfChar; out length_: byte); virtual;
+    procedure Read(out aMessage: TArray0To59OfChar; out aLength: byte); virtual;
 
     /// <summary>
     ///  Enables the <see cref="BrickletRS232.TBrickletRS232.OnRead"/> callback.
@@ -99,12 +99,14 @@ type
     ///  
     ///  The default is: 115200 baud, parity none, 1 stop bit, word length 8, hard-/software flow control off.
     /// </summary>
-    procedure SetConfiguration(const baudrate: byte; const parity: byte; const stopbits: byte; const wordlength: byte; const hardwareFlowcontrol: byte; const softwareFlowcontrol: byte); virtual;
+    procedure SetConfiguration(const aBaudrate: byte; const aParity: byte; const aStopbits: byte; const aWordlength: byte;
+                               const aHardwareFlowcontrol: byte; const aSoftwareFlowcontrol: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletRS232.TBrickletRS232.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out baudrate: byte; out parity: byte; out stopbits: byte; out wordlength: byte; out hardwareFlowcontrol: byte; out softwareFlowcontrol: byte); virtual;
+    procedure GetConfiguration(out aBaudrate: byte; out aParity: byte; out aStopbits: byte; out aWordlength: byte;
+                               out aHardwareFlowcontrol: byte; out aSoftwareFlowcontrol: byte); virtual;
 
     /// <summary>
     ///  Sets a break condition (the TX output is forced to a logic 0 state).
@@ -112,7 +114,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetBreakCondition(const breakTime: word); virtual;
+    procedure SetBreakCondition(const aBreakTime: word); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -124,7 +126,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is called if new data is available. The message has
@@ -194,31 +197,33 @@ begin
   aCallBacks[BRICKLET_RS232_CALLBACK_ERROR]:= {$ifdef FPC}@{$endif}CallbackWrapperError;
 end;
 
-function TBrickletRS232.Write(const message_: array of char; const length_: byte): byte;
+function TBrickletRS232.Write(const aMessage: array of char; const aLength: byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_WRITE, 69);
-  if (Length(message_) <> 60) then raise EInvalidParameterException.Create('Message has to be exactly 60 items long');
-  for _i:= 0 to Length(message_) - 1 do LEConvertCharTo(message_[_i], 8 + (_i * 1), _request);
-  LEConvertUInt8To(length_, 68, _request);
+  if (Length(aMessage) <> 60) then raise EInvalidParameterException.Create('Message has to be exactly 60 items long');
+  for _i:= 0 to Length(aMessage) - 1 do LEConvertCharTo(aMessage[_i], 8 + (_i * 1), _request);
+  LEConvertUInt8To(aLength, 68, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRS232.Read(out message_: TArray0To59OfChar; out length_: byte);
+procedure TBrickletRS232.Read(out aMessage: TArray0To59OfChar; out aLength: byte);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_READ, 8);
   _response:= SendRequest(_request);
-  for _i:= 0 to 59 do message_[_i]:= LEConvertCharFrom(8 + (_i * 1), _response);
-  length_:= LEConvertUInt8From(68, _response);
+  for _i:= 0 to 59 do aMessage[_i]:= LEConvertCharFrom(8 + (_i * 1), _response);
+  aLength:= LEConvertUInt8From(68, _response);
 end;
 
 procedure TBrickletRS232.EnableReadCallback;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_ENABLE_READ_CALLBACK, 8);
   SendRequest(_request);
@@ -226,7 +231,7 @@ end;
 
 procedure TBrickletRS232.DisableReadCallback;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_DISABLE_READ_CALLBACK, 8);
   SendRequest(_request);
@@ -234,51 +239,51 @@ end;
 
 function TBrickletRS232.IsReadCallbackEnabled: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_IS_READ_CALLBACK_ENABLED, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletRS232.SetConfiguration(const baudrate: byte; const parity: byte; const stopbits: byte; const wordlength: byte; const hardwareFlowcontrol: byte; const softwareFlowcontrol: byte);
+procedure TBrickletRS232.SetConfiguration(const aBaudrate: byte; const aParity: byte; const aStopbits: byte; const aWordlength: byte; const aHardwareFlowcontrol: byte; const aSoftwareFlowcontrol: byte);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_SET_CONFIGURATION, 14);
-  LEConvertUInt8To(baudrate, 8, _request);
-  LEConvertUInt8To(parity, 9, _request);
-  LEConvertUInt8To(stopbits, 10, _request);
-  LEConvertUInt8To(wordlength, 11, _request);
-  LEConvertUInt8To(hardwareFlowcontrol, 12, _request);
-  LEConvertUInt8To(softwareFlowcontrol, 13, _request);
+  LEConvertUInt8To(aBaudrate, 8, _request);
+  LEConvertUInt8To(aParity, 9, _request);
+  LEConvertUInt8To(aStopbits, 10, _request);
+  LEConvertUInt8To(aWordlength, 11, _request);
+  LEConvertUInt8To(aHardwareFlowcontrol, 12, _request);
+  LEConvertUInt8To(aSoftwareFlowcontrol, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRS232.GetConfiguration(out baudrate: byte; out parity: byte; out stopbits: byte; out wordlength: byte; out hardwareFlowcontrol: byte; out softwareFlowcontrol: byte);
+procedure TBrickletRS232.GetConfiguration(out aBaudrate: byte; out aParity: byte; out aStopbits: byte; out aWordlength: byte; out aHardwareFlowcontrol: byte; out aSoftwareFlowcontrol: byte);
 var 
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  baudrate:= LEConvertUInt8From(8, _response);
-  parity:= LEConvertUInt8From(9, _response);
-  stopbits:= LEConvertUInt8From(10, _response);
-  wordlength:= LEConvertUInt8From(11, _response);
-  hardwareFlowcontrol:= LEConvertUInt8From(12, _response);
-  softwareFlowcontrol:= LEConvertUInt8From(13, _response);
+  aBaudrate:= LEConvertUInt8From(8, _response);
+  aParity:= LEConvertUInt8From(9, _response);
+  aStopbits:= LEConvertUInt8From(10, _response);
+  aWordlength:= LEConvertUInt8From(11, _response);
+  aHardwareFlowcontrol:= LEConvertUInt8From(12, _response);
+  aSoftwareFlowcontrol:= LEConvertUInt8From(13, _response);
 end;
 
-procedure TBrickletRS232.SetBreakCondition(const breakTime: word);
+procedure TBrickletRS232.SetBreakCondition(const aBreakTime: word);
 var 
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_SET_BREAK_CONDITION, 10);
-  LEConvertUInt16To(breakTime, 8, _request);
+  LEConvertUInt16To(aBreakTime, 8, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRS232.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRS232.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -286,11 +291,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RS232_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletRS232.CallbackWrapperRead(const aPacket: TDynamicByteArray);
