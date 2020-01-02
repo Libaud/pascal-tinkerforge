@@ -40,12 +40,12 @@ type
     /// <summary>
     ///  Sets the *r*, *g* and *b* values for the LED. Each value can be between 0 and 255.
     /// </summary>
-    procedure SetRGBValue(const r: byte; const g: byte; const b: byte); virtual;
+    procedure SetRGBValue(const aR: byte; const aG: byte; const aB: byte); virtual;
 
     /// <summary>
     ///  Returns the *r*, *g* and *b* values of the LED as set by <see cref="BrickletRGBLEDV2.TBrickletRGBLEDV2.SetRGBValue"/>.
     /// </summary>
-    procedure GetRGBValue(out r: byte; out g: byte; out b: byte); virtual;
+    procedure GetRGBValue(out aR: byte; out aG: byte; out aB: byte); virtual;
 
     /// <summary>
     ///  Returns the error count for the communication between Brick and Bricklet.
@@ -60,7 +60,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -88,7 +89,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -100,7 +101,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -111,7 +112,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletRGBLEDV2.TBrickletRGBLEDV2.SetStatusLEDConfig"/>
@@ -163,7 +164,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
   end;
 
 implementation
@@ -201,43 +203,43 @@ begin
   // do nothing
 end;
 
-procedure TBrickletRGBLEDV2.SetRGBValue(const r: byte; const g: byte; const b: byte);
+procedure TBrickletRGBLEDV2.SetRGBValue(const aR: byte; const aG: byte; const aB: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_SET_RGB_VALUE, 11);
-  LEConvertUInt8To(r, 8, _request);
-  LEConvertUInt8To(g, 9, _request);
-  LEConvertUInt8To(b, 10, _request);
+  LEConvertUInt8To(aR, 8, _request);
+  LEConvertUInt8To(aG, 9, _request);
+  LEConvertUInt8To(aB, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRGBLEDV2.GetRGBValue(out r: byte; out g: byte; out b: byte);
+procedure TBrickletRGBLEDV2.GetRGBValue(out aR: byte; out aG: byte; out aB: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_GET_RGB_VALUE, 8);
   _response:= SendRequest(_request);
-  r:= LEConvertUInt8From(8, _response);
-  g:= LEConvertUInt8From(9, _response);
-  b:= LEConvertUInt8From(10, _response);
+  aR:= LEConvertUInt8From(8, _response);
+  aG:= LEConvertUInt8From(9, _response);
+  aB:= LEConvertUInt8From(10, _response);
 end;
 
-procedure TBrickletRGBLEDV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletRGBLEDV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletRGBLEDV2.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -247,45 +249,46 @@ end;
 
 function TBrickletRGBLEDV2.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRGBLEDV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletRGBLEDV2.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletRGBLEDV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletRGBLEDV2.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRGBLEDV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletRGBLEDV2.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRGBLEDV2.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -294,7 +297,7 @@ end;
 
 function TBrickletRGBLEDV2.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -303,7 +306,7 @@ end;
 
 procedure TBrickletRGBLEDV2.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -311,7 +314,7 @@ end;
 
 procedure TBrickletRGBLEDV2.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -320,25 +323,26 @@ end;
 
 function TBrickletRGBLEDV2.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletRGBLEDV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRGBLEDV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 end.
