@@ -25,8 +25,8 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletIO16 = class;
-  TBrickletIO16NotifyInterrupt = procedure(aSender: TBrickletIO16; const aPort: char; const interruptMask: byte; const valueMask: byte) of object;
-  TBrickletIO16NotifyMonoflopDone = procedure(aSender: TBrickletIO16; const aPort: char; const selectionMask: byte; const valueMask: byte) of object;
+  TBrickletIO16NotifyInterrupt = procedure(aSender: TBrickletIO16; const aPort: char; const aInterruptMask: byte; const aValueMask: byte) of object;
+  TBrickletIO16NotifyMonoflopDone = procedure(aSender: TBrickletIO16; const aPort: char; const aSelectionMask: byte; const aValueMask: byte) of object;
 
   /// <summary>
   ///  16-channel digital input/output
@@ -59,7 +59,7 @@ type
     ///   Pull-up resistors can be switched on with <see cref="BrickletIO16.TBrickletIO16.SetPortConfiguration"/>.
     ///  </note>
     /// </summary>
-    procedure SetPort(const aPort: char; const valueMask: byte); virtual;
+    procedure SetPort(const aPort: char; const aValueMask: byte); virtual;
 
     /// <summary>
     ///  Returns a bitmask of the values that are currently measured on the
@@ -88,7 +88,7 @@ type
     ///  Running monoflop timers for the selected pins will be aborted if this
     ///  function is called.
     /// </summary>
-    procedure SetPortConfiguration(const aPort: char; const selectionMask: byte; const direction: char; const value: boolean); virtual;
+    procedure SetPortConfiguration(const aPort: char; const aselectionMask: byte; const aDirection: char; const aValue: boolean); virtual;
 
     /// <summary>
     ///  Returns a direction bitmask and a value bitmask for the specified port. A 1 in
@@ -102,7 +102,7 @@ type
     ///  * pins 4 and 5 are configured as output high
     ///  * and pins 6 and 7 are configured as output low.
     /// </summary>
-    procedure GetPortConfiguration(const aPort: char; out directionMask: byte; out valueMask: byte); virtual;
+    procedure GetPortConfiguration(const aPort: char; out aDirectionMask: byte; out aValueMask: byte); virtual;
 
     /// <summary>
     ///  Sets the debounce period of the <see cref="BrickletIO16.TBrickletIO16.OnInterrupt"/> callback.
@@ -111,7 +111,7 @@ type
     ///  maximal every 100ms. This is necessary if something that bounces is
     ///  connected to the IO-16 Bricklet, such as a button.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletIO16.TBrickletIO16.SetDebouncePeriod"/>.
@@ -128,7 +128,7 @@ type
     ///  
     ///  The interrupt is delivered with the <see cref="BrickletIO16.TBrickletIO16.OnInterrupt"/> callback.
     /// </summary>
-    procedure SetPortInterrupt(const aPort: char; const interruptMask: byte); virtual;
+    procedure SetPortInterrupt(const aPort: char; const aInterruptMask: byte); virtual;
 
     /// <summary>
     ///  Returns the interrupt bitmask for the specified port as set by
@@ -157,7 +157,7 @@ type
     ///  of two seconds and pin 0 set to high. Pin 0 will be high all the time. If now
     ///  the RS485 connection is lost, then pin 0 will get low in at most two seconds.
     /// </summary>
-    procedure SetPortMonoflop(const aPort: char; const selectionMask: byte; const valueMask: byte; const time: longword); virtual;
+    procedure SetPortMonoflop(const aPort: char; const aSelectionMask: byte; const aValueMask: byte; const aTime: longword); virtual;
 
     /// <summary>
     ///  Returns (for the given pin) the current value and the time as set by
@@ -166,7 +166,7 @@ type
     ///  If the timer is not running currently, the remaining time will be returned
     ///  as 0.
     /// </summary>
-    procedure GetPortMonoflop(const aPort: char; const aPin: byte; out aValue: byte; out time: longword; out timeRemaining: longword); virtual;
+    procedure GetPortMonoflop(const aPort: char; const aPin: byte; out aValue: byte; out aTime: longword; out aTimeRemaining: longword); virtual;
 
     /// <summary>
     ///  Sets the output value (high or low) for a port ("a" or "b" with a bitmask,
@@ -184,7 +184,7 @@ type
     ///   Pull-up resistors can be switched on with <see cref="BrickletIO16.TBrickletIO16.SetPortConfiguration"/>.
     ///  </note>
     /// </summary>
-    procedure SetSelectedValues(const aPort: char; const selectionMask: byte; const valueMask: byte); virtual;
+    procedure SetSelectedValues(const aPort: char; const aSelectionMask: byte; const aValueMask: byte); virtual;
 
     /// <summary>
     ///  Returns the current value of the edge counter for the selected pin on port A.
@@ -195,7 +195,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.3$nbsp;(Plugin)
     /// </summary>
-    function GetEdgeCount(const aPin: byte; const resetCounter: boolean): longword; virtual;
+    function GetEdgeCount(const aPin: byte; const aResetCounter: boolean): longword; virtual;
 
     /// <summary>
     ///  Configures the edge counter for the selected pin of port A. Pins 0 and 1
@@ -215,7 +215,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.3$nbsp;(Plugin)
     /// </summary>
-    procedure SetEdgeCountConfig(const aPin: byte; const edgeType: byte; const debounce: byte); virtual;
+    procedure SetEdgeCountConfig(const aPin: byte; const aEdgeType: byte; const aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the edge type and debounce time for the selected pin of port A as set by
@@ -223,7 +223,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.3$nbsp;(Plugin)
     /// </summary>
-    procedure GetEdgeCountConfig(const aPin: byte; out edgeType: byte; out debounce: byte); virtual;
+    procedure GetEdgeCountConfig(const aPin: byte; out aEdgeType: byte; out aDebounce: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -235,7 +235,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever a change of the voltage level is detected
@@ -296,19 +297,19 @@ begin
   aCallBacks[BRICKLET_IO16_CALLBACK_MONOFLOP_DONE]:= {$ifdef FPC}@{$endif}CallbackWrapperMonoflopDone;
 end;
 
-procedure TBrickletIO16.SetPort(const aPort: char; const valueMask: byte);
+procedure TBrickletIO16.SetPort(const aPort: char; const aValueMask: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_PORT, 10);
   LEConvertCharTo(aPort, 8, _request);
-  LEConvertUInt8To(valueMask, 9, _request);
+  LEConvertUInt8To(aValueMask, 9, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIO16.GetPort(const aPort: char): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_PORT, 9);
   LEConvertCharTo(aPort, 8, _request);
@@ -316,60 +317,60 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIO16.SetPortConfiguration(const aPort: char; const selectionMask: byte; const direction: char; const value: boolean);
+procedure TBrickletIO16.SetPortConfiguration(const aPort: char; const aselectionMask: byte; const aDirection: char; const aValue: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_PORT_CONFIGURATION, 12);
   LEConvertCharTo(aPort, 8, _request);
-  LEConvertUInt8To(selectionMask, 9, _request);
-  LEConvertCharTo(direction, 10, _request);
-  LEConvertBooleanTo(value, 11, _request);
+  LEConvertUInt8To(aselectionMask, 9, _request);
+  LEConvertCharTo(aDirection, 10, _request);
+  LEConvertBooleanTo(aValue, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16.GetPortConfiguration(const aPort: char; out directionMask: byte; out valueMask: byte);
+procedure TBrickletIO16.GetPortConfiguration(const aPort: char; out aDirectionMask: byte; out aValueMask: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_PORT_CONFIGURATION, 9);
   LEConvertCharTo(aPort, 8, _request);
   _response:= SendRequest(_request);
-  directionMask:= LEConvertUInt8From(8, _response);
-  valueMask:= LEConvertUInt8From(9, _response);
+  aDirectionMask:= LEConvertUInt8From(8, _response);
+  aValueMask:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletIO16.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletIO16.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIO16.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIO16.SetPortInterrupt(const aPort: char; const interruptMask: byte);
+procedure TBrickletIO16.SetPortInterrupt(const aPort: char; const aInterruptMask: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_PORT_INTERRUPT, 10);
   LEConvertCharTo(aPort, 8, _request);
-  LEConvertUInt8To(interruptMask, 9, _request);
+  LEConvertUInt8To(aInterruptMask, 9, _request);
   SendRequest(_request);
 end;
 
 function TBrickletIO16.GetPortInterrupt(const aPort: char): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_PORT_INTERRUPT, 9);
   LEConvertCharTo(aPort, 8, _request);
@@ -377,110 +378,117 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIO16.SetPortMonoflop(const aPort: char; const selectionMask: byte; const valueMask: byte; const time: longword);
+procedure TBrickletIO16.SetPortMonoflop(const aPort: char; const aSelectionMask: byte; const aValueMask: byte; const aTime: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_PORT_MONOFLOP, 15);
   LEConvertCharTo(aPort, 8, _request);
-  LEConvertUInt8To(selectionMask, 9, _request);
-  LEConvertUInt8To(valueMask, 10, _request);
-  LEConvertUInt32To(time, 11, _request);
+  LEConvertUInt8To(aSelectionMask, 9, _request);
+  LEConvertUInt8To(aValueMask, 10, _request);
+  LEConvertUInt32To(aTime, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16.GetPortMonoflop(const aPort: char; const aPin: byte; out aValue: byte; out time: longword; out timeRemaining: longword);
+procedure TBrickletIO16.GetPortMonoflop(const aPort: char; const aPin: byte; out aValue: byte; out aTime: longword; out aTimeRemaining: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_PORT_MONOFLOP, 10);
   LEConvertCharTo(aPort, 8, _request);
   LEConvertUInt8To(aPin, 9, _request);
   _response:= SendRequest(_request);
   aValue:= LEConvertUInt8From(8, _response);
-  time:= LEConvertUInt32From(9, _response);
-  timeRemaining:= LEConvertUInt32From(13, _response);
+  aTime:= LEConvertUInt32From(9, _response);
+  aTimeRemaining:= LEConvertUInt32From(13, _response);
 end;
 
-procedure TBrickletIO16.SetSelectedValues(const aPort: char; const selectionMask: byte; const valueMask: byte);
+procedure TBrickletIO16.SetSelectedValues(const aPort: char; const aSelectionMask: byte; const aValueMask: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_SELECTED_VALUES, 11);
   LEConvertCharTo(aPort, 8, _request);
-  LEConvertUInt8To(selectionMask, 9, _request);
-  LEConvertUInt8To(valueMask, 10, _request);
+  LEConvertUInt8To(aSelectionMask, 9, _request);
+  LEConvertUInt8To(aValueMask, 10, _request);
   SendRequest(_request);
 end;
 
-function TBrickletIO16.GetEdgeCount(const aPin: byte; const resetCounter: boolean): longword;
+function TBrickletIO16.GetEdgeCount(const aPin: byte; const aResetCounter: boolean): longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_EDGE_COUNT, 10);
   LEConvertUInt8To(aPin, 8, _request);
-  LEConvertBooleanTo(resetCounter, 9, _request);
+  LEConvertBooleanTo(aResetCounter, 9, _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletIO16.SetEdgeCountConfig(const aPin: byte; const edgeType: byte; const debounce: byte);
+procedure TBrickletIO16.SetEdgeCountConfig(const aPin: byte; const aEdgeType: byte; const aDebounce: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_SET_EDGE_COUNT_CONFIG, 11);
   LEConvertUInt8To(aPin, 8, _request);
-  LEConvertUInt8To(edgeType, 9, _request);
-  LEConvertUInt8To(debounce, 10, _request);
+  LEConvertUInt8To(aEdgeType, 9, _request);
+  LEConvertUInt8To(aDebounce, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIO16.GetEdgeCountConfig(const aPin: byte; out edgeType: byte; out debounce: byte);
+procedure TBrickletIO16.GetEdgeCountConfig(const aPin: byte; out aEdgeType: byte; out aDebounce: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_EDGE_COUNT_CONFIG, 9);
   LEConvertUInt8To(aPin, 8, _request);
   _response:= SendRequest(_request);
-  edgeType:= LEConvertUInt8From(8, _response);
-  debounce:= LEConvertUInt8From(9, _response);
+  aEdgeType:= LEConvertUInt8From(8, _response);
+  aDebounce:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletIO16.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIO16.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_IO16_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIO16.CallbackWrapperInterrupt(const aPacket: TDynamicByteArray);
-var port: char; interruptMask: byte; valueMask: byte;
+var
+  _port: char;
+  _interruptMask: byte;
+  _valueMask: byte;
 begin
-  port:= LEConvertCharFrom(8, aPacket);
-  interruptMask:= LEConvertUInt8From(9, aPacket);
-  valueMask:= LEConvertUInt8From(10, aPacket);
+  _port:= LEConvertCharFrom(8, aPacket);
+  _interruptMask:= LEConvertUInt8From(9, aPacket);
+  _valueMask:= LEConvertUInt8From(10, aPacket);
 
   if (Assigned(fInterruptCallback)) then begin
-    fInterruptCallback(self, port, interruptMask, valueMask);
+    fInterruptCallback(self, _port, _interruptMask, _valueMask);
   end;
 end;
 
 procedure TBrickletIO16.CallbackWrapperMonoflopDone(const aPacket: TDynamicByteArray);
-var port: char; selectionMask: byte; valueMask: byte;
+var
+  _port: char;
+  _selectionMask: byte;
+  _valueMask: byte;
 begin
-  port:= LEConvertCharFrom(8, aPacket);
-  selectionMask:= LEConvertUInt8From(9, aPacket);
-  valueMask:= LEConvertUInt8From(10, aPacket);
+  _port:= LEConvertCharFrom(8, aPacket);
+  _selectionMask:= LEConvertUInt8From(9, aPacket);
+  _valueMask:= LEConvertUInt8From(10, aPacket);
 
   if (Assigned(fMonoflopDoneCallback)) then begin
-    fMonoflopDoneCallback(self, port, selectionMask, valueMask);
+    fMonoflopDoneCallback(self, _port, _selectionMask, _valueMask);
   end;
 end;
 
