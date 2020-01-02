@@ -26,8 +26,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletJoystickV2 = class;
-  TBrickletJoystickV2NotifyPosition = procedure(sender: TBrickletJoystickV2; const x: smallint; const y: smallint) of object;
-  TBrickletJoystickV2NotifyPressed = procedure(sender: TBrickletJoystickV2; const pressed: boolean) of object;
+  TBrickletJoystickV2NotifyPosition = procedure(aSender: TBrickletJoystickV2; const aX: smallint; const aY: smallint) of object;
+  TBrickletJoystickV2NotifyPressed = procedure(aSender: TBrickletJoystickV2; const aPressed: boolean) of object;
 
   /// <summary>
   ///  2-axis joystick with push-button
