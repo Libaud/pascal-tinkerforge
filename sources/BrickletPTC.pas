@@ -25,11 +25,11 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletPTC = class;
-  TBrickletPTCNotifyTemperature = procedure(aSender: TBrickletPTC; const temperature: longint) of object;
-  TBrickletPTCNotifyTemperatureReached = procedure(aSender: TBrickletPTC; const temperature: longint) of object;
-  TBrickletPTCNotifyResistance = procedure(aSender: TBrickletPTC; const resistance: longint) of object;
-  TBrickletPTCNotifyResistanceReached = procedure(aSender: TBrickletPTC; const resistance: longint) of object;
-  TBrickletPTCNotifySensorConnected = procedure(aSender: TBrickletPTC; const connected: boolean) of object;
+  TBrickletPTCNotifyTemperature = procedure(aSender: TBrickletPTC; const aTemperature: longint) of object;
+  TBrickletPTCNotifyTemperatureReached = procedure(aSender: TBrickletPTC; const aTemperature: longint) of object;
+  TBrickletPTCNotifyResistance = procedure(aSender: TBrickletPTC; const aResistance: longint) of object;
+  TBrickletPTCNotifyResistanceReached = procedure(aSender: TBrickletPTC; const aResistance: longint) of object;
+  TBrickletPTCNotifySensorConnected = procedure(aSender: TBrickletPTC; const aConnected: boolean) of object;
 
   /// <summary>
   ///  Reads temperatures from Pt100 und Pt1000 sensors
@@ -85,7 +85,7 @@ type
     ///  The <see cref="BrickletPTC.TBrickletPTC.OnTemperature"/> callback is only triggered if the temperature has
     ///  changed since the last triggering.
     /// </summary>
-    procedure SetTemperatureCallbackPeriod(const period: longword); virtual;
+    procedure SetTemperatureCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletPTC.TBrickletPTC.SetTemperatureCallbackPeriod"/>.
@@ -99,7 +99,7 @@ type
     ///  The <see cref="BrickletPTC.TBrickletPTC.OnResistance"/> callback is only triggered if the resistance has changed
     ///  since the last triggering.
     /// </summary>
-    procedure SetResistanceCallbackPeriod(const period: longword); virtual;
+    procedure SetResistanceCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletPTC.TBrickletPTC.SetResistanceCallbackPeriod"/>.
@@ -123,12 +123,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetTemperatureCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetTemperatureCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletPTC.TBrickletPTC.SetTemperatureCallbackThreshold"/>.
     /// </summary>
-    procedure GetTemperatureCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetTemperatureCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the thresholds for the <see cref="BrickletPTC.TBrickletPTC.OnResistanceReached"/> callback.
@@ -147,12 +147,12 @@ type
     ///  
     ///  The default value is ('x', 0, 0).
     /// </summary>
-    procedure SetResistanceCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetResistanceCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletPTC.TBrickletPTC.SetResistanceCallbackThreshold"/>.
     /// </summary>
-    procedure GetResistanceCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetResistanceCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callback
@@ -167,7 +167,7 @@ type
     ///  
     ///  keeps being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletPTC.TBrickletPTC.SetDebouncePeriod"/>.
@@ -182,7 +182,7 @@ type
     ///  
     ///  Default value is 0 = 50Hz.
     /// </summary>
-    procedure SetNoiseRejectionFilter(const filter: byte); virtual;
+    procedure SetNoiseRejectionFilter(const aFilter: byte); virtual;
 
     /// <summary>
     ///  Returns the noise rejection filter option as set by
@@ -221,7 +221,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetSensorConnectedCallbackConfiguration(const enabled: boolean); virtual;
+    procedure SetSensorConnectedCallbackConfiguration(const aEnabled: boolean); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletPTC.TBrickletPTC.SetSensorConnectedCallbackConfiguration"/>.
@@ -240,7 +240,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -337,7 +338,7 @@ end;
 
 function TBrickletPTC.GetTemperature: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -346,123 +347,123 @@ end;
 
 function TBrickletPTC.GetResistance: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_RESISTANCE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletPTC.SetTemperatureCallbackPeriod(const period: longword);
+procedure TBrickletPTC.SetTemperatureCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_TEMPERATURE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletPTC.GetTemperatureCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_TEMPERATURE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletPTC.SetResistanceCallbackPeriod(const period: longword);
+procedure TBrickletPTC.SetResistanceCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_RESISTANCE_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletPTC.GetResistanceCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_RESISTANCE_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletPTC.SetTemperatureCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletPTC.SetTemperatureCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_TEMPERATURE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletPTC.GetTemperatureCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletPTC.GetTemperatureCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_TEMPERATURE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletPTC.SetResistanceCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletPTC.SetResistanceCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_RESISTANCE_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletPTC.GetResistanceCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletPTC.GetResistanceCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_RESISTANCE_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletPTC.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletPTC.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletPTC.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletPTC.SetNoiseRejectionFilter(const filter: byte);
+procedure TBrickletPTC.SetNoiseRejectionFilter(const aFilter: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_NOISE_REJECTION_FILTER, 9);
-  LEConvertUInt8To(filter, 8, _request);
+  LEConvertUInt8To(aFilter, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletPTC.GetNoiseRejectionFilter: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_NOISE_REJECTION_FILTER, 8);
   _response:= SendRequest(_request);
@@ -471,7 +472,7 @@ end;
 
 function TBrickletPTC.IsSensorConnected: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_IS_SENSOR_CONNECTED, 8);
   _response:= SendRequest(_request);
@@ -480,7 +481,7 @@ end;
 
 procedure TBrickletPTC.SetWireMode(const aMode: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_WIRE_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -489,92 +490,98 @@ end;
 
 function TBrickletPTC.GetWireMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_WIRE_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletPTC.SetSensorConnectedCallbackConfiguration(const enabled: boolean);
+procedure TBrickletPTC.SetSensorConnectedCallbackConfiguration(const aEnabled: boolean);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_SET_SENSOR_CONNECTED_CALLBACK_CONFIGURATION, 9);
-  LEConvertBooleanTo(enabled, 8, _request);
+  LEConvertBooleanTo(aEnabled, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletPTC.GetSensorConnectedCallbackConfiguration: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_SENSOR_CONNECTED_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletPTC.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletPTC.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_PTC_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletPTC.CallbackWrapperTemperature(const aPacket: TDynamicByteArray);
-var temperature: longint;
+var
+  _temperature: longint;
 begin
-  temperature:= LEConvertInt32From(8, aPacket);
+  _temperature:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fTemperatureCallback)) then begin
-    fTemperatureCallback(self, temperature);
+    fTemperatureCallback(self, _temperature);
   end;
 end;
 
 procedure TBrickletPTC.CallbackWrapperTemperatureReached(const aPacket: TDynamicByteArray);
-var temperature: longint;
+var
+  _temperature: longint;
 begin
-  temperature:= LEConvertInt32From(8, aPacket);
+  _temperature:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fTemperatureReachedCallback)) then begin
-    fTemperatureReachedCallback(self, temperature);
+    fTemperatureReachedCallback(self, _temperature);
   end;
 end;
 
 procedure TBrickletPTC.CallbackWrapperResistance(const aPacket: TDynamicByteArray);
-var resistance: longint;
+var
+  _resistance: longint;
 begin
-  resistance:= LEConvertInt32From(8, aPacket);
+  _resistance:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fResistanceCallback)) then begin
-    fResistanceCallback(self, resistance);
+    fResistanceCallback(self, _resistance);
   end;
 end;
 
 procedure TBrickletPTC.CallbackWrapperResistanceReached(const aPacket: TDynamicByteArray);
-var resistance: longint;
+var
+  _resistance: longint;
 begin
-  resistance:= LEConvertInt32From(8, aPacket);
+  _resistance:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(fResistanceReachedCallback)) then begin
-    fResistanceReachedCallback(self, resistance);
+    fResistanceReachedCallback(self, _resistance);
   end;
 end;
 
 procedure TBrickletPTC.CallbackWrapperSensorConnected(const aPacket: TDynamicByteArray);
-var connected: boolean;
+var
+  _connected: boolean;
 begin
-  connected:= LEConvertBooleanFrom(8, aPacket);
+  _connected:= LEConvertBooleanFrom(8, aPacket);
 
   if (Assigned(fSensorConnectedCallback)) then begin
-    fSensorConnectedCallback(self, connected);
+    fSensorConnectedCallback(self, _connected);
   end;
 end;
 
