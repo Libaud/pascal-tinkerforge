@@ -39,12 +39,12 @@ type
     /// <summary>
     ///  Sets the *r*, *g* and *b* values for the LED. Each value can be between 0 and 255.
     /// </summary>
-    procedure SetRGBValue(const r: byte; const g: byte; const b: byte); virtual;
+    procedure SetRGBValue(const aR: byte; const aG: byte; const aB: byte); virtual;
 
     /// <summary>
     ///  Returns the *r*, *g* and *b* values of the LED as set by <see cref="BrickletRGBLED.TBrickletRGBLED.SetRGBValue"/>.
     /// </summary>
-    procedure GetRGBValue(out r: byte; out g: byte; out b: byte); virtual;
+    procedure GetRGBValue(out aR: byte; out aG: byte; out aB: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -56,7 +56,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
   end;
 
 implementation
@@ -80,40 +81,41 @@ begin
   // do nothing
 end;
 
-procedure TBrickletRGBLED.SetRGBValue(const r: byte; const g: byte; const b: byte);
+procedure TBrickletRGBLED.SetRGBValue(const aR: byte; const aG: byte; const aB: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_FUNCTION_SET_RGB_VALUE, 11);
-  LEConvertUInt8To(r, 8, _request);
-  LEConvertUInt8To(g, 9, _request);
-  LEConvertUInt8To(b, 10, _request);
+  LEConvertUInt8To(aR, 8, _request);
+  LEConvertUInt8To(aG, 9, _request);
+  LEConvertUInt8To(aB, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletRGBLED.GetRGBValue(out r: byte; out g: byte; out b: byte);
+procedure TBrickletRGBLED.GetRGBValue(out aR: byte; out aG: byte; out aB: byte);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_FUNCTION_GET_RGB_VALUE, 8);
   _response:= SendRequest(_request);
-  r:= LEConvertUInt8From(8, _response);
-  g:= LEConvertUInt8From(9, _response);
-  b:= LEConvertUInt8From(10, _response);
+  aR:= LEConvertUInt8From(8, _response);
+  aG:= LEConvertUInt8From(9, _response);
+  aB:= LEConvertUInt8From(10, _response);
 end;
 
-procedure TBrickletRGBLED.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRGBLED.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
-  _request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 end.

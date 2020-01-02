@@ -26,7 +26,7 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletRGBLEDMatrix = class;
-  TBrickletRGBLEDMatrixNotifyFrameStarted = procedure(sender: TBrickletRGBLEDMatrix; const frameNumber: longword) of object;
+  TBrickletRGBLEDMatrixNotifyFrameStarted = procedure(aSender: TBrickletRGBLEDMatrix; const aFrameNumber: longword) of object;
 
   /// <summary>
   ///  RGB LED Matrix with 8x8 pixel
@@ -45,7 +45,7 @@ type
     /// <summary>
     ///  Sets the 64 red LED values of the matrix.
     /// </summary>
-    procedure SetRed(const red: array of byte); virtual;
+    procedure SetRed(const aRed: array of byte); virtual;
 
     /// <summary>
     ///  Returns the red LED values as set by <see cref="BrickletRGBLEDMatrix.TBrickletRGBLEDMatrix.SetRed"/>.
@@ -55,7 +55,7 @@ type
     /// <summary>
     ///  Sets the 64 green LED values of the matrix.
     /// </summary>
-    procedure SetGreen(const green: array of byte); virtual;
+    procedure SetGreen(const aGreen: array of byte); virtual;
 
     /// <summary>
     ///  Returns the green LED values as set by <see cref="BrickletRGBLEDMatrix.TBrickletRGBLEDMatrix.SetGreen"/>.
@@ -65,7 +65,7 @@ type
     /// <summary>
     ///  Sets the 64 blue LED values of the matrix.
     /// </summary>
-    procedure SetBlue(const blue: array of byte);
+    procedure SetBlue(const aBlue: array of byte);
     ///  can be found :ref:`here &lt;remote_switch_bricklet_type_c_system_and_device_code&gt;`.                                                                                                                                          of byte); virtual;
 
     /// <summary>
@@ -95,7 +95,7 @@ type
     ///  
     ///  Default value: 0 = off.
     /// </summary>
-    procedure SetFrameDuration(const frameDuration: word); virtual;
+    procedure SetFrameDuration(const aFrameDuration: word); virtual;
 
     /// <summary>
     ///  Returns the frame duration in ms as set by <see cref="BrickletRGBLEDMatrix.TBrickletRGBLEDMatrix.SetFrameDuration"/>.
@@ -137,7 +137,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -165,7 +166,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -177,7 +178,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -188,7 +189,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletRGBLEDMatrix.TBrickletRGBLEDMatrix.SetStatusLEDConfig"/>
@@ -240,7 +241,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered as soon as a new frame write is started.
@@ -293,51 +295,54 @@ begin
   aCallBacks[BRICKLET_RGB_LED_MATRIX_CALLBACK_FRAME_STARTED]:= {$ifdef FPC}@{$endif}CallbackWrapperFrameStarted;
 end;
 
-procedure TBrickletRGBLEDMatrix.SetRed(const red: array of byte);
+procedure TBrickletRGBLEDMatrix.SetRed(const aRed: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_RED, 72);
-  if (Length(red) <> 64) then raise EInvalidParameterException.Create('Red has to be exactly 64 items long');
-  for _i:= 0 to Length(red) - 1 do LEConvertUInt8To(red[_i], 8 + (_i * 1), _request);
+  if (Length(aRed) <> 64) then raise EInvalidParameterException.Create('Red has to be exactly 64 items long');
+  for _i:= 0 to Length(aRed) - 1 do LEConvertUInt8To(aRed[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
 function TBrickletRGBLEDMatrix.GetRed: TArray0To63OfUInt8;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_RED, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 63 do Result[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.SetGreen(const green: array of byte);
+procedure TBrickletRGBLEDMatrix.SetGreen(const aGreen: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_GREEN, 72);
-  if (Length(green) <> 64) then raise EInvalidParameterException.Create('Green has to be exactly 64 items long');
-  for _i:= 0 to Length(green) - 1 do LEConvertUInt8To(green[_i], 8 + (_i * 1), _request);
+  if (Length(aGreen) <> 64) then raise EInvalidParameterException.Create('Green has to be exactly 64 items long');
+  for _i:= 0 to Length(aGreen) - 1 do LEConvertUInt8To(aGreen[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
 function TBrickletRGBLEDMatrix.GetGreen: TArray0To63OfUInt8;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_GREEN, 8);
   _response:= SendRequest(_request);
   for _i:= 0 to 63 do Result[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.SetBlue(const blue: array of byte);
+procedure TBrickletRGBLEDMatrix.SetBlue(const aBlue: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_BLUE, 72);
-  if (Length(blue) <> 64) then raise EInvalidParameterException.Create('Blue has to be exactly 64 items long');
-  for _i:= 0 to Length(blue) - 1 do LEConvertUInt8To(blue[_i], 8 + (_i * 1), _request);
+  if (Length(aBlue) <> 64) then raise EInvalidParameterException.Create('Blue has to be exactly 64 items long');
+  for _i:= 0 to Length(aBlue) - 1 do LEConvertUInt8To(aBlue[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
@@ -351,18 +356,18 @@ begin
   for _i:= 0 to 63 do Result[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.SetFrameDuration(const frameDuration: word);
+procedure TBrickletRGBLEDMatrix.SetFrameDuration(const aFrameDuration: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_FRAME_DURATION, 10);
-  LEConvertUInt16To(frameDuration, 8, _request);
+  LEConvertUInt16To(aFrameDuration, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRGBLEDMatrix.GetFrameDuration: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_FRAME_DURATION, 8);
   _response:= SendRequest(_request);
@@ -371,7 +376,7 @@ end;
 
 procedure TBrickletRGBLEDMatrix.DrawFrame;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_DRAW_FRAME, 8);
   SendRequest(_request);
@@ -379,28 +384,28 @@ end;
 
 function TBrickletRGBLEDMatrix.GetSupplyVoltage: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_SUPPLY_VOLTAGE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletRGBLEDMatrix.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletRGBLEDMatrix.SetBootloaderMode(const aMode: byte): byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_BOOTLOADER_MODE, 9);
   LEConvertUInt8To(aMode, 8, _request);
@@ -410,45 +415,46 @@ end;
 
 function TBrickletRGBLEDMatrix.GetBootloaderMode: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_BOOTLOADER_MODE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletRGBLEDMatrix.SetWriteFirmwarePointer(const aPointer: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletRGBLEDMatrix.WriteFirmware(const data: array of byte): byte;
+function TBrickletRGBLEDMatrix.WriteFirmware(const aData: array of byte): byte;
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.SetStatusLEDConfig(const config: byte);
+procedure TBrickletRGBLEDMatrix.SetStatusLEDConfig(const aConfig: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletRGBLEDMatrix.GetStatusLEDConfig: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_STATUS_LED_CONFIG, 8);
   _response:= SendRequest(_request);
@@ -457,7 +463,7 @@ end;
 
 function TBrickletRGBLEDMatrix.GetChipTemperature: smallint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_CHIP_TEMPERATURE, 8);
   _response:= SendRequest(_request);
@@ -466,7 +472,7 @@ end;
 
 procedure TBrickletRGBLEDMatrix.Reset;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_RESET, 8);
   SendRequest(_request);
@@ -474,7 +480,7 @@ end;
 
 procedure TBrickletRGBLEDMatrix.WriteUID(const aUID: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_WRITE_UID, 12);
   LEConvertUInt32To(uid, 8, _request);
@@ -483,34 +489,36 @@ end;
 
 function TBrickletRGBLEDMatrix.ReadUID: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_READ_UID, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletRGBLEDMatrix.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletRGBLEDMatrix.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_RGB_LED_MATRIX_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletRGBLEDMatrix.CallbackWrapperFrameStarted(const aPacket: TDynamicByteArray);
-var frameNumber: longword;
+var
+  _frameNumber: longword;
 begin
-  frameNumber:= LEConvertUInt32From(8, aPacket);
+  _frameNumber:= LEConvertUInt32From(8, aPacket);
 
   if (Assigned(frameStartedCallback)) then begin
-    frameStartedCallback(self, frameNumber);
+    frameStartedCallback(self, _frameNumber);
   end;
 end;
 
