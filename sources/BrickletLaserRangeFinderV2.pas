@@ -26,8 +26,8 @@ type
   TArray0To63OfUInt8 = array [0..63] of byte;
 
   TBrickletLaserRangeFinderV2 = class;
-  TBrickletLaserRangeFinderV2NotifyDistance = procedure(sender: TBrickletLaserRangeFinderV2; const distance: smallint) of object;
-  TBrickletLaserRangeFinderV2NotifyVelocity = procedure(sender: TBrickletLaserRangeFinderV2; const velocity: smallint) of object;
+  TBrickletLaserRangeFinderV2NotifyDistance = procedure(aSender: TBrickletLaserRangeFinderV2; const aDistance: smallint) of object;
+  TBrickletLaserRangeFinderV2NotifyVelocity = procedure(aSender: TBrickletLaserRangeFinderV2; const aVelocity: smallint) of object;
 
   /// <summary>
   ///  Measures distance up to 40m with laser light
@@ -86,12 +86,12 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetDistanceCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint); virtual;
+    procedure SetDistanceCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetDistanceCallbackConfiguration"/>.
     /// </summary>
-    procedure GetDistanceCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint); virtual;
+    procedure GetDistanceCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the measured velocity. The value has a range of -12800 to 12700
@@ -137,12 +137,12 @@ type
     ///  
     ///  If the option is set to 'x' (threshold turned off) the callback is triggered with the fixed period.
     /// </summary>
-    procedure SetVelocityCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint); virtual;
+    procedure SetVelocityCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint); virtual;
 
     /// <summary>
     ///  Returns the callback configuration as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetVelocityCallbackConfiguration"/>.
     /// </summary>
-    procedure GetVelocityCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint); virtual;
+    procedure GetVelocityCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint); virtual;
 
     /// <summary>
     ///  Enables the laser of the LIDAR if set to *true*.
@@ -150,7 +150,7 @@ type
     ///  We recommend that you wait 250ms after enabling the laser before
     ///  the first call of <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.GetDistance"/> to ensure stable measurements.
     /// </summary>
-    procedure SetEnable(const enable: boolean); virtual;
+    procedure SetEnable(const aEnable: boolean); virtual;
 
     /// <summary>
     ///  Returns the value as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetEnable"/>.
@@ -186,12 +186,12 @@ type
     ///  The default values for Acquisition Count, Enable Quick Termination, Threshold Value and
     ///  Measurement Frequency are 128, false, 0 and 0.
     /// </summary>
-    procedure SetConfiguration(const acquisitionCount: byte; const enableQuickTermination: boolean; const thresholdValue: byte; const measurementFrequency: word); virtual;
+    procedure SetConfiguration(const aAcquisitionCount: byte; const aEnableQuickTermination: boolean; const aThresholdValue: byte; const aMeasurementFrequency: word); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out acquisitionCount: byte; out enableQuickTermination: boolean; out thresholdValue: byte; out measurementFrequency: word); virtual;
+    procedure GetConfiguration(out aAcquisitionCount: byte; out aEnableQuickTermination: boolean; out aThresholdValue: byte; out aMeasurementFrequency: word); virtual;
 
     /// <summary>
     ///  Sets the length of a `moving averaging &lt;https://en.wikipedia.org/wiki/Moving_average&gt;`__
@@ -200,12 +200,12 @@ type
     ///  Setting the length to 0 will turn the averaging completely off. With less
     ///  averaging, there is more noise on the data.
     /// </summary>
-    procedure SetMovingAverage(const distanceAverageLength: byte; const velocityAverageLength: byte); virtual;
+    procedure SetMovingAverage(const aDistanceAverageLength: byte; const aVelocityAverageLength: byte); virtual;
 
     /// <summary>
     ///  Returns the length moving average as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetMovingAverage"/>.
     /// </summary>
-    procedure GetMovingAverage(out distanceAverageLength: byte; out velocityAverageLength: byte); virtual;
+    procedure GetMovingAverage(out aDistanceAverageLength: byte; out aVelocityAverageLength: byte); virtual;
 
     /// <summary>
     ///  The offset is added to the measured distance.
@@ -218,7 +218,7 @@ type
     ///  Calculate the offset by measuring the distance to a known distance
     ///  and set it again.
     /// </summary>
-    procedure SetOffsetCalibration(const offset: smallint); virtual;
+    procedure SetOffsetCalibration(const aOffset: smallint); virtual;
 
     /// <summary>
     ///  Returns the offset value as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetOffsetCalibration"/>.
@@ -229,7 +229,7 @@ type
     ///  Configures the distance LED to be either turned off, turned on, blink in
     ///  heartbeat mode or show the distance (brighter = object is nearer).
     /// </summary>
-    procedure SetDistanceLEDConfig(const config: byte); virtual;
+    procedure SetDistanceLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the LED configuration as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetDistanceLEDConfig"/>
@@ -249,7 +249,8 @@ type
     ///  The errors counts are for errors that occur on the Bricklet side. All
     ///  Bricks have a similar function that returns the errors on the Brick side.
     /// </summary>
-    procedure GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword); virtual;
+    procedure GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword;
+                                  out aErrorCountFrame: longword; out aErrorCountOverflow: longword); virtual;
 
     /// <summary>
     ///  Sets the bootloader mode and returns the status after the _requested
@@ -277,7 +278,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    procedure SetWriteFirmwarePointer(const pointer: longword); virtual;
+    procedure SetWriteFirmwarePointer(const aPointer: longword); virtual;
 
     /// <summary>
     ///  Writes 64 Bytes of firmware at the position as written by
@@ -289,7 +290,7 @@ type
     ///  This function is used by Brick Viewer during flashing. It should not be
     ///  necessary to call it in a normal user program.
     /// </summary>
-    function WriteFirmware(const data: array of byte): byte; virtual;
+    function WriteFirmware(const aData: array of byte): byte; virtual;
 
     /// <summary>
     ///  Sets the status LED configuration. By default the LED shows
@@ -300,7 +301,7 @@ type
     ///  
     ///  If the Bricklet is in bootloader mode, the LED is will show heartbeat by default.
     /// </summary>
-    procedure SetStatusLEDConfig(const config: byte); virtual;
+    procedure SetStatusLEDConfig(const aConfig: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletLaserRangeFinderV2.TBrickletLaserRangeFinderV2.SetStatusLEDConfig"/>
@@ -352,7 +353,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically according to the configuration set by
@@ -430,30 +432,30 @@ begin
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetDistanceCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint);
+procedure TBrickletLaserRangeFinderV2.SetDistanceCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_DISTANCE_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertInt16To(min, 14, _request);
-  LEConvertInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertInt16To(aMin, 14, _request);
+  LEConvertInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLaserRangeFinderV2.GetDistanceCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint);
+procedure TBrickletLaserRangeFinderV2.GetDistanceCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_GET_DISTANCE_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertInt16From(14, _response);
-  max:= LEConvertInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertInt16From(14, _response);
+  aMax:= LEConvertInt16From(16, _response);
 end;
 
 function TBrickletLaserRangeFinderV2.GetVelocity: smallint;
@@ -465,38 +467,38 @@ begin
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetVelocityCallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: smallint; const max: smallint);
+procedure TBrickletLaserRangeFinderV2.SetVelocityCallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char; const aMin: smallint; const aMax: smallint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_VELOCITY_CALLBACK_CONFIGURATION, 18);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertInt16To(min, 14, _request);
-  LEConvertInt16To(max, 16, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aOption, 13, _request);
+  LEConvertInt16To(aMin, 14, _request);
+  LEConvertInt16To(aMax, 16, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLaserRangeFinderV2.GetVelocityCallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: smallint; out max: smallint);
+procedure TBrickletLaserRangeFinderV2.GetVelocityCallbackConfiguration(out aPeriod: longword; out aValueHasToChange: boolean; out aOption: char; out aMin: smallint; out aMax: smallint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_GET_VELOCITY_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertInt16From(14, _response);
-  max:= LEConvertInt16From(16, _response);
+  aPeriod:= LEConvertUInt32From(8, _response);
+  aValueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aOption:= LEConvertCharFrom(13, _response);
+  aMin:= LEConvertInt16From(14, _response);
+  aMax:= LEConvertInt16From(16, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetEnable(const enable: boolean);
+procedure TBrickletLaserRangeFinderV2.SetEnable(const aEnable: boolean);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_ENABLE, 9);
-  LEConvertBooleanTo(enable, 8, _request);
+  LEConvertBooleanTo(aEnable, 8, _request);
   SendRequest(_request);
 end;
 
@@ -509,56 +511,56 @@ begin
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetConfiguration(const acquisitionCount: byte; const enableQuickTermination: boolean; const thresholdValue: byte; const measurementFrequency: word);
+procedure TBrickletLaserRangeFinderV2.SetConfiguration(const aAcquisitionCount: byte; const aEnableQuickTermination: boolean; const aThresholdValue: byte; const aMeasurementFrequency: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_CONFIGURATION, 13);
-  LEConvertUInt8To(acquisitionCount, 8, _request);
-  LEConvertBooleanTo(enableQuickTermination, 9, _request);
-  LEConvertUInt8To(thresholdValue, 10, _request);
-  LEConvertUInt16To(measurementFrequency, 11, _request);
+  LEConvertUInt8To(aAcquisitionCount, 8, _request);
+  LEConvertBooleanTo(aEnableQuickTermination, 9, _request);
+  LEConvertUInt8To(aThresholdValue, 10, _request);
+  LEConvertUInt16To(aMeasurementFrequency, 11, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLaserRangeFinderV2.GetConfiguration(out acquisitionCount: byte; out enableQuickTermination: boolean; out thresholdValue: byte; out measurementFrequency: word);
+procedure TBrickletLaserRangeFinderV2.GetConfiguration(out aAcquisitionCount: byte; out aEnableQuickTermination: boolean; out aThresholdValue: byte; out aMeasurementFrequency: word);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  acquisitionCount:= LEConvertUInt8From(8, _response);
-  enableQuickTermination:= LEConvertBooleanFrom(9, _response);
-  thresholdValue:= LEConvertUInt8From(10, _response);
-  measurementFrequency:= LEConvertUInt16From(11, _response);
+  aAcquisitionCount:= LEConvertUInt8From(8, _response);
+  aEnableQuickTermination:= LEConvertBooleanFrom(9, _response);
+  aThresholdValue:= LEConvertUInt8From(10, _response);
+  aMeasurementFrequency:= LEConvertUInt16From(11, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetMovingAverage(const distanceAverageLength: byte; const velocityAverageLength: byte);
+procedure TBrickletLaserRangeFinderV2.SetMovingAverage(const aDistanceAverageLength: byte; const aVelocityAverageLength: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_MOVING_AVERAGE, 10);
-  LEConvertUInt8To(distanceAverageLength, 8, _request);
-  LEConvertUInt8To(velocityAverageLength, 9, _request);
+  LEConvertUInt8To(aDistanceAverageLength, 8, _request);
+  LEConvertUInt8To(aVelocityAverageLength, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLaserRangeFinderV2.GetMovingAverage(out distanceAverageLength: byte; out velocityAverageLength: byte);
+procedure TBrickletLaserRangeFinderV2.GetMovingAverage(out aDistanceAverageLength: byte; out aVelocityAverageLength: byte);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_GET_MOVING_AVERAGE, 8);
   _response:= SendRequest(_request);
-  distanceAverageLength:= LEConvertUInt8From(8, _response);
-  velocityAverageLength:= LEConvertUInt8From(9, _response);
+  aDistanceAverageLength:= LEConvertUInt8From(8, _response);
+  aVelocityAverageLength:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetOffsetCalibration(const offset: smallint);
+procedure TBrickletLaserRangeFinderV2.SetOffsetCalibration(const aOffset: smallint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_OFFSET_CALIBRATION, 10);
-  LEConvertInt16To(offset, 8, _request);
+  LEConvertInt16To(aOffset, 8, _request);
   SendRequest(_request);
 end;
 
@@ -571,12 +573,12 @@ begin
   Result:= LEConvertInt16From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetDistanceLEDConfig(const config: byte);
+procedure TBrickletLaserRangeFinderV2.SetDistanceLEDConfig(const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_DISTANCE_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -589,16 +591,16 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.GetSPITFPErrorCount(out errorCountAckChecksum: longword; out errorCountMessageChecksum: longword; out errorCountFrame: longword; out errorCountOverflow: longword);
+procedure TBrickletLaserRangeFinderV2.GetSPITFPErrorCount(out aErrorCountAckChecksum: longword; out aErrorCountMessageChecksum: longword; out aErrorCountFrame: longword; out aErrorCountOverflow: longword);
 var 
 _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_GET_SPITFP_ERROR_COUNT, 8);
   _response:= SendRequest(_request);
-  errorCountAckChecksum:= LEConvertUInt32From(8, _response);
-  errorCountMessageChecksum:= LEConvertUInt32From(12, _response);
-  errorCountFrame:= LEConvertUInt32From(16, _response);
-  errorCountOverflow:= LEConvertUInt32From(20, _response);
+  aErrorCountAckChecksum:= LEConvertUInt32From(8, _response);
+  aErrorCountMessageChecksum:= LEConvertUInt32From(12, _response);
+  aErrorCountFrame:= LEConvertUInt32From(16, _response);
+  aErrorCountOverflow:= LEConvertUInt32From(20, _response);
 end;
 
 function TBrickletLaserRangeFinderV2.SetBootloaderMode(const aMode: byte): byte;
@@ -620,32 +622,32 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetWriteFirmwarePointer(const pointer: longword);
+procedure TBrickletLaserRangeFinderV2.SetWriteFirmwarePointer(const aPointer: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_WRITE_FIRMWARE_POINTER, 12);
-  LEConvertUInt32To(pointer, 8, _request);
+  LEConvertUInt32To(aPointer, 8, _request);
   SendRequest(_request);
 end;
 
-function TBrickletLaserRangeFinderV2.WriteFirmware(const data: array of byte): byte;
+function TBrickletLaserRangeFinderV2.WriteFirmware(const aData: array of byte): byte;
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_WRITE_FIRMWARE, 72);
-  if (Length(data) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
-  for _i:= 0 to Length(data) - 1 do LEConvertUInt8To(data[_i], 8 + (_i * 1), _request);
+  if (Length(aData) <> 64) then raise EInvalidParameterException.Create('Data has to be exactly 64 items long');
+  for _i:= 0 to Length(aData) - 1 do LEConvertUInt8To(aData[_i], 8 + (_i * 1), _request);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.SetStatusLEDConfig(const config: byte);
+procedure TBrickletLaserRangeFinderV2.SetStatusLEDConfig(const aConfig: byte);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_SET_STATUS_LED_CONFIG, 9);
-  LEConvertUInt8To(config, 8, _request);
+  LEConvertUInt8To(aConfig, 8, _request);
   SendRequest(_request);
 end;
 
@@ -693,18 +695,18 @@ begin
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletLaserRangeFinderV2.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletLaserRangeFinderV2.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray; _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LASER_RANGE_FINDER_V2_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletLaserRangeFinderV2.CallbackWrapperDistance(const aPacket: TDynamicByteArray);
