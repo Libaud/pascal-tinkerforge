@@ -25,8 +25,8 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletLoadCell = class;
-  TBrickletLoadCellNotifyWeight = procedure(sender: TBrickletLoadCell; const weight: longint) of object;
-  TBrickletLoadCellNotifyWeightReached = procedure(sender: TBrickletLoadCell; const weight: longint) of object;
+  TBrickletLoadCellNotifyWeight = procedure(aSender: TBrickletLoadCell; const aWeight: longint) of object;
+  TBrickletLoadCellNotifyWeightReached = procedure(aSender: TBrickletLoadCell; const aWeight: longint) of object;
 
   /// <summary>
   ///  Measures weight with a load cell
@@ -60,7 +60,7 @@ type
     ///  The <see cref="BrickletLoadCell.TBrickletLoadCell.OnWeight"/> callback is only triggered if the weight has changed since the
     ///  last triggering.
     /// </summary>
-    procedure SetWeightCallbackPeriod(const period: longword); virtual;
+    procedure SetWeightCallbackPeriod(const aPeriod: longword); virtual;
 
     /// <summary>
     ///  Returns the period as set by <see cref="BrickletLoadCell.TBrickletLoadCell.SetWeightCallbackPeriod"/>.
@@ -82,12 +82,12 @@ type
     ///   "'&gt;'",    "Callback is triggered when the weight is greater than the min value (max is ignored)"
     ///  </code>
     /// </summary>
-    procedure SetWeightCallbackThreshold(const option: char; const min: longint; const max: longint); virtual;
+    procedure SetWeightCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint); virtual;
 
     /// <summary>
     ///  Returns the threshold as set by <see cref="BrickletLoadCell.TBrickletLoadCell.SetWeightCallbackThreshold"/>.
     /// </summary>
-    procedure GetWeightCallbackThreshold(out option: char; out min: longint; out max: longint); virtual;
+    procedure GetWeightCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint); virtual;
 
     /// <summary>
     ///  Sets the period with which the threshold callback
@@ -100,7 +100,7 @@ type
     ///  
     ///  keeps being reached.
     /// </summary>
-    procedure SetDebouncePeriod(const debounce: longword); virtual;
+    procedure SetDebouncePeriod(const aDebounce: longword); virtual;
 
     /// <summary>
     ///  Returns the debounce period as set by <see cref="BrickletLoadCell.TBrickletLoadCell.SetDebouncePeriod"/>.
@@ -114,7 +114,7 @@ type
     ///  Setting the length to 1 will turn the averaging off. With less
     ///  averaging, there is more noise on the data.
     /// </summary>
-    procedure SetMovingAverage(const average: byte); virtual;
+    procedure SetMovingAverage(const aAverage: byte); virtual;
 
     /// <summary>
     ///  Returns the length moving average as set by <see cref="BrickletLoadCell.TBrickletLoadCell.SetMovingAverage"/>.
@@ -175,12 +175,12 @@ type
     ///  We recommend to use the Brick Viewer for configuration, you don't need
     ///  to call this function in your source code.
     /// </summary>
-    procedure SetConfiguration(const rate: byte; const gain: byte); virtual;
+    procedure SetConfiguration(const aRate: byte; const aGain: byte); virtual;
 
     /// <summary>
     ///  Returns the configuration as set by <see cref="BrickletLoadCell.TBrickletLoadCell.SetConfiguration"/>.
     /// </summary>
-    procedure GetConfiguration(out rate: byte; out gain: byte); virtual;
+    procedure GetConfiguration(out aRate: byte; out aGain: byte); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -192,7 +192,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char;
+                          out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered periodically with the period that is set by
@@ -253,83 +254,83 @@ end;
 
 function TBrickletLoadCell.GetWeight: longint;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_WEIGHT, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletLoadCell.SetWeightCallbackPeriod(const period: longword);
+procedure TBrickletLoadCell.SetWeightCallbackPeriod(const aPeriod: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_SET_WEIGHT_CALLBACK_PERIOD, 12);
-  LEConvertUInt32To(period, 8, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLoadCell.GetWeightCallbackPeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_WEIGHT_CALLBACK_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletLoadCell.SetWeightCallbackThreshold(const option: char; const min: longint; const max: longint);
+procedure TBrickletLoadCell.SetWeightCallbackThreshold(const aOption: char; const aMin: longint; const aMax: longint);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_SET_WEIGHT_CALLBACK_THRESHOLD, 17);
-  LEConvertCharTo(option, 8, _request);
-  LEConvertInt32To(min, 9, _request);
-  LEConvertInt32To(max, 13, _request);
+  LEConvertCharTo(aOption, 8, _request);
+  LEConvertInt32To(aMin, 9, _request);
+  LEConvertInt32To(aMax, 13, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLoadCell.GetWeightCallbackThreshold(out option: char; out min: longint; out max: longint);
+procedure TBrickletLoadCell.GetWeightCallbackThreshold(out aOption: char; out aMin: longint; out aMax: longint);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_WEIGHT_CALLBACK_THRESHOLD, 8);
   _response:= SendRequest(_request);
-  option:= LEConvertCharFrom(8, _response);
-  min:= LEConvertInt32From(9, _response);
-  max:= LEConvertInt32From(13, _response);
+  aOption:= LEConvertCharFrom(8, _response);
+  aMin:= LEConvertInt32From(9, _response);
+  aMax:= LEConvertInt32From(13, _response);
 end;
 
-procedure TBrickletLoadCell.SetDebouncePeriod(const debounce: longword);
+procedure TBrickletLoadCell.SetDebouncePeriod(const aDebounce: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_SET_DEBOUNCE_PERIOD, 12);
-  LEConvertUInt32To(debounce, 8, _request);
+  LEConvertUInt32To(aDebounce, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLoadCell.GetDebouncePeriod: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_DEBOUNCE_PERIOD, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletLoadCell.SetMovingAverage(const average: byte);
+procedure TBrickletLoadCell.SetMovingAverage(const aAverage: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_SET_MOVING_AVERAGE, 9);
-  LEConvertUInt8To(average, 8, _request);
+  LEConvertUInt8To(aAverage, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLoadCell.GetMovingAverage: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_MOVING_AVERAGE, 8);
   _response:= SendRequest(_request);
@@ -338,7 +339,7 @@ end;
 
 procedure TBrickletLoadCell.LEDOn;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_LED_ON, 8);
   SendRequest(_request);
@@ -346,7 +347,7 @@ end;
 
 procedure TBrickletLoadCell.LEDOff;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_LED_OFF, 8);
   SendRequest(_request);
@@ -354,7 +355,7 @@ end;
 
 function TBrickletLoadCell.IsLEDOn: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_IS_LED_ON, 8);
   _response:= SendRequest(_request);
@@ -363,7 +364,7 @@ end;
 
 procedure TBrickletLoadCell.Calibrate(const weight: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_CALIBRATE, 12);
   LEConvertUInt32To(weight, 8, _request);
@@ -372,63 +373,66 @@ end;
 
 procedure TBrickletLoadCell.Tare;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_TARE, 8);
   SendRequest(_request);
 end;
 
-procedure TBrickletLoadCell.SetConfiguration(const rate: byte; const gain: byte);
+procedure TBrickletLoadCell.SetConfiguration(const aRate: byte; const aGain: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_SET_CONFIGURATION, 10);
-  LEConvertUInt8To(rate, 8, _request);
-  LEConvertUInt8To(gain, 9, _request);
+  LEConvertUInt8To(aRate, 8, _request);
+  LEConvertUInt8To(aGain, 9, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLoadCell.GetConfiguration(out rate: byte; out gain: byte);
+procedure TBrickletLoadCell.GetConfiguration(out aRate: byte; out aGain: byte);
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  rate:= LEConvertUInt8From(8, _response);
-  gain:= LEConvertUInt8From(9, _response);
+  aRate:= LEConvertUInt8From(8, _response);
+  aGain:= LEConvertUInt8From(9, _response);
 end;
 
-procedure TBrickletLoadCell.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletLoadCell.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LOAD_CELL_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletLoadCell.CallbackWrapperWeight(const aPacket: TDynamicByteArray);
-var weight: longint;
+var
+  _weight: longint;
 begin
-  weight:= LEConvertInt32From(8, aPacket);
+  _weight:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(weightCallback)) then begin
-    weightCallback(self, weight);
+    weightCallback(self, _weight);
   end;
 end;
 
 procedure TBrickletLoadCell.CallbackWrapperWeightReached(const aPacket: TDynamicByteArray);
-var weight: longint;
+var
+  _weight: longint;
 begin
-  weight:= LEConvertInt32From(8, aPacket);
+  _weight:= LEConvertInt32From(8, aPacket);
 
   if (Assigned(weightReachedCallback)) then begin
-    weightReachedCallback(self, weight);
+    weightReachedCallback(self, _weight);
   end;
 end;
 
