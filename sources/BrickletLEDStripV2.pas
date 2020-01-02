@@ -36,7 +36,7 @@ type
   /// </summary>
   TBrickletLEDStripV2 = class(TThreadedDevice)
   private
-    frameStartedCallback: TBrickletLEDStripV2NotifyFrameStarted;
+    fFrameStartedCallback: TBrickletLEDStripV2NotifyFrameStarted;
     procedure CallbackWrapperFrameStarted(const aPacket: TDynamicByteArray); virtual;
   protected
     // Inherited method's
@@ -361,7 +361,7 @@ type
     ///  
     ///  For an explanation of the general approach see <see cref="BrickletLEDStripV2.TBrickletLEDStripV2.SetLEDValues"/>.
     /// </summary>
-    property OnFrameStarted: TBrickletLEDStripV2NotifyFrameStarted read frameStartedCallback write frameStartedCallback;
+    property OnFrameStarted: TBrickletLEDStripV2NotifyFrameStarted read fFrameStartedCallback write fFrameStartedCallback;
   end;
 
 implementation
@@ -750,8 +750,8 @@ var
 begin
   _length:= LEConvertUInt16From(8, aPacket);
 
-  if (Assigned(frameStartedCallback)) then begin
-    frameStartedCallback(self, _length);
+  if (Assigned(fFrameStartedCallback)) then begin
+    fFrameStartedCallback(self, _length);
   end;
 end;
 

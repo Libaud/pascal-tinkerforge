@@ -27,7 +27,7 @@ type
   TArray0To2OfUInt8 = array [0..2] of byte;
 
   TBrickletLEDStrip = class;
-  TBrickletLEDStripNotifyFrameRendered = procedure(aSender: TBrickletLEDStrip; const length_: word) of object;
+  TBrickletLEDStripNotifyFrameRendered = procedure(aSender: TBrickletLEDStrip; const aLength: word) of object;
 
   /// <summary>
   ///  Controls up to 320 RGB LEDs
@@ -83,7 +83,7 @@ type
     ///  information. A call of <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetRGBValues"/> with index + length above the
     ///  bounds is ignored completely.
     /// </summary>
-    procedure SetRGBValues(const index: word; const length_: byte; const r: array of byte; const g: array of byte; const b: array of byte); virtual;
+    procedure SetRGBValues(const aIndex: word; const aLength: byte; const aR: array of byte; const aG: array of byte; const aB: array of byte); virtual;
 
     /// <summary>
     ///  Returns *length* R, G and B values starting from the
@@ -91,7 +91,7 @@ type
     ///  
     ///  The values are the last values that were set by <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetRGBValues"/>.
     /// </summary>
-    procedure GetRGBValues(const index: word; const length_: byte; out r: TArray0To15OfUInt8; out g: TArray0To15OfUInt8; out b: TArray0To15OfUInt8); virtual;
+    procedure GetRGBValues(const aIndex: word; const aLength: byte; out aR: TArray0To15OfUInt8; out aG: TArray0To15OfUInt8; out aB: TArray0To15OfUInt8); virtual;
 
     /// <summary>
     ///  Sets the frame duration.
@@ -101,7 +101,7 @@ type
     ///  
     ///  For an explanation of the general approach see <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetRGBValues"/>.
     /// </summary>
-    procedure SetFrameDuration(const duration: word); virtual;
+    procedure SetFrameDuration(const aDuration: word); virtual;
 
     /// <summary>
     ///  Returns the frame duration as set by <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetFrameDuration"/>.
@@ -133,7 +133,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.1$nbsp;(Plugin)
     /// </summary>
-    procedure SetClockFrequency(const frequency: longword); virtual;
+    procedure SetClockFrequency(const aFrequency: longword); virtual;
 
     /// <summary>
     ///  Returns the currently used clock frequency as set by <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetClockFrequency"/>.
@@ -154,7 +154,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.2$nbsp;(Plugin)
     /// </summary>
-    procedure SetChipType(const chip: word); virtual;
+    procedure SetChipType(const aChip: word); virtual;
 
     /// <summary>
     ///  Returns the currently used chip type as set by <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetChipType"/>.
@@ -219,7 +219,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.6$nbsp;(Plugin)
     /// </summary>
-    procedure SetRGBWValues(const index: word; const length_: byte; const r: array of byte; const g: array of byte; const b: array of byte; const w: array of byte); virtual;
+    procedure SetRGBWValues(const aIndex: word; const aLength: byte; const aR: array of byte; const aG: array of byte; const aB: array of byte; const aW: array of byte); virtual;
 
     /// <summary>
     ///  Returns *length* RGBW values starting from the given *index*.
@@ -228,7 +228,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.6$nbsp;(Plugin)
     /// </summary>
-    procedure GetRGBWValues(const index: word; const length_: byte; out r: TArray0To11OfUInt8; out g: TArray0To11OfUInt8; out b: TArray0To11OfUInt8; out w: TArray0To11OfUInt8); virtual;
+    procedure GetRGBWValues(const aIndex: word; const aLength: byte; out aR: TArray0To11OfUInt8; out aG: TArray0To11OfUInt8; out aB: TArray0To11OfUInt8; out aW: TArray0To11OfUInt8); virtual;
 
     /// <summary>
     ///  Sets the channel mapping for the connected LEDs.
@@ -253,7 +253,7 @@ type
     ///  
     ///  .. versionadded:: 2.0.6$nbsp;(Plugin)
     /// </summary>
-    procedure SetChannelMapping(const mapping: byte); virtual;
+    procedure SetChannelMapping(const aMapping: byte); virtual;
 
     /// <summary>
     ///  Returns the currently used channel mapping as set by <see cref="BrickletLEDStrip.TBrickletLEDStrip.SetChannelMapping"/>.
@@ -297,7 +297,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber;
+                          out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered directly after a new frame is rendered. The
@@ -349,47 +350,49 @@ begin
   aCallBacks[BRICKLET_LED_STRIP_CALLBACK_FRAME_RENDERED]:= {$ifdef FPC}@{$endif}CallbackWrapperFrameRendered;
 end;
 
-procedure TBrickletLEDStrip.SetRGBValues(const index: word; const length_: byte; const r: array of byte; const g: array of byte; const b: array of byte);
+procedure TBrickletLEDStrip.SetRGBValues(const aIndex: word; const aLength: byte; const aR: array of byte; const aG: array of byte; const aB: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_SET_RGB_VALUES, 59);
-  LEConvertUInt16To(index, 8, _request);
-  LEConvertUInt8To(length_, 10, _request);
-  if (Length(r) <> 16) then raise EInvalidParameterException.Create('R has to be exactly 16 items long');
-  for _i:= 0 to Length(r) - 1 do LEConvertUInt8To(r[_i], 11 + (_i * 1), _request);
-  if (Length(g) <> 16) then raise EInvalidParameterException.Create('G has to be exactly 16 items long');
-  for _i:= 0 to Length(g) - 1 do LEConvertUInt8To(g[_i], 27 + (_i * 1), _request);
-  if (Length(b) <> 16) then raise EInvalidParameterException.Create('B has to be exactly 16 items long');
-  for _i:= 0 to Length(b) - 1 do LEConvertUInt8To(b[_i], 43 + (_i * 1), _request);
+  LEConvertUInt16To(aIndex, 8, _request);
+  LEConvertUInt8To(aLength, 10, _request);
+  if (Length(aR) <> 16) then raise EInvalidParameterException.Create('R has to be exactly 16 items long');
+  for _i:= 0 to Length(aR) - 1 do LEConvertUInt8To(aR[_i], 11 + (_i * 1), _request);
+  if (Length(aG) <> 16) then raise EInvalidParameterException.Create('G has to be exactly 16 items long');
+  for _i:= 0 to Length(aG) - 1 do LEConvertUInt8To(aG[_i], 27 + (_i * 1), _request);
+  if (Length(aB) <> 16) then raise EInvalidParameterException.Create('B has to be exactly 16 items long');
+  for _i:= 0 to Length(aB) - 1 do LEConvertUInt8To(aB[_i], 43 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLEDStrip.GetRGBValues(const index: word; const length_: byte; out r: TArray0To15OfUInt8; out g: TArray0To15OfUInt8; out b: TArray0To15OfUInt8);
+procedure TBrickletLEDStrip.GetRGBValues(const aIndex: word; const aLength: byte; out aR: TArray0To15OfUInt8; out aG: TArray0To15OfUInt8; out aB: TArray0To15OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_RGB_VALUES, 11);
-  LEConvertUInt16To(index, 8, _request);
-  LEConvertUInt8To(length_, 10, _request);
+  LEConvertUInt16To(aIndex, 8, _request);
+  LEConvertUInt8To(aLength, 10, _request);
   _response:= SendRequest(_request);
-  for _i:= 0 to 15 do r[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  for _i:= 0 to 15 do g[_i]:= LEConvertUInt8From(24 + (_i * 1), _response);
-  for _i:= 0 to 15 do b[_i]:= LEConvertUInt8From(40 + (_i * 1), _response);
+  for _i:= 0 to 15 do aR[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  for _i:= 0 to 15 do aG[_i]:= LEConvertUInt8From(24 + (_i * 1), _response);
+  for _i:= 0 to 15 do aB[_i]:= LEConvertUInt8From(40 + (_i * 1), _response);
 end;
 
-procedure TBrickletLEDStrip.SetFrameDuration(const duration: word);
+procedure TBrickletLEDStrip.SetFrameDuration(const aDuration: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_SET_FRAME_DURATION, 10);
-  LEConvertUInt16To(duration, 8, _request);
+  LEConvertUInt16To(aDuration, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLEDStrip.GetFrameDuration: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_FRAME_DURATION, 8);
   _response:= SendRequest(_request);
@@ -398,93 +401,95 @@ end;
 
 function TBrickletLEDStrip.GetSupplyVoltage: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_SUPPLY_VOLTAGE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletLEDStrip.SetClockFrequency(const frequency: longword);
+procedure TBrickletLEDStrip.SetClockFrequency(const aFrequency: longword);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_SET_CLOCK_FREQUENCY, 12);
-  LEConvertUInt32To(frequency, 8, _request);
+  LEConvertUInt32To(aFrequency, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLEDStrip.GetClockFrequency: longword;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_CLOCK_FREQUENCY, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt32From(8, _response);
 end;
 
-procedure TBrickletLEDStrip.SetChipType(const chip: word);
+procedure TBrickletLEDStrip.SetChipType(const aChip: word);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_SET_CHIP_TYPE, 10);
-  LEConvertUInt16To(chip, 8, _request);
+  LEConvertUInt16To(aChip, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLEDStrip.GetChipType: word;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_CHIP_TYPE, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletLEDStrip.SetRGBWValues(const index: word; const length_: byte; const r: array of byte; const g: array of byte; const b: array of byte; const w: array of byte);
+procedure TBrickletLEDStrip.SetRGBWValues(const aIndex: word; const aLength: byte; const aR: array of byte; const aG: array of byte; const aB: array of byte; const aW: array of byte);
 var 
-_request: TDynamicByteArray; _i: longint;
+  _request: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_SET_RGBW_VALUES, 59);
-  LEConvertUInt16To(index, 8, _request);
-  LEConvertUInt8To(length_, 10, _request);
-  if (Length(r) <> 12) then raise EInvalidParameterException.Create('R has to be exactly 12 items long');
-  for _i:= 0 to Length(r) - 1 do LEConvertUInt8To(r[_i], 11 + (_i * 1), _request);
-  if (Length(g) <> 12) then raise EInvalidParameterException.Create('G has to be exactly 12 items long');
-  for _i:= 0 to Length(g) - 1 do LEConvertUInt8To(g[_i], 23 + (_i * 1), _request);
-  if (Length(b) <> 12) then raise EInvalidParameterException.Create('B has to be exactly 12 items long');
-  for _i:= 0 to Length(b) - 1 do LEConvertUInt8To(b[_i], 35 + (_i * 1), _request);
-  if (Length(w) <> 12) then raise EInvalidParameterException.Create('W has to be exactly 12 items long');
-  for _i:= 0 to Length(w) - 1 do LEConvertUInt8To(w[_i], 47 + (_i * 1), _request);
+  LEConvertUInt16To(aIndex, 8, _request);
+  LEConvertUInt8To(aLength, 10, _request);
+  if (Length(aR) <> 12) then raise EInvalidParameterException.Create('R has to be exactly 12 items long');
+  for _i:= 0 to Length(aR) - 1 do LEConvertUInt8To(aR[_i], 11 + (_i * 1), _request);
+  if (Length(aG) <> 12) then raise EInvalidParameterException.Create('G has to be exactly 12 items long');
+  for _i:= 0 to Length(aG) - 1 do LEConvertUInt8To(aG[_i], 23 + (_i * 1), _request);
+  if (Length(aB) <> 12) then raise EInvalidParameterException.Create('B has to be exactly 12 items long');
+  for _i:= 0 to Length(aB) - 1 do LEConvertUInt8To(aB[_i], 35 + (_i * 1), _request);
+  if (Length(aW) <> 12) then raise EInvalidParameterException.Create('W has to be exactly 12 items long');
+  for _i:= 0 to Length(aW) - 1 do LEConvertUInt8To(aW[_i], 47 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletLEDStrip.GetRGBWValues(const index: word; const length_: byte; out r: TArray0To11OfUInt8; out g: TArray0To11OfUInt8; out b: TArray0To11OfUInt8; out w: TArray0To11OfUInt8);
+procedure TBrickletLEDStrip.GetRGBWValues(const aIndex: word; const aLength: byte; out aR: TArray0To11OfUInt8; out aG: TArray0To11OfUInt8; out aB: TArray0To11OfUInt8; out aW: TArray0To11OfUInt8);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_RGBW_VALUES, 11);
-  LEConvertUInt16To(index, 8, _request);
-  LEConvertUInt8To(length_, 10, _request);
+  LEConvertUInt16To(aIndex, 8, _request);
+  LEConvertUInt8To(aLength, 10, _request);
   _response:= SendRequest(_request);
-  for _i:= 0 to 11 do r[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
-  for _i:= 0 to 11 do g[_i]:= LEConvertUInt8From(20 + (_i * 1), _response);
-  for _i:= 0 to 11 do b[_i]:= LEConvertUInt8From(32 + (_i * 1), _response);
-  for _i:= 0 to 11 do w[_i]:= LEConvertUInt8From(44 + (_i * 1), _response);
+  for _i:= 0 to 11 do aR[_i]:= LEConvertUInt8From(8 + (_i * 1), _response);
+  for _i:= 0 to 11 do aG[_i]:= LEConvertUInt8From(20 + (_i * 1), _response);
+  for _i:= 0 to 11 do aB[_i]:= LEConvertUInt8From(32 + (_i * 1), _response);
+  for _i:= 0 to 11 do aW[_i]:= LEConvertUInt8From(44 + (_i * 1), _response);
 end;
 
-procedure TBrickletLEDStrip.SetChannelMapping(const mapping: byte);
+procedure TBrickletLEDStrip.SetChannelMapping(const aMapping: byte);
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_SET_CHANNEL_MAPPING, 9);
-  LEConvertUInt8To(mapping, 8, _request);
+  LEConvertUInt8To(aMapping, 8, _request);
   SendRequest(_request);
 end;
 
 function TBrickletLEDStrip.GetChannelMapping: byte;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_CHANNEL_MAPPING, 8);
   _response:= SendRequest(_request);
@@ -493,7 +498,7 @@ end;
 
 procedure TBrickletLEDStrip.EnableFrameRenderedCallback;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_ENABLE_FRAME_RENDERED_CALLBACK, 8);
   SendRequest(_request);
@@ -501,7 +506,7 @@ end;
 
 procedure TBrickletLEDStrip.DisableFrameRenderedCallback;
 var 
-_request: TDynamicByteArray;
+  _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_DISABLE_FRAME_RENDERED_CALLBACK, 8);
   SendRequest(_request);
@@ -509,34 +514,36 @@ end;
 
 function TBrickletLEDStrip.IsFrameRenderedCallbackEnabled: boolean;
 var 
-_request, _response: TDynamicByteArray;
+  _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_IS_FRAME_RENDERED_CALLBACK_ENABLED, 8);
   _response:= SendRequest(_request);
   Result:= LEConvertBooleanFrom(8, _response);
 end;
 
-procedure TBrickletLEDStrip.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletLEDStrip.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var 
-_request, _response: TDynamicByteArray; _i: longint;
+  _request, _response: TDynamicByteArray;
+  _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_LED_STRIP_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletLEDStrip.CallbackWrapperFrameRendered(const aPacket: TDynamicByteArray);
-var length_: word;
+var
+  _length: word;
 begin
-  length_:= LEConvertUInt16From(8, aPacket);
+  _length:= LEConvertUInt16From(8, aPacket);
 
   if (Assigned(frameRenderedCallback)) then begin
-    frameRenderedCallback(self, length_);
+    frameRenderedCallback(self, _length);
   end;
 end;
 
