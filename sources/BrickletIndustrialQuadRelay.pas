@@ -26,7 +26,7 @@ type
   TArray0To3OfChar = array [0..3] of char;
 
   TBrickletIndustrialQuadRelay = class;
-  TBrickletIndustrialQuadRelayNotifyMonoflopDone = procedure(aSender: TBrickletIndustrialQuadRelay; const selectionMask: word; const valueMask: word) of object;
+  TBrickletIndustrialQuadRelayNotifyMonoflopDone = procedure(aSender: TBrickletIndustrialQuadRelay; const aSelectionMask: word; const aValueMask: word) of object;
 
   /// <summary>
   ///  4 galvanically isolated solid state relays
@@ -58,7 +58,7 @@ type
     ///  
     ///  All running monoflop timers will be aborted if this function is called.
     /// </summary>
-    procedure SetValue(const valueMask: word); virtual;
+    procedure SetValue(const aValueMask: word); virtual;
 
     /// <summary>
     ///  Returns the bitmask as set by <see cref="BrickletIndustrialQuadRelay.TBrickletIndustrialQuadRelay.SetValue"/>.
@@ -85,7 +85,7 @@ type
     ///  of two seconds and pin 0 closed. Pin 0 will be closed all the time. If now
     ///  the RS485 connection is lost, then pin 0 will be opened in at most two seconds.
     /// </summary>
-    procedure SetMonoflop(const selectionMask: word; const valueMask: word; const time: longword); virtual;
+    procedure SetMonoflop(const aSelectionMask: word; const aValueMask: word; const aTime: longword); virtual;
 
     /// <summary>
     ///  Returns (for the given pin) the current value and the time as set by
@@ -94,7 +94,7 @@ type
     ///  If the timer is not running currently, the remaining time will be returned
     ///  as 0.
     /// </summary>
-    procedure GetMonoflop(const aPin: byte; out aValue: word; out time: longword; out timeRemaining: longword); virtual;
+    procedure GetMonoflop(const aPin: byte; out aValue: word; out aTime: longword; out aTimeRemaining: longword); virtual;
 
     /// <summary>
     ///  Sets a group of Quad Relay Bricklets that should work together. You can
@@ -113,7 +113,7 @@ type
     ///  pins on the Quad Relay on port B are assigned to 4-7. It is now possible
     ///  to call <see cref="BrickletIndustrialQuadRelay.TBrickletIndustrialQuadRelay.SetValue"/> and control two Bricklets at the same time.
     /// </summary>
-    procedure SetGroup(const group: array of char); virtual;
+    procedure SetGroup(const aGroup: array of char); virtual;
 
     /// <summary>
     ///  Returns the group as set by <see cref="BrickletIndustrialQuadRelay.TBrickletIndustrialQuadRelay.SetGroup"/>
@@ -145,7 +145,7 @@ type
     ///  Running monoflop timers for the selected relays will be aborted if this function
     ///  is called.
     /// </summary>
-    procedure SetSelectedValues(const selectionMask: word; const valueMask: word); virtual;
+    procedure SetSelectedValues(const aSelectionMask: word; const aValueMask: word); virtual;
 
     /// <summary>
     ///  Returns the UID, the UID where the Bricklet is connected to,
@@ -157,7 +157,8 @@ type
     ///  The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
     ///  |device_identifier_constant|
     /// </summary>
-    procedure GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word); override;
+    procedure GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char;
+                          out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word); override;
 
     /// <summary>
     ///  This callback is triggered whenever a monoflop timer reaches 0. The
@@ -197,12 +198,12 @@ begin
   aCallBacks[BRICKLET_INDUSTRIAL_QUAD_RELAY_CALLBACK_MONOFLOP_DONE]:= {$ifdef FPC}@{$endif}CallbackWrapperMonoflopDone;
 end;
 
-procedure TBrickletIndustrialQuadRelay.SetValue(const valueMask: word);
+procedure TBrickletIndustrialQuadRelay.SetValue(const aValueMask: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_FUNCTION_SET_VALUE, 10);
-  LEConvertUInt16To(valueMask, 8, _request);
+  LEConvertUInt16To(aValueMask, 8, _request);
   SendRequest(_request);
 end;
 
@@ -215,18 +216,18 @@ begin
   Result:= LEConvertUInt16From(8, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelay.SetMonoflop(const selectionMask: word; const valueMask: word; const time: longword);
+procedure TBrickletIndustrialQuadRelay.SetMonoflop(const aSelectionMask: word; const aValueMask: word; const aTime: longword);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_FUNCTION_SET_MONOFLOP, 16);
-  LEConvertUInt16To(selectionMask, 8, _request);
-  LEConvertUInt16To(valueMask, 10, _request);
-  LEConvertUInt32To(time, 12, _request);
+  LEConvertUInt16To(aSelectionMask, 8, _request);
+  LEConvertUInt16To(aValueMask, 10, _request);
+  LEConvertUInt32To(aTime, 12, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialQuadRelay.GetMonoflop(const aPin: byte; out aValue: word; out time: longword; out timeRemaining: longword);
+procedure TBrickletIndustrialQuadRelay.GetMonoflop(const aPin: byte; out aValue: word; out aTime: longword; out aTimeRemaining: longword);
 var
   _request, _response: TDynamicByteArray;
 begin
@@ -234,18 +235,18 @@ begin
   LEConvertUInt8To(aPin, 8, _request);
   _response:= SendRequest(_request);
   aValue:= LEConvertUInt16From(8, _response);
-  time:= LEConvertUInt32From(10, _response);
-  timeRemaining:= LEConvertUInt32From(14, _response);
+  aTime:= LEConvertUInt32From(10, _response);
+  aTimeRemaining:= LEConvertUInt32From(14, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelay.SetGroup(const group: array of char);
+procedure TBrickletIndustrialQuadRelay.SetGroup(const aGroup: array of char);
 var
   _request: TDynamicByteArray;
   _i: longint;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_FUNCTION_SET_GROUP, 12);
-  if (Length(group) <> 4) then raise EInvalidParameterException.Create('Group has to be exactly 4 items long');
-  for _i:= 0 to Length(group) - 1 do LEConvertCharTo(group[_i], 8 + (_i * 1), _request);
+  if (Length(aGroup) <> 4) then raise EInvalidParameterException.Create('Group has to be exactly 4 items long');
+  for _i:= 0 to Length(aGroup) - 1 do LEConvertCharTo(aGroup[_i], 8 + (_i * 1), _request);
   SendRequest(_request);
 end;
 
@@ -268,17 +269,17 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletIndustrialQuadRelay.SetSelectedValues(const selectionMask: word; const valueMask: word);
+procedure TBrickletIndustrialQuadRelay.SetSelectedValues(const aSelectionMask: word; const aValueMask: word);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_FUNCTION_SET_SELECTED_VALUES, 12);
-  LEConvertUInt16To(selectionMask, 8, _request);
-  LEConvertUInt16To(valueMask, 10, _request);
+  LEConvertUInt16To(aSelectionMask, 8, _request);
+  LEConvertUInt16To(aValueMask, 10, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletIndustrialQuadRelay.GetIdentity(out aUID: string; out connectedUid: string; out position: char; out hardwareVersion: TTFVersionNumber; out firmwareVersion: TTFVersionNumber; out deviceIdentifier: word);
+procedure TBrickletIndustrialQuadRelay.GetIdentity(out aUID: string; out aConnectedUID: string; out aPosition: char; out aHardwareVersion: TTFVersionNumber; out aFirmwareVersion: TTFVersionNumber; out aDeviceIdentifier: word);
 var
   _request, _response: TDynamicByteArray;
   _i: longint;
@@ -286,11 +287,11 @@ begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_INDUSTRIAL_QUAD_RELAY_FUNCTION_GET_IDENTITY, 8);
   _response:= SendRequest(_request);
   aUID:= LEConvertStringFrom(8, 8, _response);
-  connectedUID:= LEConvertStringFrom(16, 8, _response);
-  position:= LEConvertCharFrom(24, _response);
-  for _i:= 0 to 2 do hardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
-  for _i:= 0 to 2 do firmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
-  deviceIdentifier:= LEConvertUInt16From(31, _response);
+  aConnectedUID:= LEConvertStringFrom(16, 8, _response);
+  aPosition:= LEConvertCharFrom(24, _response);
+  for _i:= 0 to 2 do aHardwareVersion[_i]:= LEConvertUInt8From(25 + (_i * 1), _response);
+  for _i:= 0 to 2 do aFirmwareVersion[_i]:= LEConvertUInt8From(28 + (_i * 1), _response);
+  aDeviceIdentifier:= LEConvertUInt16From(31, _response);
 end;
 
 procedure TBrickletIndustrialQuadRelay.CallbackWrapperMonoflopDone(const aPacket: TDynamicByteArray);
