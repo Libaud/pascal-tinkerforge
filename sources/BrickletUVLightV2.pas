@@ -432,30 +432,31 @@ begin
   Result:= LEConvertInt32From(8, _response);
 end;
 
-procedure TBrickletUVLightV2.SetUVACallbackConfiguration(const period: longword; const valueHasToChange: boolean; const option: char; const min: longint; const max: longint);
+procedure TBrickletUVLightV2.SetUVACallbackConfiguration(const aPeriod: longword; const aValueHasToChange: boolean; const aOption: char;
+                                                         const aMin: longint; const aMax: longint);
 var
   _request: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_V2_FUNCTION_SET_UVA_CALLBACK_CONFIGURATION, 22);
-  LEConvertUInt32To(period, 8, _request);
-  LEConvertBooleanTo(valueHasToChange, 12, _request);
-  LEConvertCharTo(option, 13, _request);
-  LEConvertInt32To(min, 14, _request);
-  LEConvertInt32To(max, 18, _request);
+  LEConvertUInt32To(aPeriod, 8, _request);
+  LEConvertBooleanTo(aValueHasToChange, 12, _request);
+  LEConvertCharTo(aoption, 13, _request);
+  LEConvertInt32To(amin, 14, _request);
+  LEConvertInt32To(amax, 18, _request);
   SendRequest(_request);
 end;
 
-procedure TBrickletUVLightV2.GetUVACallbackConfiguration(out period: longword; out valueHasToChange: boolean; out option: char; out min: longint; out max: longint);
+procedure TBrickletUVLightV2.GetUVACallbackConfiguration(out aperiod: longword; out avalueHasToChange: boolean; out aoption: char; out amin: longint; out amax: longint);
 var
   _request, _response: TDynamicByteArray;
 begin
   _request:= IPConnection.CreateRequestPacket(self, BRICKLET_UV_LIGHT_V2_FUNCTION_GET_UVA_CALLBACK_CONFIGURATION, 8);
   _response:= SendRequest(_request);
-  period:= LEConvertUInt32From(8, _response);
-  valueHasToChange:= LEConvertBooleanFrom(12, _response);
-  option:= LEConvertCharFrom(13, _response);
-  min:= LEConvertInt32From(14, _response);
-  max:= LEConvertInt32From(18, _response);
+  aperiod:= LEConvertUInt32From(8, _response);
+  avalueHasToChange:= LEConvertBooleanFrom(12, _response);
+  aoption:= LEConvertCharFrom(13, _response);
+  amin:= LEConvertInt32From(14, _response);
+  amax:= LEConvertInt32From(18, _response);
 end;
 
 function TBrickletUVLightV2.GetUVB: longint;
