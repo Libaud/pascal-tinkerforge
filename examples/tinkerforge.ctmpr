@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <MultiProject FileVersion="1">
+    <Elements Count="2">
+      <Element0 FileName="ExampleAuthenticate.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element0>
+      <Element1 FileName="ExampleEnumerate.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element1>
+    </Elements>
+  </MultiProject>
+</CONFIG>
