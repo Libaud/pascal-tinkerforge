@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <MultiProject FileVersion="1">
-    <Elements Count="295">
+    <Elements Count="296">
       <Element0 FileName="../packages/tinkerforge.ctpkg"/>
       <Element1 FileName="ExampleAuthenticate.ctpr">
         <BuildModes Count="1"/>
@@ -1179,6 +1179,10 @@
         <BuildModes Count="1"/>
         <Mode1 Name="Default"/>
       </Element294>
+      <Element295 FileName="Bricklet/RealTimeClockV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element295>
     </Elements>
   </MultiProject>
 </CONFIG>
