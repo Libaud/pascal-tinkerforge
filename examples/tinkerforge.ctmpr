@@ -1,15 +1,1184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <MultiProject FileVersion="1">
-    <Elements Count="2">
-      <Element0 FileName="ExampleAuthenticate.ctpr">
-        <BuildModes Count="1"/>
-        <Mode1 Name="Default"/>
-      </Element0>
-      <Element1 FileName="ExampleEnumerate.ctpr">
+    <Elements Count="295">
+      <Element0 FileName="../packages/tinkerforge.ctpkg"/>
+      <Element1 FileName="ExampleAuthenticate.ctpr">
         <BuildModes Count="1"/>
         <Mode1 Name="Default"/>
       </Element1>
+      <Element2 FileName="ExampleEnumerate.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element2>
+      <Element3 FileName="Bricklet/XMC1400Breakout/ExampleGPIO.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element3>
+      <Element4 FileName="Brick/DC/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element4>
+      <Element5 FileName="Brick/DC/ExampleConfiguration.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element5>
+      <Element6 FileName="ExampleAuthenticate.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element6>
+      <Element7 FileName="ExampleEnumerate.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element7>
+      <Element8 FileName="Bricklet/MultiTouch/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element8>
+      <Element9 FileName="Bricklet/MultiTouch/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element9>
+      <Element10 FileName="Bricklet/AnalogOut/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element10>
+      <Element11 FileName="Bricklet/LCD128x64/ExampleBigFont.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element11>
+      <Element12 FileName="Bricklet/LCD128x64/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element12>
+      <Element13 FileName="Bricklet/LCD128x64/ExampleGUI.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element13>
+      <Element14 FileName="Bricklet/LCD128x64/ExampleTouch.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element14>
+      <Element15 FileName="Bricklet/LCD128x64/ExamplePixelMatrix.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element15>
+      <Element16 FileName="Bricklet/IndustrialDualAnalogIn/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element16>
+      <Element17 FileName="Bricklet/IndustrialDualAnalogIn/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element17>
+      <Element18 FileName="Bricklet/IndustrialDualAnalogIn/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element18>
+      <Element19 FileName="Bricklet/AmbientLightV3/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element19>
+      <Element20 FileName="Bricklet/AmbientLightV3/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element20>
+      <Element21 FileName="Bricklet/AmbientLightV3/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element21>
+      <Element22 FileName="Bricklet/MotionDetectorV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element22>
+      <Element23 FileName="Bricklet/MotionDetectorV2/ExampleIndicator.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element23>
+      <Element24 FileName="Bricklet/HallEffectV2/ExampleCounterCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element24>
+      <Element25 FileName="Bricklet/HallEffectV2/ExampleMagneticFluxDensity.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element25>
+      <Element26 FileName="Bricklet/HallEffectV2/ExampleCounter.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element26>
+      <Element27 FileName="Bricklet/IndustrialAnalogOut/ExampleSimpleVoltage.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element27>
+      <Element28 FileName="Bricklet/IndustrialAnalogOut/ExampleSimpleCurrent.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element28>
+      <Element29 FileName="Bricklet/GPSV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element29>
+      <Element30 FileName="Bricklet/GPSV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element30>
+      <Element31 FileName="Bricklet/LCD16x2/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element31>
+      <Element32 FileName="Bricklet/LCD16x2/ExampleButtonCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element32>
+      <Element33 FileName="Bricklet/LCD16x2/ExampleUnicode.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element33>
+      <Element34 FileName="Bricklet/IO4V2/ExampleOutput.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element34>
+      <Element35 FileName="Bricklet/IO4V2/ExampleInterrupt.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element35>
+      <Element36 FileName="Bricklet/IndustrialDualAnalogInV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element36>
+      <Element37 FileName="Bricklet/IndustrialDualAnalogInV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element37>
+      <Element38 FileName="Bricklet/IndustrialDualAnalogInV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element38>
+      <Element39 FileName="Bricklet/DistanceIR/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element39>
+      <Element40 FileName="Bricklet/DistanceIR/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element40>
+      <Element41 FileName="Bricklet/DistanceIR/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element41>
+      <Element42 FileName="Bricklet/CO2V2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element42>
+      <Element43 FileName="Bricklet/CO2V2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element43>
+      <Element44 FileName="Bricklet/RotaryEncoder/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element44>
+      <Element45 FileName="Bricklet/SegmentDisplay4x7V2/ExampleNumericValue.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element45>
+      <Element46 FileName="Bricklet/SegmentDisplay4x7V2/ExampleBlinkColon.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element46>
+      <Element47 FileName="Bricklet/SegmentDisplay4x7V2/ExampleSetSegments.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element47>
+      <Element48 FileName="Bricklet/AirQuality/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element48>
+      <Element49 FileName="Bricklet/AirQuality/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element49>
+      <Element50 FileName="Bricklet/NFC/ExampleWriteReadType2.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element50>
+      <Element51 FileName="Bricklet/NFC/ExampleEmulateNDEF.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element51>
+      <Element52 FileName="Bricklet/NFC/ExampleScanForTags.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element52>
+      <Element53 FileName="Bricklet/RotaryPoti/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element53>
+      <Element54 FileName="Bricklet/VoltageCurrent/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element54>
+      <Element55 FileName="Bricklet/VoltageCurrent/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element55>
+      <Element56 FileName="Bricklet/VoltageCurrent/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element56>
+      <Element57 FileName="Bricklet/RemoteSwitch/ExampleSwitchSocket.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element57>
+      <Element58 FileName="Bricklet/OLED128x64V2/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element58>
+      <Element59 FileName="Bricklet/OLED128x64V2/ExamplePixelMatrix.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element59>
+      <Element60 FileName="Bricklet/Joystick/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element60>
+      <Element61 FileName="Bricklet/Joystick/ExampleFindBorders.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element61>
+      <Element62 FileName="Bricklet/Joystick/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element62>
+      <Element63 FileName="Bricklet/Moisture/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element63>
+      <Element64 FileName="Bricklet/Moisture/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element64>
+      <Element65 FileName="Bricklet/Moisture/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element65>
+      <Element66 FileName="Bricklet/EnergyMonitor/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element66>
+      <Element67 FileName="Bricklet/EnergyMonitor/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element67>
+      <Element68 FileName="Bricklet/Current12/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element68>
+      <Element69 FileName="Bricklet/Current12/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element69>
+      <Element70 FileName="Bricklet/Current12/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element70>
+      <Element71 FileName="Bricklet/OneWire/ExampleReadDS18B20Temperature.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element71>
+      <Element72 FileName="Bricklet/PiezoSpeakerV2/ExampleAlarm.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element72>
+      <Element73 FileName="Bricklet/PiezoSpeakerV2/ExampleBeep.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element73>
+      <Element74 FileName="Bricklet/IO16V2/ExampleOutput.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element74>
+      <Element75 FileName="Bricklet/IO16V2/ExampleInterrupt.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element75>
+      <Element76 FileName="Bricklet/NFCRFID/ExampleWriteReadType2.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element76>
+      <Element77 FileName="Bricklet/NFCRFID/ExampleScanForTags.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element77>
+      <Element78 FileName="Bricklet/JoystickV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element78>
+      <Element79 FileName="Bricklet/JoystickV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element79>
+      <Element80 FileName="Bricklet/DustDetector/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element80>
+      <Element81 FileName="Bricklet/DustDetector/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element81>
+      <Element82 FileName="Bricklet/DustDetector/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element82>
+      <Element83 FileName="Bricklet/DistanceIRV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element83>
+      <Element84 FileName="Bricklet/DistanceIRV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element84>
+      <Element85 FileName="Bricklet/DistanceIRV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element85>
+      <Element86 FileName="Bricklet/DMX/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element86>
+      <Element87 FileName="Bricklet/AnalogOutV3/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element87>
+      <Element88 FileName="Bricklet/Tilt/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element88>
+      <Element89 FileName="Bricklet/Tilt/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element89>
+      <Element90 FileName="Bricklet/AccelerometerV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element90>
+      <Element91 FileName="Bricklet/AccelerometerV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element91>
+      <Element92 FileName="Bricklet/IndustrialDigitalIn4V2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element92>
+      <Element93 FileName="Bricklet/IndustrialDigitalIn4V2/ExampleEdgeCount.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element93>
+      <Element94 FileName="Bricklet/IndustrialDigitalIn4V2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element94>
+      <Element95 FileName="Bricklet/Thermocouple/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element95>
+      <Element96 FileName="Bricklet/Thermocouple/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element96>
+      <Element97 FileName="Bricklet/Thermocouple/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element97>
+      <Element98 FileName="Bricklet/Humidity/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element98>
+      <Element99 FileName="Bricklet/Humidity/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element99>
+      <Element100 FileName="Bricklet/Humidity/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element100>
+      <Element101 FileName="Bricklet/AnalogIn/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element101>
+      <Element102 FileName="Bricklet/AnalogIn/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element102>
+      <Element103 FileName="Bricklet/AnalogIn/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element103>
+      <Element104 FileName="Bricklet/IndustrialDual020mA/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element104>
+      <Element105 FileName="Bricklet/IndustrialDual020mA/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element105>
+      <Element106 FileName="Bricklet/IndustrialDual020mA/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element106>
+      <Element107 FileName="Bricklet/ParticulateMatter/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element107>
+      <Element108 FileName="Bricklet/ParticulateMatter/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element108>
+      <Element109 FileName="Bricklet/RotaryPotiV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element109>
+      <Element110 FileName="Bricklet/PiezoBuzzer/ExampleMorseCode.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element110>
+      <Element111 FileName="Bricklet/PiezoBuzzer/ExampleBeep.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element111>
+      <Element112 FileName="Bricklet/IndustrialQuadRelay/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element112>
+      <Element113 FileName="Bricklet/DistanceUSV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element113>
+      <Element114 FileName="Bricklet/DistanceUSV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element114>
+      <Element115 FileName="Bricklet/DistanceUSV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element115>
+      <Element116 FileName="Bricklet/MultiTouchV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element116>
+      <Element117 FileName="Bricklet/MultiTouchV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element117>
+      <Element118 FileName="Bricklet/PTCV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element118>
+      <Element119 FileName="Bricklet/PTCV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element119>
+      <Element120 FileName="Bricklet/PTCV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element120>
+      <Element121 FileName="Bricklet/CAN/ExampleLoopback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element121>
+      <Element122 FileName="Bricklet/TemperatureV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element122>
+      <Element123 FileName="Bricklet/TemperatureV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element123>
+      <Element124 FileName="Bricklet/TemperatureV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element124>
+      <Element125 FileName="Bricklet/GPS/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element125>
+      <Element126 FileName="Bricklet/GPS/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element126>
+      <Element127 FileName="Bricklet/Voltage/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element127>
+      <Element128 FileName="Bricklet/Voltage/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element128>
+      <Element129 FileName="Bricklet/Voltage/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element129>
+      <Element130 FileName="Bricklet/RotaryEncoderV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element130>
+      <Element131 FileName="Bricklet/LinearPoti/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element131>
+      <Element132 FileName="Bricklet/LinearPoti/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element132>
+      <Element133 FileName="Bricklet/UVLight/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element133>
+      <Element134 FileName="Bricklet/UVLight/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element134>
+      <Element135 FileName="Bricklet/UVLight/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element135>
+      <Element136 FileName="Bricklet/LoadCellV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element136>
+      <Element137 FileName="Bricklet/LoadCellV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element137>
+      <Element138 FileName="Bricklet/LoadCellV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element138>
+      <Element139 FileName="Bricklet/Current25/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element139>
+      <Element140 FileName="Bricklet/Current25/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element140>
+      <Element141 FileName="Bricklet/Current25/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element141>
+      <Element142 FileName="Bricklet/PTC/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element142>
+      <Element143 FileName="Bricklet/PTC/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element143>
+      <Element144 FileName="Bricklet/PTC/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element144>
+      <Element145 FileName="Bricklet/VoltageCurrentV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element145>
+      <Element146 FileName="Bricklet/VoltageCurrentV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element146>
+      <Element147 FileName="Bricklet/VoltageCurrentV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element147>
+      <Element148 FileName="Bricklet/OutdoorWeather/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element148>
+      <Element149 FileName="Bricklet/RemoteSwitchV2/ExampleSwitchSocket.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element149>
+      <Element150 FileName="Bricklet/RemoteSwitchV2/ExampleRemoteCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element150>
+      <Element151 FileName="Bricklet/MotionDetector/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element151>
+      <Element152 FileName="Bricklet/HallEffect/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element152>
+      <Element153 FileName="Bricklet/HallEffect/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element153>
+      <Element154 FileName="Bricklet/AmbientLightV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element154>
+      <Element155 FileName="Bricklet/AmbientLightV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element155>
+      <Element156 FileName="Bricklet/AmbientLightV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element156>
+      <Element157 FileName="Bricklet/OLED64x48/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element157>
+      <Element158 FileName="Bricklet/OLED64x48/ExamplePixelMatrix.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element158>
+      <Element159 FileName="Bricklet/LoadCell/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element159>
+      <Element160 FileName="Bricklet/LoadCell/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element160>
+      <Element161 FileName="Bricklet/LoadCell/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element161>
+      <Element162 FileName="Bricklet/IndustrialDigitalIn4/ExampleInterrupt.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element162>
+      <Element163 FileName="Bricklet/IndustrialDigitalIn4/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element163>
+      <Element164 FileName="Bricklet/RealTimeClock/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element164>
+      <Element165 FileName="Bricklet/IO4/ExampleOutput.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element165>
+      <Element166 FileName="Bricklet/IO4/ExampleInterrupt.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element166>
+      <Element167 FileName="Bricklet/IO4/ExampleInput.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element167>
+      <Element168 FileName="Bricklet/IndustrialDual020mAV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element168>
+      <Element169 FileName="Bricklet/IndustrialDual020mAV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element169>
+      <Element170 FileName="Bricklet/IndustrialDual020mAV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element170>
+      <Element171 FileName="Bricklet/IndustrialAnalogOutV2/ExampleSimpleVoltage.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element171>
+      <Element172 FileName="Bricklet/IndustrialAnalogOutV2/ExampleSimpleCurrent.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element172>
+      <Element173 FileName="Bricklet/TemperatureIR/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element173>
+      <Element174 FileName="Bricklet/TemperatureIR/ExampleWaterBoiling.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element174>
+      <Element175 FileName="Bricklet/TemperatureIR/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element175>
+      <Element176 FileName="Bricklet/PiezoSpeaker/ExampleMorseCode.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element176>
+      <Element177 FileName="Bricklet/PiezoSpeaker/ExampleBeep.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element177>
+      <Element178 FileName="Bricklet/LEDStrip/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element178>
+      <Element179 FileName="Bricklet/LEDStrip/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element179>
+      <Element180 FileName="Bricklet/RS232V2/ExampleLoopback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element180>
+      <Element181 FileName="Bricklet/XMC1400Breakout/ExampleGPIO.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element181>
+      <Element182 FileName="Bricklet/CANV2/ExampleLoopback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element182>
+      <Element183 FileName="Bricklet/UVLightV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element183>
+      <Element184 FileName="Bricklet/UVLightV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element184>
+      <Element185 FileName="Bricklet/UVLightV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element185>
+      <Element186 FileName="Bricklet/LaserRangeFinder/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element186>
+      <Element187 FileName="Bricklet/LaserRangeFinder/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element187>
+      <Element188 FileName="Bricklet/LaserRangeFinder/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element188>
+      <Element189 FileName="Bricklet/Compass/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element189>
+      <Element190 FileName="Bricklet/Compass/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element190>
+      <Element191 FileName="Bricklet/Color/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element191>
+      <Element192 FileName="Bricklet/Color/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element192>
+      <Element193 FileName="Bricklet/Color/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element193>
+      <Element194 FileName="Bricklet/IndustrialDigitalOut4V2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element194>
+      <Element195 FileName="Bricklet/IndustrialQuadRelayV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element195>
+      <Element196 FileName="Bricklet/BarometerV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element196>
+      <Element197 FileName="Bricklet/BarometerV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element197>
+      <Element198 FileName="Bricklet/BarometerV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element198>
+      <Element199 FileName="Bricklet/LEDStripV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element199>
+      <Element200 FileName="Bricklet/LEDStripV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element200>
+      <Element201 FileName="Bricklet/AnalogOutV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element201>
+      <Element202 FileName="Bricklet/ColorV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element202>
+      <Element203 FileName="Bricklet/ColorV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element203>
+      <Element204 FileName="Bricklet/SoundIntensity/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element204>
+      <Element205 FileName="Bricklet/SoundIntensity/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element205>
+      <Element206 FileName="Bricklet/SoundIntensity/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element206>
+      <Element207 FileName="Bricklet/MotorizedLinearPoti/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element207>
+      <Element208 FileName="Bricklet/MotorizedLinearPoti/ExampleMotor.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element208>
+      <Element209 FileName="Bricklet/MotorizedLinearPoti/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element209>
+      <Element210 FileName="Bricklet/RS232/ExampleLoopback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element210>
+      <Element211 FileName="Bricklet/SoundPressureLevel/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element211>
+      <Element212 FileName="Bricklet/SoundPressureLevel/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element212>
+      <Element213 FileName="Bricklet/SoundPressureLevel/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element213>
+      <Element214 FileName="Bricklet/IO16/ExampleOutput.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element214>
+      <Element215 FileName="Bricklet/IO16/ExampleInterrupt.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element215>
+      <Element216 FileName="Bricklet/IO16/ExampleInput.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element216>
+      <Element217 FileName="Bricklet/IndustrialDualRelay/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element217>
+      <Element218 FileName="Bricklet/Line/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element218>
+      <Element219 FileName="Bricklet/Line/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element219>
+      <Element220 FileName="Bricklet/Line/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element220>
+      <Element221 FileName="Bricklet/EPaper296x128/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element221>
+      <Element222 FileName="Bricklet/Barometer/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element222>
+      <Element223 FileName="Bricklet/Barometer/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element223>
+      <Element224 FileName="Bricklet/Barometer/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element224>
+      <Element225 FileName="Bricklet/RS485/ExampleModbusSlave.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element225>
+      <Element226 FileName="Bricklet/RS485/ExampleLoopback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element226>
+      <Element227 FileName="Bricklet/RS485/ExampleModbusMaster.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element227>
+      <Element228 FileName="Bricklet/Temperature/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element228>
+      <Element229 FileName="Bricklet/Temperature/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element229>
+      <Element230 FileName="Bricklet/Temperature/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element230>
+      <Element231 FileName="Bricklet/IndustrialDigitalOut4/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element231>
+      <Element232 FileName="Bricklet/LinearPotiV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element232>
+      <Element233 FileName="Bricklet/LinearPotiV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element233>
+      <Element234 FileName="Bricklet/Isolator/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element234>
+      <Element235 FileName="Bricklet/CO2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element235>
+      <Element236 FileName="Bricklet/CO2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element236>
+      <Element237 FileName="Bricklet/CO2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element237>
+      <Element238 FileName="Bricklet/RealTimeClockV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element238>
+      <Element239 FileName="Bricklet/ThermocoupleV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element239>
+      <Element240 FileName="Bricklet/ThermocoupleV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element240>
+      <Element241 FileName="Bricklet/ThermocoupleV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element241>
+      <Element242 FileName="Bricklet/OLED128x64/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element242>
+      <Element243 FileName="Bricklet/OLED128x64/ExamplePixelMatrix.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element243>
+      <Element244 FileName="Bricklet/DistanceUS/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element244>
+      <Element245 FileName="Bricklet/DistanceUS/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element245>
+      <Element246 FileName="Bricklet/DistanceUS/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element246>
+      <Element247 FileName="Bricklet/AnalogInV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element247>
+      <Element248 FileName="Bricklet/AnalogInV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element248>
+      <Element249 FileName="Bricklet/AnalogInV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element249>
+      <Element250 FileName="Bricklet/DualButtonV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element250>
+      <Element251 FileName="Bricklet/Accelerometer/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element251>
+      <Element252 FileName="Bricklet/Accelerometer/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element252>
+      <Element253 FileName="Bricklet/Accelerometer/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element253>
+      <Element254 FileName="Bricklet/IndustrialCounter/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element254>
+      <Element255 FileName="Bricklet/AmbientLight/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element255>
+      <Element256 FileName="Bricklet/AmbientLight/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element256>
+      <Element257 FileName="Bricklet/AmbientLight/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element257>
+      <Element258 FileName="Bricklet/ThermalImaging/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element258>
+      <Element259 FileName="Bricklet/AnalogInV3/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element259>
+      <Element260 FileName="Bricklet/AnalogInV3/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element260>
+      <Element261 FileName="Bricklet/AnalogInV3/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element261>
+      <Element262 FileName="Bricklet/HumidityV2/ExampleThreshold.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element262>
+      <Element263 FileName="Bricklet/HumidityV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element263>
+      <Element264 FileName="Bricklet/HumidityV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element264>
+      <Element265 FileName="Bricklet/LCD20x4/ExampleHelloWorld.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element265>
+      <Element266 FileName="Bricklet/LCD20x4/ExampleButtonCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element266>
+      <Element267 FileName="Bricklet/LCD20x4/ExampleUnicode.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element267>
+      <Element268 FileName="Bricklet/DualButton/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element268>
+      <Element269 FileName="Bricklet/TemperatureIRV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element269>
+      <Element270 FileName="Bricklet/TemperatureIRV2/ExampleWaterBoiling.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element270>
+      <Element271 FileName="Bricklet/TemperatureIRV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element271>
+      <Element272 FileName="Bricklet/DualRelay/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element272>
+      <Element273 FileName="Bricklet/RGBLEDButton/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element273>
+      <Element274 FileName="Bricklet/RGBLEDButton/ExampleSimpleButton.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element274>
+      <Element275 FileName="Bricklet/RGBLEDButton/ExampleSimpleColor.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element275>
+      <Element276 FileName="Brick/RED/ExampleWriteFile.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element276>
+      <Element277 FileName="Brick/RED/ExampleReadFile.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element277>
+      <Element278 FileName="Brick/SilentStepper/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element278>
+      <Element279 FileName="Brick/SilentStepper/ExampleConfiguration.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element279>
+      <Element280 FileName="Brick/HAT/ExamplePrintVoltages.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element280>
+      <Element281 FileName="Brick/HAT/ExampleSleep.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element281>
+      <Element282 FileName="Brick/Servo/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element282>
+      <Element283 FileName="Brick/Servo/ExampleConfiguration.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element283>
+      <Element284 FileName="Brick/IMUV2/ExampleAllData.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element284>
+      <Element285 FileName="Brick/IMUV2/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element285>
+      <Element286 FileName="Brick/IMUV2/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element286>
+      <Element287 FileName="Brick/Master/ExampleStackStatus.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element287>
+      <Element288 FileName="Brick/Stepper/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element288>
+      <Element289 FileName="Brick/Stepper/ExampleConfiguration.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element289>
+      <Element290 FileName="Brick/HATZero/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element290>
+      <Element291 FileName="Brick/IMU/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element291>
+      <Element292 FileName="Brick/IMU/ExampleSimple.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element292>
+      <Element293 FileName="Brick/DC/ExampleCallback.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element293>
+      <Element294 FileName="Brick/DC/ExampleConfiguration.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element294>
     </Elements>
   </MultiProject>
 </CONFIG>

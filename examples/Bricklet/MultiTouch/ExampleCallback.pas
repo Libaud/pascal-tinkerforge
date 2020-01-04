@@ -49,10 +49,12 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  mt := TBrickletMultiTouch.Create(UID, ipcon);
+  mt := TBrickletMultiTouch.Create(nil);
+  mt.IPConnection:= ipcon;
+  mt.UIDString:= UID;
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

@@ -28,10 +28,10 @@ var year: word; month, day, hour, minute, second, centisecond, weekday: byte;
     timestamp: int64;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  rtc := TBrickletRealTimeClockV2.Create(UID, ipcon);
+  rtc := TBrickletRealTimeClockV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

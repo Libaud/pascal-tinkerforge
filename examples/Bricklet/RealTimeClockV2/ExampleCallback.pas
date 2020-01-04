@@ -71,10 +71,10 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  rtc := TBrickletRealTimeClockV2.Create(UID, ipcon);
+  rtc := TBrickletRealTimeClockV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

@@ -29,10 +29,10 @@ var t_low, t_high, status: byte;
 var temperature: Single;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  ow := TBrickletOneWire.Create(UID, ipcon);
+  ow := TBrickletOneWire.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

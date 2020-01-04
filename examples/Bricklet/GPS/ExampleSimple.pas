@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var latitude, longitude: longword; ns, ew: char; pdop, hdop, vdop, epe: word;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  gps := TBrickletGPS.Create(UID, ipcon);
+  gps := TBrickletGPS.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

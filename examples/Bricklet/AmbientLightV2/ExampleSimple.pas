@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var illuminance: longword;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  al := TBrickletAmbientLightV2.Create(UID, ipcon);
+  al := TBrickletAmbientLightV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

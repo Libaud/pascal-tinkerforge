@@ -98,7 +98,7 @@ type
     ///  In case of any *ReaderError* state the selection is lost and you have to
     ///  start again by calling <see cref="BrickletNFC.TBrickletNFC.Reader_requestTagID"/>.
     /// </summary>
-    procedure Reader_requestTagID; virtual;
+    procedure ReaderRequestTagID; virtual;
 
     /// <summary>
     ///  Returns the tag type and the tag ID. This function can only be called if the
@@ -201,7 +201,7 @@ type
     ///     or <see cref="BrickletNFC.TBrickletNFC.OnReaderStateChanged"/> callback)
     ///  6. Call <see cref="BrickletNFC.TBrickletNFC.ReaderReadNDEF"/> to retrieve the NDEF message from the buffer
     /// </summary>
-    procedure Reader_requestNDEF; virtual;
+    procedure ReaderRequestNDEF; virtual;
 
     /// <summary>
     ///  Returns the NDEF data from an internal buffer. To fill the buffer
@@ -333,7 +333,7 @@ type
     ///  
     ///  Choose CC by setting page to 3 or NDEF by setting page to 4.
     /// </summary>
-    procedure Reader_requestPage(const aPage: word; const aLength: word); virtual;
+    procedure ReaderRequestPage(const aPage: word; const aLength: word); virtual;
 
     /// <summary>
     ///  Returns the page data from an internal buffer. To fill the buffer
@@ -766,7 +766,7 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletNFC.Reader_requestTagID;
+procedure TBrickletNFC.ReaderRequestTagID;
 var 
   _request: TDynamicByteArray;
 begin
@@ -856,7 +856,7 @@ begin
   end;
 end;
 
-procedure TBrickletNFC.Reader_requestNDEF;
+procedure TBrickletNFC.ReaderRequestNDEF;
 var 
   _request: TDynamicByteArray;
 begin
@@ -989,7 +989,7 @@ begin
   end;
 end;
 
-procedure TBrickletNFC.Reader_requestPage(const aPage: word; const aLength: word);
+procedure TBrickletNFC.ReaderRequestPage(const aPage: word; const aLength: word);
 var 
   _request: TDynamicByteArray;
 begin

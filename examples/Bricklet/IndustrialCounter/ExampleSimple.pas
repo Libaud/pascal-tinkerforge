@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var counter: int64; dutyCycle: word; period: uint64; frequency: longword; value: boolean;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  ic := TBrickletIndustrialCounter.Create(UID, ipcon);
+  ic := TBrickletIndustrialCounter.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

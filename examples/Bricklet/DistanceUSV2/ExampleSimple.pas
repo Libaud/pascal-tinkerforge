@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var distance: word;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  dus := TBrickletDistanceUSV2.Create(UID, ipcon);
+  dus := TBrickletDistanceUSV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

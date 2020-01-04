@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var intensity: word;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  si := TBrickletSoundIntensity.Create(UID, ipcon);
+  si := TBrickletSoundIntensity.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

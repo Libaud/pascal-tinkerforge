@@ -31,10 +31,10 @@ procedure TExample.Execute;
 var segments: array [0..3] of byte;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  sd := TBrickletSegmentDisplay4x7.Create(UID, ipcon);
+  sd := TBrickletSegmentDisplay4x7.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

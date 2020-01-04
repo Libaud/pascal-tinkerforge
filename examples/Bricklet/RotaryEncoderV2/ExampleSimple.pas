@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var count: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  re := TBrickletRotaryEncoderV2.Create(UID, ipcon);
+  re := TBrickletRotaryEncoderV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

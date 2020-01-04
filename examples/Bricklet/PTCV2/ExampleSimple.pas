@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var temperature: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  ptc := TBrickletPTCV2.Create(UID, ipcon);
+  ptc := TBrickletPTCV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

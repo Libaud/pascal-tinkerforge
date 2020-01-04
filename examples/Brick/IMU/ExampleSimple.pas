@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var x, y, z, w: single;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  imu := TBrickIMU.Create(UID, ipcon);
+  imu := TBrickIMU.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

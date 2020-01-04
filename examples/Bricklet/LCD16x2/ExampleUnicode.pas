@@ -107,10 +107,10 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  lcd := TBrickletLCD16x2.Create(UID, ipcon);
+  lcd := TBrickletLCD16x2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

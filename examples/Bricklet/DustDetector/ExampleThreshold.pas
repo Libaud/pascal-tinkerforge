@@ -35,10 +35,10 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  dd := TBrickletDustDetector.Create(UID, ipcon);
+  dd := TBrickletDustDetector.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

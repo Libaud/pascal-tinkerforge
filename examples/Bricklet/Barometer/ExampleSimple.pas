@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var airPressure, altitude: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  b := TBrickletBarometer.Create(UID, ipcon);
+  b := TBrickletBarometer.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

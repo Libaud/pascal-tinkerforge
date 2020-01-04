@@ -74,7 +74,7 @@ type
     ///  In case of any *Error* state the selection is lost and you have to
     ///  start again by calling <see cref="BrickletNFCRFID.TBrickletNFCRFID._requestTagID"/>.
     /// </summary>
-    procedure _requestTagID(const aTagType: byte); virtual;
+    procedure RequestTagID(const aTagType: byte); virtual;
 
     /// <summary>
     ///  Returns the tag type, tag ID and the length of the tag ID
@@ -180,7 +180,7 @@ type
     ///  If you use a Mifare Classic tag you have to authenticate a page before you
     ///  can read it. See <see cref="BrickletNFCRFID.TBrickletNFCRFID.AuthenticateMifareClassicPage"/>.
     /// </summary>
-    procedure _requestPage(const aPage: word); virtual;
+    procedure RequestPage(const aPage: word); virtual;
 
     /// <summary>
     ///  Returns 16 bytes of data from an internal buffer. To fill the buffer
@@ -237,7 +237,7 @@ begin
   aCallBacks[BRICKLET_NFC_RFID_CALLBACK_STATE_CHANGED]:= {$ifdef FPC}@{$endif}CallbackWrapperStateChanged;
 end;
 
-procedure TBrickletNFCRFID._requestTagID(const aTagType: byte);
+procedure TBrickletNFCRFID.RequestTagID(const aTagType: byte);
 var 
   _request: TDynamicByteArray;
 begin
@@ -293,7 +293,7 @@ begin
   SendRequest(_request);
 end;
 
-procedure TBrickletNFCRFID._requestPage(const aPage: word);
+procedure TBrickletNFCRFID.RequestPage(const aPage: word);
 var 
   _request: TDynamicByteArray;
 begin

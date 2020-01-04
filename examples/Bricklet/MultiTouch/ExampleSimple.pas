@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var state: word; i: integer;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  mt := TBrickletMultiTouch.Create(UID, ipcon);
+  mt := TBrickletMultiTouch.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var current: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  id020 := TBrickletIndustrialDual020mA.Create(UID, ipcon);
+  id020 := TBrickletIndustrialDual020mA.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

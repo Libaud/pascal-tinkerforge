@@ -44,10 +44,12 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  dc := TBrickDC.Create(UID, ipcon);
+  dc := TBrickDC.Create(nil);
+  dc.IPConnection:= ipcon;
+  dc.UIDString:= UID;
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

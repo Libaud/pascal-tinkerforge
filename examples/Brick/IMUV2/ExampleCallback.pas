@@ -39,10 +39,10 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  imu := TBrickIMUV2.Create(UID, ipcon);
+  imu := TBrickIMUV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

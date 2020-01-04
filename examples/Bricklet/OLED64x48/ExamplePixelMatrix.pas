@@ -52,10 +52,10 @@ procedure TExample.Execute;
 var row, column: integer; pixels: TPixels;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  oled := TBrickletOLED64x48.Create(UID, ipcon);
+  oled := TBrickletOLED64x48.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

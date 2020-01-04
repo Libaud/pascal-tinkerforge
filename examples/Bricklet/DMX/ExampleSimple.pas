@@ -26,10 +26,10 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  dmx := TBrickletDMX.Create(UID, ipcon);
+  dmx := TBrickletDMX.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

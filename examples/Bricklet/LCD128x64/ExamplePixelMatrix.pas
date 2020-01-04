@@ -32,10 +32,10 @@ procedure TExample.Execute;
 var row, column: integer; pixels: TPixels;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  lcd := TBrickletLCD128x64.Create(UID, ipcon);
+  lcd := TBrickletLCD128x64.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

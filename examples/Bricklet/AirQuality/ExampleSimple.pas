@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var iaqIndex, temperature, humidity, airPressure: longint; iaqIndexAccuracy: byte;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  aq := TBrickletAirQuality.Create(UID, ipcon);
+  aq := TBrickletAirQuality.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

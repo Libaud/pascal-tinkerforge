@@ -534,7 +534,7 @@ type
     ///  callback with the _request ID, Register Address and Register Value as provided by
     ///  the arguments of the callback.
     /// </summary>
-    procedure ModbusSlaveAnswerWriteSingleRegister_request(const aRequestID: byte); virtual;
+    procedure ModbusSlaveAnswerWriteSingleRegisterRequest(const aRequestID: byte); virtual;
 
     /// <summary>
     ///  In Modbus master mode this function can be used to write a single holding register of a
@@ -991,7 +991,7 @@ type
     ///  
     ///  To send a _response of this _request use <see cref="BrickletRS485.TBrickletRS485.ModbusSlaveAnswerWriteSingleRegister_request"/>.
     /// </summary>
-    property OnModbusSlaveWriteSingleRegister_request: TBrickletRS485NotifyModbusSlaveWriteSingleRegister_request read fModbusSlaveWriteSingleRegister_requestCallback write fModbusSlaveWriteSingleRegister_requestCallback;
+    property OnModbusSlaveWriteSingleRegisterRequest: TBrickletRS485NotifyModbusSlaveWriteSingleRegister_request read fModbusSlaveWriteSingleRegister_requestCallback write fModbusSlaveWriteSingleRegister_requestCallback;
 
     /// <summary>
     ///  This callback is called only in Modbus master mode when the master receives a
@@ -1007,7 +1007,7 @@ type
     ///  master did not receive any valid _response of the _request within the master _request
     ///  timeout period as set by <see cref="BrickletRS485.TBrickletRS485.SetModbusConfiguration"/>.
     /// </summary>
-    property OnModbusMasterWriteSingleRegister_response: TBrickletRS485NotifyModbusMasterWriteSingleRegister_response read fModbusMasterWriteSingleRegister_responseCallback write fModbusMasterWriteSingleRegister_responseCallback;
+    property OnModbusMasterWriteSingleRegisterResponse: TBrickletRS485NotifyModbusMasterWriteSingleRegister_response read fModbusMasterWriteSingleRegister_responseCallback write fModbusMasterWriteSingleRegister_responseCallback;
 
     /// <summary>
     ///  <see cref="BrickletRS485.TBrickletRS485.OnModbusSlaveWriteMultipleCoils_request"/>
@@ -1756,7 +1756,7 @@ begin
   Result:= LEConvertUInt8From(8, _response);
 end;
 
-procedure TBrickletRS485.ModbusSlaveAnswerWriteSingleRegister_request(const aRequestID: byte);
+procedure TBrickletRS485.ModbusSlaveAnswerWriteSingleRegisterRequest(const aRequestID: byte);
 var 
   _request: TDynamicByteArray;
 begin

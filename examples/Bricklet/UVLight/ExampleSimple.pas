@@ -27,10 +27,10 @@ procedure TExample.Execute;
 var uvLight: longword;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  uvl := TBrickletUVLight.Create(UID, ipcon);
+  uvl := TBrickletUVLight.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

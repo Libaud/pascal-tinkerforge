@@ -28,10 +28,10 @@ var messagesFromBrick, messagesFromBricklet: longword;
     connectedBrickletDeviceIdentifier: word; connectedBrickletUID: string;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  i := TBrickletIsolator.Create(UID, ipcon);
+  i := TBrickletIsolator.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

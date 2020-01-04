@@ -104,10 +104,10 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  red := TBrickRED.Create(UID, ipcon);
+  red := TBrickRED.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

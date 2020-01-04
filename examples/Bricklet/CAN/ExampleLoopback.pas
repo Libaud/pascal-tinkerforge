@@ -48,10 +48,10 @@ procedure TExample.Execute;
 var data: TArray0To7OfUInt8;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  can := TBrickletCAN.Create(UID, ipcon);
+  can := TBrickletCAN.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);
