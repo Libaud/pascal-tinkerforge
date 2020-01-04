@@ -1,0 +1,1383 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EE2DD7F5-CDAC-4432-B288-2BBBD59BB691}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\packages\Tinkerforge.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleAuthenticate.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\Servo\ExampleConfiguration.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\IMU\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\RED\ExampleWriteFile.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\Master\ExampleStackStatus.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\HAT\ExampleSleep.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\HATZero\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\RED\ExampleReadFile.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\HAT\ExamplePrintVoltages.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="ExampleEnumerate.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\IMUV2\ExampleAllData.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\Servo\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\SilentStepper\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\Stepper\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\SilentStepper\ExampleConfiguration.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\Stepper\ExampleConfiguration.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\IMU\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\IMUV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\DC\ExampleConfiguration.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Brick\DC\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\NFCRFID\ExampleWriteReadType2.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\NFC\ExampleWriteReadType2.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIRV2\ExampleWaterBoiling.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIR\ExampleWaterBoiling.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD20x4\ExampleUnicode.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD16x2\ExampleUnicode.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExampleTouch.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrentV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrent\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Voltage\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\UVLightV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\UVLight\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ThermocoupleV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Thermocouple\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Temperature\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SoundPressureLevel\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SoundIntensity\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PTCV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PTC\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Moisture\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LoadCellV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LoadCell\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Line\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LaserRangeFinder\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mA\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HumidityV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Humidity\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DustDetector\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUSV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUS\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIRV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIR\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Current25\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Current12\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Color\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CO2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\BarometerV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Barometer\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV3\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogIn\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV3\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV2\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLight\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Accelerometer\ExampleThreshold.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RemoteSwitchV2\ExampleSwitchSocket.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RemoteSwitch\ExampleSwitchSocket.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOutV2\ExampleSimpleVoltage.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOutV2\ExampleSimpleCurrent.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RGBLEDButton\ExampleSimpleColor.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RGBLEDButton\ExampleSimpleButton.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrentV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrent\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Voltage\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\UVLightV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\UVLight\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ThermocoupleV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Tilt\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Thermocouple\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIRV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIR\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Temperature\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SoundPressureLevel\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SoundIntensity\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PTCV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PTC\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ParticulateMatter\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouchV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouch\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Moisture\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LoadCellV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LoadCell\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LinearPotiV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LinearPoti\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Line\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LEDStripV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LEDStrip\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LaserRangeFinder\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\JoystickV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Joystick\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Isolator\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialQuadRelayV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialQuadRelay\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualRelay\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mA\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalOut4V2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalOut4\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialCounter\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HumidityV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Humidity\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HallEffect\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\GPSV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\GPS\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\EnergyMonitor\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DustDetector\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DualRelay\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DMX\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUSV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUS\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIRV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIR\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Current25\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Current12\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Compass\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ColorV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Color\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CO2V2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CO2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\BarometerV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Barometer\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogOutV3\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogOutV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogOut\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV3\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogIn\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV3\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLight\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AirQuality\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AccelerometerV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Accelerometer\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\NFCRFID\ExampleScanForTags.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\NFC\ExampleScanForTags.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RemoteSwitchV2\ExampleRemoteCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64V2\ExamplePixelMatrix.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OLED64x48\ExamplePixelMatrix.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64\ExamplePixelMatrix.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExamplePixelMatrix.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO4V2\ExampleOutput.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO4\ExampleOutput.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO16V2\ExampleOutput.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO16\ExampleOutput.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PiezoSpeaker\ExampleMorseCode.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RS485\ExampleModbusSlave.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RS485\ExampleModbusMaster.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RS485\ExampleLoopback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RS232V2\ExampleLoopback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RS232\ExampleLoopback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CANV2\ExampleLoopback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CAN\ExampleLoopback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO4V2\ExampleInterrupt.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO4\ExampleInterrupt.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO16V2\ExampleInterrupt.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO16\ExampleInterrupt.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO4\ExampleInput.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IO16\ExampleInput.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MotionDetectorV2\ExampleIndicator.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OLED64x48\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64V2\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD20x4\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD16x2\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\EPaper296x128\ExampleHelloWorld.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExampleGUI.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Joystick\ExampleFindBorders.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\NFC\ExampleEmulateNDEF.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HallEffectV2\ExampleCounterCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HallEffectV2\ExampleCounter.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrentV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrent\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Voltage\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\UVLightV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\UVLight\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Tilt\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ThermocoupleV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Thermocouple\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ThermalImaging\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIRV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIR\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Temperature\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SoundPressureLevel\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SoundIntensity\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPotiV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPoti\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoderV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoder\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RGBLEDButton\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClockV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClock\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PTCV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PTC\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ParticulateMatter\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\OutdoorWeather\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouchV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouch\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MotionDetectorV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\MotionDetector\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Moisture\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LoadCellV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LoadCell\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LinearPotiV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LinearPoti\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Line\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LEDStripV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LEDStrip\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LaserRangeFinder\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\JoystickV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Joystick\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mA\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HumidityV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Humidity\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\HallEffect\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\GPSV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\GPS\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\EnergyMonitor\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DustDetector\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DualButtonV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DualButton\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUSV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUS\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIRV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIR\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Current25\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Current12\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Compass\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\ColorV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Color\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CO2V2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\CO2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\BarometerV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Barometer\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV3\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AnalogIn\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV3\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLight\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AirQuality\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\AccelerometerV2\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\Accelerometer\ExampleCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD20x4\ExampleButtonCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD16x2\ExampleButtonCallback.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SegmentDisplay4x7V2\ExampleBlinkColon.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExampleBigFont.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PiezoSpeakerV2\ExampleBeep.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PiezoSpeaker\ExampleBeep.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PiezoBuzzer\ExampleBeep.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\XMC1400Breakout\ExampleGPIO.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClock\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClockV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RGBLED\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RGBLEDV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoder\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoderV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPoti\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPotiV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SegmentDisplay4x7\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SolidStateRelay\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+        <Projects Include="Bricklet\SolidStateRelayV2\ExampleSimple.dproj">
+            <Dependencies>..\packages\Tinkerforge.dproj</Dependencies>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Tinkerforge">
+        <MSBuild Projects="..\packages\Tinkerforge.dproj"/>
+    </Target>
+    <Target Name="Tinkerforge:Clean">
+        <MSBuild Projects="..\packages\Tinkerforge.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Tinkerforge:Make">
+        <MSBuild Projects="..\packages\Tinkerforge.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleAuthenticate" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="ExampleAuthenticate.dproj"/>
+    </Target>
+    <Target Name="ExampleAuthenticate:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="ExampleAuthenticate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleAuthenticate:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="ExampleAuthenticate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleConfiguration" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\DC\ExampleConfiguration.dproj"/>
+    </Target>
+    <Target Name="ExampleConfiguration:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\DC\ExampleConfiguration.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleConfiguration:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\DC\ExampleConfiguration.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCallback" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\Accelerometer\ExampleCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCallback:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\Accelerometer\ExampleCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCallback:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\Accelerometer\ExampleCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleWriteFile" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\RED\ExampleWriteFile.dproj"/>
+    </Target>
+    <Target Name="ExampleWriteFile:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\RED\ExampleWriteFile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleWriteFile:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\RED\ExampleWriteFile.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleStackStatus" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\Master\ExampleStackStatus.dproj"/>
+    </Target>
+    <Target Name="ExampleStackStatus:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\Master\ExampleStackStatus.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleStackStatus:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\Master\ExampleStackStatus.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSleep" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\HAT\ExampleSleep.dproj"/>
+    </Target>
+    <Target Name="ExampleSleep:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\HAT\ExampleSleep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSleep:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\HAT\ExampleSleep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimple" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\SolidStateRelayV2\ExampleSimple.dproj"/>
+    </Target>
+    <Target Name="ExampleSimple:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\SolidStateRelayV2\ExampleSimple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimple:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\SolidStateRelayV2\ExampleSimple.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleReadFile" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\RED\ExampleReadFile.dproj"/>
+    </Target>
+    <Target Name="ExampleReadFile:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\RED\ExampleReadFile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleReadFile:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\RED\ExampleReadFile.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExamplePrintVoltages" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\HAT\ExamplePrintVoltages.dproj"/>
+    </Target>
+    <Target Name="ExamplePrintVoltages:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\HAT\ExamplePrintVoltages.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExamplePrintVoltages:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\HAT\ExamplePrintVoltages.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEnumerate" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="ExampleEnumerate.dproj"/>
+    </Target>
+    <Target Name="ExampleEnumerate:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="ExampleEnumerate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEnumerate:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="ExampleEnumerate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleAllData" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Brick\IMUV2\ExampleAllData.dproj"/>
+    </Target>
+    <Target Name="ExampleAllData:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Brick\IMUV2\ExampleAllData.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleAllData:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Brick\IMUV2\ExampleAllData.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleWriteReadType2" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\NFC\ExampleWriteReadType2.dproj"/>
+    </Target>
+    <Target Name="ExampleWriteReadType2:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\NFC\ExampleWriteReadType2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleWriteReadType2:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\NFC\ExampleWriteReadType2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleWaterBoiling" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\TemperatureIR\ExampleWaterBoiling.dproj"/>
+    </Target>
+    <Target Name="ExampleWaterBoiling:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\TemperatureIR\ExampleWaterBoiling.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleWaterBoiling:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\TemperatureIR\ExampleWaterBoiling.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleUnicode" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\LCD16x2\ExampleUnicode.dproj"/>
+    </Target>
+    <Target Name="ExampleUnicode:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\LCD16x2\ExampleUnicode.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleUnicode:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\LCD16x2\ExampleUnicode.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleTouch" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleTouch.dproj"/>
+    </Target>
+    <Target Name="ExampleTouch:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleTouch.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleTouch:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleTouch.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleThreshold" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\Accelerometer\ExampleThreshold.dproj"/>
+    </Target>
+    <Target Name="ExampleThreshold:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\Accelerometer\ExampleThreshold.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleThreshold:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\Accelerometer\ExampleThreshold.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\RemoteSwitch\ExampleSwitchSocket.dproj"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\RemoteSwitch\ExampleSwitchSocket.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\RemoteSwitch\ExampleSwitchSocket.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleColor" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleColor.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleColor:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleColor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleColor:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleColor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleButton" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleButton.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleButton:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleButton.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleButton:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleButton.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSetSegments" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj"/>
+    </Target>
+    <Target Name="ExampleSetSegments:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSetSegments:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleScanForTags" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\NFC\ExampleScanForTags.dproj"/>
+    </Target>
+    <Target Name="ExampleScanForTags:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\NFC\ExampleScanForTags.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleScanForTags:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\NFC\ExampleScanForTags.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleRemoteCallback" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\RemoteSwitchV2\ExampleRemoteCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleRemoteCallback:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\RemoteSwitchV2\ExampleRemoteCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleRemoteCallback:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\RemoteSwitchV2\ExampleRemoteCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleReadDS18B20Temperature" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj"/>
+    </Target>
+    <Target Name="ExampleReadDS18B20Temperature:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleReadDS18B20Temperature:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\LCD128x64\ExamplePixelMatrix.dproj"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\LCD128x64\ExamplePixelMatrix.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\LCD128x64\ExamplePixelMatrix.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleOutput" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\IO16\ExampleOutput.dproj"/>
+    </Target>
+    <Target Name="ExampleOutput:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\IO16\ExampleOutput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleOutput:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\IO16\ExampleOutput.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleNumericValue" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj"/>
+    </Target>
+    <Target Name="ExampleNumericValue:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleNumericValue:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMotor" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj"/>
+    </Target>
+    <Target Name="ExampleMotor:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMotor:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMorseCode" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj"/>
+    </Target>
+    <Target Name="ExampleMorseCode:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMorseCode:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleModbusSlave" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\RS485\ExampleModbusSlave.dproj"/>
+    </Target>
+    <Target Name="ExampleModbusSlave:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\RS485\ExampleModbusSlave.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleModbusSlave:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\RS485\ExampleModbusSlave.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleModbusMaster" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\RS485\ExampleModbusMaster.dproj"/>
+    </Target>
+    <Target Name="ExampleModbusMaster:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\RS485\ExampleModbusMaster.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleModbusMaster:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\RS485\ExampleModbusMaster.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleLoopback" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\CAN\ExampleLoopback.dproj"/>
+    </Target>
+    <Target Name="ExampleLoopback:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\CAN\ExampleLoopback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleLoopback:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\CAN\ExampleLoopback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleInterrupt" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleInput" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj"/>
+    </Target>
+    <Target Name="ExampleInput:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInput:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleIndicator" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj"/>
+    </Target>
+    <Target Name="ExampleIndicator:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleIndicator:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleHelloWorld" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\EPaper296x128\ExampleHelloWorld.dproj"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\EPaper296x128\ExampleHelloWorld.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\EPaper296x128\ExampleHelloWorld.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleGUI" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj"/>
+    </Target>
+    <Target Name="ExampleGUI:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleGUI:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleFindBorders" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj"/>
+    </Target>
+    <Target Name="ExampleFindBorders:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleFindBorders:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEdgeCount" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj"/>
+    </Target>
+    <Target Name="ExampleEdgeCount:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEdgeCount:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCounterCallback" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCounterCallback:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCounterCallback:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCounter" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj"/>
+    </Target>
+    <Target Name="ExampleCounter:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCounter:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleButtonCallback" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\LCD16x2\ExampleButtonCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleButtonCallback:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\LCD16x2\ExampleButtonCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleButtonCallback:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\LCD16x2\ExampleButtonCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBlinkColon" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleBlinkColon.dproj"/>
+    </Target>
+    <Target Name="ExampleBlinkColon:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleBlinkColon.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBlinkColon:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleBlinkColon.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBigFont" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj"/>
+    </Target>
+    <Target Name="ExampleBigFont:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBigFont:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBeep" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleBeep.dproj"/>
+    </Target>
+    <Target Name="ExampleBeep:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleBeep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBeep:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleBeep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleAlarm" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj"/>
+    </Target>
+    <Target Name="ExampleAlarm:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleAlarm:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleGPIO" DependsOnTargets="Tinkerforge">
+        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj"/>
+    </Target>
+    <Target Name="ExampleGPIO:Clean" DependsOnTargets="Tinkerforge:Clean">
+        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleGPIO:Make" DependsOnTargets="Tinkerforge:Make">
+        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Tinkerforge;ExampleAuthenticate;ExampleConfiguration;ExampleCallback;ExampleWriteFile;ExampleStackStatus;ExampleSleep;ExampleSimple;ExampleReadFile;ExamplePrintVoltages;ExampleEnumerate;ExampleAllData;ExampleCallback;ExampleCallback;ExampleCallback;ExampleConfiguration;ExampleConfiguration;ExampleSimple;ExampleSimple;ExampleConfiguration;ExampleCallback;ExampleWriteReadType2;ExampleWriteReadType2;ExampleWaterBoiling;ExampleWaterBoiling;ExampleUnicode;ExampleUnicode;ExampleTouch;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleSwitchSocket;ExampleSwitchSocket;ExampleSimpleVoltage;ExampleSimpleVoltage;ExampleSimpleCurrent;ExampleSimpleCurrent;ExampleSimpleColor;ExampleSimpleButton;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSetSegments;ExampleScanForTags;ExampleScanForTags;ExampleRemoteCallback;ExampleReadDS18B20Temperature;ExamplePixelMatrix;ExamplePixelMatrix;ExamplePixelMatrix;ExamplePixelMatrix;ExampleOutput;ExampleOutput;ExampleOutput;ExampleOutput;ExampleNumericValue;ExampleMotor;ExampleMorseCode;ExampleMorseCode;ExampleModbusSlave;ExampleModbusMaster;ExampleMagneticFluxDensity;ExampleLoopback;ExampleLoopback;ExampleLoopback;ExampleLoopback;ExampleLoopback;ExampleInterrupt;ExampleInterrupt;ExampleInterrupt;ExampleInterrupt;ExampleInterrupt;ExampleInput;ExampleInput;ExampleIndicator;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleGUI;ExampleFindBorders;ExampleEmulateNDEF;ExampleEdgeCount;ExampleCounterCallback;ExampleCounter;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleButtonCallback;ExampleButtonCallback;ExampleBlinkColon;ExampleBigFont;ExampleBeep;ExampleBeep;ExampleBeep;ExampleAlarm;ExampleGPIO;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Tinkerforge:Clean;ExampleAuthenticate:Clean;ExampleConfiguration:Clean;ExampleCallback:Clean;ExampleWriteFile:Clean;ExampleStackStatus:Clean;ExampleSleep:Clean;ExampleSimple:Clean;ExampleReadFile:Clean;ExamplePrintVoltages:Clean;ExampleEnumerate:Clean;ExampleAllData:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleConfiguration:Clean;ExampleConfiguration:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleConfiguration:Clean;ExampleCallback:Clean;ExampleWriteReadType2:Clean;ExampleWriteReadType2:Clean;ExampleWaterBoiling:Clean;ExampleWaterBoiling:Clean;ExampleUnicode:Clean;ExampleUnicode:Clean;ExampleTouch:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleSwitchSocket:Clean;ExampleSwitchSocket:Clean;ExampleSimpleVoltage:Clean;ExampleSimpleVoltage:Clean;ExampleSimpleCurrent:Clean;ExampleSimpleCurrent:Clean;ExampleSimpleColor:Clean;ExampleSimpleButton:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSetSegments:Clean;ExampleScanForTags:Clean;ExampleScanForTags:Clean;ExampleRemoteCallback:Clean;ExampleReadDS18B20Temperature:Clean;ExamplePixelMatrix:Clean;ExamplePixelMatrix:Clean;ExamplePixelMatrix:Clean;ExamplePixelMatrix:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExampleNumericValue:Clean;ExampleMotor:Clean;ExampleMorseCode:Clean;ExampleMorseCode:Clean;ExampleModbusSlave:Clean;ExampleModbusMaster:Clean;ExampleMagneticFluxDensity:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInput:Clean;ExampleInput:Clean;ExampleIndicator:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleGUI:Clean;ExampleFindBorders:Clean;ExampleEmulateNDEF:Clean;ExampleEdgeCount:Clean;ExampleCounterCallback:Clean;ExampleCounter:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleButtonCallback:Clean;ExampleButtonCallback:Clean;ExampleBlinkColon:Clean;ExampleBigFont:Clean;ExampleBeep:Clean;ExampleBeep:Clean;ExampleBeep:Clean;ExampleAlarm:Clean;ExampleGPIO:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Tinkerforge:Make;ExampleAuthenticate:Make;ExampleConfiguration:Make;ExampleCallback:Make;ExampleWriteFile:Make;ExampleStackStatus:Make;ExampleSleep:Make;ExampleSimple:Make;ExampleReadFile:Make;ExamplePrintVoltages:Make;ExampleEnumerate:Make;ExampleAllData:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleConfiguration:Make;ExampleConfiguration:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleConfiguration:Make;ExampleCallback:Make;ExampleWriteReadType2:Make;ExampleWriteReadType2:Make;ExampleWaterBoiling:Make;ExampleWaterBoiling:Make;ExampleUnicode:Make;ExampleUnicode:Make;ExampleTouch:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleSwitchSocket:Make;ExampleSwitchSocket:Make;ExampleSimpleVoltage:Make;ExampleSimpleVoltage:Make;ExampleSimpleCurrent:Make;ExampleSimpleCurrent:Make;ExampleSimpleColor:Make;ExampleSimpleButton:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSetSegments:Make;ExampleScanForTags:Make;ExampleScanForTags:Make;ExampleRemoteCallback:Make;ExampleReadDS18B20Temperature:Make;ExamplePixelMatrix:Make;ExamplePixelMatrix:Make;ExamplePixelMatrix:Make;ExamplePixelMatrix:Make;ExampleOutput:Make;ExampleOutput:Make;ExampleOutput:Make;ExampleOutput:Make;ExampleNumericValue:Make;ExampleMotor:Make;ExampleMorseCode:Make;ExampleMorseCode:Make;ExampleModbusSlave:Make;ExampleModbusMaster:Make;ExampleMagneticFluxDensity:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInput:Make;ExampleInput:Make;ExampleIndicator:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleGUI:Make;ExampleFindBorders:Make;ExampleEmulateNDEF:Make;ExampleEdgeCount:Make;ExampleCounterCallback:Make;ExampleCounter:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleButtonCallback:Make;ExampleButtonCallback:Make;ExampleBlinkColon:Make;ExampleBigFont:Make;ExampleBeep:Make;ExampleBeep:Make;ExampleBeep:Make;ExampleAlarm:Make;ExampleGPIO:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
