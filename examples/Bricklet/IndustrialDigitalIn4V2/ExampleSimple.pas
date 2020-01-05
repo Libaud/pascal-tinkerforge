@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     idi4: TBrickletIndustrialDigitalIn4V2;
   public
     procedure Execute;
@@ -27,17 +27,17 @@ procedure TExample.Execute;
 var value: TArray0To3OfBoolean;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  idi4 := TBrickletIndustrialDigitalIn4V2.Create(nil);
+  idi4:= TBrickletIndustrialDigitalIn4V2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current value }
-  value := idi4.GetValue;
+  value:= idi4.GetValue;
 
   WriteLn(Format('Channel 0: %d', [value[0]]));
   WriteLn(Format('Channel 1: %d', [value[1]]));
@@ -46,11 +46,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

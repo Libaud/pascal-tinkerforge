@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     imu: TBrickIMU;
   public
     procedure QuaternionCB(sender: TBrickIMU; const x: single; const y: single;
@@ -39,28 +39,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  imu := TBrickIMU.Create(nil);
+  imu:= TBrickIMU.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register quaternion callback to procedure QuaternionCB }
-  imu.OnQuaternion := {$ifdef FPC}@{$endif}QuaternionCB;
+  imu.OnQuaternion:= {$ifdef FPC}@{$endif}QuaternionCB;
 
   { Set period for quaternion callback to 1s (1000ms) }
   imu.SetQuaternionPeriod(1000);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

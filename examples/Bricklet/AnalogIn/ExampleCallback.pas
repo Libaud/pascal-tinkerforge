@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ai: TBrickletAnalogIn;
   public
     procedure VoltageCB(sender: TBrickletAnalogIn; const voltage: word);
@@ -33,17 +33,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ai := TBrickletAnalogIn.Create(nil);
+  ai:= TBrickletAnalogIn.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register voltage callback to procedure VoltageCB }
-  ai.OnVoltage := {$ifdef FPC}@{$endif}VoltageCB;
+  ai.OnVoltage:= {$ifdef FPC}@{$endif}VoltageCB;
 
   { Set period for voltage callback to 1s (1000ms)
     Note: The voltage callback is only called every second
@@ -52,11 +52,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

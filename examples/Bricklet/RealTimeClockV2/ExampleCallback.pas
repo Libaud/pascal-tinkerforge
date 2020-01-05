@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     rtc: TBrickletRealTimeClockV2;
   public
     procedure DateTimeCB(sender: TBrickletRealTimeClockV2; const year: word;
@@ -71,28 +71,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  rtc := TBrickletRealTimeClockV2.Create(nil);
+  rtc:= TBrickletRealTimeClockV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register date and time callback to procedure DateTimeCB }
-  rtc.OnDateTime := {$ifdef FPC}@{$endif}DateTimeCB;
+  rtc.OnDateTime:= {$ifdef FPC}@{$endif}DateTimeCB;
 
   { Set period for date and time callback to 5s (5000ms) }
   rtc.SetDateTimeCallbackConfiguration(5000);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

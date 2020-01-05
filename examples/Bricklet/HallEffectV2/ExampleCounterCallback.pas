@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    he: TBrickletHallEffectV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletHallEffectV2;
   public
     procedure CounterCB(sender: TBrickletHallEffectV2; const counter: longword);
     procedure Execute;
@@ -33,31 +33,33 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  he := TBrickletHallEffectV2.Create(nil);
+  oBricklet:= TBrickletHallEffectV2.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Configure counter with ±3000µT threshold and 10ms debounce }
-  he.SetCounterConfig(3000, -3000, 10000);
+  oBricklet.SetCounterConfig(3000, -3000, 10000);
 
   { Register counter callback to procedure CounterCB }
-  he.OnCounter := {$ifdef FPC}@{$endif}CounterCB;
+  oBricklet.OnCounter:= {$ifdef FPC}@{$endif}CounterCB;
 
   { Set period for counter callback to 0.1s (100ms) }
-  he.SetCounterCallbackConfiguration(100, true);
+  oBricklet.SetCounterCallbackConfiguration(100, true);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

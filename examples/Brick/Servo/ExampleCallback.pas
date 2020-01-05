@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     servo: TBrickServo;
   public
     procedure PositionReachedCB(sender: TBrickServo; const servoNum: byte;
@@ -45,17 +45,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  servo := TBrickServo.Create(nil);
+  servo:= TBrickServo.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register position reached callback to procedure PositionReachedCB }
-  servo.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  servo.OnPositionReached:= {$ifdef FPC}@{$endif}PositionReachedCB;
 
   { Enable position reached callback }
   servo.EnablePositionReachedCallback;
@@ -70,11 +70,11 @@ begin
   WriteLn('Press key to exit');
   ReadLn;
   servo.Disable(0);
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     spl: TBrickletSoundPressureLevel;
   public
     procedure DecibelCB(sender: TBrickletSoundPressureLevel; const decibel: word);
@@ -33,17 +33,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  spl := TBrickletSoundPressureLevel.Create(nil);
+  spl:= TBrickletSoundPressureLevel.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register decibel callback to procedure DecibelCB }
-  spl.OnDecibel := {$ifdef FPC}@{$endif}DecibelCB;
+  spl.OnDecibel:= {$ifdef FPC}@{$endif}DecibelCB;
 
   { Configure threshold for decibel "greater than 60 dB(A)"
     with a debounce period of 1s (1000ms) }
@@ -51,11 +51,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

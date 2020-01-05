@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dc: TBrickDC;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickDC;
   public
     procedure VelocityReachedCB(sender: TBrickDC; const velocity: smallint);
     procedure Execute;
@@ -43,38 +43,42 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  dc := TBrickDC.Create(nil);
-  dc.IPConnection:= ipcon;
-  dc.UIDString:= UID;
+    { Create device object }
+    oBricklet:= TBrickDC.Create(nil);
+    oBricklet.IPConnection:= oIPCOnnection;
+    oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { The acceleration has to be smaller or equal to the maximum
-    acceleration of the DC motor, otherwise the velocity reached
-    callback will be called too early }
-  dc.SetAcceleration(5000); { Slow acceleration }
-  dc.SetVelocity(32767); { Full speed forward }
+    { The acceleration has to be smaller or equal to the maximum
+      acceleration of the oBricklet motor, otherwise the velocity reached
+      callback will be called too early }
+    oBricklet.SetAcceleration(5000); { Slow acceleration }
+    oBricklet.SetVelocity(32767); { Full speed forward }
 
-  { Register velocity reached callback to procedure VelocityReachedCB }
-  dc.OnVelocityReached := {$ifdef FPC}@{$endif}VelocityReachedCB;
+    { Register velocity reached callback to procedure VelocityReachedCB }
+    oBricklet.OnVelocityReached:= {$ifdef FPC}@{$endif}VelocityReachedCB;
 
-  { Enable motor power }
-  dc.Enable;
+    { Enable motor power }
+    oBricklet.Enable;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  dc.Disable; { Disable motor power }
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Disable; { Disable motor power }
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     nfc: TBrickletNFC;
   public
     procedure CardemuStateChangedCB(sender: TBrickletNFC; const state: byte;
@@ -36,14 +36,14 @@ begin
     { Only short records are supported } 
     SetLength(ndefRecordURI, Length(NDEF_URI) + 5);
 
-    ndefRecordURI[0] := $D1;                  { MB/ME/CF/SR=1/IL/TNF }
-    ndefRecordURI[1] := $01;                  { TYPE LENGTH }
-    ndefRecordURI[2] := Length(NDEF_URI) + 1; { Length }
-    ndefRecordURI[3] := ord('U');             { Type }
-    ndefRecordURI[4] := $04;                  { Status }
+    ndefRecordURI[0]:= $D1;                  { MB/ME/CF/SR=1/IL/TNF }
+    ndefRecordURI[1]:= $01;                  { TYPE LENGTH }
+    ndefRecordURI[2]:= Length(NDEF_URI) + 1; { Length }
+    ndefRecordURI[3]:= ord('U');             { Type }
+    ndefRecordURI[4]:= $04;                  { Status }
 
-    for i := 0 to (Length(NDEF_URI) + 1) do begin
-      ndefRecordURI[5 + i] := ord(NDEF_URI[i + 1]);
+    for i:= 0 to (Length(NDEF_URI) + 1) do begin
+      ndefRecordURI[5 + i]:= ord(NDEF_URI[i + 1]);
     end;
 
     nfc.CardemuWriteNDEF(ndefRecordURI);
@@ -63,28 +63,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  nfc := TBrickletNFC.Create(nil);
+  nfc:= TBrickletNFC.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register cardemu state changed callback to procedure CardemuStateChangedCB }
-  nfc.OnCardemuStateChanged := {$ifdef FPC}@{$endif}CardemuStateChangedCB;
+  nfc.OnCardemuStateChanged:= {$ifdef FPC}@{$endif}CardemuStateChangedCB;
 
   { Enable cardemu mode }
   nfc.SetMode(BRICKLET_NFC_MODE_CARDEMU);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

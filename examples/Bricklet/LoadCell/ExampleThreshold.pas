@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     lc: TBrickletLoadCell;
   public
     procedure WeightReachedCB(sender: TBrickletLoadCell; const weight: longint);
@@ -33,31 +33,31 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  lc := TBrickletLoadCell.Create(nil);
+  lc:= TBrickletLoadCell.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 1 second (1000ms) }
   lc.SetDebouncePeriod(1000);
 
   { Register weight reached callback to procedure WeightReachedCB }
-  lc.OnWeightReached := {$ifdef FPC}@{$endif}WeightReachedCB;
+  lc.OnWeightReached:= {$ifdef FPC}@{$endif}WeightReachedCB;
 
   { Configure threshold for weight "greater than 200 g" }
   lc.SetWeightCallbackThreshold('>', 200, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

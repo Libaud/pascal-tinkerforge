@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     aq: TBrickletAirQuality;
   public
     procedure AllValuesCB(sender: TBrickletAirQuality; const iaqIndex: longint;
@@ -55,28 +55,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  aq := TBrickletAirQuality.Create(nil);
+  aq:= TBrickletAirQuality.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register all values callback to procedure AllValuesCB }
-  aq.OnAllValues := {$ifdef FPC}@{$endif}AllValuesCB;
+  aq.OnAllValues:= {$ifdef FPC}@{$endif}AllValuesCB;
 
   { Set period for all values callback to 1s (1000ms) }
   aq.SetAllValuesCallbackConfiguration(1000, false);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

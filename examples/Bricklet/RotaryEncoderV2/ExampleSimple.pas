@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    re: TBrickletRotaryEncoderV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRotaryEncoderV2;
   public
     procedure Execute;
   end;
@@ -24,29 +24,38 @@ var
   e: TExample;
 
 procedure TExample.Execute;
-var count: longint;
+var
+  count: longint;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  re := TBrickletRotaryEncoderV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRotaryEncoderV2.Create(nil);
+    oBricklet.IPConnection:= oIPConnection;
+    oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
 
-  { Get current count without reset }
-  count := re.GetCount(false);
-  WriteLn(Format('Count: %d', [count]));
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+    { Get current count without reset }
+    count:= oBricklet.GetCount(false);
+    WriteLn(Format('Count: %d', [count]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
+
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     rs485: TBrickletRS485;
   public
     procedure ModbusMasterWriteSingleRegisterResponseCB(sender: TBrickletRS485;
@@ -43,13 +43,13 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  rs485 := TBrickletRS485.Create(nil);
+  rs485:= TBrickletRS485.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Set operating mode to Modbus RTU master }
@@ -62,18 +62,18 @@ begin
 
   { Register Modbus master write single register response callback to procedure
     ModbusMasterWriteSingleRegisterResponseCB }
-  rs485.OnModbusMasterWriteSingleRegisterResponse := {$ifdef FPC}@{$endif}ModbusMasterWriteSingleRegisterResponseCB;
+  rs485.OnModbusMasterWriteSingleRegisterResponse:= {$ifdef FPC}@{$endif}ModbusMasterWriteSingleRegisterResponseCB;
 
   { Write 65535 to register 42 of slave 17 }
-  expectedRequestID := rs485.ModbusMasterWriteSingleRegister(17, 42, 65535);
+  expectedRequestID:= rs485.ModbusMasterWriteSingleRegister(17, 42, 65535);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

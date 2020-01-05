@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     m: TBrickletMoisture;
   public
     procedure MoistureReachedCB(sender: TBrickletMoisture; const moisture: word);
@@ -33,31 +33,31 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  m := TBrickletMoisture.Create(nil);
+  m:= TBrickletMoisture.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 1 second (1000ms) }
   m.SetDebouncePeriod(1000);
 
   { Register moisture value reached callback to procedure MoistureReachedCB }
-  m.OnMoistureReached := {$ifdef FPC}@{$endif}MoistureReachedCB;
+  m.OnMoistureReached:= {$ifdef FPC}@{$endif}MoistureReachedCB;
 
   { Configure threshold for moisture value "greater than 200" }
   m.SetMoistureCallbackThreshold('>', 200, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

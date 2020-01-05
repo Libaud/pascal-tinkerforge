@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     gps: TBrickletGPS;
   public
     procedure CoordinatesCB(sender: TBrickletGPS; const latitude: longword;
@@ -43,17 +43,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  gps := TBrickletGPS.Create(nil);
+  gps:= TBrickletGPS.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register coordinates callback to procedure CoordinatesCB }
-  gps.OnCoordinates := {$ifdef FPC}@{$endif}CoordinatesCB;
+  gps.OnCoordinates:= {$ifdef FPC}@{$endif}CoordinatesCB;
 
   { Set period for coordinates callback to 1s (1000ms)
     Note: The coordinates callback is only called every second
@@ -62,11 +62,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     b: TBrickletBarometer;
   public
     procedure AirPressureCB(sender: TBrickletBarometer; const airPressure: longint);
@@ -33,17 +33,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  b := TBrickletBarometer.Create(nil);
+  b:= TBrickletBarometer.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register air pressure callback to procedure AirPressureCB }
-  b.OnAirPressure := {$ifdef FPC}@{$endif}AirPressureCB;
+  b.OnAirPressure:= {$ifdef FPC}@{$endif}AirPressureCB;
 
   { Set period for air pressure callback to 1s (1000ms)
     Note: The air pressure callback is only called every second
@@ -52,11 +52,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

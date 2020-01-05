@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    gps: TBrickletGPSV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletGPSV2;
   public
     procedure Execute;
   end;
@@ -27,17 +27,19 @@ procedure TExample.Execute;
 var latitude, longitude: longword; ns, ew: char;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  gps := TBrickletGPSV2.Create(nil);
+  oBricklet:= TBrickletGPSV2.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current coordinates }
-  gps.GetCoordinates(latitude, ns, longitude, ew);
+  oBricklet.GetCoordinates(latitude, ns, longitude, ew);
 
   WriteLn(Format('Latitude: %f °', [latitude/1000000.0]));
   WriteLn(Format('N/S: %s', [ns]));
@@ -46,11 +48,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

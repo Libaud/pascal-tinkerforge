@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    md: TBrickletMotionDetectorV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMotionDetectorV2;
   public
     procedure Execute;
   end;
@@ -26,25 +26,27 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  md := TBrickletMotionDetectorV2.Create(nil);
+  oBricklet:= TBrickletMotionDetectorV2.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Turn blue backlight LEDs on (maximum brightness) }
-  md.SetIndicator(255, 255, 255);
+  oBricklet.SetIndicator(255, 255, 255);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

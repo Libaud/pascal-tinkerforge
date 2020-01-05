@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     j: TBrickletJoystick;
   public
     procedure PositionReachedCB(sender: TBrickletJoystick; const x: smallint;
@@ -47,31 +47,31 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  j := TBrickletJoystick.Create(nil);
+  j:= TBrickletJoystick.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 0.2 seconds (200ms) }
   j.SetDebouncePeriod(200);
 
   { Register position reached callback to procedure PositionReachedCB }
-  j.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  j.OnPositionReached:= {$ifdef FPC}@{$endif}PositionReachedCB;
 
   { Configure threshold for position "outside of -99, -99 to 99, 99" }
   j.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     dd: TBrickletDustDetector;
   public
     procedure DustDensityReachedCB(sender: TBrickletDustDetector;
@@ -35,31 +35,31 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  dd := TBrickletDustDetector.Create(nil);
+  dd:= TBrickletDustDetector.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   dd.SetDebouncePeriod(10000);
 
   { Register dust density reached callback to procedure DustDensityReachedCB }
-  dd.OnDustDensityReached := {$ifdef FPC}@{$endif}DustDensityReachedCB;
+  dd.OnDustDensityReached:= {$ifdef FPC}@{$endif}DustDensityReachedCB;
 
   { Configure threshold for dust density "greater than 10 µg/m³" }
   dd.SetDustDensityCallbackThreshold('>', 10, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

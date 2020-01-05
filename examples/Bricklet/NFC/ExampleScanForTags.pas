@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     nfc: TBrickletNFC;
   public
     procedure ReaderStateChangedCB(sender: TBrickletNFC; const state: byte;
@@ -40,14 +40,14 @@ begin
   else if state = BRICKLET_NFC_READER_STATE_REQUEST_TAG_ID_READY then begin
     sender.ReaderGetTagID(tagType, tagID);
 
-    tagInfo := 'Found tag of type ' + IntToStr(tagType) + ' with ID [';
+    tagInfo:= 'Found tag of type ' + IntToStr(tagType) + ' with ID [';
 
-    for i := 0 to (length(tagID) - 1) do begin
+    for i:= 0 to (length(tagID) - 1) do begin
       if i < Length(tagID) - 1 then begin
-        tagInfo := tagInfo + '0x' + IntToHex(tagID[i], 2) + ' ';
+        tagInfo:= tagInfo + '0x' + IntToHex(tagID[i], 2) + ' ';
       end
       else begin
-        tagInfo := tagInfo + '0x' + IntToHex(tagID[i], 2) + ']';
+        tagInfo:= tagInfo + '0x' + IntToHex(tagID[i], 2) + ']';
       end;
     end;
 
@@ -61,28 +61,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  nfc := TBrickletNFC.Create(nil);
+  nfc:= TBrickletNFC.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register reader state changed callback to procedure ReaderStateChangedCB }
-  nfc.OnReaderStateChanged := {$ifdef FPC}@{$endif}ReaderStateChangedCB;
+  nfc.OnReaderStateChanged:= {$ifdef FPC}@{$endif}ReaderStateChangedCB;
 
   { Enable reader mode }
   nfc.SetMode(BRICKLET_NFC_MODE_READER);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

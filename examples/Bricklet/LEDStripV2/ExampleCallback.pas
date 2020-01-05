@@ -11,7 +11,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ls: TBrickletLEDStripV2;
   public
     procedure FrameStartedCB(sender: TBrickletLEDStripV2; const length: word);
@@ -35,28 +35,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ls := TBrickletLEDStripV2.Create(nil);
+  ls:= TBrickletLEDStripV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Set frame duration to 50ms (20 frames per second) }
   ls.SetFrameDuration(50);
 
   { Register frame started callback to procedure FrameStartedCB }
-  ls.OnFrameStarted := {$ifdef FPC}@{$endif}FrameStartedCB;
+  ls.OnFrameStarted:= {$ifdef FPC}@{$endif}FrameStartedCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

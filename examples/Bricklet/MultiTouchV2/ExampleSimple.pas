@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     mt: TBrickletMultiTouchV2;
   public
     procedure Execute;
@@ -27,17 +27,17 @@ procedure TExample.Execute;
 var state: TArray0To12OfBoolean;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  mt := TBrickletMultiTouchV2.Create(nil);
+  mt:= TBrickletMultiTouchV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current touch state }
-  state := mt.GetTouchState;
+  state:= mt.GetTouchState;
 
   WriteLn(Format('Electrode 0: %d', [state[0]]));
   WriteLn(Format('Electrode 1: %d', [state[1]]));
@@ -55,11 +55,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

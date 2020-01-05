@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     md: TBrickletMotionDetector;
   public
     procedure MotionDetectedCB(sender: TBrickletMotionDetector);
@@ -40,28 +40,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  md := TBrickletMotionDetector.Create(nil);
+  md:= TBrickletMotionDetector.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register motion detected callback to procedure MotionDetectedCB }
-  md.OnMotionDetected := {$ifdef FPC}@{$endif}MotionDetectedCB;
+  md.OnMotionDetected:= {$ifdef FPC}@{$endif}MotionDetectedCB;
 
   { Register detection cycle ended callback to procedure DetectionCycleEndedCB }
-  md.OnDetectionCycleEnded := {$ifdef FPC}@{$endif}DetectionCycleEndedCB;
+  md.OnDetectionCycleEnded:= {$ifdef FPC}@{$endif}DetectionCycleEndedCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

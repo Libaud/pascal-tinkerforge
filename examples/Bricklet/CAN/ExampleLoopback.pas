@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     can: TBrickletCAN;
   public
     procedure FrameReadCB(sender: TBrickletCAN; const frameType: byte;
@@ -35,7 +35,7 @@ begin
   WriteLn(Format('Frame Type: %d', [frameType]));
   WriteLn(Format('Identifier: %d', [identifier]));
   Write(Format('Data (Length: %d):', [len]));
-  for i := 0 to (len - 1) do begin
+  for i:= 0 to (len - 1) do begin
     if i < 8 then begin
       Write(Format(' %d', [data[i]]));
     end;
@@ -48,13 +48,13 @@ procedure TExample.Execute;
 var data: TArray0To7OfUInt8;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  can := TBrickletCAN.Create(nil);
+  can:= TBrickletCAN.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Configure transceiver for loopback mode }
@@ -62,23 +62,23 @@ begin
                        BRICKLET_CAN_TRANSCEIVER_MODE_LOOPBACK, 0);
 
   { Register frame read callback to procedure FrameReadCB }
-  can.OnFrameRead := {$ifdef FPC}@{$endif}FrameReadCB;
+  can.OnFrameRead:= {$ifdef FPC}@{$endif}FrameReadCB;
 
   { Enable frame read callback }
   can.EnableFrameReadCallback;
 
   { Write standard data frame with identifier 1742 and 3 bytes of data }
-  data[0] := 42; data[1] := 23; data[2] := 17;
+  data[0]:= 42; data[1]:= 23; data[2]:= 17;
   can.WriteFrame(BRICKLET_CAN_FRAME_TYPE_STANDARD_DATA, 1742, data, 3);
 
   WriteLn('Press key to exit');
   ReadLn;
   can.DisableFrameReadCallback;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

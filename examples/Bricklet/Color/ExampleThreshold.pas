@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     c: TBrickletColor;
   public
     procedure ColorReachedCB(sender: TBrickletColor; const r: word; const g: word;
@@ -39,31 +39,31 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  c := TBrickletColor.Create(nil);
+  c:= TBrickletColor.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   c.SetDebouncePeriod(10000);
 
   { Register color reached callback to procedure ColorReachedCB }
-  c.OnColorReached := {$ifdef FPC}@{$endif}ColorReachedCB;
+  c.OnColorReached:= {$ifdef FPC}@{$endif}ColorReachedCB;
 
   { Configure threshold for color "greater than 100, 200, 300, 400" }
   c.SetColorCallbackThreshold('>', 100, 0, 200, 0, 300, 0, 400, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

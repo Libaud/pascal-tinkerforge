@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     iao: TBrickletIndustrialAnalogOutV2;
   public
     procedure Execute;
@@ -26,13 +26,13 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  iao := TBrickletIndustrialAnalogOutV2.Create(nil);
+  iao:= TBrickletIndustrialAnalogOutV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Set output current to 4.5mA }
@@ -42,11 +42,11 @@ begin
   WriteLn('Press key to exit');
   ReadLn;
   iao.SetEnabled(false);
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

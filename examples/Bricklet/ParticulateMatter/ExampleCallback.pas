@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     pm: TBrickletParticulateMatter;
   public
     procedure PMConcentrationCB(sender: TBrickletParticulateMatter; const pm10: word;
@@ -38,28 +38,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  pm := TBrickletParticulateMatter.Create(nil);
+  pm:= TBrickletParticulateMatter.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register PM concentration callback to procedure PMConcentrationCB }
-  pm.OnPMConcentration := {$ifdef FPC}@{$endif}PMConcentrationCB;
+  pm.OnPMConcentration:= {$ifdef FPC}@{$endif}PMConcentrationCB;
 
   { Set period for PM concentration callback to 1s (1000ms) }
   pm.SetPMConcentrationCallbackConfiguration(1000, false);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

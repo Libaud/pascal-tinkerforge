@@ -12,7 +12,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     rs485: TBrickletRS485;
   public
     procedure ReadCB(sender: TBrickletRS485; const message_: TArrayOfChar);
@@ -40,13 +40,13 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  rs485 := TBrickletRS485.Create(nil);
+  rs485:= TBrickletRS485.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Enable full-duplex mode }
@@ -55,7 +55,7 @@ begin
                               BRICKLET_RS485_DUPLEX_FULL);
 
   { Register read callback to procedure ReadCB }
-  rs485.OnRead := {$ifdef FPC}@{$endif}ReadCB;
+  rs485.OnRead:= {$ifdef FPC}@{$endif}ReadCB;
 
   { Enable read callback }
   rs485.EnableReadCallback;
@@ -65,11 +65,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

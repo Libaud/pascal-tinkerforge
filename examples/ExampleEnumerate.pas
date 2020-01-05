@@ -9,7 +9,7 @@ uses
 type
   TExample = class(TComponent)
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
   public
     procedure EnumerateCB(sender: TIPConnection;
                           const uid: string; const connectedUid: string; const position: char;
@@ -51,23 +51,27 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create connection and connect to brickd }
-  ipcon := TIPConnection.Create(Self);
-  ipcon.Connect(HOST, PORT);
+  try
+    { Create connection and connect to brickd }
+    oIPConnection:= TIPConnection.Create(Self);
+    oIPConnection.Connect(HOST, PORT);
 
-  { Register enumerate callback to "EnumerateCB" }
-  ipcon.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
+    { Register enumerate callback to "EnumerateCB" }
+    oIPConnection.OnEnumerate:= {$ifdef FPC}@{$endif}EnumerateCB;
 
-  { Trigger enumerate }
-  ipcon.Enumerate;
+    { Trigger enumerate }
+    oIPConnection.Enumerate;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+
+  finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
-  e := TExample.Create(nil);
+  e:= TExample.Create(nil);
   e.Execute;
   e.Destroy;
 end.

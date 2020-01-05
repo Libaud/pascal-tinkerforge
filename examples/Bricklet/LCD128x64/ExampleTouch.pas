@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    lcd: TBrickletLCD128x64;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletLCD128x64;
   public
     procedure TouchPositionCB(sender: TBrickletLCD128x64; const pressure: word;
                               const x: word; const y: word; const age: longword);
@@ -73,34 +73,36 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  lcd := TBrickletLCD128x64.Create(nil);
+  oBricklet:= TBrickletLCD128x64.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register touch position callback to procedure TouchPositionCB }
-  lcd.OnTouchPosition := {$ifdef FPC}@{$endif}TouchPositionCB;
+  oBricklet.OnTouchPosition:= {$ifdef FPC}@{$endif}TouchPositionCB;
 
   { Register touch gesture callback to procedure TouchGestureCB }
-  lcd.OnTouchGesture := {$ifdef FPC}@{$endif}TouchGestureCB;
+  oBricklet.OnTouchGesture:= {$ifdef FPC}@{$endif}TouchGestureCB;
 
   { Set period for touch position callback to 0.1s (100ms) }
-  lcd.SetTouchPositionCallbackConfiguration(100, true);
+  oBricklet.SetTouchPositionCallbackConfiguration(100, true);
 
   { Set period for touch gesture callback to 0.1s (100ms) }
-  lcd.SetTouchGestureCallbackConfiguration(100, true);
+  oBricklet.SetTouchGestureCallbackConfiguration(100, true);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

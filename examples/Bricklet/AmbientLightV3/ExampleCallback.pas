@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    al: TBrickletAmbientLightV3;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletAmbientLightV3;
   public
     procedure IlluminanceCB(sender: TBrickletAmbientLightV3; const illuminance: longword);
     procedure Execute;
@@ -34,28 +34,30 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  al := TBrickletAmbientLightV3.Create(nil);
+  oBricklet:= TBrickletAmbientLightV3.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register illuminance callback to procedure IlluminanceCB }
-  al.OnIlluminance := {$ifdef FPC}@{$endif}IlluminanceCB;
+  oBricklet.OnIlluminance:= {$ifdef FPC}@{$endif}IlluminanceCB;
 
   { Set period for illuminance callback to 1s (1000ms) without a threshold }
-  al.SetIlluminanceCallbackConfiguration(1000, false, 'x', 0, 0);
+  oBricklet.SetIlluminanceCallbackConfiguration(1000, false, 'x', 0, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    md: TBrickletMotionDetectorV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMotionDetectorV2;
   public
     procedure MotionDetectedCB(sender: TBrickletMotionDetectorV2);
     procedure DetectionCycleEndedCB(sender: TBrickletMotionDetectorV2);
@@ -40,28 +40,30 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  md := TBrickletMotionDetectorV2.Create(nil);
+  oBricklet:= TBrickletMotionDetectorV2.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register motion detected callback to procedure MotionDetectedCB }
-  md.OnMotionDetected := {$ifdef FPC}@{$endif}MotionDetectedCB;
+  oBricklet.OnMotionDetected:= {$ifdef FPC}@{$endif}MotionDetectedCB;
 
   { Register detection cycle ended callback to procedure DetectionCycleEndedCB }
-  md.OnDetectionCycleEnded := {$ifdef FPC}@{$endif}DetectionCycleEndedCB;
+  oBricklet.OnDetectionCycleEnded:= {$ifdef FPC}@{$endif}DetectionCycleEndedCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     dd: TBrickletDustDetector;
   public
     procedure Execute;
@@ -27,26 +27,26 @@ procedure TExample.Execute;
 var dustDensity: word;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  dd := TBrickletDustDetector.Create(nil);
+  dd:= TBrickletDustDetector.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current dust density }
-  dustDensity := dd.GetDustDensity;
+  dustDensity:= dd.GetDustDensity;
   WriteLn(Format('Dust Density: %d µg/m³', [dustDensity]));
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

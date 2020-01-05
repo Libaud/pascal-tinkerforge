@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     sd: TBrickletSegmentDisplay4x7;
   public
     procedure Execute;
@@ -31,29 +31,29 @@ procedure TExample.Execute;
 var segments: array [0..3] of byte;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  sd := TBrickletSegmentDisplay4x7.Create(nil);
+  sd:= TBrickletSegmentDisplay4x7.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Write "4223" to the display with full brightness without colon }
-  segments[0] := DIGITS[4];
-  segments[1] := DIGITS[2];
-  segments[2] := DIGITS[2];
-  segments[3] := DIGITS[3];
+  segments[0]:= DIGITS[4];
+  segments[1]:= DIGITS[2];
+  segments[2]:= DIGITS[2];
+  segments[3]:= DIGITS[3];
   sd.SetSegments(segments, 7, false);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

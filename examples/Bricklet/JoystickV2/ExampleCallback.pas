@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     j: TBrickletJoystickV2;
   public
     procedure PressedCB(sender: TBrickletJoystickV2; const pressed: boolean);
@@ -33,28 +33,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  j := TBrickletJoystickV2.Create(nil);
+  j:= TBrickletJoystickV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register pressed callback to procedure PressedCB }
-  j.OnPressed := {$ifdef FPC}@{$endif}PressedCB;
+  j.OnPressed:= {$ifdef FPC}@{$endif}PressedCB;
 
   { Set period for pressed callback to 0.01s (10ms) }
   j.SetPressedCallbackConfiguration(10, true);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

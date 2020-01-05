@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mt: TBrickletMultiTouch;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMultiTouch;
   public
     procedure Execute;
   end;
@@ -27,17 +27,19 @@ procedure TExample.Execute;
 var state: word; i: integer;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  mt := TBrickletMultiTouch.Create(nil);
+  oBricklet:= TBrickletMultiTouch.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current touch state }
-  state := mt.GetTouchState;
+  state:= oBricklet.GetTouchState;
 
   if (state And (1 Shl 12)) = (1 Shl 12) then begin
     Write('In proximity, ');
@@ -48,7 +50,7 @@ begin
   end
   else begin
     Write('Electrodes ');
-    for i := 0 to 11 do begin
+    for i:= 0 to 11 do begin
       if (state And (1 Shl i)) = (1 Shl i) then begin
         Write(IntToStr(i) + ' ');
       end;
@@ -59,11 +61,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

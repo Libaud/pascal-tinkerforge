@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ow: TBrickletOneWire;
   public
     procedure Execute;
@@ -29,13 +29,13 @@ var t_low, t_high, status: byte;
 var temperature: Single;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ow := TBrickletOneWire.Create(nil);
+  ow:= TBrickletOneWire.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   ow.WriteCommand(0, 78); { WRITE SCRATCHPAD }
@@ -44,7 +44,7 @@ begin
   ow.Write(127); { CONFIGURATION: 12-bit mode }
 
   { Read temperature 10 times }
-  for i := 0 to 9 do begin
+  for i:= 0 to 9 do begin
     ow.WriteCommand(0, 68); { CONVERT T (start temperature conversion) }
     Sleep(1000); { Wait for conversion to finish }
     ow.WriteCommand(0, 190); { READ SCRATCHPAD }
@@ -52,11 +52,11 @@ begin
     ow.Read(t_low, status);
     ow.Read(t_high, status);
 
-    temperature := t_low or (t_high shl 8);
+    temperature:= t_low or (t_high shl 8);
 
     { Negative 12-bit values are sign-extended to 16-bit two's complement }
     if (temperature > 1 << 12) then begin
-      temperature := temperature - 1 << 16;
+      temperature:= temperature - 1 << 16;
     end;
 
     { 12-bit mode measures in units of 1/16°C }
@@ -65,11 +65,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

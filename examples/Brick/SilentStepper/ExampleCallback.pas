@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ss: TBrickSilentStepper;
   public
     procedure PositionReachedCB(sender: TBrickSilentStepper; const position: longint);
@@ -30,17 +30,17 @@ procedure TExample.PositionReachedCB(sender: TBrickSilentStepper;
 var steps: longint; vel: smallint; acc, dec: word;
 begin
   if (Random(2) = 0) then begin
-    steps := Random(4000) + 1000; { steps (forward) }
+    steps:= Random(4000) + 1000; { steps (forward) }
     WriteLn(Format('Driving forward: %d steps', [steps]));
   end
   else begin
-    steps := -(Random(4000) + 1000); { steps (backward) }
+    steps:= -(Random(4000) + 1000); { steps (backward) }
     WriteLn(Format('Driving backward: %d steps', [steps]));
   end;
 
-  vel := Random(1800) + 200; { steps/s }
-  acc := Random(900) + 100; { steps/s^2 }
-  dec := Random(900) + 100; { steps/s^2 }
+  vel:= Random(1800) + 200; { steps/s }
+  acc:= Random(900) + 100; { steps/s^2 }
+  dec:= Random(900) + 100; { steps/s^2 }
   WriteLn(Format('Configuration (vel, acc, dec): %d, %d %d', [vel, acc, dec]));
 
   sender.SetSpeedRamping(acc, dec);
@@ -51,17 +51,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ss := TBrickSilentStepper.Create(nil);
+  ss:= TBrickSilentStepper.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register position reached callback to procedure PositionReachedCB }
-  ss.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  ss.OnPositionReached:= {$ifdef FPC}@{$endif}PositionReachedCB;
 
   ss.SetStepConfiguration(BRICK_SILENT_STEPPER_STEP_RESOLUTION_8,
                           true); { 1/8 steps (interpolated) }
@@ -71,11 +71,11 @@ begin
   WriteLn('Press key to exit');
   ReadLn;
   ss.Disable;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

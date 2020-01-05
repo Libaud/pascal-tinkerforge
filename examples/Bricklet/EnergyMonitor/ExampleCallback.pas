@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     em: TBrickletEnergyMonitor;
   public
     procedure EnergyDataCB(sender: TBrickletEnergyMonitor; const voltage: longint;
@@ -49,28 +49,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  em := TBrickletEnergyMonitor.Create(nil);
+  em:= TBrickletEnergyMonitor.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register Energy Data callback to procedure EnergyDataCB }
-  em.OnEnergyData := {$ifdef FPC}@{$endif}EnergyDataCB;
+  em.OnEnergyData:= {$ifdef FPC}@{$endif}EnergyDataCB;
 
   { Set period for Energy Data callback to 1s (1000ms) }
   em.SetEnergyDataCallbackConfiguration(1000, false);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

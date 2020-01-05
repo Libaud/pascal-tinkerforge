@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     l: TBrickletLine;
   public
     procedure ReflectivityReachedCB(sender: TBrickletLine; const reflectivity: word);
@@ -33,31 +33,31 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  l := TBrickletLine.Create(nil);
+  l:= TBrickletLine.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 1 second (1000ms) }
   l.SetDebouncePeriod(1000);
 
   { Register reflectivity reached callback to procedure ReflectivityReachedCB }
-  l.OnReflectivityReached := {$ifdef FPC}@{$endif}ReflectivityReachedCB;
+  l.OnReflectivityReached:= {$ifdef FPC}@{$endif}ReflectivityReachedCB;
 
   { Configure threshold for reflectivity "greater than 2000" }
   l.SetReflectivityCallbackThreshold('>', 2000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

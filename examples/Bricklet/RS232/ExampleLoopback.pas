@@ -11,7 +11,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     rs232: TBrickletRS232;
   public
     function StringToCharArray(const message_: string): TArray0To59OfChar;
@@ -34,8 +34,8 @@ function TExample.StringToCharArray(const message_: string): TArray0To59OfChar;
 var i: longint;
 begin
   FillChar(result, 60, 0);
-  for i := 1 to Length(message_) do begin
-    result[i - 1] := message_[i];
+  for i:= 1 to Length(message_) do begin
+    result[i - 1]:= message_[i];
   end;
 end;
 
@@ -56,17 +56,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  rs232 := TBrickletRS232.Create(nil);
+  rs232:= TBrickletRS232.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register read callback to procedure ReadCB }
-  rs232.OnRead := {$ifdef FPC}@{$endif}ReadCB;
+  rs232.OnRead:= {$ifdef FPC}@{$endif}ReadCB;
 
   { Enable read callback }
   rs232.EnableReadCallback;
@@ -76,11 +76,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ow: TBrickletOutdoorWeather;
   public
     procedure StationDataCB(sender: TBrickletOutdoorWeather; const identifier: byte;
@@ -113,13 +113,13 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ow := TBrickletOutdoorWeather.Create(nil);
+  ow:= TBrickletOutdoorWeather.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Enable station data callbacks }
@@ -129,18 +129,18 @@ begin
   ow.SetSensorCallbackConfiguration(true);
 
   { Register station data callback to procedure StationDataCB }
-  ow.OnStationData := {$ifdef FPC}@{$endif}StationDataCB;
+  ow.OnStationData:= {$ifdef FPC}@{$endif}StationDataCB;
 
   { Register sensor data callback to procedure SensorDataCB }
-  ow.OnSensorData := {$ifdef FPC}@{$endif}SensorDataCB;
+  ow.OnSensorData:= {$ifdef FPC}@{$endif}SensorDataCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

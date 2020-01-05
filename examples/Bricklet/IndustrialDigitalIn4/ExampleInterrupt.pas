@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     idi4: TBrickletIndustrialDigitalIn4;
   public
     procedure InterruptCB(sender: TBrickletIndustrialDigitalIn4;
@@ -37,28 +37,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  idi4 := TBrickletIndustrialDigitalIn4.Create(nil);
+  idi4:= TBrickletIndustrialDigitalIn4.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register interrupt callback to procedure InterruptCB }
-  idi4.OnInterrupt := {$ifdef FPC}@{$endif}InterruptCB;
+  idi4.OnInterrupt:= {$ifdef FPC}@{$endif}InterruptCB;
 
   { Enable interrupt on pin 0 }
   idi4.SetInterrupt(1 shl 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

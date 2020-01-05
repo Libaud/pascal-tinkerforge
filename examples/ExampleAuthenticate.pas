@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
   public
     procedure ConnectedCB(sender: TIPConnection; const connectReason: byte);
     procedure EnumerateCB(sender: TIPConnection;
@@ -67,29 +67,32 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP Connection }
-  ipcon := TIPConnection.Create(Self);
+  try
+    { Create IP Connection }
+    oIPConnection:= TIPConnection.Create(Self);
 
-  { Disable auto reconnect mechanism, in case we have the wrong secret.
-    If the authentication is successful, reenable it. }
-  ipcon.SetAutoReconnect(false);
+    { Disable auto reconnect mechanism, in case we have the wrong secret.
+      If the authentication is successful, reenable it. }
+    oIPConnection.SetAutoReconnect(false);
 
-  { Register connected callback to "ConnectedCB" }
-  ipcon.OnConnected := {$ifdef FPC}@{$endif}ConnectedCB;
+    { Register connected callback to "ConnectedCB" }
+    oIPConnection.OnConnected:= {$ifdef FPC}@{$endif}ConnectedCB;
 
-  { Register enumerate callback to "EnumerateCB" }
-  ipcon.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
+    { Register enumerate callback to "EnumerateCB" }
+    oIPConnection.OnEnumerate:= {$ifdef FPC}@{$endif}EnumerateCB;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

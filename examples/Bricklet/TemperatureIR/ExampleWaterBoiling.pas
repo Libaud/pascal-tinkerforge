@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     tir: TBrickletTemperatureIR;
   public
     procedure ObjectTemperatureReachedCB(sender: TBrickletTemperatureIR;
@@ -36,13 +36,13 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  tir := TBrickletTemperatureIR.Create(nil);
+  tir:= TBrickletTemperatureIR.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
@@ -52,18 +52,18 @@ begin
   tir.SetDebouncePeriod(10000);
 
   { Register object temperature reached callback to procedure ObjectTemperatureReachedCB }
-  tir.OnObjectTemperatureReached := {$ifdef FPC}@{$endif}ObjectTemperatureReachedCB;
+  tir.OnObjectTemperatureReached:= {$ifdef FPC}@{$endif}ObjectTemperatureReachedCB;
 
   { Configure threshold for object temperature "greater than 100 °C" }
   tir.SetObjectTemperatureCallbackThreshold('>', 100*10, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

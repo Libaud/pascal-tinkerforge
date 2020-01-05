@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mt: TBrickletMultiTouch;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMultiTouch;
   public
     procedure TouchStateCB(sender: TBrickletMultiTouch; const state: word);
     procedure Execute;
@@ -37,7 +37,7 @@ begin
   end
   else begin
     Write('Electrodes ');
-    for i := 0 to 11 do begin
+    for i:= 0 to 11 do begin
       if (state And (1 Shl i)) = (1 Shl i) then begin
         Write(IntToStr(i) + ' ');
       end;
@@ -49,27 +49,27 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  mt := TBrickletMultiTouch.Create(nil);
-  mt.IPConnection:= ipcon;
-  mt.UIDString:= UID;
+  oBricklet:= TBrickletMultiTouch.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register touch state callback to procedure TouchStateCB }
-  mt.OnTouchState := {$ifdef FPC}@{$endif}TouchStateCB;
+  oBricklet.OnTouchState:= {$ifdef FPC}@{$endif}TouchStateCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

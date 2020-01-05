@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     nr: TBrickletNFCRFID;
   public
     procedure StateChangedCB(sender: TBrickletNFCRFID; const state: byte;
@@ -47,12 +47,12 @@ begin
   end
   else if state = BRICKLET_NFC_RFID_STATE_REQUEST_PAGE_READY then begin
     { Get and print pages }
-    dataRead := sender.GetPage();
-    s := 'Read data: [' + IntToStr(dataRead[0]);
+    dataRead:= sender.GetPage();
+    s:= 'Read data: [' + IntToStr(dataRead[0]);
     for i:= 1 to 15 do begin
-      s := s + ' ' + IntToStr(dataRead[i]);
+      s:= s + ' ' + IntToStr(dataRead[i]);
     end;
-    s := s + ']';
+    s:= s + ']';
     WriteLn(s);
   end
   else if (state And (1 Shl 6)) = (1 Shl 6) then begin
@@ -63,28 +63,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  nr := TBrickletNFCRFID.Create(nil);
+  nr:= TBrickletNFCRFID.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register state changed callback to procedure StateChangedCB }
-  nr.OnStateChanged := {$ifdef FPC}@{$endif}StateChangedCB;
+  nr.OnStateChanged:= {$ifdef FPC}@{$endif}StateChangedCB;
 
   { Select NFC Forum Type 2 tag }
   nr.RequestTagID(BRICKLET_NFC_RFID_TAG_TYPE_TYPE2);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

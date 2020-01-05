@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     b: TBrickletBarometer;
   public
     procedure Execute;
@@ -27,30 +27,30 @@ procedure TExample.Execute;
 var airPressure, altitude: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  b := TBrickletBarometer.Create(nil);
+  b:= TBrickletBarometer.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current air pressure }
-  airPressure := b.GetAirPressure;
+  airPressure:= b.GetAirPressure;
   WriteLn(Format('Air Pressure: %f hPa', [airPressure/1000.0]));
 
   { Get current altitude }
-  altitude := b.GetAltitude;
+  altitude:= b.GetAltitude;
   WriteLn(Format('Altitude: %f m', [altitude/100.0]));
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

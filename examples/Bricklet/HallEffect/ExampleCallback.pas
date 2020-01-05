@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     he: TBrickletHallEffect;
   public
     procedure EdgeCountCB(sender: TBrickletHallEffect; const count: longword;
@@ -35,17 +35,17 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  he := TBrickletHallEffect.Create(nil);
+  he:= TBrickletHallEffect.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register edge count callback to procedure EdgeCountCB }
-  he.OnEdgeCount := {$ifdef FPC}@{$endif}EdgeCountCB;
+  he.OnEdgeCount:= {$ifdef FPC}@{$endif}EdgeCountCB;
 
   { Set period for edge count callback to 0.05s (50ms)
     Note: The edge count callback is only called every 0.05 seconds
@@ -54,11 +54,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

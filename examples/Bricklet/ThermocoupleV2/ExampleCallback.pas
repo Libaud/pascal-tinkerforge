@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     t: TBrickletThermocoupleV2;
   public
     procedure TemperatureCB(sender: TBrickletThermocoupleV2; const temperature: longint);
@@ -34,28 +34,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  t := TBrickletThermocoupleV2.Create(nil);
+  t:= TBrickletThermocoupleV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register temperature callback to procedure TemperatureCB }
-  t.OnTemperature := {$ifdef FPC}@{$endif}TemperatureCB;
+  t.OnTemperature:= {$ifdef FPC}@{$endif}TemperatureCB;
 
   { Set period for temperature callback to 1s (1000ms) without a threshold }
   t.SetTemperatureCallbackConfiguration(1000, false, 'x', 0, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

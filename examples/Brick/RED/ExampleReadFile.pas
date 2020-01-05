@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     red: TBrickRED;
   public
     procedure CheckError(context: string; errorCode: byte);
@@ -42,7 +42,7 @@ begin
   end;
   red.AllocateString(Length(buffer), buffer, sessionId, errorCode, stringId);
   CheckError('AllocateString', errorCode);
-  result := stringId;
+  result:= stringId;
 end;
 
 procedure TExample.ReadFile(remotePath: string; localPath: string);
@@ -54,7 +54,7 @@ begin
   CheckError('CreateSession', errorCode);
 
   { Wrap remote path string }
-  remotePathStringId := AllocateString(sessionId, remotePath);
+  remotePathStringId:= AllocateString(sessionId, remotePath);
 
   { Open remote file for reading }
   red.OpenFile(remotePathStringId, BRICK_RED_FILE_FLAG_READ_ONLY or BRICK_RED_FILE_FLAG_NON_BLOCKING,
@@ -66,7 +66,7 @@ begin
   Rewrite(localFile, 1);
 
   { Read remote file and write to local file }
-  counter := 500;
+  counter:= 500;
 
   repeat
     red.ReadFile(remoteFileId, 61, errorCode, buffer, lengthRead);
@@ -75,9 +75,9 @@ begin
     Dec(counter);
 
     if (counter = 0) then begin
-      counter := 500;
+      counter:= 500;
       Write('.');
-      errorCode := red.KeepSessionAlive(sessionId, 30);
+      errorCode:= red.KeepSessionAlive(sessionId, 30);
       CheckError('KeepSessionAlive', errorCode);
     end;
   until (lengthRead = 0);
@@ -97,13 +97,13 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  red := TBrickRED.Create(nil);
+  red:= TBrickRED.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Read /home/tf/foobar.txt on RED Brick and write it locally to foobar.txt }
@@ -111,11 +111,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

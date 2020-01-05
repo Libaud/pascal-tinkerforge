@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ssr: TBrickletSolidStateRelay;
   public
     procedure Execute;
@@ -27,17 +27,17 @@ procedure TExample.Execute;
 var i: integer;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ssr := TBrickletSolidStateRelay.Create(nil);
+  ssr:= TBrickletSolidStateRelay.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Turn relay on/off 10 times with 1 second delay }
-  for i := 0 to 4 do begin
+  for i:= 0 to 4 do begin
     Sleep(1000);
     ssr.SetState(true);
     Sleep(1000);
@@ -46,11 +46,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

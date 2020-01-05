@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     mlp: TBrickletMotorizedLinearPoti;
   public
     procedure PositionReachedCB(sender: TBrickletMotorizedLinearPoti;
@@ -35,28 +35,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  mlp := TBrickletMotorizedLinearPoti.Create(nil);
+  mlp:= TBrickletMotorizedLinearPoti.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register position reached callback to procedure PositionReachedCB }
-  mlp.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  mlp.OnPositionReached:= {$ifdef FPC}@{$endif}PositionReachedCB;
 
   { Move slider smooth to the middle }
   mlp.SetMotorPosition(50, BRICKLET_MOTORIZED_LINEAR_POTI_DRIVE_MODE_SMOOTH, false);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

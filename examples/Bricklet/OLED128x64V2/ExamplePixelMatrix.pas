@@ -14,7 +14,7 @@ type
   TPixels = array [0..(HEIGHT*WIDTH - 1)] of boolean;
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     oled: TBrickletOLED128x64V2;
   public
     procedure Execute;
@@ -32,22 +32,22 @@ procedure TExample.Execute;
 var row, column: integer; pixels: TPixels;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  oled := TBrickletOLED128x64V2.Create(nil);
+  oled:= TBrickletOLED128x64V2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Clear display }
   oled.ClearDisplay;
 
   { Draw checkerboard pattern }
-  for row := 0 to HEIGHT - 1 do begin
-    for column := 0 to WIDTH - 1 do begin
-      pixels[row * WIDTH + column] := (row div 8) mod 2 = (column div 8) mod 2;
+  for row:= 0 to HEIGHT - 1 do begin
+    for column:= 0 to WIDTH - 1 do begin
+      pixels[row * WIDTH + column]:= (row div 8) mod 2 = (column div 8) mod 2;
     end;
   end;
 
@@ -55,11 +55,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

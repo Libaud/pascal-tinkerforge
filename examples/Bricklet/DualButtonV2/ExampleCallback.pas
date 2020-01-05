@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     db: TBrickletDualButtonV2;
   public
     procedure StateChangedCB(sender: TBrickletDualButtonV2; const buttonL: byte;
@@ -50,28 +50,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  db := TBrickletDualButtonV2.Create(nil);
+  db:= TBrickletDualButtonV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register state changed callback to procedure StateChangedCB }
-  db.OnStateChanged := {$ifdef FPC}@{$endif}StateChangedCB;
+  db.OnStateChanged:= {$ifdef FPC}@{$endif}StateChangedCB;
 
   { Enable state changed callback }
   db.SetStateChangedCallbackConfiguration(true);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.

@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     ptc: TBrickletPTCV2;
   public
     procedure Execute;
@@ -27,26 +27,26 @@ procedure TExample.Execute;
 var temperature: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection:= TIPConnection.Create(nil);
 
   { Create device object }
-  ptc := TBrickletPTCV2.Create(nil);
+  ptc:= TBrickletPTCV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current temperature }
-  temperature := ptc.GetTemperature;
+  temperature:= ptc.GetTemperature;
   WriteLn(Format('Temperature: %f °C', [temperature/100.0]));
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
-  e := TExample.Create;
+  e:= TExample.Create;
   e.Execute;
   e.Destroy;
 end.
