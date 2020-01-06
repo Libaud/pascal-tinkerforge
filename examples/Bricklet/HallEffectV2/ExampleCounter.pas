@@ -26,25 +26,29 @@ var
 procedure TExample.Execute;
 var count: longword;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet:= TBrickletHallEffectV2.Create(nil);
-  oBricklet.IPConnection:= oIPConnection;
-  oBricklet.UIDString:= UID;
+    { Create device object }
+    oBricklet:= TBrickletHallEffectV2.Create(nil);
+    oBricklet.IPConnection:= oIPConnection;
+    oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Get current count without counter reset }
-  count:= oBricklet.GetCounter(false);
-  WriteLn(Format('Count: %d', [count]));
+    { Get current count without counter reset }
+    count:= oBricklet.GetCounter(false);
+    WriteLn(Format('Count: %d', [count]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

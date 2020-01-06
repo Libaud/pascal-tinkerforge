@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    nfc: TBrickletNFC;
+    oBricklet: TBrickletNFC;
   public
     procedure CardemuStateChangedCB(sender: TBrickletNFC; const state: byte;
                                     const idle: boolean);
@@ -46,8 +46,8 @@ begin
       ndefRecordURI[5 + i]:= ord(NDEF_URI[i + 1]);
     end;
 
-    nfc.CardemuWriteNDEF(ndefRecordURI);
-    nfc.CardemuStartDiscovery;
+    oBricklet.CardemuWriteNDEF(ndefRecordURI);
+    oBricklet.CardemuStartDiscovery;
   end
   else if state = BRICKLET_NFC_CARDEMU_STATE_DISCOVER_READY then begin
     sender.CardemuStartTransfer(BRICKLET_NFC_CARDEMU_TRANSFER_WRITE);
@@ -62,25 +62,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  nfc:= TBrickletNFC.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletNFC.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register cardemu state changed callback to procedure CardemuStateChangedCB }
-  nfc.OnCardemuStateChanged:= {$ifdef FPC}@{$endif}CardemuStateChangedCB;
+    { Register cardemu state changed callback to procedure CardemuStateChangedCB }
+    oBricklet.OnCardemuStateChanged:= {$ifdef FPC}@{$endif}CardemuStateChangedCB;
 
-  { Enable cardemu mode }
-  nfc.SetMode(BRICKLET_NFC_MODE_CARDEMU);
+    { Enable cardemu mode }
+    oBricklet.SetMode(BRICKLET_NFC_MODE_CARDEMU);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

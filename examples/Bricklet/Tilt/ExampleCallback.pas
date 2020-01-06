@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    t: TBrickletTilt;
+    oBricklet: TBrickletTilt;
   public
     procedure TiltStateCB(sender: TBrickletTilt; const state: byte);
     procedure Execute;
@@ -40,25 +40,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  t:= TBrickletTilt.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletTilt.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Enable tilt state callback }
-  t.EnableTiltStateCallback;
+    { Enable tilt state callback }
+    oBricklet.EnableTiltStateCallback;
 
-  { Register tilt state callback to procedure TiltStateCB }
-  t.OnTiltState:= {$ifdef FPC}@{$endif}TiltStateCB;
+    { Register tilt state callback to procedure TiltStateCB }
+    oBricklet.OnTiltState:= {$ifdef FPC}@{$endif}TiltStateCB;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

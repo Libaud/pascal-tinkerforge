@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    iao: TBrickletIndustrialAnalogOutV2;
+    oBricklet: TBrickletIndustrialAnalogOutV2;
   public
     procedure Execute;
   end;
@@ -25,24 +25,28 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  iao:= TBrickletIndustrialAnalogOutV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletIndustrialAnalogOutV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Set output current to 4.5mA }
-  iao.SetCurrent(4500);
-  iao.SetEnabled(true);
+    { Set output current to 4.5mA }
+    oBricklet.SetCurrent(4500);
+    oBricklet.SetEnabled(true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  iao.SetEnabled(false);
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.SetEnabled(false);
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

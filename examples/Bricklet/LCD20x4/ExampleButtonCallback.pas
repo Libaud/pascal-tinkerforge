@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    lcd: TBrickletLCD20x4;
+    oBricklet: TBrickletLCD20x4;
   public
     procedure ButtonPressedCB(sender: TBrickletLCD20x4; const button: byte);
     procedure ButtonReleasedCB(sender: TBrickletLCD20x4; const button: byte);
@@ -39,25 +39,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  lcd:= TBrickletLCD20x4.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletLCD20x4.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register button pressed callback to procedure ButtonPressedCB }
-  lcd.OnButtonPressed:= {$ifdef FPC}@{$endif}ButtonPressedCB;
+    { Register button pressed callback to procedure ButtonPressedCB }
+    oBricklet.OnButtonPressed:= {$ifdef FPC}@{$endif}ButtonPressedCB;
 
-  { Register button released callback to procedure ButtonReleasedCB }
-  lcd.OnButtonReleased:= {$ifdef FPC}@{$endif}ButtonReleasedCB;
+    { Register button released callback to procedure ButtonReleasedCB }
+    oBricklet.OnButtonReleased:= {$ifdef FPC}@{$endif}ButtonReleasedCB;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    j: TBrickletJoystickV2;
+    oBricklet: TBrickletJoystickV2;
   public
     procedure PressedCB(sender: TBrickletJoystickV2; const pressed: boolean);
     procedure Execute;
@@ -32,25 +32,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  j:= TBrickletJoystickV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletJoystickV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register pressed callback to procedure PressedCB }
-  j.OnPressed:= {$ifdef FPC}@{$endif}PressedCB;
+    { Register pressed callback to procedure PressedCB }
+    oBricklet.OnPressed:= {$ifdef FPC}@{$endif}PressedCB;
 
-  { Set period for pressed callback to 0.01s (10ms) }
-  j.SetPressedCallbackConfiguration(10, true);
+    { Set period for pressed callback to 0.01s (10ms) }
+    oBricklet.SetPressedCallbackConfiguration(10, true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

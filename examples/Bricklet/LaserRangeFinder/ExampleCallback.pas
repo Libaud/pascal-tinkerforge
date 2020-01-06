@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    lrf: TBrickletLaserRangeFinder;
+    oBricklet: TBrickletLaserRangeFinder;
   public
     procedure DistanceCB(sender: TBrickletLaserRangeFinder; const distance: word);
     procedure Execute;
@@ -32,32 +32,36 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  lrf:= TBrickletLaserRangeFinder.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletLaserRangeFinder.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Turn laser on and wait 250ms for very first measurement to be ready }
-  lrf.EnableLaser;
-  Sleep(250);
+    { Turn laser on and wait 250ms for very first measurement to be ready }
+    oBricklet.EnableLaser;
+    Sleep(250);
 
-  { Register distance callback to procedure DistanceCB }
-  lrf.OnDistance:= {$ifdef FPC}@{$endif}DistanceCB;
+    { Register distance callback to procedure DistanceCB }
+    oBricklet.OnDistance:= {$ifdef FPC}@{$endif}DistanceCB;
 
-  { Set period for distance callback to 0.2s (200ms)
-    Note: The distance callback is only called every 0.2 seconds
-          if the distance has changed since the last call! }
-  lrf.SetDistanceCallbackPeriod(200);
+    { Set period for distance callback to 0.2s (200ms)
+      Note: The distance callback is only called every 0.2 seconds
+            if the distance has changed since the last call! }
+    oBricklet.SetDistanceCallbackPeriod(200);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  lrf.DisableLaser; { Turn laser off }
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.DisableLaser; { Turn laser off }
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    t: TBrickletTemperature;
+    oBricklet: TBrickletTemperature;
   public
     procedure TemperatureCB(sender: TBrickletTemperature; const temperature: smallint);
     procedure Execute;
@@ -33,27 +33,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  t:= TBrickletTemperature.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletTemperature.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register temperature callback to procedure TemperatureCB }
-  t.OnTemperature:= {$ifdef FPC}@{$endif}TemperatureCB;
+    { Register temperature callback to procedure TemperatureCB }
+    oBricklet.OnTemperature:= {$ifdef FPC}@{$endif}TemperatureCB;
 
-  { Set period for temperature callback to 1s (1000ms)
-    Note: The temperature callback is only called every second
-          if the temperature has changed since the last call! }
-  t.SetTemperatureCallbackPeriod(1000);
+    { Set period for temperature callback to 1s (1000ms)
+      Note: The temperature callback is only called every second
+            if the temperature has changed since the last call! }
+    oBricklet.SetTemperatureCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

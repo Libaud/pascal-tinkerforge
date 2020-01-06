@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    lc: TBrickletLoadCell;
+    oBricklet: TBrickletLoadCell;
   public
     procedure WeightCB(sender: TBrickletLoadCell; const weight: longint);
     procedure Execute;
@@ -32,27 +32,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  lc:= TBrickletLoadCell.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletLoadCell.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register weight callback to procedure WeightCB }
-  lc.OnWeight:= {$ifdef FPC}@{$endif}WeightCB;
+    { Register weight callback to procedure WeightCB }
+    oBricklet.OnWeight:= {$ifdef FPC}@{$endif}WeightCB;
 
-  { Set period for weight callback to 1s (1000ms)
-    Note: The weight callback is only called every second
-          if the weight has changed since the last call! }
-  lc.SetWeightCallbackPeriod(1000);
+    { Set period for weight callback to 1s (1000ms)
+      Note: The weight callback is only called every second
+            if the weight has changed since the last call! }
+    oBricklet.SetWeightCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

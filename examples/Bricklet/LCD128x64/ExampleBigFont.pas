@@ -25,28 +25,32 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet:= TBrickletLCD128x64.Create(nil);
-  oBricklet.IPConnection:= oIPConnection;
-  oBricklet.UIDString:= UID;
+    { Create device object }
+    oBricklet:= TBrickletLCD128x64.Create(nil);
+    oBricklet.IPConnection:= oIPConnection;
+    oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Clear display }
-  oBricklet.ClearDisplay;
+    { Clear display }
+    oBricklet.ClearDisplay;
 
-  { Write "Hello World" with big 24x32 font }
-  oBricklet.DrawText(0, 0, BRICKLET_LCD_128X64_FONT_24X32, BRICKLET_LCD_128X64_COLOR_BLACK,
-               '24x32');
+    { Write "Hello World" with big 24x32 font }
+    oBricklet.DrawText(0, 0, BRICKLET_LCD_128X64_FONT_24X32, BRICKLET_LCD_128X64_COLOR_BLACK,
+                 '24x32');
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

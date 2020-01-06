@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    idi4: TBrickletIndustrialDigitalIn4V2;
+    oBricklet: TBrickletIndustrialDigitalIn4V2;
   public
     procedure Execute;
   end;
@@ -26,31 +26,35 @@ var
 procedure TExample.Execute;
 var i: integer; count: longword;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  idi4:= TBrickletIndustrialDigitalIn4V2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletIndustrialDigitalIn4V2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Configure rising edge count (channel 3) with 10ms debounce }
-  idi4.SetEdgeCountConfiguration(3, 0, 10);
+    { Configure rising edge count (channel 3) with 10ms debounce }
+    oBricklet.SetEdgeCountConfiguration(3, 0, 10);
 
-  { Get edge count 10 times with 1s delay }
-  for i:= 0 to 9 do begin
-    Sleep(1000);
+    { Get edge count 10 times with 1s delay }
+    for i:= 0 to 9 do begin
+      Sleep(1000);
 
-    { Get current edge count }
-    count:= idi4.GetEdgeCount(3, false);
-    WriteLn(Format('Count: %d', [count]));
+      { Get current edge count }
+      count:= oBricklet.GetEdgeCount(3, false);
+      WriteLn(Format('Count: %d', [count]));
+    end;
+
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

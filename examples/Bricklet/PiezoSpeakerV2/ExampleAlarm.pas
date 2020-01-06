@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    ps: TBrickletPiezoSpeakerV2;
+    oBricklet: TBrickletPiezoSpeakerV2;
   public
     procedure Execute;
   end;
@@ -25,22 +25,26 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  ps:= TBrickletPiezoSpeakerV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletPiezoSpeakerV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { 10 seconds of loud annoying fast alarm }
-  ps.SetAlarm(800, 2000, 10, 1, 10, 10000);
+    { 10 seconds of loud annoying fast alarm }
+    oBricklet.SetAlarm(800, 2000, 10, 1, 10, 10000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

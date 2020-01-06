@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    re: TBrickletRotaryEncoder;
+    oBricklet: TBrickletRotaryEncoder;
   public
     procedure CountCB(sender: TBrickletRotaryEncoder; const count: longint);
     procedure Execute;
@@ -32,27 +32,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  re:= TBrickletRotaryEncoder.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRotaryEncoder.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register count callback to procedure CountCB }
-  re.OnCount:= {$ifdef FPC}@{$endif}CountCB;
+    { Register count callback to procedure CountCB }
+    oBricklet.OnCount:= {$ifdef FPC}@{$endif}CountCB;
 
-  { Set period for count callback to 0.05s (50ms)
-    Note: The count callback is only called every 0.05 seconds
-          if the count has changed since the last call! }
-  re.SetCountCallbackPeriod(50);
+    { Set period for count callback to 0.05s (50ms)
+      Note: The count callback is only called every 0.05 seconds
+            if the count has changed since the last call! }
+    oBricklet.SetCountCallbackPeriod(50);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

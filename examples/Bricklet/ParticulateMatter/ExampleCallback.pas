@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    pm: TBrickletParticulateMatter;
+    oBricklet: TBrickletParticulateMatter;
   public
     procedure PMConcentrationCB(sender: TBrickletParticulateMatter; const pm10: word;
                                 const pm25: word; const pm100: word);
@@ -37,25 +37,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  pm:= TBrickletParticulateMatter.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletParticulateMatter.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register PM concentration callback to procedure PMConcentrationCB }
-  pm.OnPMConcentration:= {$ifdef FPC}@{$endif}PMConcentrationCB;
+    { Register oBricklet concentration callback to procedure PMConcentrationCB }
+    oBricklet.OnPMConcentration:= {$ifdef FPC}@{$endif}PMConcentrationCB;
 
-  { Set period for PM concentration callback to 1s (1000ms) }
-  pm.SetPMConcentrationCallbackConfiguration(1000, false);
+    { Set period for oBricklet concentration callback to 1s (1000ms) }
+    oBricklet.SetPMConcentrationCallbackConfiguration(1000, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

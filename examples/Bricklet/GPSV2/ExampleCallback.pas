@@ -39,28 +39,32 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet:= TBrickletGPSV2.Create(nil);
-  oBricklet.IPConnection:= oIPConnection;
-  oBricklet.UIDString:= UID;
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Create device object }
+    oBricklet:= TBrickletGPSV2.Create(nil);
+    oBricklet.IPConnection:= oIPConnection;
+    oBricklet.UIDString:= UID;
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register coordinates callback to procedure CoordinatesCB }
-  oBricklet.OnCoordinates:= {$ifdef FPC}@{$endif}CoordinatesCB;
+    { Register coordinates callback to procedure CoordinatesCB }
+    oBricklet.OnCoordinates:= {$ifdef FPC}@{$endif}CoordinatesCB;
 
-  { Set period for coordinates callback to 1s (1000ms)
-    Note: The coordinates callback is only called every second
-          if the coordinates has changed since the last call! }
-  oBricklet.SetCoordinatesCallbackPeriod(1000);
+    { Set period for coordinates callback to 1s (1000ms)
+      Note: The coordinates callback is only called every second
+            if the coordinates has changed since the last call! }
+    oBricklet.SetCoordinatesCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

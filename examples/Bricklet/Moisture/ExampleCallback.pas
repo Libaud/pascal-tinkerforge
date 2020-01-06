@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    m: TBrickletMoisture;
+    oBricklet: TBrickletMoisture;
   public
     procedure MoistureCB(sender: TBrickletMoisture; const moisture: word);
     procedure Execute;
@@ -32,27 +32,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  m:= TBrickletMoisture.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletMoisture.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register moisture value callback to procedure MoistureCB }
-  m.OnMoisture:= {$ifdef FPC}@{$endif}MoistureCB;
+    { Register moisture value callback to procedure MoistureCB }
+    oBricklet.OnMoisture:= {$ifdef FPC}@{$endif}MoistureCB;
 
-  { Set period for moisture value callback to 1s (1000ms)
-    Note: The moisture value callback is only called every second
-          if the moisture value has changed since the last call! }
-  m.SetMoistureCallbackPeriod(1000);
+    { Set period for moisture value callback to 1s (1000ms)
+      Note: The moisture value callback is only called every second
+            if the moisture value has changed since the last call! }
+    oBricklet.SetMoistureCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

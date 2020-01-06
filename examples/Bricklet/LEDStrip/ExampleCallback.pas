@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    ls: TBrickletLEDStrip;
+    oBricklet: TBrickletLEDStrip;
     r: {$ifdef FPC}array [0..15] of byte{$else}TArray0To15OfUInt8{$endif};
     g: {$ifdef FPC}array [0..15] of byte{$else}TArray0To15OfUInt8{$endif};
     b: {$ifdef FPC}array [0..15] of byte{$else}TArray0To15OfUInt8{$endif};
@@ -47,28 +47,33 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  ls:= TBrickletLEDStrip.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletLEDStrip.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Set frame duration to 50ms (20 frames per second) }
-  ls.SetFrameDuration(50);
+    { Set frame duration to 50ms (20 frames per second) }
+    oBricklet.SetFrameDuration(50);
 
-  { Register frame rendered callback to procedure FrameRenderedCB }
-  ls.OnFrameRendered:= {$ifdef FPC}@{$endif}FrameRenderedCB;
+    { Register frame rendered callback to procedure FrameRenderedCB }
+    oBricklet.OnFrameRendered:= {$ifdef FPC}@{$endif}FrameRenderedCB;
 
-  { Set initial rgb values to get started }
-  ls.SetRGBValues(0, NUM_LEDS, r, g, b);
+    { Set initial rgb values to get started }
+    oBricklet.SetRGBValues(0, NUM_LEDS, r, g, b);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
