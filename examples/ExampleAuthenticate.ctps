@@ -9,13 +9,14 @@
         <FRMtype Value="0"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
+        <CursorPos X="6" Y="3"/>
         <UsageCount Value="20"/>
       </Unit>
       <Unit>
         <Filename Value="ExampleAuthenticate.pas"/>
-        <FRMtype Value="0"/>
+        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="20"/>
       </Unit>
       <Unit>
         <Filename Value="ExampleEnumerate.pas"/>
@@ -238,13 +239,33 @@
       <Unit>
         <Filename Value="Bricklet/Voltage/ExampleCallback.pas"/>
         <FRMtype Value="0"/>
-        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="38" Y="12"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RotaryEncoderV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <TopLine Value="26"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RealTimeClockV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="8" Y="13"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="1">
+      <Position1>
+        <Filename Value="Bricklet/RealTimeClockV2/ExampleSimple.pas"/>
+        <Caret Line="13" Column="14"/>
+      </Position1>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode=""/>

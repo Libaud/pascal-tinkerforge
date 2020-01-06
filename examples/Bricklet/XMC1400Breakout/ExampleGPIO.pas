@@ -26,6 +26,7 @@ var
 procedure TExample.Execute;
 var i: integer;
 begin
+  try
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 
@@ -50,7 +51,11 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
