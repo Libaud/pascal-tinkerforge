@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    spl: TBrickletSoundPressureLevel;
+    oBricklet: TBrickletSoundPressureLevel;
   public
     procedure Execute;
   end;
@@ -27,26 +27,26 @@ procedure TExample.Execute;
 var decibel: word;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletSoundPressureLevel.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current decibel }
+    decibel:= oBricklet.GetDecibel;
+    WriteLn(Format('Decibel: %f dB(A)', [decibel/10.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  spl:= TBrickletSoundPressureLevel.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current decibel }
-  decibel:= spl.GetDecibel;
-  WriteLn(Format('Decibel: %f dB(A)', [decibel/10.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

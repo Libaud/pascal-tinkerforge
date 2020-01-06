@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    a: TBrickletAccelerometer;
+    oBricklet: TBrickletAccelerometer;
   public
     procedure AccelerationReachedCB(sender: TBrickletAccelerometer; const x: smallint;
                                     const y: smallint; const z: smallint);
@@ -39,31 +39,31 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletAccelerometer.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get threshold callbacks with oBricklet debounce time of 10 seconds (10000ms) }
+    oBricklet.SetDebouncePeriod(10000);
+
+    { Register acceleration reached callback to procedure AccelerationReachedCB }
+    oBricklet.OnAccelerationReached:= {$ifdef FPC}@{$endif}AccelerationReachedCB;
+
+    { Configure threshold for acceleration "greater than 2 g, 2 g, 2 g" }
+    oBricklet.SetAccelerationCallbackThreshold('>', 2*1000, 0, 2*1000, 0, 2*1000, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  a:= TBrickletAccelerometer.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  a.SetDebouncePeriod(10000);
-
-  { Register acceleration reached callback to procedure AccelerationReachedCB }
-  a.OnAccelerationReached:= {$ifdef FPC}@{$endif}AccelerationReachedCB;
-
-  { Configure threshold for acceleration "greater than 2 g, 2 g, 2 g" }
-  a.SetAccelerationCallbackThreshold('>', 2*1000, 0, 2*1000, 0, 2*1000, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

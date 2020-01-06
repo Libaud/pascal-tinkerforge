@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    dus: TBrickletDistanceUS;
+    oBricklet: TBrickletDistanceUS;
   public
     procedure Execute;
   end;
@@ -27,26 +27,26 @@ procedure TExample.Execute;
 var distance: word;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletDistanceUS.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current distance value }
+    distance:= oBricklet.GetDistanceValue;
+    WriteLn(Format('Distance Value: %d', [distance]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  dus:= TBrickletDistanceUS.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current distance value }
-  distance:= dus.GetDistanceValue;
-  WriteLn(Format('Distance Value: %d', [distance]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    co2: TBrickletCO2;
+    oBricklet: TBrickletCO2;
   public
     procedure Execute;
   end;
@@ -27,26 +27,26 @@ procedure TExample.Execute;
 var co2Concentration: word;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletCO2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current oBricklet concentration }
+    co2Concentration:= oBricklet.GetCO2Concentration;
+    WriteLn(Format('CO2 Concentration: %d ppm', [co2Concentration]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  co2:= TBrickletCO2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current CO2 concentration }
-  co2Concentration:= co2.GetCO2Concentration;
-  WriteLn(Format('CO2 Concentration: %d ppm', [co2Concentration]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

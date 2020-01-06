@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    al: TBrickletAmbientLight;
+    oBricklet: TBrickletAmbientLight;
   public
     procedure Execute;
   end;
@@ -27,26 +27,26 @@ procedure TExample.Execute;
 var illuminance: word;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletAmbientLight.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current illuminance }
+    illuminance:= oBricklet.GetIlluminance;
+    WriteLn(Format('Illuminance: %f lx', [illuminance/10.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  al:= TBrickletAmbientLight.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current illuminance }
-  illuminance:= al.GetIlluminance;
-  WriteLn(Format('Illuminance: %f lx', [illuminance/10.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

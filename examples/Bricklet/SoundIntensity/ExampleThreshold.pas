@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    si: TBrickletSoundIntensity;
+    oBricklet: TBrickletSoundIntensity;
   public
     procedure IntensityReachedCB(sender: TBrickletSoundIntensity; const intensity: word);
     procedure Execute;
@@ -34,31 +34,31 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletSoundIntensity.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get threshold callbacks with a debounce time of 1 second (1000ms) }
+    oBricklet.SetDebouncePeriod(1000);
+
+    { Register intensity reached callback to procedure IntensityReachedCB }
+    oBricklet.OnIntensityReached:= {$ifdef FPC}@{$endif}IntensityReachedCB;
+
+    { Configure threshold for intensity "greater than 2000" }
+    oBricklet.SetIntensityCallbackThreshold('>', 2000, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  si:= TBrickletSoundIntensity.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get threshold callbacks with a debounce time of 1 second (1000ms) }
-  si.SetDebouncePeriod(1000);
-
-  { Register intensity reached callback to procedure IntensityReachedCB }
-  si.OnIntensityReached:= {$ifdef FPC}@{$endif}IntensityReachedCB;
-
-  { Configure threshold for intensity "greater than 2000" }
-  si.SetIntensityCallbackThreshold('>', 2000, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

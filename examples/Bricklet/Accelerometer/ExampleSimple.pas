@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    a: TBrickletAccelerometer;
+    oBricklet: TBrickletAccelerometer;
   public
     procedure Execute;
   end;
@@ -27,29 +27,29 @@ procedure TExample.Execute;
 var x, y, z: smallint;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletAccelerometer.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current acceleration }
+    oBricklet.GetAcceleration(x, y, z);
+
+    WriteLn(Format('Acceleration [X]: %f g', [x/1000.0]));
+    WriteLn(Format('Acceleration [Y]: %f g', [y/1000.0]));
+    WriteLn(Format('Acceleration [Z]: %f g', [z/1000.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  a:= TBrickletAccelerometer.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current acceleration }
-  a.GetAcceleration(x, y, z);
-
-  WriteLn(Format('Acceleration [X]: %f g', [x/1000.0]));
-  WriteLn(Format('Acceleration [Y]: %f g', [y/1000.0]));
-  WriteLn(Format('Acceleration [Z]: %f g', [z/1000.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

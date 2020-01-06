@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    t: TBrickletThermocoupleV2;
+    oBricklet: TBrickletThermocoupleV2;
   public
     procedure TemperatureCB(sender: TBrickletThermocoupleV2; const temperature: longint);
     procedure Execute;
@@ -34,29 +34,29 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletThermocoupleV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Register temperature callback to procedure TemperatureCB }
+    oBricklet.OnTemperature:= {$ifdef FPC}@{$endif}TemperatureCB;
+
+    { Configure threshold for temperature "greater than 30 °C"
+      with a debounce period of 10s (10000ms) }
+    oBricklet.SetTemperatureCallbackConfiguration(10000, false, '>', 30*100, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  t:= TBrickletThermocoupleV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Register temperature callback to procedure TemperatureCB }
-  t.OnTemperature:= {$ifdef FPC}@{$endif}TemperatureCB;
-
-  { Configure threshold for temperature "greater than 30 °C"
-    with a debounce period of 10s (10000ms) }
-  t.SetTemperatureCallbackConfiguration(10000, false, '>', 30*100, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

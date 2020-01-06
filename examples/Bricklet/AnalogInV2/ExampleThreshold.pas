@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    ai: TBrickletAnalogInV2;
+    oBricklet: TBrickletAnalogInV2;
   public
     procedure VoltageReachedCB(sender: TBrickletAnalogInV2; const voltage: word);
     procedure Execute;
@@ -33,31 +33,31 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletAnalogInV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+    oBricklet.SetDebouncePeriod(10000);
+
+    { Register voltage reached callback to procedure VoltageReachedCB }
+    oBricklet.OnVoltageReached:= {$ifdef FPC}@{$endif}VoltageReachedCB;
+
+    { Configure threshold for voltage "smaller than 5 V" }
+    oBricklet.SetVoltageCallbackThreshold('<', 5*1000, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  ai:= TBrickletAnalogInV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  ai.SetDebouncePeriod(10000);
-
-  { Register voltage reached callback to procedure VoltageReachedCB }
-  ai.OnVoltageReached:= {$ifdef FPC}@{$endif}VoltageReachedCB;
-
-  { Configure threshold for voltage "smaller than 5 V" }
-  ai.SetVoltageCallbackThreshold('<', 5*1000, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
