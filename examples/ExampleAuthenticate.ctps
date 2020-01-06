@@ -2046,6 +2046,7 @@
       <Unit>
         <Filename Value="Bricklet/IndustrialAnalogOutV2/ExampleSimpleCurrent.pas"/>
         <FRMtype Value="0"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="70"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
@@ -2053,31 +2054,34 @@
       <Unit>
         <Filename Value="Bricklet/HumidityV2/ExampleCallback.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="71"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="23" Y="55"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/Humidity/ExampleCallback.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="72"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="24"/>
+        <CursorPos X="23" Y="57"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/HallEffect/ExampleCallback.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="73"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="24"/>
+        <CursorPos X="23" Y="59"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/GPS/ExampleCallback.pas"/>
         <FRMtype Value="0"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="74"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="23" Y="67"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/EnergyMonitor/ExampleCallback.pas"/>
@@ -2304,11 +2308,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory Count="1">
-      <Position1>
-        <Filename Value="Bricklet/GPS/ExampleCallback.pas"/>
-      </Position1>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode=""/>
