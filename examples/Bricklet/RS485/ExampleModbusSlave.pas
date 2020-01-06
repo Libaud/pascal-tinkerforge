@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    rs485: TBrickletRS485;
+    oBricklet: TBrickletRS485;
   public
     procedure ModbusSlaveWriteSingleRegisterRequestCB(sender: TBrickletRS485;
                                                       const requestID: byte;
@@ -48,31 +48,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  rs485:= TBrickletRS485.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRS485.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Set operating mode to Modbus RTU slave }
-  rs485.SetMode(BRICKLET_RS485_MODE_MODBUS_SLAVE_RTU);
+    { Set operating mode to Modbus RTU slave }
+    oBricklet.SetMode(BRICKLET_RS485_MODE_MODBUS_SLAVE_RTU);
 
-  { Modbus specific configuration:
-    - slave address = 17
-    - master request timeout = 0ms (unused in slave mode) }
-  rs485.SetModbusConfiguration(17, 0);
+    { Modbus specific configuration:
+      - slave address = 17
+      - master request timeout = 0ms (unused in slave mode) }
+    oBricklet.SetModbusConfiguration(17, 0);
 
-  { Register Modbus slave write single register request callback to procedure
-    ModbusSlaveWriteSingleRegisterRequestCB }
-  rs485.OnModbusSlaveWriteSingleRegisterRequest:= {$ifdef FPC}@{$endif}ModbusSlaveWriteSingleRegisterRequestCB;
+    { Register Modbus slave write single register request callback to procedure
+      ModbusSlaveWriteSingleRegisterRequestCB }
+    oBricklet.OnModbusSlaveWriteSingleRegisterRequest:= {$ifdef FPC}@{$endif}ModbusSlaveWriteSingleRegisterRequestCB;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

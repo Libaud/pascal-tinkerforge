@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    rs: TBrickletRemoteSwitchV2;
+    oBricklet: TBrickletRemoteSwitchV2;
   public
     procedure RemoteStatusACB(sender: TBrickletRemoteSwitchV2; const houseCode: byte;
                               const receiverCode: byte; const switchTo: byte;
@@ -47,25 +47,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  rs:= TBrickletRemoteSwitchV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRemoteSwitchV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Configure to receive from remote type A with minimum repeats set to 1 and enable callback }
-  rs.SetRemoteConfiguration(BRICKLET_REMOTE_SWITCH_V2_REMOTE_TYPE_A, 1, true);
+    { Configure to receive from remote type A with minimum repeats set to 1 and enable callback }
+    oBricklet.SetRemoteConfiguration(BRICKLET_REMOTE_SWITCH_V2_REMOTE_TYPE_A, 1, true);
 
-  { Register remote status a callback to procedure RemoteStatusACB }
-  rs.OnRemoteStatusA:= {$ifdef FPC}@{$endif}RemoteStatusACB;
+    { Register remote status a callback to procedure RemoteStatusACB }
+    oBricklet.OnRemoteStatusA:= {$ifdef FPC}@{$endif}RemoteStatusACB;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

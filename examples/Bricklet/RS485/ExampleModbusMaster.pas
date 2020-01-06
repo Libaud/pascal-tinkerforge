@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    rs485: TBrickletRS485;
+    oBricklet: TBrickletRS485;
   public
     procedure ModbusMasterWriteSingleRegisterResponseCB(sender: TBrickletRS485;
                                                         const requestID: byte;
@@ -42,34 +42,38 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  rs485:= TBrickletRS485.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRS485.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Set operating mode to Modbus RTU master }
-  rs485.SetMode(BRICKLET_RS485_MODE_MODBUS_MASTER_RTU);
+    { Set operating mode to Modbus RTU master }
+    oBricklet.SetMode(BRICKLET_RS485_MODE_MODBUS_MASTER_RTU);
 
-  { Modbus specific configuration:
-    - slave address = 1 (unused in master mode)
-    - master request timeout = 1000ms }
-  rs485.SetModbusConfiguration(1, 1000);
+    { Modbus specific configuration:
+      - slave address = 1 (unused in master mode)
+      - master request timeout = 1000ms }
+    oBricklet.SetModbusConfiguration(1, 1000);
 
-  { Register Modbus master write single register response callback to procedure
-    ModbusMasterWriteSingleRegisterResponseCB }
-  rs485.OnModbusMasterWriteSingleRegisterResponse:= {$ifdef FPC}@{$endif}ModbusMasterWriteSingleRegisterResponseCB;
+    { Register Modbus master write single register response callback to procedure
+      ModbusMasterWriteSingleRegisterResponseCB }
+    oBricklet.OnModbusMasterWriteSingleRegisterResponse:= {$ifdef FPC}@{$endif}ModbusMasterWriteSingleRegisterResponseCB;
 
-  { Write 65535 to register 42 of slave 17 }
-  expectedRequestID:= rs485.ModbusMasterWriteSingleRegister(17, 42, 65535);
+    { Write 65535 to register 42 of slave 17 }
+    expectedRequestID:= oBricklet.ModbusMasterWriteSingleRegister(17, 42, 65535);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

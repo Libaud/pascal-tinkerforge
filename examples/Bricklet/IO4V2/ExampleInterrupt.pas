@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    io: TBrickletIO4V2;
+    oBricklet: TBrickletIO4V2;
   public
     procedure InputValueCB(sender: TBrickletIO4V2; const channel: byte;
                            const changed: boolean; const value: boolean);
@@ -23,7 +23,7 @@ const
   UID = 'XYZ'; { Change XYZ to the UID of your IO-4 Bricklet 2.0 }
 
 var
-  e: TExample;
+  e: TExample;                                              io
 
 { Callback procedure for input value callback }
 procedure TExample.InputValueCB(sender: TBrickletIO4V2; const channel: byte;
@@ -37,25 +37,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  io:= TBrickletIO4V2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletIO4V2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register input value callback to procedure InputValueCB }
-  io.OnInputValue:= {$ifdef FPC}@{$endif}InputValueCB;
+    { Register input value callback to procedure InputValueCB }
+    oBricklet.OnInputValue:= {$ifdef FPC}@{$endif}InputValueCB;
 
-  { Set period for input value (channel 1) callback to 0.5s (500ms) }
-  io.SetInputValueCallbackConfiguration(1, 500, false);
+    { Set period for input value (channel 1) callback to 0.5s (500ms) }
+    oBricklet.SetInputValueCallbackConfiguration(1, 500, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

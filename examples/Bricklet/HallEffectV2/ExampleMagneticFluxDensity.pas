@@ -26,25 +26,29 @@ var
 procedure TExample.Execute;
 var magneticFluxDensity: smallint;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet:= TBrickletHallEffectV2.Create(nil);
-  oBricklet.IPConnection:= oIPConnection;
-  oBricklet.UIDString:= UID;
+    { Create device object }
+    oBricklet:= TBrickletHallEffectV2.Create(nil);
+    oBricklet.IPConnection:= oIPConnection;
+    oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Get current Magnetic Flux Density }
-  magneticFluxDensity:= oBricklet.GetMagneticFluxDensity;
-  WriteLn(Format('Magnetic Flux Density: %d µT', [magneticFluxDensity]));
+    { Get current Magnetic Flux Density }
+    magneticFluxDensity:= oBricklet.GetMagneticFluxDensity;
+    WriteLn(Format('Magnetic Flux Density: %d µT', [magneticFluxDensity]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

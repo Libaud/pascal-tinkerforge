@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    can: TBrickletCAN;
+    oBricklet: TBrickletCAN;
   public
     procedure FrameReadCB(sender: TBrickletCAN; const frameType: byte;
                           const identifier: longword; const data: TArray0To7OfUInt8;
@@ -47,34 +47,38 @@ end;
 procedure TExample.Execute;
 var data: TArray0To7OfUInt8;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  can:= TBrickletCAN.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletCAN.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Configure transceiver for loopback mode }
-  can.SetConfiguration(BRICKLET_CAN_BAUD_RATE_1000KBPS,
-                       BRICKLET_CAN_TRANSCEIVER_MODE_LOOPBACK, 0);
+    { Configure transceiver for loopback mode }
+    oBricklet.SetConfiguration(BRICKLET_CAN_BAUD_RATE_1000KBPS,
+                         BRICKLET_CAN_TRANSCEIVER_MODE_LOOPBACK, 0);
 
-  { Register frame read callback to procedure FrameReadCB }
-  can.OnFrameRead:= {$ifdef FPC}@{$endif}FrameReadCB;
+    { Register frame read callback to procedure FrameReadCB }
+    oBricklet.OnFrameRead:= {$ifdef FPC}@{$endif}FrameReadCB;
 
-  { Enable frame read callback }
-  can.EnableFrameReadCallback;
+    { Enable frame read callback }
+    oBricklet.EnableFrameReadCallback;
 
-  { Write standard data frame with identifier 1742 and 3 bytes of data }
-  data[0]:= 42; data[1]:= 23; data[2]:= 17;
-  can.WriteFrame(BRICKLET_CAN_FRAME_TYPE_STANDARD_DATA, 1742, data, 3);
+    { Write standard data frame with identifier 1742 and 3 bytes of data }
+    data[0]:= 42; data[1]:= 23; data[2]:= 17;
+    oBricklet.WriteFrame(BRICKLET_CAN_FRAME_TYPE_STANDARD_DATA, 1742, data, 3);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  can.DisableFrameReadCallback;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+    oBricklet.DisableFrameReadCallback;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

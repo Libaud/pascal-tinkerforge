@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var counter: int64; dutyCycle: word; period: uint64; frequency: longword; value: boolean;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

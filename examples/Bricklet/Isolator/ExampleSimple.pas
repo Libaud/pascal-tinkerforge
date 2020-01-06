@@ -27,6 +27,10 @@ procedure TExample.Execute;
 var messagesFromBrick, messagesFromBricklet: longword;
     connectedBrickletDeviceIdentifier: word; connectedBrickletUID: string;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

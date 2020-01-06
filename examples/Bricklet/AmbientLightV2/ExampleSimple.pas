@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var illuminance: longword;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

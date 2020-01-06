@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    idi4: TBrickletIndustrialDigitalIn4;
+    oBricklet: TBrickletIndustrialDigitalIn4;
   public
     procedure InterruptCB(sender: TBrickletIndustrialDigitalIn4;
                           const interruptMask: word; const valueMask: word);
@@ -36,25 +36,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  idi4:= TBrickletIndustrialDigitalIn4.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletIndustrialDigitalIn4.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register interrupt callback to procedure InterruptCB }
-  idi4.OnInterrupt:= {$ifdef FPC}@{$endif}InterruptCB;
+    { Register interrupt callback to procedure InterruptCB }
+    oBricklet.OnInterrupt:= {$ifdef FPC}@{$endif}InterruptCB;
 
-  { Enable interrupt on pin 0 }
-  idi4.SetInterrupt(1 shl 0);
+    { Enable interrupt on pin 0 }
+    oBricklet.SetInterrupt(1 shl 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

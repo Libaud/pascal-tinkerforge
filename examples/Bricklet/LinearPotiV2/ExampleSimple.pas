@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var position: byte;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

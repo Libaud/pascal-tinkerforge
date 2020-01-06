@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var iaqIndex, temperature, humidity, airPressure: longint; iaqIndexAccuracy: byte;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

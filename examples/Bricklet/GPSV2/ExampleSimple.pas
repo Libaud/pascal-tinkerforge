@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var latitude, longitude: longword; ns, ew: char;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

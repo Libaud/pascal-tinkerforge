@@ -27,6 +27,10 @@ procedure TExample.Execute;
 var voltage, current, energy, realPower, apparentPower, reactivePower: longint;
     powerFactor, frequency: word;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

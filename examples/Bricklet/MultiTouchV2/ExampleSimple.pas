@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var state: TArray0To12OfBoolean;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

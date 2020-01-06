@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    sd: TBrickletSegmentDisplay4x7V2;
+    oBricklet: TBrickletSegmentDisplay4x7V2;
   public
     procedure Execute;
   end;
@@ -25,24 +25,28 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  sd:= TBrickletSegmentDisplay4x7V2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletSegmentDisplay4x7V2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  sd.SetBrightness(7); { Set to full brightness }
+    oBricklet.SetBrightness(7); { Set to full brightness }
 
-  { Show "- 42" on the Display }
-  sd.SetNumericValue([-2, -1, 4, 2]);
+    { Show "- 42" on the Display }
+    oBricklet.SetNumericValue([-2, -1, 4, 2]);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

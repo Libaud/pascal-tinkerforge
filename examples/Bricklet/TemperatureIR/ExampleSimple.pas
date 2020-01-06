@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var ambientTemperature, objectTemperature: smallint;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

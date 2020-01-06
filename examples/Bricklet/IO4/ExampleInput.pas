@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    io: TBrickletIO4;
+    oBricklet: TBrickletIO4;
   public
     procedure Execute;
   end;
@@ -26,23 +26,27 @@ var
 procedure TExample.Execute;
 var valueMask: byte;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  io:= TBrickletIO4.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletIO4.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Get current value as bitmask }
-  valueMask:= io.GetValue;
-  WriteLn(Format('Value Mask: %d', [valueMask]));
+    { Get current value as bitmask }
+    valueMask:= oBricklet.GetValue;
+    WriteLn(Format('Value Mask: %d', [valueMask]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

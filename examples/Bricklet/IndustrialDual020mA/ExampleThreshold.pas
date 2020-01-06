@@ -29,6 +29,10 @@ var
 procedure TExample.CurrentReachedCB(sender: TBrickletIndustrialDual020mA;
                                     const sensor: byte; const current: longint);
 begin
+  try
+
+  finally
+  end;
   WriteLn(Format('Sensor: %d', [sensor]));
   WriteLn(Format('Current: %f mA', [current/1000000.0]));
   WriteLn('');

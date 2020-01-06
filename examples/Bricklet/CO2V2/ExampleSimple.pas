@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var co2Concentration, humidity: word; temperature: smallint;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

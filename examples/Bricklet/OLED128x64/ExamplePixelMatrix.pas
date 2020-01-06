@@ -15,7 +15,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    oled: TBrickletOLED128x64;
+    oBricklet: TBrickletOLED128x64;
   public
     procedure DrawMatrix(pixels: TPixels);
     procedure Execute;
@@ -48,14 +48,14 @@ begin
       end;
     end;
   end;
-  oled.NewWindow(0, WIDTH - 1, 0, HEIGHT div 8 - 1);
+  oBricklet.NewWindow(0, WIDTH - 1, 0, HEIGHT div 8 - 1);
   for row:= 0 to HEIGHT div 8 - 1 do begin
     column:= 0;
     while column < WIDTH - 1 do begin
       for i:= 0 to 63 do begin
         section[i]:= pages[row][column + i];
       end;
-      oled.write(section);
+      oBricklet.write(section);
       column:= column + 64;
     end;
   end;
@@ -64,31 +64,35 @@ end;
 procedure TExample.Execute;
 var row, column: integer; pixels: TPixels;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  oled:= TBrickletOLED128x64.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletOLED128x64.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Clear display }
-  oled.ClearDisplay;
+    { Clear display }
+    oBricklet.ClearDisplay;
 
-  { Draw checkerboard pattern }
-  for row:= 0 to HEIGHT - 1 do begin
-    for column:= 0 to WIDTH - 1 do begin
-      pixels[row, column]:= (row div 8) mod 2 = (column div 8) mod 2;
+    { Draw checkerboard pattern }
+    for row:= 0 to HEIGHT - 1 do begin
+      for column:= 0 to WIDTH - 1 do begin
+        pixels[row, column]:= (row div 8) mod 2 = (column div 8) mod 2;
+      end;
     end;
+
+    e.DrawMatrix(pixels);
+
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  e.DrawMatrix(pixels);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

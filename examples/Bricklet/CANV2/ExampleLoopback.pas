@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    can: TBrickletCANV2;
+    oBricklet: TBrickletCANV2;
   public
     procedure FrameReadCB(sender: TBrickletCANV2; const frameType: byte;
                           const identifier: longword; const data: TArrayOfUInt8);
@@ -45,33 +45,37 @@ end;
 procedure TExample.Execute;
 var data: TArrayOfUInt8;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  can:= TBrickletCANV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletCANV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Configure transceiver for loopback mode }
-  can.SetTransceiverConfiguration(1000000, 625,
-                                  BRICKLET_CAN_V2_TRANSCEIVER_MODE_LOOPBACK);
+    { Configure transceiver for loopback mode }
+    oBricklet.SetTransceiverConfiguration(1000000, 625,
+                                    BRICKLET_CAN_V2_TRANSCEIVER_MODE_LOOPBACK);
 
-  { Register frame read callback to procedure FrameReadCB }
-  can.OnFrameRead:= {$ifdef FPC}@{$endif}FrameReadCB;
+    { Register frame read callback to procedure FrameReadCB }
+    oBricklet.OnFrameRead:= {$ifdef FPC}@{$endif}FrameReadCB;
 
-  { Enable frame read callback }
-  can.SetFrameReadCallbackConfiguration(true);
+    { Enable frame read callback }
+    oBricklet.SetFrameReadCallbackConfiguration(true);
 
-  { Write standard data frame with identifier 1742 and 3 bytes of data }
-  can.WriteFrame(BRICKLET_CAN_V2_FRAME_TYPE_STANDARD_DATA, 1742, [42, 23, 17]);
+    { Write standard data frame with identifier 1742 and 3 bytes of data }
+    oBricklet.WriteFrame(BRICKLET_CAN_V2_FRAME_TYPE_STANDARD_DATA, 1742, [42, 23, 17]);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  can.SetFrameReadCallbackConfiguration(false);
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+    oBricklet.SetFrameReadCallbackConfiguration(false);
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

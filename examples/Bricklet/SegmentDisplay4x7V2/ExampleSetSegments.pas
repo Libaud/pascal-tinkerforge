@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    sd: TBrickletSegmentDisplay4x7V2;
+    oBricklet: TBrickletSegmentDisplay4x7V2;
   public
     procedure Execute;
   end;
@@ -25,27 +25,31 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  sd:= TBrickletSegmentDisplay4x7V2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletSegmentDisplay4x7V2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  sd.SetBrightness(7); { Set to full brightness }
+    oBricklet.SetBrightness(7); { Set to full brightness }
 
-  { Activate all segments }
-  sd.SetSegments([true, true, true, true, true, true, true, true],
-                 [true, true, true, true, true, true, true, true],
-                 [true, true, true, true, true, true, true, true],
-                 [true, true, true, true, true, true, true, true], [true, true], true);
+    { Activate all segments }
+    oBricklet.SetSegments([true, true, true, true, true, true, true, true],
+                   [true, true, true, true, true, true, true, true],
+                   [true, true, true, true, true, true, true, true],
+                   [true, true, true, true, true, true, true, true], [true, true], true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

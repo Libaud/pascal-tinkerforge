@@ -12,7 +12,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    rs232: TBrickletRS232V2;
+    oBricklet: TBrickletRS232V2;
   public
     procedure ReadCB(sender: TBrickletRS232V2; const message_: TArrayOfChar);
     procedure Execute;
@@ -38,28 +38,32 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  rs232:= TBrickletRS232V2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRS232V2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register read callback to procedure ReadCB }
-  rs232.OnRead:= {$ifdef FPC}@{$endif}ReadCB;
+    { Register read callback to procedure ReadCB }
+    oBricklet.OnRead:= {$ifdef FPC}@{$endif}ReadCB;
 
-  { Enable read callback }
-  rs232.EnableReadCallback;
+    { Enable read callback }
+    oBricklet.EnableReadCallback;
 
-  { Write "test" string }
-  rs232.Write(['t', 'e', 's', 't']);
+    { Write "test" string }
+    oBricklet.Write(['t', 'e', 's', 't']);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

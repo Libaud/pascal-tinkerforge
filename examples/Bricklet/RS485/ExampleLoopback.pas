@@ -13,7 +13,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    rs485: TBrickletRS485;
+    oBricklet: TBrickletRS485;
   public
     procedure ReadCB(sender: TBrickletRS485; const message_: TArrayOfChar);
     procedure Execute;
@@ -39,33 +39,37 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  rs485:= TBrickletRS485.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletRS485.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Enable full-duplex mode }
-  rs485.SetRS485Configuration(115200, BRICKLET_RS485_PARITY_NONE,
-                              BRICKLET_RS485_STOPBITS_1, BRICKLET_RS485_WORDLENGTH_8,
-                              BRICKLET_RS485_DUPLEX_FULL);
+    { Enable full-duplex mode }
+    oBricklet.SetRS485Configuration(115200, BRICKLET_RS485_PARITY_NONE,
+                                BRICKLET_RS485_STOPBITS_1, BRICKLET_RS485_WORDLENGTH_8,
+                                BRICKLET_RS485_DUPLEX_FULL);
 
-  { Register read callback to procedure ReadCB }
-  rs485.OnRead:= {$ifdef FPC}@{$endif}ReadCB;
+    { Register read callback to procedure ReadCB }
+    oBricklet.OnRead:= {$ifdef FPC}@{$endif}ReadCB;
 
-  { Enable read callback }
-  rs485.EnableReadCallback;
+    { Enable read callback }
+    oBricklet.EnableReadCallback;
 
-  { Write "test" string }
-  rs485.Write(['t', 'e', 's', 't']);
+    { Write "test" string }
+    oBricklet.Write(['t', 'e', 's', 't']);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

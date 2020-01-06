@@ -25,6 +25,10 @@ var
 
 procedure TExample.Execute;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
   oBricklet.IPConnection:= oIPConnection;

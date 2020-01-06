@@ -30,6 +30,10 @@ var
 procedure TExample.Execute;
 var segments: array [0..3] of byte;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

@@ -27,6 +27,10 @@ procedure TExample.Execute;
 var year: word; month, day, hour, minute, second, centisecond, weekday: byte;
     timestamp: int64;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 

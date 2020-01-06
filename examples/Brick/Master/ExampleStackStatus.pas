@@ -26,6 +26,10 @@ var
 procedure TExample.Execute;
 var stackVoltage, stackCurrent: word;
 begin
+  try
+
+  finally
+  end;
   { Create IP connection }
   oIPConnection:= TIPConnection.Create(nil);
 
