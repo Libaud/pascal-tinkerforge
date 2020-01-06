@@ -53,7 +53,7 @@ begin
     WriteLn('Press key to exit');
     ReadLn;
   finally
-    oBricklet.Destroy
+    oBricklet.Destroy;
     oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
 end;

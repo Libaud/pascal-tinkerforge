@@ -36,28 +36,6 @@ begin
 
   finally
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  dir:= TBrickletDistanceIR.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  dir.SetDebouncePeriod(10000);
-
-  { Register distance reached callback to procedure DistanceReachedCB }
-  dir.OnDistanceReached:= {$ifdef FPC}@{$endif}DistanceReachedCB;
-
-  { Configure threshold for distance "smaller than 30 cm" }
-  dir.SetDistanceCallbackThreshold('<', 30*10, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

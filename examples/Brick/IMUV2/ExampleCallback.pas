@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    imu: TBrickIMUV2;
+    oBrick: TBrickIMUV2;
   public
     procedure QuaternionCB(sender: TBrickIMUV2; const w: smallint; const x: smallint;
                            const y: smallint; const z: smallint);
@@ -38,25 +38,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  imu:= TBrickIMUV2.Create(nil);
+    { Create device object }
+    oBrick:= TBrickIMUV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register quaternion callback to procedure QuaternionCB }
-  imu.OnQuaternion:= {$ifdef FPC}@{$endif}QuaternionCB;
+    { Register quaternion callback to procedure QuaternionCB }
+    oBrick.OnQuaternion:= {$ifdef FPC}@{$endif}QuaternionCB;
 
-  { Set period for quaternion callback to 0.1s (100ms) }
-  imu.SetQuaternionPeriod(100);
+    { Set period for quaternion callback to 0.1s (100ms) }
+    oBrick.SetQuaternionPeriod(100);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBrick.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

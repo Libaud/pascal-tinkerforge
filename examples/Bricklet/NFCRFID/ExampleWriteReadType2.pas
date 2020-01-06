@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    nr: TBrickletNFCRFID;
+    oBricklet: TBrickletNFCRFID;
   public
     procedure StateChangedCB(sender: TBrickletNFCRFID; const state: byte;
                              const idle: boolean);
@@ -63,28 +63,27 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletNFCRFID.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Register state changed callback to procedure StateChangedCB }
+    oBricklet.OnStateChanged:= {$ifdef FPC}@{$endif}StateChangedCB;
+
+    { Select NFC Forum Type 2 tag }
+    oBricklet.RequestTagID(BRICKLET_NFC_RFID_TAG_TYPE_TYPE2);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  nr:= TBrickletNFCRFID.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Register state changed callback to procedure StateChangedCB }
-  nr.OnStateChanged:= {$ifdef FPC}@{$endif}StateChangedCB;
-
-  { Select NFC Forum Type 2 tag }
-  nr.RequestTagID(BRICKLET_NFC_RFID_TAG_TYPE_TYPE2);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    ai: TBrickletAnalogInV3;
+    oBricklet: TBrickletAnalogInV3;
   public
     procedure VoltageCB(sender: TBrickletAnalogInV3; const voltage: word);
     procedure Execute;
@@ -32,25 +32,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  ai:= TBrickletAnalogInV3.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletAnalogInV3.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register voltage callback to procedure VoltageCB }
-  ai.OnVoltage:= {$ifdef FPC}@{$endif}VoltageCB;
+    { Register voltage callback to procedure VoltageCB }
+    oBricklet.OnVoltage:= {$ifdef FPC}@{$endif}VoltageCB;
 
-  { Set period for voltage callback to 1s (1000ms) without a threshold }
-  ai.SetVoltageCallbackConfiguration(1000, false, 'x', 0, 0);
+    { Set period for voltage callback to 1s (1000ms) without a threshold }
+    oBricklet.SetVoltageCallbackConfiguration(1000, false, 'x', 0, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

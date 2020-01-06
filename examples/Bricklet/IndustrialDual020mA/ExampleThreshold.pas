@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    id020: TBrickletIndustrialDual020mA;
+    oBricklet: TBrickletIndustrialDual020mA;
   public
     procedure CurrentReachedCB(sender: TBrickletIndustrialDual020mA; const sensor: byte;
                                const current: longint);
@@ -29,10 +29,6 @@ var
 procedure TExample.CurrentReachedCB(sender: TBrickletIndustrialDual020mA;
                                     const sensor: byte; const current: longint);
 begin
-  try
-
-  finally
-  end;
   WriteLn(Format('Sensor: %d', [sensor]));
   WriteLn(Format('Current: %f mA', [current/1000000.0]));
   WriteLn('');
@@ -40,28 +36,32 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  id020:= TBrickletIndustrialDual020mA.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletIndustrialDual020mA.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  id020.SetDebouncePeriod(10000);
+    { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+    oBricklet.SetDebouncePeriod(10000);
 
-  { Register current reached callback to procedure CurrentReachedCB }
-  id020.OnCurrentReached:= {$ifdef FPC}@{$endif}CurrentReachedCB;
+    { Register current reached callback to procedure CurrentReachedCB }
+    oBricklet.OnCurrentReached:= {$ifdef FPC}@{$endif}CurrentReachedCB;
 
-  { Configure threshold for current (sensor 1) "greater than 10 mA" }
-  id020.SetCurrentCallbackThreshold(1, '>', 10*1000000, 0);
+    { Configure threshold for current (sensor 1) "greater than 10 mA" }
+    oBricklet.SetCurrentCallbackThreshold(1, '>', 10*1000000, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

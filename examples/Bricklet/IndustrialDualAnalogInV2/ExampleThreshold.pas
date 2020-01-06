@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    idai: TBrickletIndustrialDualAnalogInV2;
+    oBricklet: TBrickletIndustrialDualAnalogInV2;
   public
     procedure VoltageCB(sender: TBrickletIndustrialDualAnalogInV2; const channel: byte;
                         const voltage: longint);
@@ -37,29 +37,29 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletIndustrialDualAnalogInV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Register voltage callback to procedure VoltageCB }
+    oBricklet.OnVoltage:= {$ifdef FPC}@{$endif}VoltageCB;
+
+    { Configure threshold for voltage (channel 0) "greater than 10 V"
+      with a debounce period of 10s (10000ms) }
+    oBricklet.SetVoltageCallbackConfiguration(0, 10000, false, '>', 10*1000, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  idai:= TBrickletIndustrialDualAnalogInV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Register voltage callback to procedure VoltageCB }
-  idai.OnVoltage:= {$ifdef FPC}@{$endif}VoltageCB;
-
-  { Configure threshold for voltage (channel 0) "greater than 10 V"
-    with a debounce period of 10s (10000ms) }
-  idai.SetVoltageCallbackConfiguration(0, 10000, false, '>', 10*1000, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

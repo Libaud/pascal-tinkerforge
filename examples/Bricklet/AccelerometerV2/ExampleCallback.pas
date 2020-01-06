@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    a: TBrickletAccelerometerV2;
+    oBricklet: TBrickletAccelerometerV2;
   public
     procedure AccelerationCB(sender: TBrickletAccelerometerV2; const x: longint;
                              const y: longint; const z: longint);
@@ -37,25 +37,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  a:= TBrickletAccelerometerV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletAccelerometerV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register acceleration callback to procedure AccelerationCB }
-  a.OnAcceleration:= {$ifdef FPC}@{$endif}AccelerationCB;
+    { Register acceleration callback to procedure AccelerationCB }
+    oBricklet.OnAcceleration:= {$ifdef FPC}@{$endif}AccelerationCB;
 
-  { Set period for acceleration callback to 1s (1000ms) }
-  a.SetAccelerationCallbackConfiguration(1000, false);
+    { Set period for acceleration callback to 1s (1000ms) }
+    oBricklet.SetAccelerationCallbackConfiguration(1000, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

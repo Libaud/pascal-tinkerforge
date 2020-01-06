@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    em: TBrickletEnergyMonitor;
+    oBricklet: TBrickletEnergyMonitor;
   public
     procedure EnergyDataCB(sender: TBrickletEnergyMonitor; const voltage: longint;
                            const current: longint; const energy: longint;
@@ -48,25 +48,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  em:= TBrickletEnergyMonitor.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletEnergyMonitor.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register Energy Data callback to procedure EnergyDataCB }
-  em.OnEnergyData:= {$ifdef FPC}@{$endif}EnergyDataCB;
+    { Register Energy Data callback to procedure EnergyDataCB }
+    oBricklet.OnEnergyData:= {$ifdef FPC}@{$endif}EnergyDataCB;
 
-  { Set period for Energy Data callback to 1s (1000ms) }
-  em.SetEnergyDataCallbackConfiguration(1000, false);
+    { Set period for Energy Data callback to 1s (1000ms) }
+    oBricklet.SetEnergyDataCallbackConfiguration(1000, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

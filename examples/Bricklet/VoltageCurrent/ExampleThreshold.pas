@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    vc: TBrickletVoltageCurrent;
+    oBricklet: TBrickletVoltageCurrent;
   public
     procedure PowerReachedCB(sender: TBrickletVoltageCurrent; const power: longint);
     procedure Execute;
@@ -33,31 +33,31 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletVoltageCurrent.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+    oBricklet.SetDebouncePeriod(10000);
+
+    { Register power reached callback to procedure PowerReachedCB }
+    oBricklet.OnPowerReached:= {$ifdef FPC}@{$endif}PowerReachedCB;
+
+    { Configure threshold for power "greater than 10 W" }
+    oBricklet.SetPowerCallbackThreshold('>', 10*1000, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  vc:= TBrickletVoltageCurrent.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  vc.SetDebouncePeriod(10000);
-
-  { Register power reached callback to procedure PowerReachedCB }
-  vc.OnPowerReached:= {$ifdef FPC}@{$endif}PowerReachedCB;
-
-  { Configure threshold for power "greater than 10 W" }
-  vc.SetPowerCallbackThreshold('>', 10*1000, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

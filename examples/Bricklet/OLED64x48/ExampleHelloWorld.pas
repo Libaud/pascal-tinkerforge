@@ -38,7 +38,7 @@ begin
 
     { Clear display }
     oBricklet.ClearDisplay;
-                                                               oled
+
     { Write "Hello World" starting from upper left corner of the screen }
     oBricklet.WriteLine(0, 0, 'Hello World');
 

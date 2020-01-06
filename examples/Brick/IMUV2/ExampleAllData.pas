@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    imu: TBrickIMUV2;
+    oBrick: TBrickIMUV2;
   public
     procedure AllDataCB(sender: TBrickIMUV2; const acceleration: TArray0To2OfInt16;
                         const magneticField: TArray0To2OfInt16;
@@ -70,25 +70,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  imu:= TBrickIMUV2.Create(nil);
+    { Create device object }
+    oBrick:= TBrickIMUV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register all data callback to procedure AllDataCB }
-  imu.OnAllData:= {$ifdef FPC}@{$endif}AllDataCB;
+    { Register all data callback to procedure AllDataCB }
+    oBrick.OnAllData:= {$ifdef FPC}@{$endif}AllDataCB;
 
-  { Set period for all data callback to 0.1s (100ms) }
-  imu.SetAllDataPeriod(100);
+    { Set period for all data callback to 0.1s (100ms) }
+    oBrick.SetAllDataPeriod(100);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBrick.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

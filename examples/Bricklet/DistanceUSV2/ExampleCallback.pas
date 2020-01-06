@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    dus: TBrickletDistanceUSV2;
+    oBricklet: TBrickletDistanceUSV2;
   public
     procedure DistanceCB(sender: TBrickletDistanceUSV2; const distance: word);
     procedure Execute;
@@ -32,25 +32,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  dus:= TBrickletDistanceUSV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletDistanceUSV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register distance callback to procedure DistanceCB }
-  dus.OnDistance:= {$ifdef FPC}@{$endif}DistanceCB;
+    { Register distance callback to procedure DistanceCB }
+    oBricklet.OnDistance:= {$ifdef FPC}@{$endif}DistanceCB;
 
-  { Set period for distance callback to 0.1s (100ms) without a threshold }
-  dus.SetDistanceCallbackConfiguration(100, false, 'x', 0, 0);
+    { Set period for distance callback to 0.1s (100ms) without a threshold }
+    oBricklet.SetDistanceCallbackConfiguration(100, false, 'x', 0, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

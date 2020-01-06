@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    j: TBrickletJoystickV2;
+    oBricklet: TBrickletJoystickV2;
   public
     procedure Execute;
   end;
@@ -27,28 +27,28 @@ procedure TExample.Execute;
 var x, y: smallint;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletJoystickV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current position }
+    oBricklet.GetPosition(x, y);
+
+    WriteLn(Format('Position [X]: %d', [x]));
+    WriteLn(Format('Position [Y]: %d', [y]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  j:= TBrickletJoystickV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current position }
-  j.GetPosition(x, y);
-
-  WriteLn(Format('Position [X]: %d', [x]));
-  WriteLn(Format('Position [Y]: %d', [y]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

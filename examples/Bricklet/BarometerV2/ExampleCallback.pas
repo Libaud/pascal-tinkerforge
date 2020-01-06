@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    b: TBrickletBarometerV2;
+    oBricklet: TBrickletBarometerV2;
   public
     procedure AirPressureCB(sender: TBrickletBarometerV2; const airPressure: longint);
     procedure Execute;
@@ -33,25 +33,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  b:= TBrickletBarometerV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletBarometerV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register air pressure callback to procedure AirPressureCB }
-  b.OnAirPressure:= {$ifdef FPC}@{$endif}AirPressureCB;
+    { Register air pressure callback to procedure AirPressureCB }
+    oBricklet.OnAirPressure:= {$ifdef FPC}@{$endif}AirPressureCB;
 
-  { Set period for air pressure callback to 1s (1000ms) without a threshold }
-  b.SetAirPressureCallbackConfiguration(1000, false, 'x', 0, 0);
+    { Set period for air pressure callback to 1s (1000ms) without a threshold }
+    oBricklet.SetAirPressureCallbackConfiguration(1000, false, 'x', 0, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -23,7 +23,7 @@ const
   UID = 'XYZ'; { Change XYZ to the UID of your IO-4 Bricklet 2.0 }
 
 var
-  e: TExample;                                              io
+  e: TExample;
 
 { Callback procedure for input value callback }
 procedure TExample.InputValueCB(sender: TBrickletIO4V2; const channel: byte;

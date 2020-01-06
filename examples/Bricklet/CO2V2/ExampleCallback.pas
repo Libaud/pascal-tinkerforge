@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    co2: TBrickletCO2V2;
+    oBricklet: TBrickletCO2V2;
   public
     procedure AllValuesCB(sender: TBrickletCO2V2; const co2Concentration: word;
                           const temperature: smallint; const humidity: word);
@@ -37,25 +37,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  co2:= TBrickletCO2V2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletCO2V2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register all values callback to procedure AllValuesCB }
-  co2.OnAllValues:= {$ifdef FPC}@{$endif}AllValuesCB;
+    { Register all values callback to procedure AllValuesCB }
+    oBricklet.OnAllValues:= {$ifdef FPC}@{$endif}AllValuesCB;
 
-  { Set period for all values callback to 1s (1000ms) }
-  co2.SetAllValuesCallbackConfiguration(1000, false);
+    { Set period for all values callback to 1s (1000ms) }
+    oBricklet.SetAllValuesCallbackConfiguration(1000, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

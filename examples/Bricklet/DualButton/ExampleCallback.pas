@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    db: TBrickletDualButton;
+    oBricklet: TBrickletDualButton;
   public
     procedure StateChangedCB(sender: TBrickletDualButton; const buttonL: byte;
                              const buttonR: byte; const ledL: byte; const ledR: byte);
@@ -49,22 +49,26 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  db:= TBrickletDualButton.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletDualButton.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register state changed callback to procedure StateChangedCB }
-  db.OnStateChanged:= {$ifdef FPC}@{$endif}StateChangedCB;
+    { Register state changed callback to procedure StateChangedCB }
+    oBricklet.OnStateChanged:= {$ifdef FPC}@{$endif}StateChangedCB;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

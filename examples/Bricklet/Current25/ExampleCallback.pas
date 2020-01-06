@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    c: TBrickletCurrent25;
+    oBricklet: TBrickletCurrent25;
   public
     procedure CurrentCB(sender: TBrickletCurrent25; const current: smallint);
     procedure Execute;
@@ -32,27 +32,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  c:= TBrickletCurrent25.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletCurrent25.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register current callback to procedure CurrentCB }
-  c.OnCurrent:= {$ifdef FPC}@{$endif}CurrentCB;
+    { Register current callback to procedure CurrentCB }
+    oBricklet.OnCurrent:= {$ifdef FPC}@{$endif}CurrentCB;
 
-  { Set period for current callback to 1s (1000ms)
-    Note: The current callback is only called every second
-          if the current has changed since the last call! }
-  c.SetCurrentCallbackPeriod(1000);
+    { Set period for current callback to 1s (1000ms)
+      Note: The current callback is only called every second
+            if the current has changed since the last call! }
+    oBricklet.SetCurrentCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

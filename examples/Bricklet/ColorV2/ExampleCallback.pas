@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    c: TBrickletColorV2;
+    oBricklet: TBrickletColorV2;
   public
     procedure ColorCB(sender: TBrickletColorV2; const r: word; const g: word;
                       const b: word; const c_: word);
@@ -38,25 +38,29 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
+  try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
-  { Create device object }
-  c:= TBrickletColorV2.Create(nil);
+    { Create device object }
+    oBricklet:= TBrickletColorV2.Create(nil);
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
 
-  { Register color callback to procedure ColorCB }
-  c.OnColor:= {$ifdef FPC}@{$endif}ColorCB;
+    { Register color callback to procedure ColorCB }
+    oBricklet.OnColor:= {$ifdef FPC}@{$endif}ColorCB;
 
-  { Set period for color callback to 0.1s (100ms) }
-  c.SetColorCallbackConfiguration(100, false);
+    { Set period for color callback to 0.1s (100ms) }
+    oBricklet.SetColorCallbackConfiguration(100, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+    WriteLn('Press key to exit');
+    ReadLn;
+  finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

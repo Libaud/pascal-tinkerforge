@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    c: TBrickletCurrent12;
+    oBricklet: TBrickletCurrent12;
   public
     procedure Execute;
   end;
@@ -27,26 +27,25 @@ procedure TExample.Execute;
 var current: smallint;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletCurrent12.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current current }
+    current:= oBricklet.GetCurrent;
+    WriteLn(Format('Current: %f A', [current/1000.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  c:= TBrickletCurrent12.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current current }
-  current:= c.GetCurrent;
-  WriteLn(Format('Current: %f A', [current/1000.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

@@ -27,26 +27,25 @@ procedure TExample.Execute;
 var position: smallint;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    rp:= TBrickletRotaryPoti.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current position }
+    position:= rp.GetPosition;
+    WriteLn(Format('Position: %d', [position])); { Range: -150 to 150 }
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  rp:= TBrickletRotaryPoti.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current position }
-  position:= rp.GetPosition;
-  WriteLn(Format('Position: %d', [position])); { Range: -150 to 150 }
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
