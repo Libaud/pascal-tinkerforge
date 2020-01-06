@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    vc: TBrickletVoltageCurrentV2;
+    oBricklet: TBrickletVoltageCurrentV2;
   public
     procedure Execute;
   end;
@@ -27,30 +27,30 @@ procedure TExample.Execute;
 var voltage, current: longint;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletVoltageCurrentV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current voltage }
+    voltage:= oBricklet.GetVoltage;
+    WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
+
+    { Get current current }
+    current:= oBricklet.GetCurrent;
+    WriteLn(Format('Current: %f A', [current/1000.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  vc:= TBrickletVoltageCurrentV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current voltage }
-  voltage:= vc.GetVoltage;
-  WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
-
-  { Get current current }
-  current:= vc.GetCurrent;
-  WriteLn(Format('Current: %f A', [current/1000.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

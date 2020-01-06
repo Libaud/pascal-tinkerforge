@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    uvl: TBrickletUVLight;
+    oBricklet: TBrickletUVLight;
   public
     procedure UVLightReachedCB(sender: TBrickletUVLight; const uvLight: longword);
     procedure Execute;
@@ -34,31 +34,31 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletUVLight.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+    oBricklet.SetDebouncePeriod(10000);
+
+    { Register UV light reached callback to procedure UVLightReachedCB }
+    oBricklet.OnUVLightReached:= {$ifdef FPC}@{$endif}UVLightReachedCB;
+
+    { Configure threshold for UV light "greater than 75 mW/m²" }
+    oBricklet.SetUVLightCallbackThreshold('>', 75*10, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  uvl:= TBrickletUVLight.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  uvl.SetDebouncePeriod(10000);
-
-  { Register UV light reached callback to procedure UVLightReachedCB }
-  uvl.OnUVLightReached:= {$ifdef FPC}@{$endif}UVLightReachedCB;
-
-  { Configure threshold for UV light "greater than 75 mW/m²" }
-  uvl.SetUVLightCallbackThreshold('>', 75*10, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
