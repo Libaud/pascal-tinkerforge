@@ -7,6 +7,7 @@
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
+        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <Title Value="ExampleAuthenticate"/>
@@ -31,11 +32,6 @@
     </RequiredPackages>
     <Units>
       <Unit>
-        <Filename Value="ExampleAuthenticate.ppr"/>
-        <FRMtype Value="0"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="ExampleAuthenticate.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
@@ -47,7 +43,6 @@
       <Filename Value="ExampleAuthenticate"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
   </CompilerOptions>

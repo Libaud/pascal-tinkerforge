@@ -69,7 +69,7 @@ procedure TExample.Execute;
 begin
   try
     { Create IP Connection }
-    oIPConnection:= TIPConnection.Create(Self);
+    oIPConnection:= TIPConnection.Create(nil);
 
     { Disable auto reconnect mechanism, in case we have the wrong secret.
       If the authentication is successful, reenable it. }

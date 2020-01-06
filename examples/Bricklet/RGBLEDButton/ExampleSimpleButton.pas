@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    rlb: TBrickletRGBLEDButton;
+    oBricklet: TBrickletRGBLEDButton;
   public
     procedure Execute;
   end;
@@ -27,32 +27,31 @@ procedure TExample.Execute;
 var state: byte;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletRGBLEDButton.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current button state }
+    state:= oBricklet.GetButtonState;
+
+    if (state = BRICKLET_RGB_LED_BUTTON_BUTTON_STATE_PRESSED) then begin
+      WriteLn('State: Pressed');
+    end
+    else if (state = BRICKLET_RGB_LED_BUTTON_BUTTON_STATE_RELEASED) then begin
+      WriteLn('State: Released');
+    end;
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  rlb:= TBrickletRGBLEDButton.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current button state }
-  state:= rlb.GetButtonState;
-
-  if (state = BRICKLET_RGB_LED_BUTTON_BUTTON_STATE_PRESSED) then begin
-    WriteLn('State: Pressed');
-  end
-  else if (state = BRICKLET_RGB_LED_BUTTON_BUTTON_STATE_RELEASED) then begin
-    WriteLn('State: Released');
-  end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

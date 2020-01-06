@@ -40,7 +40,7 @@ begin
     oBricklet.IPConnection:= oIPConnection;
     oBricklet.UIDString:= UID;
 
-    { Connect to brickd }              Create
+    { Connect to brickd }
     oIPConnection.Connect(HOST, PORT);
     { Don't use device before ipcon is connected }
 

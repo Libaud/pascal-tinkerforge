@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    imu: TBrickIMUV2;
+    oBrick: TBrickIMUV2;
   public
     procedure Execute;
   end;
@@ -27,30 +27,30 @@ procedure TExample.Execute;
 var w, x, y, z: smallint;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBrick:= TBrickIMUV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current quaternion }
+    oBrick.GetQuaternion(w, x, y, z);
+
+    WriteLn(Format('Quaternion [W]: %f', [w/16383.0]));
+    WriteLn(Format('Quaternion [X]: %f', [x/16383.0]));
+    WriteLn(Format('Quaternion [Y]: %f', [y/16383.0]));
+    WriteLn(Format('Quaternion [Z]: %f', [z/16383.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBrick.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  imu:= TBrickIMUV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current quaternion }
-  imu.GetQuaternion(w, x, y, z);
-
-  WriteLn(Format('Quaternion [W]: %f', [w/16383.0]));
-  WriteLn(Format('Quaternion [X]: %f', [x/16383.0]));
-  WriteLn(Format('Quaternion [Y]: %f', [y/16383.0]));
-  WriteLn(Format('Quaternion [Z]: %f', [z/16383.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

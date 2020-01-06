@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    tir: TBrickletTemperatureIRV2;
+    oBricklet: TBrickletTemperatureIRV2;
   public
     procedure ObjectTemperatureCB(sender: TBrickletTemperatureIRV2;
                                   const temperature: smallint);
@@ -36,32 +36,32 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletTemperatureIRV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
+    oBricklet.SetEmissivity(64224);
+
+    { Register object temperature reached callback to procedure ObjectTemperatureCB }
+    oBricklet.OnObjectTemperature:= {$ifdef FPC}@{$endif}ObjectTemperatureCB;
+
+    { Configure threshold for object temperature "greater than 100 °C"
+      with a debounce period of 10s (10000ms) }
+    oBricklet.SetObjectTemperatureCallbackConfiguration(10000, false, '>', 100*10, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  tir:= TBrickletTemperatureIRV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
-  tir.SetEmissivity(64224);
-
-  { Register object temperature reached callback to procedure ObjectTemperatureCB }
-  tir.OnObjectTemperature:= {$ifdef FPC}@{$endif}ObjectTemperatureCB;
-
-  { Configure threshold for object temperature "greater than 100 °C"
-    with a debounce period of 10s (10000ms) }
-  tir.SetObjectTemperatureCallbackConfiguration(10000, false, '>', 100*10, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

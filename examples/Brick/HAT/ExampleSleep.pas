@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    hat: TBrickHAT;
+    oBrick: TBrickHAT;
   public
     procedure Execute;
   end;
@@ -26,25 +26,25 @@ var
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBrick:= TBrickHAT.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Turn Raspberry Pi and Bricklets off in 2 seconds for 30 minutes with sleep indicator enabled }
+    oBrick.SetSleepMode(2, 1800, true, true, true);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBrick.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  hat:= TBrickHAT.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Turn Raspberry Pi and Bricklets off in 2 seconds for 30 minutes with sleep indicator enabled }
-  hat.SetSleepMode(2, 1800, true, true, true);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    red: TBrickRED;
+    oBrick: TBrickRED;
   public
     procedure CheckError(context: string; errorCode: byte);
     function AllocateString(sessionId: word; buffer: string): word;
@@ -40,7 +40,7 @@ begin
     { FIXME: Currently this helper function only supports strings up to 60 characters }
     raise Exception.Create('String too long');
   end;
-  red.AllocateString(Length(buffer), buffer, sessionId, errorCode, stringId);
+  oBrick.AllocateString(Length(buffer), buffer, sessionId, errorCode, stringId);
   CheckError('AllocateString', errorCode);
   result:= stringId;
 end;
@@ -51,7 +51,7 @@ var errorCode: byte; sessionId: word; remotePathStringId: word; remoteFileId: wo
     counter: longint;
 begin
   { Create session }
-  red.CreateSession(60, errorCode, sessionId);
+  oBrick.CreateSession(60, errorCode, sessionId);
   CheckError('CreateSession', errorCode);
 
   { Open local file for reading }
@@ -62,7 +62,7 @@ begin
   remotePathStringId:= AllocateString(sessionId, remotePath);
 
   { Create remote non-executable file for writing as user/group tf }
-  red.OpenFile(remotePathStringId, BRICK_RED_FILE_FLAG_WRITE_ONLY or BRICK_RED_FILE_FLAG_CREATE or BRICK_RED_FILE_FLAG_NON_BLOCKING,
+  oBrick.OpenFile(remotePathStringId, BRICK_RED_FILE_FLAG_WRITE_ONLY or BRICK_RED_FILE_FLAG_CREATE or BRICK_RED_FILE_FLAG_NON_BLOCKING,
                420 { 0o644 }, 1000, 1000, sessionId, errorCode, remoteFileId);
   CheckError('OpenFile', errorCode);
 
@@ -71,7 +71,7 @@ begin
 
   repeat
     BlockRead(localFile, buffer, 60, lengthRead);
-    red.WriteFile(remoteFileId, buffer, lengthRead, errorCode, lengthWritten);
+    oBrick.WriteFile(remoteFileId, buffer, lengthRead, errorCode, lengthWritten);
     CheckError('WriteFile', errorCode);
 
     if (lengthRead <> lengthWritten) then begin
@@ -84,7 +84,7 @@ begin
     if (counter = 0) then begin
       counter:= 500;
       Write('.');
-      errorCode:= red.KeepSessionAlive(sessionId, 30);
+      errorCode:= oBrick.KeepSessionAlive(sessionId, 30);
       CheckError('KeepSessionAlive', errorCode);
     end;
   until (lengthRead = 0);
@@ -92,37 +92,37 @@ begin
   WriteLn('.');
 
   { Close remote file }
-  red.ReleaseObjectUnchecked(remoteFileId, sessionId);
+  oBrick.ReleaseObjectUnchecked(remoteFileId, sessionId);
 
   { Close local file }
   Close(localFile);
 
   { Expire session }
-  red.ExpireSessionUnchecked(sessionId);
+  oBrick.ExpireSessionUnchecked(sessionId);
 end;
 
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBrick:= TBrickRED.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Read foobar.txt locally and write it to /home/tf/foobar.txt on oBrick Brick }
+    WriteFile('foobar.txt', '/home/tf/foobar.txt');
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBrick.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  red:= TBrickRED.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Read foobar.txt locally and write it to /home/tf/foobar.txt on RED Brick }
-  WriteFile('foobar.txt', '/home/tf/foobar.txt');
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

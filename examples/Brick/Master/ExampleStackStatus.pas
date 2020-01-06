@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    master: TBrickMaster;
+    oBrick: TBrickMaster;
   public
     procedure Execute;
   end;
@@ -27,30 +27,30 @@ procedure TExample.Execute;
 var stackVoltage, stackCurrent: word;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBrick:= TBrickMaster.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Get current stack voltage }
+    stackVoltage:= oBrick.GetStackVoltage;
+    WriteLn(Format('Stack Voltage: %f V', [stackVoltage/1000.0]));
+
+    { Get current stack current }
+    stackCurrent:= oBrick.GetStackCurrent;
+    WriteLn(Format('Stack Current: %f A', [stackCurrent/1000.0]));
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBrick.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  master:= TBrickMaster.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Get current stack voltage }
-  stackVoltage:= master.GetStackVoltage;
-  WriteLn(Format('Stack Voltage: %f V', [stackVoltage/1000.0]));
-
-  { Get current stack current }
-  stackCurrent:= master.GetStackCurrent;
-  WriteLn(Format('Stack Current: %f A', [stackCurrent/1000.0]));
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

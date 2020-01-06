@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    dr: TBrickletDualRelay;
+    oBricklet: TBrickletDualRelay;
   public
     procedure Execute;
   end;
@@ -27,30 +27,29 @@ procedure TExample.Execute;
 var i: integer;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletDualRelay.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Turn relays alternating on/off 10 times with 1 second delay }
+    for i:= 0 to 4 do begin
+      Sleep(1000);
+      oBricklet.SetState(true, false);
+      Sleep(1000);
+      oBricklet.SetState(false, true);
+    end;
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  dr:= TBrickletDualRelay.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Turn relays alternating on/off 10 times with 1 second delay }
-  for i:= 0 to 4 do begin
-    Sleep(1000);
-    dr.SetState(true, false);
-    Sleep(1000);
-    dr.SetState(false, true);
-  end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

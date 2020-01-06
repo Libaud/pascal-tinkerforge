@@ -7,2127 +7,1661 @@
       <Unit>
         <Filename Value="ExampleAuthenticate.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="23"/>
+        <TopLine Value="25"/>
+        <CursorPos X="3" Y="44"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LCD128x64/ExamplePixelMatrix.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="27"/>
+        <CursorPos X="3" Y="34"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ExampleEnumerate.pas"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="42"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MultiTouch/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="22" Y="57"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SegmentDisplay4x7V2/ExampleSetSegments.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="23" Y="50"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="35"/>
+        <CursorPos X="3" Y="54"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/MultiTouch/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/AnalogOut/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/LCD128x64/ExampleGUI.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="86"/>
-        <CursorPos X="23" Y="113"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LCD128x64/ExamplePixelMatrix.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="18"/>
-        <CursorPos X="23" Y="62"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LCD128x64/ExampleBigFont.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="41" Y="32"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="38"/>
+        <CursorPos X="3" Y="57"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/LCD128x64/ExampleHelloWorld.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="24"/>
-        <CursorPos X="11" Y="52"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="5"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/LCD128x64/ExampleTouch.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="73"/>
-        <CursorPos Y="79"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="56"/>
+        <CursorPos X="3" Y="75"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IndustrialDualAnalogIn/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos Y="43"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="7"/>
+        <CursorPos X="3" Y="39"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IndustrialDualAnalogIn/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDualAnalogIn/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos X="55" Y="43"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="8"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/AmbientLightV3/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/AmbientLightV3/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLightV3/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="8"/>
-        <CursorPos X="45" Y="40"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="10"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/MotionDetectorV2/ExampleIndicator.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="14"/>
-        <CursorPos X="23" Y="47"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MotionDetectorV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos X="47" Y="46"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/HallEffectV2/ExampleCounter.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="43" Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/HallEffectV2/ExampleCounterCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="7"/>
-        <CursorPos X="43" Y="39"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="11"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/HallEffectV2/ExampleMagneticFluxDensity.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos X="23" Y="49"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="12"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IndustrialAnalogOut/ExampleSimpleVoltage.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="13"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IndustrialAnalogOut/ExampleSimpleCurrent.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="14"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/GPSV2/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/GPSV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="26"/>
-        <CursorPos X="37" Y="46"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/NFC/ExampleWriteReadType2.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="76"/>
-        <CursorPos Y="91"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="../sources/BrickletNFC.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="667"/>
-        <CursorPos X="22" Y="336"/>
+        <EditorIndex Value="15"/>
+        <CursorPos X="3" Y="29"/>
         <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/NFCRFID/ExampleWriteReadType2.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="55"/>
-        <CursorPos Y="69"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="../sources/BrickletNFCRFID.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="187"/>
-        <CursorPos X="29" Y="240"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Voltage/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="38" Y="12"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryEncoderV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="26"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RealTimeClockV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="24"/>
-        <CursorPos X="23" Y="81"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/DC/ExampleConfiguration.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos Y="49"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/XMC1400Breakout/ExampleGPIO.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/DC/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PiezoSpeakerV2/ExampleAlarm.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/IMUV2/ExampleAllData.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PiezoBuzzer/ExampleBeep.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PiezoSpeaker/ExampleBeep.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PiezoSpeakerV2/ExampleBeep.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SegmentDisplay4x7V2/ExampleBlinkColon.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LCD16x2/ExampleButtonCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LCD20x4/ExampleButtonCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/IMU/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/IMUV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Accelerometer/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AccelerometerV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AirQuality/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLight/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLightV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogIn/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogInV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogInV3/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Barometer/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/BarometerV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CO2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CO2V2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Color/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ColorV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Compass/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Current12/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Current25/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceIR/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceIRV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceUS/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceUSV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DualButton/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DualButtonV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DustDetector/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/EnergyMonitor/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/GPS/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/HallEffect/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Humidity/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/HumidityV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalIn4V2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDual020mA/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDual020mAV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDualAnalogInV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Joystick/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/JoystickV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LaserRangeFinder/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LEDStrip/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LEDStripV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Line/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LinearPoti/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LinearPotiV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LoadCell/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LoadCellV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Moisture/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MotionDetector/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MotorizedLinearPoti/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MultiTouchV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OutdoorWeather/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ParticulateMatter/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PTC/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PTCV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RealTimeClock/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RealTimeClockV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RGBLEDButton/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryEncoder/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryEncoderV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryPoti/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryPotiV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SoundIntensity/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SoundPressureLevel/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Temperature/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureIR/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureIRV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ThermalImaging/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Thermocouple/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ThermocoupleV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Tilt/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/UVLight/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/UVLightV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/VoltageCurrent/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/VoltageCurrentV2/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/Servo/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/SilentStepper/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/Stepper/ExampleCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/Servo/ExampleConfiguration.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/SilentStepper/ExampleConfiguration.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/Stepper/ExampleConfiguration.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalIn4V2/ExampleEdgeCount.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/NFC/ExampleEmulateNDEF.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Joystick/ExampleFindBorders.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="46"/>
-        <CursorPos X="23" Y="72"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/EPaper296x128/ExampleHelloWorld.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="24"/>
-        <CursorPos X="23" Y="51"/>
-        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/LCD16x2/ExampleHelloWorld.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="15"/>
-        <CursorPos X="23" Y="48"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="16"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="Bricklet/LCD20x4/ExampleHelloWorld.pas"/>
+        <Filename Value="Bricklet/LCD16x2/ExampleUnicode.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos X="23" Y="48"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OLED128x64/ExampleHelloWorld.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="16" Y="48"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OLED128x64V2/ExampleHelloWorld.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos X="23" Y="48"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OLED64x48/ExampleHelloWorld.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos X="23" Y="48"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO16/ExampleInput.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="23" Y="47"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO4/ExampleInput.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="20"/>
-        <CursorPos X="23" Y="47"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalIn4/ExampleInterrupt.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="23" Y="59"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO16/ExampleInterrupt.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="33"/>
-        <CursorPos X="23" Y="60"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO16V2/ExampleInterrupt.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="33"/>
-        <CursorPos X="23" Y="60"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO4/ExampleInterrupt.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos X="23" Y="59"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="17"/>
+        <TopLine Value="90"/>
+        <CursorPos X="3" Y="109"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IO4V2/ExampleInterrupt.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos X="23" Y="60"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CAN/ExampleLoopback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="43"/>
-        <CursorPos X="23" Y="79"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CANV2/ExampleLoopback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="39"/>
-        <CursorPos X="23" Y="76"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RS232/ExampleLoopback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="39"/>
-        <CursorPos X="23" Y="81"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RS232V2/ExampleLoopback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="25"/>
-        <CursorPos X="23" Y="64"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RS485/ExampleLoopback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="23" Y="70"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RS485/ExampleModbusMaster.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="37"/>
-        <CursorPos X="23" Y="74"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RS485/ExampleModbusSlave.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="40"/>
-        <CursorPos X="7" Y="56"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PiezoBuzzer/ExampleMorseCode.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="8"/>
-        <CursorPos X="23" Y="45"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PiezoSpeaker/ExampleMorseCode.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="23" Y="45"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MotorizedLinearPoti/ExampleMotor.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="18"/>
         <TopLine Value="21"/>
-        <CursorPos X="23" Y="57"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SegmentDisplay4x7V2/ExampleNumericValue.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos X="23" Y="47"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO16/ExampleOutput.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos X="23" Y="48"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO16V2/ExampleOutput.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="23" Y="54"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IO4/ExampleOutput.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="23" Y="48"/>
-        <UsageCount Value="11"/>
+        <CursorPos X="3" Y="40"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IO4V2/ExampleOutput.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="15"/>
-        <CursorPos X="23" Y="54"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="19"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="Bricklet/OLED128x64/ExamplePixelMatrix.pas"/>
+        <Filename Value="Bricklet/IndustrialDualAnalogInV2/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="54"/>
-        <CursorPos X="23" Y="93"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OLED128x64V2/ExamplePixelMatrix.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos X="23" Y="60"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OLED64x48/ExamplePixelMatrix.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="41"/>
-        <CursorPos X="23" Y="80"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/HAT/ExamplePrintVoltages.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="20" Y="50"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/OneWire/ExampleReadDS18B20Temperature.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="23" Y="70"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/RED/ExampleReadFile.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="79"/>
-        <CursorPos X="20" Y="116"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RemoteSwitchV2/ExampleRemoteCallback.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="33"/>
-        <CursorPos X="23" Y="70"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/NFC/ExampleScanForTags.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="44"/>
-        <CursorPos X="16" Y="83"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/NFCRFID/ExampleScanForTags.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="42"/>
-        <CursorPos X="23" Y="79"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/HATZero/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/IMU/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/IMUV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Accelerometer/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AccelerometerV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AirQuality/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLight/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLightV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogIn/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogInV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogInV3/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogOutV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogOutV3/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Barometer/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/BarometerV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CO2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CO2V2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Color/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ColorV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Compass/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Current12/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Current25/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceIR/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceIRV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceUS/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DistanceUSV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DMX/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DualRelay/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/DustDetector/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/EnergyMonitor/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="34"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/GPS/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/HallEffect/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Humidity/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/HumidityV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialCounter/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalIn4/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalIn4V2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalOut4/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDigitalOut4V2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDual020mA/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDual020mAV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="20"/>
+        <TopLine Value="7"/>
+        <CursorPos X="3" Y="39"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IndustrialDualAnalogInV2/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDualRelay/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialQuadRelay/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialQuadRelayV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Isolator/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="34"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Joystick/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/JoystickV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LaserRangeFinder/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LEDStrip/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LEDStripV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Line/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LinearPoti/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LinearPotiV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LoadCell/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LoadCellV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Moisture/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MotorizedLinearPoti/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/MultiTouchV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ParticulateMatter/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PTC/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PTCV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RealTimeClock/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="34"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RGBLED/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RGBLEDV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryEncoder/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryPoti/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RotaryPotiV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SegmentDisplay4x7/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="2"/>
-        <CursorPos Y="37"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SolidStateRelay/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SolidStateRelayV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SoundIntensity/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SoundPressureLevel/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Temperature/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureIR/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureIRV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Thermocouple/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ThermocoupleV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Tilt/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/UVLight/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/UVLightV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Voltage/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/VoltageCurrent/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/VoltageCurrentV2/ExampleSimple.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RGBLEDButton/ExampleSimpleButton.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RGBLEDButton/ExampleSimpleColor.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialAnalogOutV2/ExampleSimpleCurrent.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialAnalogOutV2/ExampleSimpleVoltage.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/HAT/ExampleSleep.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Brick/Master/ExampleStackStatus.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RemoteSwitch/ExampleSwitchSocket.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/RemoteSwitchV2/ExampleSwitchSocket.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="32"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Accelerometer/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="45"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLight/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="42"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AmbientLightV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos Y="42"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogIn/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos X="103" Y="22"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogInV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/AnalogInV3/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="25"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Barometer/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="42"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/BarometerV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/CO2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Color/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="45"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Current12/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Current25/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="21"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/DistanceIR/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="22"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="Bricklet/DistanceIRV2/ExampleThreshold.pas"/>
+        <Filename Value="Bricklet/DistanceIR/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="23"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="Bricklet/DistanceUS/ExampleThreshold.pas"/>
+        <Filename Value="Bricklet/CO2V2/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="24"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="Bricklet/DistanceUSV2/ExampleThreshold.pas"/>
+        <Filename Value="Bricklet/RotaryEncoder/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="25"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SegmentDisplay4x7V2/ExampleSetSegments.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="26"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SegmentDisplay4x7V2/ExampleNumericValue.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="27"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AirQuality/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="28"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/NFC/ExampleWriteReadType2.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="29"/>
+        <TopLine Value="68"/>
+        <CursorPos X="3" Y="87"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/NFC/ExampleScanForTags.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="30"/>
+        <TopLine Value="44"/>
+        <CursorPos X="3" Y="63"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RotaryPoti/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="31"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/VoltageCurrent/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="32"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/VoltageCurrent/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="33"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RemoteSwitch/ExampleSwitchSocket.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="34"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OLED128x64V2/ExamplePixelMatrix.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="35"/>
+        <TopLine Value="2"/>
+        <CursorPos X="3" Y="34"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OLED128x64V2/ExampleHelloWorld.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="36"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Joystick/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="37"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Joystick/ExampleFindBorders.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="38"/>
+        <TopLine Value="30"/>
+        <CursorPos X="3" Y="49"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Moisture/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="39"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Moisture/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="40"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/EnergyMonitor/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="41"/>
+        <CursorPos X="3" Y="30"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Current12/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="42"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Current12/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="43"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OneWire/ExampleReadDS18B20Temperature.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="44"/>
+        <CursorPos X="3" Y="31"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO16V2/ExampleInterrupt.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="45"/>
+        <TopLine Value="21"/>
+        <CursorPos X="3" Y="40"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO16V2/ExampleOutput.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="46"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/NFCRFID/ExampleWriteReadType2.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="47"/>
+        <TopLine Value="46"/>
+        <CursorPos X="3" Y="65"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/NFCRFID/ExampleScanForTags.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="48"/>
+        <TopLine Value="39"/>
+        <CursorPos X="3" Y="58"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/JoystickV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="49"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/DustDetector/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="50"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DustDetector/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="51"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DistanceIRV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="52"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DistanceIRV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="53"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DMX/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="54"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogOutV3/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="55"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Tilt/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="56"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AccelerometerV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="57"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDigitalIn4V2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="58"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Thermocouple/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="59"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Thermocouple/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="60"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SolidStateRelay/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="61"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/Humidity/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="62"/>
+        <TopLine Value="4"/>
+        <CursorPos X="3" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Humidity/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="63"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogIn/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="64"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogIn/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="65"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDual020mA/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="66"/>
+        <CursorPos X="3" Y="32"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDual020mA/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="67"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/ParticulateMatter/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="68"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RotaryPotiV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="69"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RGBLEDV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="70"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/PiezoBuzzer/ExampleMorseCode.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="71"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialQuadRelay/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="72"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DistanceUSV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="73"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DistanceUSV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="74"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/MultiTouchV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="75"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/PTCV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="76"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/PTCV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="77"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/CAN/ExampleLoopback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="78"/>
+        <TopLine Value="31"/>
+        <CursorPos X="3" Y="50"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/TemperatureV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="79"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/TemperatureV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="80"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/GPS/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="81"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Voltage/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="82"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Voltage/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="83"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RotaryEncoderV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="84"/>
+        <CursorPos X="3" Y="30"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LinearPoti/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="85"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/UVLight/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="86"/>
+        <TopLine Value="4"/>
+        <CursorPos X="3" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/UVLight/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="87"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LoadCellV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="88"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LoadCellV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="89"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Current25/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="90"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Current25/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="91"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/PTC/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="92"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/PTC/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="93"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/VoltageCurrentV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="94"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/VoltageCurrentV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="95"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RemoteSwitchV2/ExampleSwitchSocket.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="96"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RemoteSwitchV2/ExampleRemoteCallback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="97"/>
+        <TopLine Value="31"/>
+        <CursorPos X="3" Y="50"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/HallEffect/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="98"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AmbientLightV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="99"/>
+        <TopLine Value="6"/>
+        <CursorPos X="3" Y="38"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AmbientLightV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="100"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OLED64x48/ExamplePixelMatrix.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="101"/>
+        <TopLine Value="35"/>
+        <CursorPos X="3" Y="54"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OLED64x48/ExampleHelloWorld.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="102"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LoadCell/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="103"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LoadCell/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="104"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDigitalIn4/ExampleInterrupt.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="105"/>
+        <TopLine Value="7"/>
+        <CursorPos X="3" Y="39"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDigitalIn4/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="106"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RealTimeClock/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="107"/>
+        <CursorPos X="3" Y="30"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO4/ExampleInterrupt.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="108"/>
+        <TopLine Value="7"/>
+        <CursorPos X="3" Y="39"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO4/ExampleOutput.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="109"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO4/ExampleInput.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="110"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDual020mAV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="111"/>
+        <TopLine Value="7"/>
+        <CursorPos X="3" Y="39"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDual020mAV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="112"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialAnalogOutV2/ExampleSimpleVoltage.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="113"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/TemperatureIR/ExampleWaterBoiling.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="114"/>
+        <TopLine Value="6"/>
+        <CursorPos X="3" Y="38"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/TemperatureIR/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="115"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SegmentDisplay4x7/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="116"/>
+        <CursorPos X="3" Y="33"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/PiezoSpeaker/ExampleMorseCode.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="117"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RS232V2/ExampleLoopback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="118"/>
+        <TopLine Value="22"/>
+        <CursorPos X="3" Y="41"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/XMC1400Breakout/ExampleGPIO.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="119"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/CANV2/ExampleLoopback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="120"/>
+        <TopLine Value="29"/>
+        <CursorPos X="3" Y="48"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/UVLightV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="121"/>
+        <TopLine Value="4"/>
+        <CursorPos X="3" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/UVLightV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="122"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LaserRangeFinder/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="123"/>
+        <TopLine Value="4"/>
+        <CursorPos X="3" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LaserRangeFinder/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="124"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Compass/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="125"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Color/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="126"/>
+        <TopLine Value="22"/>
+        <CursorPos X="3" Y="41"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Color/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="127"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDigitalOut4V2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="128"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialQuadRelayV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="129"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/BarometerV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="130"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/BarometerV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="131"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LEDStripV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="132"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogOutV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="133"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/ColorV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="134"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SoundIntensity/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="135"/>
+        <TopLine Value="4"/>
+        <CursorPos X="3" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SoundIntensity/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="136"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/MotorizedLinearPoti/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="137"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/MotorizedLinearPoti/ExampleMotor.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="138"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RS232/ExampleLoopback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="139"/>
+        <TopLine Value="39"/>
+        <CursorPos X="3" Y="58"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SoundPressureLevel/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="140"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SoundPressureLevel/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="141"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO16/ExampleInterrupt.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="142"/>
+        <TopLine Value="21"/>
+        <CursorPos X="3" Y="40"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO16/ExampleOutput.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="143"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IO16/ExampleInput.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="144"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDualRelay/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="145"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Line/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="146"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Line/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="147"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/EPaper296x128/ExampleHelloWorld.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="148"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Barometer/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="149"/>
+        <TopLine Value="6"/>
+        <CursorPos X="3" Y="38"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Barometer/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="150"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RS485/ExampleLoopback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="151"/>
+        <TopLine Value="23"/>
+        <CursorPos X="3" Y="42"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RS485/ExampleModbusMaster.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="152"/>
+        <TopLine Value="26"/>
+        <CursorPos X="3" Y="45"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RS485/ExampleModbusSlave.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="153"/>
+        <TopLine Value="32"/>
+        <CursorPos X="3" Y="51"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/SolidStateRelayV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="154"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RGBLED/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="155"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Temperature/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="156"/>
+        <TopLine Value="6"/>
+        <CursorPos X="3" Y="38"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Temperature/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="157"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialDigitalOut4/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="158"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LinearPotiV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="159"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Isolator/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="160"/>
+        <CursorPos X="3" Y="30"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/CO2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="161"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/CO2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="162"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RealTimeClockV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="163"/>
+        <CursorPos X="3" Y="30"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/ThermocoupleV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="164"/>
+        <TopLine Value="4"/>
+        <CursorPos X="3" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/ThermocoupleV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="165"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OLED128x64/ExamplePixelMatrix.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="166"/>
+        <TopLine Value="48"/>
+        <CursorPos X="3" Y="67"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/OLED128x64/ExampleHelloWorld.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="167"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DistanceUS/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="168"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DistanceUS/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="169"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogInV2/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="170"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogInV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="171"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Accelerometer/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="172"/>
+        <TopLine Value="22"/>
+        <CursorPos X="3" Y="41"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/Accelerometer/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="173"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/IndustrialCounter/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="174"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AmbientLight/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="175"/>
+        <TopLine Value="6"/>
+        <CursorPos X="3" Y="38"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AmbientLight/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="176"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogInV3/ExampleThreshold.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="177"/>
+        <TopLine Value="3"/>
+        <CursorPos X="3" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/AnalogInV3/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="178"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/HumidityV2/ExampleThreshold.pas"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDual020mA/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="36"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDual020mAV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="43"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/IndustrialDualAnalogInV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos Y="43"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LaserRangeFinder/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Line/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LoadCell/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/LoadCellV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Moisture/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PTC/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/PTCV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SoundIntensity/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/SoundPressureLevel/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Temperature/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="42"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Thermocouple/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/ThermocoupleV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="25"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/UVLight/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/UVLightV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="27"/>
-        <CursorPos Y="40"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/Voltage/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/VoltageCurrent/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/VoltageCurrentV2/ExampleThreshold.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
-        <CursorPos Y="39"/>
-        <UsageCount Value="11"/>
+        <CursorPos X="23" Y="57"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="Bricklet/LCD16x2/ExampleUnicode.pas"/>
+        <Filename Value="Bricklet/HumidityV2/ExampleSimple.pas"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="104"/>
-        <CursorPos Y="113"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="13"/>
+        <CursorPos X="23" Y="47"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/LCD20x4/ExampleHelloWorld.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="13"/>
+        <CursorPos Y="51"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/LCD20x4/ExampleUnicode.pas"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="105"/>
-        <CursorPos Y="113"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Bricklet/TemperatureIR/ExampleWaterBoiling.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="34"/>
-        <CursorPos Y="42"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="104"/>
+        <CursorPos X="23" Y="135"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/TemperatureIRV2/ExampleWaterBoiling.pas"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="32"/>
-        <CursorPos Y="42"/>
-        <UsageCount Value="11"/>
+        <CursorPos X="23" Y="62"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/TemperatureIRV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="23" Y="51"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/DualRelay/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="5" Y="34"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RGBLEDButton/ExampleSimpleButton.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="6" Y="34"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Bricklet/RGBLEDButton/ExampleSimpleColor.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="15"/>
+        <CursorPos X="23" Y="45"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="Brick/RED/ExampleWriteFile.pas"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="88"/>
+        <TopLine Value="92"/>
+        <CursorPos X="20" Y="123"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/RED/ExampleReadFile.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="80"/>
         <CursorPos Y="110"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/HAT/ExampleSleep.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="15"/>
+        <CursorPos X="20" Y="45"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/HAT/ExamplePrintVoltages.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/IMUV2/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="20" Y="51"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/Master/ExampleStackStatus.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="21"/>
+        <CursorPos X="20" Y="51"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/HATZero/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="20" Y="47"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/IMU/ExampleSimple.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="21"/>
+        <CursorPos X="20" Y="51"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/DC/ExampleConfiguration.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Brick/DC/ExampleCallback.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="46"/>
+        <CursorPos X="3" Y="46"/>
+        <UsageCount Value="10"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="-1"/>
