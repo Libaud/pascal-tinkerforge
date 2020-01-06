@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    uvl: TBrickletUVLightV2;
+    oBricklet: TBrickletUVLightV2;
   public
     procedure UVICB(sender: TBrickletUVLightV2; const uvi: longint);
     procedure Execute;
@@ -34,29 +34,29 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletUVLightV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Register UV index callback to procedure UVICB }
+    oBricklet.OnUVI:= {$ifdef FPC}@{$endif}UVICB;
+
+    { Configure threshold for UV index "greater than 3"
+      with a debounce period of 1s (1000ms) }
+    oBricklet.SetUVICallbackConfiguration(1000, false, '>', 3*10, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  uvl:= TBrickletUVLightV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Register UV index callback to procedure UVICB }
-  uvl.OnUVI:= {$ifdef FPC}@{$endif}UVICB;
-
-  { Configure threshold for UV index "greater than 3"
-    with a debounce period of 1s (1000ms) }
-  uvl.SetUVICallbackConfiguration(1000, false, '>', 3*10, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
