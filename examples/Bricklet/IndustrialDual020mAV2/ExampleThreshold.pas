@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    id020: TBrickletIndustrialDual020mAV2;
+    oBricklet: TBrickletIndustrialDual020mAV2;
   public
     procedure CurrentCB(sender: TBrickletIndustrialDual020mAV2; const channel: byte;
                         const current: longint);
@@ -37,29 +37,29 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletIndustrialDual020mAV2.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Register current callback to procedure CurrentCB }
+    oBricklet.OnCurrent:= {$ifdef FPC}@{$endif}CurrentCB;
+
+    { Configure threshold for current (channel 0) "greater than 10 mA"
+      with a debounce period of 10s (10000ms) }
+    oBricklet.SetCurrentCallbackConfiguration(0, 10000, false, '>', 10*1000000, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  id020:= TBrickletIndustrialDual020mAV2.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Register current callback to procedure CurrentCB }
-  id020.OnCurrent:= {$ifdef FPC}@{$endif}CurrentCB;
-
-  { Configure threshold for current (channel 0) "greater than 10 mA"
-    with a debounce period of 10s (10000ms) }
-  id020.SetCurrentCallbackConfiguration(0, 10000, false, '>', 10*1000000, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin

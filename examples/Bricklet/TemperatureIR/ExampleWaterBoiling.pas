@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    tir: TBrickletTemperatureIR;
+    oBricklet: TBrickletTemperatureIR;
   public
     procedure ObjectTemperatureReachedCB(sender: TBrickletTemperatureIR;
                                          const temperature: smallint);
@@ -36,34 +36,34 @@ end;
 procedure TExample.Execute;
 begin
   try
+    { Create IP connection }
+    oIPConnection:= TIPConnection.Create(nil);
 
+    { Create device object }
+    oBricklet:= TBrickletTemperatureIR.Create(nil);
+
+    { Connect to brickd }
+    oIPConnection.Connect(HOST, PORT);
+    { Don't use device before ipcon is connected }
+
+    { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
+    oBricklet.SetEmissivity(64224);
+
+    { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+    oBricklet.SetDebouncePeriod(10000);
+
+    { Register object temperature reached callback to procedure ObjectTemperatureReachedCB }
+    oBricklet.OnObjectTemperatureReached:= {$ifdef FPC}@{$endif}ObjectTemperatureReachedCB;
+
+    { Configure threshold for object temperature "greater than 100 °C" }
+    oBricklet.SetObjectTemperatureCallbackThreshold('>', 100*10, 0);
+
+    WriteLn('Press key to exit');
+    ReadLn;
   finally
+    oBricklet.Destroy;
+    oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-  { Create IP connection }
-  oIPConnection:= TIPConnection.Create(nil);
-
-  { Create device object }
-  tir:= TBrickletTemperatureIR.Create(nil);
-
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
-
-  { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
-  tir.SetEmissivity(64224);
-
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  tir.SetDebouncePeriod(10000);
-
-  { Register object temperature reached callback to procedure ObjectTemperatureReachedCB }
-  tir.OnObjectTemperatureReached:= {$ifdef FPC}@{$endif}ObjectTemperatureReachedCB;
-
-  { Configure threshold for object temperature "greater than 100 °C" }
-  tir.SetObjectTemperatureCallbackThreshold('>', 100*10, 0);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
 end;
 
 begin
