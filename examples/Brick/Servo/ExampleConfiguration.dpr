@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    servo: TBrickServo;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickServo;
   public
     procedure Execute;
   end;
@@ -26,13 +26,13 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  servo := TBrickServo.Create(nil);
+  oBrick := TBrickServo.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Configure two servos with voltage 5.5V
@@ -41,31 +41,31 @@ begin
 
     Servo 2: Connected to port 5, period of 20ms, pulse width of 0.95
              to 1.95ms and operating angle -90 to 90° }
-  servo.SetOutputVoltage(5500);
+  oBrick.SetOutputVoltage(5500);
 
-  servo.SetDegree(0, -10000, 10000);
-  servo.SetPulseWidth(0, 1000, 2000);
-  servo.SetPeriod(0, 19500);
-  servo.SetAcceleration(0, 1000); { Slow acceleration }
-  servo.SetVelocity(0, 65535); { Full speed }
+  oBrick.SetDegree(0, -10000, 10000);
+  oBrick.SetPulseWidth(0, 1000, 2000);
+  oBrick.SetPeriod(0, 19500);
+  oBrick.SetAcceleration(0, 1000); { Slow acceleration }
+  oBrick.SetVelocity(0, 65535); { Full speed }
 
-  servo.SetDegree(5, -9000, 9000);
-  servo.SetPulseWidth(5, 950, 1950);
-  servo.SetPeriod(5, 20000);
-  servo.SetAcceleration(5, 65535); { Full acceleration }
-  servo.SetVelocity(5, 65535); { Full speed }
+  oBrick.SetDegree(5, -9000, 9000);
+  oBrick.SetPulseWidth(5, 950, 1950);
+  oBrick.SetPeriod(5, 20000);
+  oBrick.SetAcceleration(5, 65535); { Full acceleration }
+  oBrick.SetVelocity(5, 65535); { Full speed }
 
-  servo.SetPosition(0, 10000); { Set to most right position }
-  servo.Enable(0);
+  oBrick.SetPosition(0, 10000); { Set to most right position }
+  oBrick.Enable(0);
 
-  servo.SetPosition(5, -9000); { Set to most left position }
-  servo.Enable(5);
+  oBrick.SetPosition(5, -9000); { Set to most left position }
+  oBrick.Enable(5);
 
   WriteLn('Press key to exit');
   ReadLn;
-  servo.Disable(0);
-  servo.Disable(5);
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oBrick.Disable(0);
+  oBrick.Disable(5);
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

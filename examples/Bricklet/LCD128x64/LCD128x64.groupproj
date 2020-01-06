@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E2836A99-66B1-4CC4-8F7F-A2123EE4BBED}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleTouch.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleBigFont.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleGUI.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExamplePixelMatrix.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleTouch">
+        <MSBuild Projects="ExampleTouch.dproj"/>
+    </Target>
+    <Target Name="ExampleTouch:Clean">
+        <MSBuild Projects="ExampleTouch.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleTouch:Make">
+        <MSBuild Projects="ExampleTouch.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBigFont">
+        <MSBuild Projects="ExampleBigFont.dproj"/>
+    </Target>
+    <Target Name="ExampleBigFont:Clean">
+        <MSBuild Projects="ExampleBigFont.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBigFont:Make">
+        <MSBuild Projects="ExampleBigFont.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleGUI">
+        <MSBuild Projects="ExampleGUI.dproj"/>
+    </Target>
+    <Target Name="ExampleGUI:Clean">
+        <MSBuild Projects="ExampleGUI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleGUI:Make">
+        <MSBuild Projects="ExampleGUI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleHelloWorld">
+        <MSBuild Projects="ExampleHelloWorld.dproj"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Clean">
+        <MSBuild Projects="ExampleHelloWorld.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Make">
+        <MSBuild Projects="ExampleHelloWorld.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix">
+        <MSBuild Projects="ExamplePixelMatrix.dproj"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix:Clean">
+        <MSBuild Projects="ExamplePixelMatrix.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix:Make">
+        <MSBuild Projects="ExamplePixelMatrix.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleTouch;ExampleBigFont;ExampleGUI;ExampleHelloWorld;ExamplePixelMatrix"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleTouch:Clean;ExampleBigFont:Clean;ExampleGUI:Clean;ExampleHelloWorld:Clean;ExamplePixelMatrix:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleTouch:Make;ExampleBigFont:Make;ExampleGUI:Make;ExampleHelloWorld:Make;ExamplePixelMatrix:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

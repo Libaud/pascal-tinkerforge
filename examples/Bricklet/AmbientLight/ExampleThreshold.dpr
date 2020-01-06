@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    al: TBrickletAmbientLight;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletAmbientLight;
   public
     procedure IlluminanceReachedCB(sender: TBrickletAmbientLight;
                                    const illuminance: word);
@@ -36,27 +36,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  al := TBrickletAmbientLight.Create(UID, ipcon);
+  oBricklet := TBrickletAmbientLight.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  al.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register illuminance reached callback to procedure IlluminanceReachedCB }
-  al.OnIlluminanceReached := {$ifdef FPC}@{$endif}IlluminanceReachedCB;
+  oBricklet.OnIlluminanceReached := {$ifdef FPC}@{$endif}IlluminanceReachedCB;
 
   { Configure threshold for illuminance "greater than 200 lx" }
-  al.SetIlluminanceCallbackThreshold('>', 200*10, 0);
+  oBricklet.SetIlluminanceCallbackThreshold('>', 200*10, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

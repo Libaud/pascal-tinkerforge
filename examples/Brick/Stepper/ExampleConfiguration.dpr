@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    stepper: TBrickStepper;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickStepper;
   public
     procedure Execute;
   end;
@@ -26,30 +26,32 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  stepper := TBrickStepper.Create(UID, ipcon);
+  oBrick := TBrickStepper.Create(nil);
+  oBrick.UIDString:= UID;
+  oBrick.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  stepper.SetMotorCurrent(800); { 800mA }
-  stepper.SetStepMode(8); { 1/8 step mode }
-  stepper.SetMaxVelocity(2000); { Velocity 2000 steps/s }
+  oBrick.SetMotorCurrent(800); { 800mA }
+  oBrick.SetStepMode(8); { 1/8 step mode }
+  oBrick.SetMaxVelocity(2000); { Velocity 2000 steps/s }
 
   { Slow acceleration (500 steps/s^2),
     Fast deacceleration (5000 steps/s^2) }
-  stepper.SetSpeedRamping(500, 5000);
+  oBrick.SetSpeedRamping(500, 5000);
 
-  stepper.Enable; { Enable motor power }
-  stepper.SetSteps(60000); { Drive 60000 steps forward }
+  oBrick.Enable; { Enable motor power }
+  oBrick.SetSteps(60000); { Drive 60000 steps forward }
 
   WriteLn('Press key to exit');
   ReadLn;
-  stepper.Disable;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oBrick.Disable;
+  oBrick.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

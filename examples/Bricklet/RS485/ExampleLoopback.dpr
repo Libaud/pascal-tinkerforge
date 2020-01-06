@@ -12,8 +12,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    rs485: TBrickletRS485;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRS485;
   public
     procedure ReadCB(sender: TBrickletRS485; const message_: TArrayOfChar);
     procedure Execute;
@@ -40,32 +40,32 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  rs485 := TBrickletRS485.Create(UID, ipcon);
+  oBricklet := TBrickletRS485.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Enable full-duplex mode }
-  rs485.SetRS485Configuration(115200, BRICKLET_RS485_PARITY_NONE,
+  oBricklet.SetRS485Configuration(115200, BRICKLET_RS485_PARITY_NONE,
                               BRICKLET_RS485_STOPBITS_1, BRICKLET_RS485_WORDLENGTH_8,
                               BRICKLET_RS485_DUPLEX_FULL);
 
   { Register read callback to procedure ReadCB }
-  rs485.OnRead := {$ifdef FPC}@{$endif}ReadCB;
+  oBricklet.OnRead := {$ifdef FPC}@{$endif}ReadCB;
 
   { Enable read callback }
-  rs485.EnableReadCallback;
+  oBricklet.EnableReadCallback;
 
   { Write "test" string }
-  rs485.Write(['t', 'e', 's', 't']);
+  oBricklet.Write(['t', 'e', 's', 't']);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

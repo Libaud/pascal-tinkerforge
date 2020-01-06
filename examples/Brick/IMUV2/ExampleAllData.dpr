@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    imu: TBrickIMUV2;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickIMUV2;
   public
     procedure AllDataCB(sender: TBrickIMUV2; const acceleration: TArray0To2OfInt16;
                         const magneticField: TArray0To2OfInt16;
@@ -71,24 +71,26 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  imu := TBrickIMUV2.Create(nil);
+  oBrick := TBrickIMUV2.Create(nil);
+  oBrick.IPConnection:= oIPConnection;
+  oBRick.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register all data callback to procedure AllDataCB }
-  imu.OnAllData := {$ifdef FPC}@{$endif}AllDataCB;
+  oBrick.OnAllData := {$ifdef FPC}@{$endif}AllDataCB;
 
   { Set period for all data callback to 0.1s (100ms) }
-  imu.SetAllDataPeriod(100);
+  oBrick.SetAllDataPeriod(100);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

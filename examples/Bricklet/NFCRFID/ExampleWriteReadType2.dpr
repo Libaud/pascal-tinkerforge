@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    nr: TBrickletNFCRFID;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletNFCRFID;
   public
     procedure StateChangedCB(sender: TBrickletNFCRFID; const state: byte;
                              const idle: boolean);
@@ -63,24 +63,24 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  nr := TBrickletNFCRFID.Create(UID, ipcon);
+  oBricklet := TBrickletNFCRFID.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register state changed callback to procedure StateChangedCB }
-  nr.OnStateChanged := {$ifdef FPC}@{$endif}StateChangedCB;
+  oBricklet.OnStateChanged := {$ifdef FPC}@{$endif}StateChangedCB;
 
   { Select NFC Forum Type 2 tag }
-  nr.RequestTagID(BRICKLET_NFC_RFID_TAG_TYPE_TYPE2);
+  oBricklet.RequestTagID(BRICKLET_NFC_RFID_TAG_TYPE_TYPE2);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

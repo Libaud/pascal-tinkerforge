@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    c: TBrickletColor;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletColor;
   public
     procedure ColorReachedCB(sender: TBrickletColor; const r: word; const g: word;
                              const b: word; const c_: word);
@@ -39,27 +39,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  c := TBrickletColor.Create(UID, ipcon);
+  oBricklet := TBrickletColor.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  c.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register color reached callback to procedure ColorReachedCB }
-  c.OnColorReached := {$ifdef FPC}@{$endif}ColorReachedCB;
+  oBricklet.OnColorReached := {$ifdef FPC}@{$endif}ColorReachedCB;
 
   { Configure threshold for color "greater than 100, 200, 300, 400" }
-  c.SetColorCallbackThreshold('>', 100, 0, 200, 0, 300, 0, 400, 0);
+  oBricklet.SetColorCallbackThreshold('>', 100, 0, 200, 0, 300, 0, 400, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

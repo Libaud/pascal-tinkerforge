@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    rlb: TBrickletRGBLEDButton;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRGBLEDButton;
   public
     procedure Execute;
   end;
@@ -27,17 +27,17 @@ procedure TExample.Execute;
 var state: byte;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  rlb := TBrickletRGBLEDButton.Create(UID, ipcon);
+  oBricklet := TBrickletRGBLEDButton.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current button state }
-  state := rlb.GetButtonState;
+  state := oBricklet.GetButtonState;
 
   if (state = BRICKLET_RGB_LED_BUTTON_BUTTON_STATE_PRESSED) then begin
     WriteLn('State: Pressed');
@@ -48,7 +48,7 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

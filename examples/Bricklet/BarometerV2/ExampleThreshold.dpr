@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    b: TBrickletBarometerV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletBarometerV2;
   public
     procedure AirPressureCB(sender: TBrickletBarometerV2; const airPressure: longint);
     procedure Execute;
@@ -35,25 +35,27 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  b := TBrickletBarometerV2.Create(UID, ipcon);
+  oBricklet := TBrickletBarometerV2.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register air pressure callback to procedure AirPressureCB }
-  b.OnAirPressure := {$ifdef FPC}@{$endif}AirPressureCB;
+  oBricklet.OnAirPressure := {$ifdef FPC}@{$endif}AirPressureCB;
 
   { Configure threshold for air pressure "greater than 1025 hPa"
     with a debounce period of 1s (1000ms) }
-  b.SetAirPressureCallbackConfiguration(1000, false, '>', 1025*1000, 0);
+  oBricklet.SetAirPressureCallbackConfiguration(1000, false, '>', 1025*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    c: TBrickletColor;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletColor;
   public
     procedure ColorCB(sender: TBrickletColor; const r: word; const g: word; const b: word;
                       const c_: word);
@@ -39,26 +39,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  c := TBrickletColor.Create(UID, ipcon);
+  oBricklet := TBrickletColor.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register color callback to procedure ColorCB }
-  c.OnColor := {$ifdef FPC}@{$endif}ColorCB;
+  oBricklet.OnColor := {$ifdef FPC}@{$endif}ColorCB;
 
   { Set period for color callback to 1s (1000ms)
     Note: The color callback is only called every second
           if the color has changed since the last call! }
-  c.SetColorCallbackPeriod(1000);
+  oBricklet.SetColorCallbackPeriod(1000);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

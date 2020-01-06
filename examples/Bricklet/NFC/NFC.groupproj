@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1CBBEA8F-E5D5-4CF2-B3E7-7AB0B6A0CF40}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleScanForTags.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleEmulateNDEF.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleWriteReadType2.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleScanForTags">
+        <MSBuild Projects="ExampleScanForTags.dproj"/>
+    </Target>
+    <Target Name="ExampleScanForTags:Clean">
+        <MSBuild Projects="ExampleScanForTags.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleScanForTags:Make">
+        <MSBuild Projects="ExampleScanForTags.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF">
+        <MSBuild Projects="ExampleEmulateNDEF.dproj"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF:Clean">
+        <MSBuild Projects="ExampleEmulateNDEF.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF:Make">
+        <MSBuild Projects="ExampleEmulateNDEF.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleWriteReadType2">
+        <MSBuild Projects="ExampleWriteReadType2.dproj"/>
+    </Target>
+    <Target Name="ExampleWriteReadType2:Clean">
+        <MSBuild Projects="ExampleWriteReadType2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleWriteReadType2:Make">
+        <MSBuild Projects="ExampleWriteReadType2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleScanForTags;ExampleEmulateNDEF;ExampleWriteReadType2"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleScanForTags:Clean;ExampleEmulateNDEF:Clean;ExampleWriteReadType2:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleScanForTags:Make;ExampleEmulateNDEF:Make;ExampleWriteReadType2:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    pb: TBrickletPiezoBuzzer;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletPiezoBuzzer;
   public
     procedure Execute;
   end;
@@ -26,21 +26,21 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  pb := TBrickletPiezoBuzzer.Create(UID, ipcon);
+  oBricklet := TBrickletPiezoBuzzer.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Morse SOS }
-  pb.MorseCode('... --- ...');
+  oBricklet.MorseCode('... --- ...');
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

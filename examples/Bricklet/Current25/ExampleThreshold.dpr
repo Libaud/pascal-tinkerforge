@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    c: TBrickletCurrent25;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletCurrent25;
   public
     procedure CurrentReachedCB(sender: TBrickletCurrent25; const current: smallint);
     procedure Execute;
@@ -33,27 +33,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  c := TBrickletCurrent25.Create(UID, ipcon);
+  oBricklet := TBrickletCurrent25.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  c.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register current reached callback to procedure CurrentReachedCB }
-  c.OnCurrentReached := {$ifdef FPC}@{$endif}CurrentReachedCB;
+  oBricklet.OnCurrentReached := {$ifdef FPC}@{$endif}CurrentReachedCB;
 
   { Configure threshold for current "greater than 5 A" }
-  c.SetCurrentCallbackThreshold('>', 5*1000, 0);
+  oBricklet.SetCurrentCallbackThreshold('>', 5*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

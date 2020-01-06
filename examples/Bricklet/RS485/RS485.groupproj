@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E5A31FAD-985D-47DF-AF18-44AB1058E92E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleLoopback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleModbusMaster.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleModbusSlave.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleLoopback">
+        <MSBuild Projects="ExampleLoopback.dproj"/>
+    </Target>
+    <Target Name="ExampleLoopback:Clean">
+        <MSBuild Projects="ExampleLoopback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleLoopback:Make">
+        <MSBuild Projects="ExampleLoopback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleModbusMaster">
+        <MSBuild Projects="ExampleModbusMaster.dproj"/>
+    </Target>
+    <Target Name="ExampleModbusMaster:Clean">
+        <MSBuild Projects="ExampleModbusMaster.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleModbusMaster:Make">
+        <MSBuild Projects="ExampleModbusMaster.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleModbusSlave">
+        <MSBuild Projects="ExampleModbusSlave.dproj"/>
+    </Target>
+    <Target Name="ExampleModbusSlave:Clean">
+        <MSBuild Projects="ExampleModbusSlave.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleModbusSlave:Make">
+        <MSBuild Projects="ExampleModbusSlave.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleLoopback;ExampleModbusMaster;ExampleModbusSlave"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleLoopback:Clean;ExampleModbusMaster:Clean;ExampleModbusSlave:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleLoopback:Make;ExampleModbusMaster:Make;ExampleModbusSlave:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

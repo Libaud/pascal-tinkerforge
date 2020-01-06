@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{43016F68-422D-463F-8D98-16D089D5D04A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleSimpleColor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSimpleButton.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleSimpleColor">
+        <MSBuild Projects="ExampleSimpleColor.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleColor:Clean">
+        <MSBuild Projects="ExampleSimpleColor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleColor:Make">
+        <MSBuild Projects="ExampleSimpleColor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleButton">
+        <MSBuild Projects="ExampleSimpleButton.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleButton:Clean">
+        <MSBuild Projects="ExampleSimpleButton.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleButton:Make">
+        <MSBuild Projects="ExampleSimpleButton.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCallback">
+        <MSBuild Projects="ExampleCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCallback:Clean">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCallback:Make">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleSimpleColor;ExampleSimpleButton;ExampleCallback"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleSimpleColor:Clean;ExampleSimpleButton:Clean;ExampleCallback:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleSimpleColor:Make;ExampleSimpleButton:Make;ExampleCallback:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

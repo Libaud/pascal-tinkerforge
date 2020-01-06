@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    si: TBrickletSoundIntensity;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletSoundIntensity;
   public
     procedure IntensityCB(sender: TBrickletSoundIntensity; const intensity: word);
     procedure Execute;
@@ -33,26 +33,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  si := TBrickletSoundIntensity.Create(UID, ipcon);
+  oBricklet := TBrickletSoundIntensity.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register intensity callback to procedure IntensityCB }
-  si.OnIntensity := {$ifdef FPC}@{$endif}IntensityCB;
+  oBricklet.OnIntensity := {$ifdef FPC}@{$endif}IntensityCB;
 
   { Set period for intensity callback to 0.05s (50ms)
     Note: The intensity callback is only called every 0.05 seconds
           if the intensity has changed since the last call! }
-  si.SetIntensityCallbackPeriod(50);
+  oBricklet.SetIntensityCallbackPeriod(50);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

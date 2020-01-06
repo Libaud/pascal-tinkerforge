@@ -35,10 +35,10 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  ipcon := TIPConnection.Create(nil);
 
   { Create device object }
-  ls := TBrickletLEDStripV2.Create(UID, ipcon);
+  ls := TBrickletLEDStripV2.Create(nil);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);

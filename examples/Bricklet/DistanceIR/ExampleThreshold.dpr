@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dir: TBrickletDistanceIR;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDistanceIR;
   public
     procedure DistanceReachedCB(sender: TBrickletDistanceIR; const distance: word);
     procedure Execute;
@@ -33,27 +33,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  dir := TBrickletDistanceIR.Create(UID, ipcon);
+  oBricklet := TBrickletDistanceIR.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  dir.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register distance reached callback to procedure DistanceReachedCB }
-  dir.OnDistanceReached := {$ifdef FPC}@{$endif}DistanceReachedCB;
+  oBricklet.OnDistanceReached := {$ifdef FPC}@{$endif}DistanceReachedCB;
 
   { Configure threshold for distance "smaller than 30 cm" }
-  dir.SetDistanceCallbackThreshold('<', 30*10, 0);
+  oBricklet.SetDistanceCallbackThreshold('<', 30*10, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

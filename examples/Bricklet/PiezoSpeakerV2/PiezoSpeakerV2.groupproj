@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8608D83E-C5DF-4B5F-99A3-41869DF2F015}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleAlarm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleBeep.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleAlarm">
+        <MSBuild Projects="ExampleAlarm.dproj"/>
+    </Target>
+    <Target Name="ExampleAlarm:Clean">
+        <MSBuild Projects="ExampleAlarm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleAlarm:Make">
+        <MSBuild Projects="ExampleAlarm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBeep">
+        <MSBuild Projects="ExampleBeep.dproj"/>
+    </Target>
+    <Target Name="ExampleBeep:Clean">
+        <MSBuild Projects="ExampleBeep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBeep:Make">
+        <MSBuild Projects="ExampleBeep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleAlarm;ExampleBeep"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleAlarm:Clean;ExampleBeep:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleAlarm:Make;ExampleBeep:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

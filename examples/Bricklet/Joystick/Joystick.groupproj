@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{F2C071C5-D792-4022-BE3C-C919E1D65E82}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleFindBorders.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleCallback">
+        <MSBuild Projects="ExampleCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCallback:Clean">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCallback:Make">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleFindBorders">
+        <MSBuild Projects="ExampleFindBorders.dproj"/>
+    </Target>
+    <Target Name="ExampleFindBorders:Clean">
+        <MSBuild Projects="ExampleFindBorders.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleFindBorders:Make">
+        <MSBuild Projects="ExampleFindBorders.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimple">
+        <MSBuild Projects="ExampleSimple.dproj"/>
+    </Target>
+    <Target Name="ExampleSimple:Clean">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimple:Make">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleCallback;ExampleFindBorders;ExampleSimple"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleCallback:Clean;ExampleFindBorders:Clean;ExampleSimple:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleCallback:Make;ExampleFindBorders:Make;ExampleSimple:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

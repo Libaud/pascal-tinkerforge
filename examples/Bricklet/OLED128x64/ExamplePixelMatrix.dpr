@@ -14,8 +14,8 @@ type
   TPixels = array [0..(HEIGHT - 1), 0..(WIDTH - 1)] of boolean;
   TExample = class
   private
-    ipcon: TIPConnection;
-    oled: TBrickletOLED128x64;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletOLED128x64;
   public
     procedure DrawMatrix(pixels: TPixels);
     procedure Execute;
@@ -38,20 +38,25 @@ begin
     for column := 0 to WIDTH - 1 do begin
       pages[row][column] := 0;
       for bit := 0 to 7 do begin
-        if (pixels[(row * 8) + bit, column]) then begin
+        if (pixels[(row * 8) + bit, column]) then
+        begin
+          {$ifdef FPC}
           pages[row][column] := pages[row][column] or (1 << bit);
+          {$else}
+          pages[row][column] := pages[row][column] or (1 Shl bit);
+          {$endif}
         end;
       end;
     end;
   end;
-  oled.NewWindow(0, WIDTH - 1, 0, HEIGHT div 8 - 1);
+  oBricklet.NewWindow(0, WIDTH - 1, 0, HEIGHT div 8 - 1);
   for row := 0 to HEIGHT div 8 - 1 do begin
     column := 0;
     while column < WIDTH - 1 do begin
       for i := 0 to 63 do begin
         section[i] := pages[row][column + i];
       end;
-      oled.write(section);
+      oBricklet.write(section);
       column := column + 64;
     end;
   end;
@@ -61,17 +66,17 @@ procedure TExample.Execute;
 var row, column: integer; pixels: TPixels;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  oled := TBrickletOLED128x64.Create(UID, ipcon);
+  oBricklet := TBrickletOLED128x64.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Clear display }
-  oled.ClearDisplay;
+  oBricklet.ClearDisplay;
 
   { Draw checkerboard pattern }
   for row := 0 to HEIGHT - 1 do begin
@@ -84,7 +89,7 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

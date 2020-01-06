@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{590CC797-E427-4B05-96BF-416752C2480E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleInterrupt">
+        <MSBuild Projects="ExampleInterrupt.dproj"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Clean">
+        <MSBuild Projects="ExampleInterrupt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Make">
+        <MSBuild Projects="ExampleInterrupt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimple">
+        <MSBuild Projects="ExampleSimple.dproj"/>
+    </Target>
+    <Target Name="ExampleSimple:Clean">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimple:Make">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleInterrupt;ExampleSimple"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleInterrupt:Clean;ExampleSimple:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleInterrupt:Make;ExampleSimple:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

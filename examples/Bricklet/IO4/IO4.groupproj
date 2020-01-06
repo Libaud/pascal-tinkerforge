@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EA6E204D-3EF3-4419-9915-831EDFBE09EF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleInput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleOutput.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleInput">
+        <MSBuild Projects="ExampleInput.dproj"/>
+    </Target>
+    <Target Name="ExampleInput:Clean">
+        <MSBuild Projects="ExampleInput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInput:Make">
+        <MSBuild Projects="ExampleInput.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleInterrupt">
+        <MSBuild Projects="ExampleInterrupt.dproj"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Clean">
+        <MSBuild Projects="ExampleInterrupt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Make">
+        <MSBuild Projects="ExampleInterrupt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleOutput">
+        <MSBuild Projects="ExampleOutput.dproj"/>
+    </Target>
+    <Target Name="ExampleOutput:Clean">
+        <MSBuild Projects="ExampleOutput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleOutput:Make">
+        <MSBuild Projects="ExampleOutput.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleInput;ExampleInterrupt;ExampleOutput"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleInput:Clean;ExampleInterrupt:Clean;ExampleOutput:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleInput:Make;ExampleInterrupt:Make;ExampleOutput:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

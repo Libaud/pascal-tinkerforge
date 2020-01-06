@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dmx: TBrickletDMX;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDMX;
   public
     procedure Execute;
   end;
@@ -26,24 +26,26 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  dmx := TBrickletDMX.Create(UID, ipcon);
+  oBricklet := TBrickletDMX.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Configure Bricklet as DMX master }
-  dmx.SetDMXMode(BRICKLET_DMX_DMX_MODE_MASTER);
+  oBricklet.SetDMXMode(BRICKLET_DMX_DMX_MODE_MASTER);
 
   { Write DMX frame with 3 channels }
-  dmx.WriteFrame([255, 128, 0]);
+  oBricklet.WriteFrame([255, 128, 0]);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

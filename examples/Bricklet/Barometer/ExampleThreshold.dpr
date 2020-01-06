@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    b: TBrickletBarometer;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletBarometer;
   public
     procedure AirPressureReachedCB(sender: TBrickletBarometer;
                                    const airPressure: longint);
@@ -36,27 +36,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  b := TBrickletBarometer.Create(UID, ipcon);
+  oBricklet := TBrickletBarometer.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  b.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register air pressure reached callback to procedure AirPressureReachedCB }
-  b.OnAirPressureReached := {$ifdef FPC}@{$endif}AirPressureReachedCB;
+  oBricklet.OnAirPressureReached := {$ifdef FPC}@{$endif}AirPressureReachedCB;
 
   { Configure threshold for air pressure "greater than 1025 hPa" }
-  b.SetAirPressureCallbackThreshold('>', 1025*1000, 0);
+  oBricklet.SetAirPressureCallbackThreshold('>', 1025*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

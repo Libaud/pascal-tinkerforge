@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    vc: TBrickletVoltageCurrentV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletVoltageCurrentV2;
   public
     procedure PowerCB(sender: TBrickletVoltageCurrentV2; const power: longint);
     procedure Execute;
@@ -33,25 +33,27 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  vc := TBrickletVoltageCurrentV2.Create(UID, ipcon);
+  oBricklet := TBrickletVoltageCurrentV2.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register power callback to procedure PowerCB }
-  vc.OnPower := {$ifdef FPC}@{$endif}PowerCB;
+  oBricklet.OnPower := {$ifdef FPC}@{$endif}PowerCB;
 
   { Configure threshold for power "greater than 10 W"
     with a debounce period of 1s (1000ms) }
-  vc.SetPowerCallbackConfiguration(1000, false, '>', 10*1000, 0);
+  oBricklet.SetPowerCallbackConfiguration(1000, false, '>', 10*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

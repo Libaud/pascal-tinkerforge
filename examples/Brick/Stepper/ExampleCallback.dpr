@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    stepper: TBrickStepper;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickStepper;
   public
     procedure PositionReachedCB(sender: TBrickStepper; const position: longint);
     procedure Execute;
@@ -50,25 +50,27 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  stepper := TBrickStepper.Create(UID, ipcon);
+  oBrick := TBrickStepper.Create(nil);
+  oBrick.UIDString:= UID;
+  oBrick.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register position reached callback to procedure PositionReachedCB }
-  stepper.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  oBrick.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
-  stepper.Enable; { Enable motor power }
-  stepper.SetSteps(1); { Drive one step forward to get things going }
+  oBrick.Enable; { Enable motor power }
+  oBrick.SetSteps(1); { Drive one step forward to get things going }
 
   WriteLn('Press key to exit');
   ReadLn;
-  stepper.Disable;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oBrick.Disable;
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

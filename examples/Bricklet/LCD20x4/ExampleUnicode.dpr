@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    lcd: TBrickletLCD20x4;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletLCD20x4;
   public
     function WideStringToKS0066U(const text: WideString): string;
     procedure Execute;
@@ -107,30 +107,30 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  lcd := TBrickletLCD20x4.Create(UID, ipcon);
+  oBricklet := TBrickletLCD20x4.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Turn backlight on }
-  lcd.BacklightOn;
+  oBricklet.BacklightOn;
 
   { Write a string using the WideStringToKS0066U function to map to the LCD charset }
   { Note: For the Free Pascal Compiler (and Lazarus) UTF8Decode is used to create a
           WideString. It assumes that your source file is UTF-8 encoded }
-  lcd.WriteLine(0, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Stromstärke: 17µA')));
-  lcd.WriteLine(1, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Temperatur:  23°C')));
+  oBricklet.WriteLine(0, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Stromstärke: 17µA')));
+  oBricklet.WriteLine(1, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Temperatur:  23°C')));
 
   { Write a string directly including characters from the LCD charset }
-  lcd.WriteLine(2, 0, 'Drehzahl:   750min' + char($E9));
+  oBricklet.WriteLine(2, 0, 'Drehzahl:   750min' + char($E9));
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

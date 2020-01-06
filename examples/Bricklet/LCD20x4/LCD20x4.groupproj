@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D9670CF3-B9D3-4628-A5CB-FC06B64E4380}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleButtonCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleUnicode.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleHelloWorld">
+        <MSBuild Projects="ExampleHelloWorld.dproj"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Clean">
+        <MSBuild Projects="ExampleHelloWorld.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Make">
+        <MSBuild Projects="ExampleHelloWorld.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleButtonCallback">
+        <MSBuild Projects="ExampleButtonCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleButtonCallback:Clean">
+        <MSBuild Projects="ExampleButtonCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleButtonCallback:Make">
+        <MSBuild Projects="ExampleButtonCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleUnicode">
+        <MSBuild Projects="ExampleUnicode.dproj"/>
+    </Target>
+    <Target Name="ExampleUnicode:Clean">
+        <MSBuild Projects="ExampleUnicode.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleUnicode:Make">
+        <MSBuild Projects="ExampleUnicode.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleHelloWorld;ExampleButtonCallback;ExampleUnicode"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleHelloWorld:Clean;ExampleButtonCallback:Clean;ExampleUnicode:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleHelloWorld:Make;ExampleButtonCallback:Make;ExampleUnicode:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

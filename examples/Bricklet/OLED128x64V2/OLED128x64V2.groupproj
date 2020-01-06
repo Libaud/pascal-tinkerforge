@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{043AC51A-389D-4A67-BBB4-59F2653B7CCF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExamplePixelMatrix.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleHelloWorld">
+        <MSBuild Projects="ExampleHelloWorld.dproj"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Clean">
+        <MSBuild Projects="ExampleHelloWorld.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleHelloWorld:Make">
+        <MSBuild Projects="ExampleHelloWorld.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix">
+        <MSBuild Projects="ExamplePixelMatrix.dproj"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix:Clean">
+        <MSBuild Projects="ExamplePixelMatrix.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExamplePixelMatrix:Make">
+        <MSBuild Projects="ExamplePixelMatrix.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleHelloWorld;ExamplePixelMatrix"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleHelloWorld:Clean;ExamplePixelMatrix:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleHelloWorld:Make;ExamplePixelMatrix:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

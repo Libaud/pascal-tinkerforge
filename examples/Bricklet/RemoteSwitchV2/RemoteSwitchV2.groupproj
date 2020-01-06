@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{5B9955DC-032E-4C40-9FF4-A366D1583BA1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleRemoteCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSwitchSocket.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleRemoteCallback">
+        <MSBuild Projects="ExampleRemoteCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleRemoteCallback:Clean">
+        <MSBuild Projects="ExampleRemoteCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleRemoteCallback:Make">
+        <MSBuild Projects="ExampleRemoteCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket">
+        <MSBuild Projects="ExampleSwitchSocket.dproj"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket:Clean">
+        <MSBuild Projects="ExampleSwitchSocket.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket:Make">
+        <MSBuild Projects="ExampleSwitchSocket.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleRemoteCallback;ExampleSwitchSocket"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleRemoteCallback:Clean;ExampleSwitchSocket:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleRemoteCallback:Make;ExampleSwitchSocket:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

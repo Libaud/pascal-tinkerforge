@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    ss: TBrickSilentStepper;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickSilentStepper;
   public
     procedure PositionReachedCB(sender: TBrickSilentStepper; const position: longint);
     procedure Execute;
@@ -51,27 +51,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  ss := TBrickSilentStepper.Create(UID, ipcon);
+  oBrick := TBrickSilentStepper.Create(nil);
+  oBrick.UIDString:= UID;
+  oBrick.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register position reached callback to procedure PositionReachedCB }
-  ss.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  oBrick.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
-  ss.SetStepConfiguration(BRICK_SILENT_STEPPER_STEP_RESOLUTION_8,
+  oBrick.SetStepConfiguration(BRICK_SILENT_STEPPER_STEP_RESOLUTION_8,
                           true); { 1/8 steps (interpolated) }
-  ss.Enable; { Enable motor power }
-  ss.SetSteps(1); { Drive one step forward to get things going }
+  oBrick.Enable; { Enable motor power }
+  oBrick.SetSteps(1); { Drive one step forward to get things going }
 
   WriteLn('Press key to exit');
   ReadLn;
-  ss.Disable;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oBrick.Disable;
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

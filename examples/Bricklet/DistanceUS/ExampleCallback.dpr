@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dus: TBrickletDistanceUS;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDistanceUS;
   public
     procedure DistanceCB(sender: TBrickletDistanceUS; const distance: word);
     procedure Execute;
@@ -33,26 +33,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  dus := TBrickletDistanceUS.Create(UID, ipcon);
+  oBricklet := TBrickletDistanceUS.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register distance value callback to procedure DistanceCB }
-  dus.OnDistance := {$ifdef FPC}@{$endif}DistanceCB;
+  oBricklet.OnDistance := {$ifdef FPC}@{$endif}DistanceCB;
 
   { Set period for distance value callback to 0.2s (200ms)
     Note: The distance value callback is only called every 0.2 seconds
           if the distance value has changed since the last call! }
-  dus.SetDistanceCallbackPeriod(200);
+  oBricklet.SetDistanceCallbackPeriod(200);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

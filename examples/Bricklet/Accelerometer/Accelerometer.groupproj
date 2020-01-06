@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CF2B2517-E482-422F-98D9-7A19A818E21B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleThreshold">
+        <MSBuild Projects="ExampleThreshold.dproj"/>
+    </Target>
+    <Target Name="ExampleThreshold:Clean">
+        <MSBuild Projects="ExampleThreshold.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleThreshold:Make">
+        <MSBuild Projects="ExampleThreshold.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimple">
+        <MSBuild Projects="ExampleSimple.dproj"/>
+    </Target>
+    <Target Name="ExampleSimple:Clean">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimple:Make">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCallback">
+        <MSBuild Projects="ExampleCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCallback:Clean">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCallback:Make">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleThreshold;ExampleSimple;ExampleCallback"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    uvl: TBrickletUVLightV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletUVLightV2;
   public
     procedure Execute;
   end;
@@ -27,30 +27,32 @@ procedure TExample.Execute;
 var uva, uvb, uvi: longint;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  uvl := TBrickletUVLightV2.Create(UID, ipcon);
+  oBricklet := TBrickletUVLightV2.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current UV-A }
-  uva := uvl.GetUVA;
+  uva := oBricklet.GetUVA;
   WriteLn(Format('UV-A: %f mW/m²', [uva/10.0]));
 
   { Get current UV-B }
-  uvb := uvl.GetUVB;
+  uvb := oBricklet.GetUVB;
   WriteLn(Format('UV-B: %f mW/m²', [uvb/10.0]));
 
   { Get current UV index }
-  uvi := uvl.GetUVI;
+  uvi := oBricklet.GetUVI;
   WriteLn(Format('UV Index: %f', [uvi/10.0]));
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6E6D4B96-55E1-4260-B2BD-9F306C9EE142}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleIndicator.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleIndicator">
+        <MSBuild Projects="ExampleIndicator.dproj"/>
+    </Target>
+    <Target Name="ExampleIndicator:Clean">
+        <MSBuild Projects="ExampleIndicator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleIndicator:Make">
+        <MSBuild Projects="ExampleIndicator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCallback">
+        <MSBuild Projects="ExampleCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCallback:Clean">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCallback:Make">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleIndicator;ExampleCallback"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleIndicator:Clean;ExampleCallback:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleIndicator:Make;ExampleCallback:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

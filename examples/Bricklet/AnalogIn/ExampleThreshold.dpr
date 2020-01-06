@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    ai: TBrickletAnalogIn;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletAnalogIn;
   public
     procedure VoltageReachedCB(sender: TBrickletAnalogIn; const voltage: word);
     procedure Execute;
@@ -33,27 +33,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  ai := TBrickletAnalogIn.Create(UID, ipcon);
+  oBricklet := TBrickletAnalogIn.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  ai.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register voltage reached callback to procedure VoltageReachedCB }
-  ai.OnVoltageReached := {$ifdef FPC}@{$endif}VoltageReachedCB;
+  oBricklet.OnVoltageReached := {$ifdef FPC}@{$endif}VoltageReachedCB;
 
   { Configure threshold for voltage "smaller than 5 V" }
-  ai.SetVoltageCallbackThreshold('<', 5*1000, 0);
+  oBricklet.SetVoltageCallbackThreshold('<', 5*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

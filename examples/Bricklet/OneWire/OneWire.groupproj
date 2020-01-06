@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D15C132B-A485-47E9-BECF-A0FE1866A5C2}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleReadDS18B20Temperature.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleReadDS18B20Temperature">
+        <MSBuild Projects="ExampleReadDS18B20Temperature.dproj"/>
+    </Target>
+    <Target Name="ExampleReadDS18B20Temperature:Clean">
+        <MSBuild Projects="ExampleReadDS18B20Temperature.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleReadDS18B20Temperature:Make">
+        <MSBuild Projects="ExampleReadDS18B20Temperature.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleReadDS18B20Temperature"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleReadDS18B20Temperature:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleReadDS18B20Temperature:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

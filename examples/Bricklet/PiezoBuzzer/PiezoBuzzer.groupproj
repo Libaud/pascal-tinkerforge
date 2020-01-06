@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EAED241D-E18B-40B3-BB79-1381440E3C57}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleMorseCode.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleBeep.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleMorseCode">
+        <MSBuild Projects="ExampleMorseCode.dproj"/>
+    </Target>
+    <Target Name="ExampleMorseCode:Clean">
+        <MSBuild Projects="ExampleMorseCode.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMorseCode:Make">
+        <MSBuild Projects="ExampleMorseCode.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBeep">
+        <MSBuild Projects="ExampleBeep.dproj"/>
+    </Target>
+    <Target Name="ExampleBeep:Clean">
+        <MSBuild Projects="ExampleBeep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBeep:Make">
+        <MSBuild Projects="ExampleBeep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleMorseCode;ExampleBeep"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleMorseCode:Clean;ExampleBeep:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleMorseCode:Make;ExampleBeep:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

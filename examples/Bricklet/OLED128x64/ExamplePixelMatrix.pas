@@ -39,7 +39,11 @@ begin
       pages[row][column]:= 0;
       for bit:= 0 to 7 do begin
         if (pixels[(row * 8) + bit, column]) then begin
+          {$ifdef DLEPHI}
+          pages[row][column]:= pages[row][column] or (1 Shl bit);
+          {$else}
           pages[row][column]:= pages[row][column] or (1 << bit);
+          {$endif}
         end;
       end;
     end;

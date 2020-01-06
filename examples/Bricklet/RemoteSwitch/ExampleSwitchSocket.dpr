@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    rs: TBrickletRemoteSwitch;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRemoteSwitch;
   public
     procedure Execute;
   end;
@@ -26,13 +26,13 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  rs := TBrickletRemoteSwitch.Create(UID, ipcon);
+  oBricklet := TBrickletRemoteSwitch.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Switch on a type A socket with house code 17 and receiver code 1.
@@ -40,11 +40,11 @@ begin
     and means that the DIP switches 1 and 5 are on and 2-4 are off.
     Receiver code 1 is 10000 in binary (least-significant bit first)
     and means that the DIP switch A is on and B-E are off. }
-  rs.SwitchSocketA(17, 1, BRICKLET_REMOTE_SWITCH_SWITCH_TO_ON);
+  oBricklet.SwitchSocketA(17, 1, BRICKLET_REMOTE_SWITCH_SWITCH_TO_ON);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

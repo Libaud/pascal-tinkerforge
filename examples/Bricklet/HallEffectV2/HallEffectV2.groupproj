@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CBA6E33C-97A0-44AD-A70A-B0F54A9CE627}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleCounter.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleCounterCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleMagneticFluxDensity.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleCounter">
+        <MSBuild Projects="ExampleCounter.dproj"/>
+    </Target>
+    <Target Name="ExampleCounter:Clean">
+        <MSBuild Projects="ExampleCounter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCounter:Make">
+        <MSBuild Projects="ExampleCounter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCounterCallback">
+        <MSBuild Projects="ExampleCounterCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCounterCallback:Clean">
+        <MSBuild Projects="ExampleCounterCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCounterCallback:Make">
+        <MSBuild Projects="ExampleCounterCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity">
+        <MSBuild Projects="ExampleMagneticFluxDensity.dproj"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity:Clean">
+        <MSBuild Projects="ExampleMagneticFluxDensity.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity:Make">
+        <MSBuild Projects="ExampleMagneticFluxDensity.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleCounter;ExampleCounterCallback;ExampleMagneticFluxDensity"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleCounter:Clean;ExampleCounterCallback:Clean;ExampleMagneticFluxDensity:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleCounter:Make;ExampleCounterCallback:Make;ExampleMagneticFluxDensity:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

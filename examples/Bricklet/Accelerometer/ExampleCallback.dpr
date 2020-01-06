@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    a: TBrickletAccelerometer;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletAccelerometer;
   public
     procedure AccelerationCB(sender: TBrickletAccelerometer; const x: smallint;
                              const y: smallint; const z: smallint);
@@ -38,26 +38,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  a := TBrickletAccelerometer.Create(UID, ipcon);
+  oBricklet := TBrickletAccelerometer.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register acceleration callback to procedure AccelerationCB }
-  a.OnAcceleration := {$ifdef FPC}@{$endif}AccelerationCB;
+  oBricklet.OnAcceleration := {$ifdef FPC}@{$endif}AccelerationCB;
 
   { Set period for acceleration callback to 1s (1000ms)
     Note: The acceleration callback is only called every second
           if the acceleration has changed since the last call! }
-  a.SetAccelerationCallbackPeriod(1000);
+  oBricklet.SetAccelerationCallbackPeriod(1000);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

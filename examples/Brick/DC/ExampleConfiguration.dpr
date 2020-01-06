@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     dc: TBrickDC;
   public
     procedure Execute;
@@ -26,13 +26,13 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  dc := TBrickDC.Create(UID, ipcon);
+  dc := TBrickDC.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   dc.SetDriveMode(BRICK_DC_DRIVE_MODE_DRIVE_COAST);
@@ -44,7 +44,7 @@ begin
   WriteLn('Press key to exit');
   ReadLn;
   dc.Disable; { Disable motor power }
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

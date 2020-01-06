@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    aq: TBrickletAirQuality;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletAirQuality;
   public
     procedure AllValuesCB(sender: TBrickletAirQuality; const iaqIndex: longint;
                           const iaqIndexAccuracy: byte; const temperature: longint;
@@ -55,24 +55,26 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  aq := TBrickletAirQuality.Create(UID, ipcon);
+  oBricklet := TBrickletAirQuality.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register all values callback to procedure AllValuesCB }
-  aq.OnAllValues := {$ifdef FPC}@{$endif}AllValuesCB;
+  oBricklet.OnAllValues := {$ifdef FPC}@{$endif}AllValuesCB;
 
   { Set period for all values callback to 1s (1000ms) }
-  aq.SetAllValuesCallbackConfiguration(1000, false);
+  oBricklet.SetAllValuesCallbackConfiguration(1000, false);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

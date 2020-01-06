@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    a: TBrickletAccelerometer;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletAccelerometer;
   public
     procedure AccelerationReachedCB(sender: TBrickletAccelerometer; const x: smallint;
                                     const y: smallint; const z: smallint);
@@ -39,27 +39,29 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  a := TBrickletAccelerometer.Create(nil);
+  oBricklet := TBrickletAccelerometer.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  a.SetDebouncePeriod(10000);
+  oBricklet.SetDebouncePeriod(10000);
 
   { Register acceleration reached callback to procedure AccelerationReachedCB }
-  a.OnAccelerationReached := {$ifdef FPC}@{$endif}AccelerationReachedCB;
+  oBricklet.OnAccelerationReached := {$ifdef FPC}@{$endif}AccelerationReachedCB;
 
   { Configure threshold for acceleration "greater than 2 g, 2 g, 2 g" }
-  a.SetAccelerationCallbackThreshold('>', 2*1000, 0, 2*1000, 0, 2*1000, 0);
+  oBricklet.SetAccelerationCallbackThreshold('>', 2*1000, 0, 2*1000, 0, 2*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

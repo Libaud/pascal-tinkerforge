@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
     nfc: TBrickletNFC;
   public
     procedure ReaderStateChangedCB(sender: TBrickletNFC; const state: byte;
@@ -85,13 +85,13 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
   nfc := TBrickletNFC.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register reader state changed callback to procedure ReaderStateChangedCB }
@@ -102,7 +102,7 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

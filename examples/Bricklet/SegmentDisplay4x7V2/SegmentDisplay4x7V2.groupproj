@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{700863AC-E63C-4326-8104-39BC2588BCF0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleSetSegments.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleNumericValue.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleBlinkColon.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleSetSegments">
+        <MSBuild Projects="ExampleSetSegments.dproj"/>
+    </Target>
+    <Target Name="ExampleSetSegments:Clean">
+        <MSBuild Projects="ExampleSetSegments.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSetSegments:Make">
+        <MSBuild Projects="ExampleSetSegments.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleNumericValue">
+        <MSBuild Projects="ExampleNumericValue.dproj"/>
+    </Target>
+    <Target Name="ExampleNumericValue:Clean">
+        <MSBuild Projects="ExampleNumericValue.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleNumericValue:Make">
+        <MSBuild Projects="ExampleNumericValue.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBlinkColon">
+        <MSBuild Projects="ExampleBlinkColon.dproj"/>
+    </Target>
+    <Target Name="ExampleBlinkColon:Clean">
+        <MSBuild Projects="ExampleBlinkColon.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBlinkColon:Make">
+        <MSBuild Projects="ExampleBlinkColon.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleSetSegments;ExampleNumericValue;ExampleBlinkColon"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleSetSegments:Clean;ExampleNumericValue:Clean;ExampleBlinkColon:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleSetSegments:Make;ExampleNumericValue:Make;ExampleBlinkColon:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

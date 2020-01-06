@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    c: TBrickletCompass;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletCompass;
   public
     procedure HeadingCB(sender: TBrickletCompass; const heading: smallint);
     procedure Execute;
@@ -33,24 +33,26 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  c := TBrickletCompass.Create(UID, ipcon);
+  oBricklet := TBrickletCompass.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register heading callback to procedure HeadingCB }
-  c.OnHeading := {$ifdef FPC}@{$endif}HeadingCB;
+  oBricklet.OnHeading := {$ifdef FPC}@{$endif}HeadingCB;
 
   { Set period for heading callback to 0.1s (100ms) without a threshold }
-  c.SetHeadingCallbackConfiguration(100, false, 'x', 0, 0);
+  oBricklet.SetHeadingCallbackConfiguration(100, false, 'x', 0, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

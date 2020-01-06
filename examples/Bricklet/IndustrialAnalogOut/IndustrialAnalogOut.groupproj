@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6F8158FE-4B08-4019-8B75-B3274F6C2FF2}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleSimpleCurrent.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSimpleVoltage.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleSimpleCurrent">
+        <MSBuild Projects="ExampleSimpleCurrent.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent:Clean">
+        <MSBuild Projects="ExampleSimpleCurrent.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent:Make">
+        <MSBuild Projects="ExampleSimpleCurrent.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage">
+        <MSBuild Projects="ExampleSimpleVoltage.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage:Clean">
+        <MSBuild Projects="ExampleSimpleVoltage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage:Make">
+        <MSBuild Projects="ExampleSimpleVoltage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleSimpleCurrent;ExampleSimpleVoltage"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleSimpleCurrent:Clean;ExampleSimpleVoltage:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleSimpleCurrent:Make;ExampleSimpleVoltage:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

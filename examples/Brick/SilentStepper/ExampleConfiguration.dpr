@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    ss: TBrickSilentStepper;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickSilentStepper;
   public
     procedure Execute;
   end;
@@ -26,31 +26,33 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  ss := TBrickSilentStepper.Create(UID, ipcon);
+  oBrick := TBrickSilentStepper.Create(nil);
+  oBrick.UIDString:= UID;
+  oBrick.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  ss.SetMotorCurrent(800); { 800mA }
-  ss.SetStepConfiguration(BRICK_SILENT_STEPPER_STEP_RESOLUTION_8,
+  oBrick.SetMotorCurrent(800); { 800mA }
+  oBrick.SetStepConfiguration(BRICK_SILENT_STEPPER_STEP_RESOLUTION_8,
                           true); { 1/8 steps (interpolated) }
-  ss.SetMaxVelocity(2000); { Velocity 2000 steps/s }
+  oBrick.SetMaxVelocity(2000); { Velocity 2000 steps/s }
 
   { Slow acceleration (500 steps/s^2),
     Fast deacceleration (5000 steps/s^2) }
-  ss.SetSpeedRamping(500, 5000);
+  oBrick.SetSpeedRamping(500, 5000);
 
-  ss.Enable; { Enable motor power }
-  ss.SetSteps(60000); { Drive 60000 steps forward }
+  oBrick.Enable; { Enable motor power }
+  oBrick.SetSteps(60000); { Drive 60000 steps forward }
 
   WriteLn('Press key to exit');
   ReadLn;
-  ss.Disable;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oBrick.Disable;
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

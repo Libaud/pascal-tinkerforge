@@ -9,7 +9,7 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
+    oIPConnection: TIPConnection;
   public
     procedure ConnectedCB(sender: TIPConnection; const connectReason: byte);
     procedure EnumerateCB(sender: TIPConnection;
@@ -68,24 +68,24 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP Connection }
-  ipcon := TIPConnection.Create(nil);
+  oIPConnection := TIPConnection.Create(nil);
 
   { Disable auto reconnect mechanism, in case we have the wrong secret.
     If the authentication is successful, reenable it. }
-  ipcon.SetAutoReconnect(false);
+  oIPConnection.SetAutoReconnect(false);
 
   { Register connected callback to "ConnectedCB" }
-  ipcon.OnConnected := {$ifdef FPC}@{$endif}ConnectedCB;
+  oIPConnection.OnConnected := {$ifdef FPC}@{$endif}ConnectedCB;
 
   { Register enumerate callback to "EnumerateCB" }
-  ipcon.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
+  oIPConnection.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

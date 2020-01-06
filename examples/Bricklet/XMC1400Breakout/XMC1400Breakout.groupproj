@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AFB6F48C-AB9B-4C67-AC93-6BD25EB8C1A9}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleGPIO.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleGPIO">
+        <MSBuild Projects="ExampleGPIO.dproj"/>
+    </Target>
+    <Target Name="ExampleGPIO:Clean">
+        <MSBuild Projects="ExampleGPIO.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleGPIO:Make">
+        <MSBuild Projects="ExampleGPIO.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleGPIO"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleGPIO:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleGPIO:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

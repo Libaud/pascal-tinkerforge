@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B992A0CC-37DC-4B12-937E-05C2C69500D3}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleLoopback.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleLoopback">
+        <MSBuild Projects="ExampleLoopback.dproj"/>
+    </Target>
+    <Target Name="ExampleLoopback:Clean">
+        <MSBuild Projects="ExampleLoopback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleLoopback:Make">
+        <MSBuild Projects="ExampleLoopback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleLoopback"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleLoopback:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleLoopback:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    rs: TBrickletRemoteSwitchV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRemoteSwitchV2;
   public
     procedure RemoteStatusACB(sender: TBrickletRemoteSwitchV2; const houseCode: byte;
                               const receiverCode: byte; const switchTo: byte;
@@ -48,24 +48,24 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  rs := TBrickletRemoteSwitchV2.Create(UID, ipcon);
+  oBricklet := TBrickletRemoteSwitchV2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Configure to receive from remote type A with minimum repeats set to 1 and enable callback }
-  rs.SetRemoteConfiguration(BRICKLET_REMOTE_SWITCH_V2_REMOTE_TYPE_A, 1, true);
+  oBricklet.SetRemoteConfiguration(BRICKLET_REMOTE_SWITCH_V2_REMOTE_TYPE_A, 1, true);
 
   { Register remote status a callback to procedure RemoteStatusACB }
-  rs.OnRemoteStatusA := {$ifdef FPC}@{$endif}RemoteStatusACB;
+  oBricklet.OnRemoteStatusA := {$ifdef FPC}@{$endif}RemoteStatusACB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

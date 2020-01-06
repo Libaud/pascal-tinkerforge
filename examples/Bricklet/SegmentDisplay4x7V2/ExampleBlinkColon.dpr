@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    sd: TBrickletSegmentDisplay4x7V2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletSegmentDisplay4x7V2;
   public
     procedure Execute;
   end;
@@ -27,34 +27,36 @@ procedure TExample.Execute;
 var i: integer;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  sd := TBrickletSegmentDisplay4x7V2.Create(UID, ipcon);
+  oBricklet := TBrickletSegmentDisplay4x7V2.Create(nil);
+  oBricklet.IPConnection:= oIPConnection;
+  oBricklet.UIDString:= UID;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  sd.SetBrightness(7); { Set to full brightness }
+  oBricklet.SetBrightness(7); { Set to full brightness }
 
   { Blink colon 10 times }
   for i := 0 to 9 do begin
 
     { Activate segments of colon }
-    sd.SetSelectedSegment(32, true);
-    sd.SetSelectedSegment(33, true);
+    oBricklet.SetSelectedSegment(32, true);
+    oBricklet.SetSelectedSegment(33, true);
 
     Sleep(250);
 
     { Deactivate segments of colon }
-    sd.SetSelectedSegment(32, false);
-    sd.SetSelectedSegment(33, false);
+    oBricklet.SetSelectedSegment(32, false);
+    oBricklet.SetSelectedSegment(33, false);
   end;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

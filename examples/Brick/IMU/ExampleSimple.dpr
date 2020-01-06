@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    imu: TBrickIMU;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickIMU;
   public
     procedure Execute;
   end;
@@ -27,17 +27,19 @@ procedure TExample.Execute;
 var x, y, z, w: single;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  imu := TBrickIMU.Create(UID, ipcon);
+  oBrick := TBrickIMU.Create(nil);
+  oBrick.UIDString:= UID;
+  oBrick.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current quaternion }
-  imu.GetQuaternion(x, y, z, w);
+  oBrick.GetQuaternion(x, y, z, w);
 
   WriteLn(Format('Quaternion [X]: %f', [x]));
   WriteLn(Format('Quaternion [Y]: %f', [y]));
@@ -46,7 +48,7 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

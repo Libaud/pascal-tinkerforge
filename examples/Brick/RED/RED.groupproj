@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{43B247AC-31A0-460A-94FE-2E5E07D56B7C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleWriteFile.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleReadFile.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleWriteFile">
+        <MSBuild Projects="ExampleWriteFile.dproj"/>
+    </Target>
+    <Target Name="ExampleWriteFile:Clean">
+        <MSBuild Projects="ExampleWriteFile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleWriteFile:Make">
+        <MSBuild Projects="ExampleWriteFile.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleReadFile">
+        <MSBuild Projects="ExampleReadFile.dproj"/>
+    </Target>
+    <Target Name="ExampleReadFile:Clean">
+        <MSBuild Projects="ExampleReadFile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleReadFile:Make">
+        <MSBuild Projects="ExampleReadFile.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleWriteFile;ExampleReadFile"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleWriteFile:Clean;ExampleReadFile:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleWriteFile:Make;ExampleReadFile:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

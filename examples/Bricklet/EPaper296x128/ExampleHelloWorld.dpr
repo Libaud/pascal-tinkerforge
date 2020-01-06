@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    ep: TBrickletEPaper296x128;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletEPaper296x128;
   public
     procedure Execute;
   end;
@@ -26,27 +26,27 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  ep := TBrickletEPaper296x128.Create(UID, ipcon);
+  oBricklet := TBrickletEPaper296x128.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Use black background }
-  ep.FillDisplay(BRICKLET_E_PAPER_296X128_COLOR_BLACK);
+  oBricklet.FillDisplay(BRICKLET_E_PAPER_296X128_COLOR_BLACK);
 
   { Write big white "Hello World" in the middle of the screen }
-  ep.DrawText(16, 48, BRICKLET_E_PAPER_296X128_FONT_24X32,
+  oBricklet.DrawText(16, 48, BRICKLET_E_PAPER_296X128_FONT_24X32,
               BRICKLET_E_PAPER_296X128_COLOR_WHITE,
               BRICKLET_E_PAPER_296X128_ORIENTATION_HORIZONTAL, 'Hello World');
-  ep.Draw;
+  oBricklet.Draw;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    rs485: TBrickletRS485;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRS485;
   public
     procedure ModbusSlaveWriteSingleRegisterRequestCB(sender: TBrickletRS485;
                                                       const requestID: byte;
@@ -49,30 +49,30 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  rs485 := TBrickletRS485.Create(UID, ipcon);
+  oBricklet := TBrickletRS485.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Set operating mode to Modbus RTU slave }
-  rs485.SetMode(BRICKLET_RS485_MODE_MODBUS_SLAVE_RTU);
+  oBricklet.SetMode(BRICKLET_RS485_MODE_MODBUS_SLAVE_RTU);
 
   { Modbus specific configuration:
     - slave address = 17
     - master request timeout = 0ms (unused in slave mode) }
-  rs485.SetModbusConfiguration(17, 0);
+  oBricklet.SetModbusConfiguration(17, 0);
 
   { Register Modbus slave write single register request callback to procedure
     ModbusSlaveWriteSingleRegisterRequestCB }
-  rs485.OnModbusSlaveWriteSingleRegisterRequest := {$ifdef FPC}@{$endif}ModbusSlaveWriteSingleRegisterRequestCB;
+  oBricklet.OnModbusSlaveWriteSingleRegisterRequest := {$ifdef FPC}@{$endif}ModbusSlaveWriteSingleRegisterRequestCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7070F55E-B0A1-495A-926C-4AE3EC9822D5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleMotor.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleCallback">
+        <MSBuild Projects="ExampleCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCallback:Clean">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCallback:Make">
+        <MSBuild Projects="ExampleCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimple">
+        <MSBuild Projects="ExampleSimple.dproj"/>
+    </Target>
+    <Target Name="ExampleSimple:Clean">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimple:Make">
+        <MSBuild Projects="ExampleSimple.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMotor">
+        <MSBuild Projects="ExampleMotor.dproj"/>
+    </Target>
+    <Target Name="ExampleMotor:Clean">
+        <MSBuild Projects="ExampleMotor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMotor:Make">
+        <MSBuild Projects="ExampleMotor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleCallback;ExampleSimple;ExampleMotor"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleCallback:Clean;ExampleSimple:Clean;ExampleMotor:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleCallback:Make;ExampleSimple:Make;ExampleMotor:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    lcd: TBrickletLCD16x2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletLCD16x2;
   public
     procedure ButtonPressedCB(sender: TBrickletLCD16x2; const button: byte);
     procedure ButtonReleasedCB(sender: TBrickletLCD16x2; const button: byte);
@@ -40,24 +40,24 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  lcd := TBrickletLCD16x2.Create(UID, ipcon);
+  oBricklet := TBrickletLCD16x2.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register button pressed callback to procedure ButtonPressedCB }
-  lcd.OnButtonPressed := {$ifdef FPC}@{$endif}ButtonPressedCB;
+  oBricklet.OnButtonPressed := {$ifdef FPC}@{$endif}ButtonPressedCB;
 
   { Register button released callback to procedure ButtonReleasedCB }
-  lcd.OnButtonReleased := {$ifdef FPC}@{$endif}ButtonReleasedCB;
+  oBricklet.OnButtonReleased := {$ifdef FPC}@{$endif}ButtonReleasedCB;
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

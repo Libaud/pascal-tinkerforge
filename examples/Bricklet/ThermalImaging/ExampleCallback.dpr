@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    ti: TBrickletThermalImaging;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletThermalImaging;
   public
     procedure HighContrastImageCB(sender: TBrickletThermalImaging;
                                   const image: TArrayOfUInt8);
@@ -35,24 +35,26 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  ti := TBrickletThermalImaging.Create(UID, ipcon);
+  oBricklet := TBrickletThermalImaging.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register high contrast image callback to procedure HighContrastImageCB }
-  ti.OnHighContrastImage := {$ifdef FPC}@{$endif}HighContrastImageCB;
+  oBricklet.OnHighContrastImage := {$ifdef FPC}@{$endif}HighContrastImageCB;
 
   { Enable high contrast image transfer for callback }
-  ti.SetImageTransferConfig(BRICKLET_THERMAL_IMAGING_IMAGE_TRANSFER_CALLBACK_HIGH_CONTRAST_IMAGE);
+  oBricklet.SetImageTransferConfig(BRICKLET_THERMAL_IMAGING_IMAGE_TRANSFER_CALLBACK_HIGH_CONTRAST_IMAGE);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

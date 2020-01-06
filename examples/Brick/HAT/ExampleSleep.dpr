@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    hat: TBrickHAT;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickHAT;
   public
     procedure Execute;
   end;
@@ -26,21 +26,21 @@ var
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  hat := TBrickHAT.Create(UID, ipcon);
+  oBrick := TBrickHAT.Create(nil);
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Turn Raspberry Pi and Bricklets off in 2 seconds for 30 minutes with sleep indicator enabled }
-  hat.SetSleepMode(2, 1800, true, true, true);
+  oBrick.SetSleepMode(2, 1800, true, true, true);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

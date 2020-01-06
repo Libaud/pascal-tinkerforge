@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{14EAF811-E25F-4748-B01F-DE5D40906261}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleSleep.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExamplePrintVoltages.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleSleep">
+        <MSBuild Projects="ExampleSleep.dproj"/>
+    </Target>
+    <Target Name="ExampleSleep:Clean">
+        <MSBuild Projects="ExampleSleep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSleep:Make">
+        <MSBuild Projects="ExampleSleep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExamplePrintVoltages">
+        <MSBuild Projects="ExamplePrintVoltages.dproj"/>
+    </Target>
+    <Target Name="ExamplePrintVoltages:Clean">
+        <MSBuild Projects="ExamplePrintVoltages.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExamplePrintVoltages:Make">
+        <MSBuild Projects="ExamplePrintVoltages.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleSleep;ExamplePrintVoltages"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleSleep:Clean;ExamplePrintVoltages:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleSleep:Make;ExamplePrintVoltages:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

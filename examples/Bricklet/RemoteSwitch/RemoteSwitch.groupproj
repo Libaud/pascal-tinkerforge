@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0D6D40DE-831D-4973-8505-F0F7E18181D0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ExampleSwitchSocket.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ExampleSwitchSocket">
+        <MSBuild Projects="ExampleSwitchSocket.dproj"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket:Clean">
+        <MSBuild Projects="ExampleSwitchSocket.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSwitchSocket:Make">
+        <MSBuild Projects="ExampleSwitchSocket.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ExampleSwitchSocket"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ExampleSwitchSocket:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ExampleSwitchSocket:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

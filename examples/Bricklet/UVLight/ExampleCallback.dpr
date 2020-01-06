@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    uvl: TBrickletUVLight;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletUVLight;
   public
     procedure UVLightCB(sender: TBrickletUVLight; const uvLight: longword);
     procedure Execute;
@@ -33,26 +33,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  uvl := TBrickletUVLight.Create(UID, ipcon);
+  oBricklet := TBrickletUVLight.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register UV light callback to procedure UVLightCB }
-  uvl.OnUVLight := {$ifdef FPC}@{$endif}UVLightCB;
+  oBricklet.OnUVLight := {$ifdef FPC}@{$endif}UVLightCB;
 
   { Set period for UV light callback to 1s (1000ms)
     Note: The UV light callback is only called every second
           if the UV light has changed since the last call! }
-  uvl.SetUVLightCallbackPeriod(1000);
+  oBricklet.SetUVLightCallbackPeriod(1000);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

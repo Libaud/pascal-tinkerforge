@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    servo: TBrickServo;
+    oIPConnection: TIPConnection;
+    oBrick: TBrickServo;
   public
     procedure PositionReachedCB(sender: TBrickServo; const servoNum: byte;
                                 const position: smallint);
@@ -45,32 +45,34 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  servo := TBrickServo.Create(UID, ipcon);
+  oBrick := TBrickServo.Create(nil);
+  oBrick.UIDString := UID;
+  oBrick.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register position reached callback to procedure PositionReachedCB }
-  servo.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+  oBrick.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
   { Enable position reached callback }
-  servo.EnablePositionReachedCallback;
+  oBrick.EnablePositionReachedCallback;
 
   { Set velocity to 100°/s. This has to be smaller or equal to the
     maximum velocity of the servo you are using, otherwise the position
     reached callback will be called too early }
-  servo.SetVelocity(0, 10000);
-  servo.SetPosition(0, 9000);
-  servo.Enable(0);
+  oBrick.SetVelocity(0, 10000);
+  oBrick.SetPosition(0, 9000);
+  oBrick.Enable(0);
 
   WriteLn('Press key to exit');
   ReadLn;
-  servo.Disable(0);
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oBrick.Disable(0);
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

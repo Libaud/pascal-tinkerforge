@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    co2: TBrickletCO2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletCO2;
   public
     procedure CO2ConcentrationCB(sender: TBrickletCO2; const co2Concentration: word);
     procedure Execute;
@@ -33,26 +33,28 @@ end;
 procedure TExample.Execute;
 begin
   { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  oIPConnection := TIPConnection.Create(nil);
 
   { Create device object }
-  co2 := TBrickletCO2.Create(UID, ipcon);
+  oBricklet := TBrickletCO2.Create(nil);
+  oBricklet.UIDString:= UID;
+  oBricklet.IPConnection:= oIPConnection;
 
   { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
+  oIPConnection.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register CO2 concentration callback to procedure CO2ConcentrationCB }
-  co2.OnCO2Concentration := {$ifdef FPC}@{$endif}CO2ConcentrationCB;
+  oBricklet.OnCO2Concentration := {$ifdef FPC}@{$endif}CO2ConcentrationCB;
 
   { Set period for CO2 concentration callback to 1s (1000ms)
     Note: The CO2 concentration callback is only called every second
           if the CO2 concentration has changed since the last call! }
-  co2.SetCO2ConcentrationCallbackPeriod(1000);
+  oBricklet.SetCO2ConcentrationCallbackPeriod(1000);
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin
