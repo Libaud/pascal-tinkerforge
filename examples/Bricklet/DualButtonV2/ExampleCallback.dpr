@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    db: TBrickletDualButtonV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDualButtonV2;
   public
     procedure StateChangedCB(sender: TBrickletDualButtonV2; const buttonL: byte;
                              const buttonR: byte; const ledL: byte; const ledR: byte);
@@ -49,25 +49,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  db := TBrickletDualButtonV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletDualButtonV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register state changed callback to procedure StateChangedCB }
-  db.OnStateChanged := {$ifdef FPC}@{$endif}StateChangedCB;
+	  { Register state changed callback to procedure StateChangedCB }
+	  oBricklet.OnStateChanged := {$ifdef FPC}@{$endif}StateChangedCB;
 
-  { Enable state changed callback }
-  db.SetStateChangedCallbackConfiguration(true);
+	  { Enable state changed callback }
+	  oBricklet.SetStateChangedCallbackConfiguration(true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -37,27 +37,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletAccelerometerV2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletAccelerometerV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register acceleration callback to procedure AccelerationCB }
-  oBricklet.OnAcceleration := {$ifdef FPC}@{$endif}AccelerationCB;
+	  { Register acceleration callback to procedure AccelerationCB }
+	  oBricklet.OnAcceleration := {$ifdef FPC}@{$endif}AccelerationCB;
 
-  { Set period for acceleration callback to 1s (1000ms) }
-  oBricklet.SetAccelerationCallbackConfiguration(1000, false);
+	  { Set period for acceleration callback to 1s (1000ms) }
+	  oBricklet.SetAccelerationCallbackConfiguration(1000, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  finally
+	  oBricklet.Destroy;
+  end;
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    rtc: TBrickletRealTimeClockV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletRealTimeClockV2;
   public
     procedure DateTimeCB(sender: TBrickletRealTimeClockV2; const year: word;
                          const month: byte; const day: byte; const hour: byte;
@@ -70,25 +70,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  rtc := TBrickletRealTimeClockV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletRealTimeClockV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register date and time callback to procedure DateTimeCB }
-  rtc.OnDateTime := {$ifdef FPC}@{$endif}DateTimeCB;
+	  { Register date and time callback to procedure DateTimeCB }
+	  oBricklet.OnDateTime := {$ifdef FPC}@{$endif}DateTimeCB;
 
-  { Set period for date and time callback to 5s (5000ms) }
-  rtc.SetDateTimeCallbackConfiguration(5000);
+	  { Set period for date and time callback to 5s (5000ms) }
+	  oBricklet.SetDateTimeCallbackConfiguration(5000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

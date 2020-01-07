@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dd: TBrickletDustDetector;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDustDetector;
   public
     procedure DustDensityReachedCB(sender: TBrickletDustDetector;
                                    const dustDensity: word);
@@ -34,28 +34,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  dd := TBrickletDustDetector.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletDustDetector.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  dd.SetDebouncePeriod(10000);
+	  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+	  oBricklet.SetDebouncePeriod(10000);
 
-  { Register dust density reached callback to procedure DustDensityReachedCB }
-  dd.OnDustDensityReached := {$ifdef FPC}@{$endif}DustDensityReachedCB;
+	  { Register dust density reached callback to procedure DustDensityReachedCB }
+	  oBricklet.OnDustDensityReached := {$ifdef FPC}@{$endif}DustDensityReachedCB;
 
-  { Configure threshold for dust density "greater than 10 µg/m³" }
-  dd.SetDustDensityCallbackThreshold('>', 10, 0);
+	  { Configure threshold for dust density "greater than 10 µg/m³" }
+	  oBricklet.SetDustDensityCallbackThreshold('>', 10, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

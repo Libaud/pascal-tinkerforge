@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <MultiProject FileVersion="1">
-    <Elements Count="297">
+    <Elements Count="298">
       <Element0 FileName="../packages/tinkerforge.ctpkg"/>
       <Element1 FileName="ExampleAuthenticate.ctpr">
         <BuildModes Count="1"/>
@@ -1187,6 +1187,10 @@
         <BuildModes Count="1"/>
         <Mode1 Name="Default"/>
       </Element296>
+      <Element297 FileName="ExampleAuthenticate.ctpr">
+        <BuildModes Count="1"/>
+        <Mode1 Name="Default"/>
+      </Element297>
     </Elements>
   </MultiProject>
 </CONFIG>

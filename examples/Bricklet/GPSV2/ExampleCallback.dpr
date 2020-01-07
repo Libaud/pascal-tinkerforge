@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    gps: TBrickletGPSV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletGPSV2;
   public
     procedure CoordinatesCB(sender: TBrickletGPSV2; const latitude: longword;
                             const ns: char; const longitude: longword; const ew: char);
@@ -39,27 +39,33 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  gps := TBrickletGPSV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletGPSV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register coordinates callback to procedure CoordinatesCB }
-  gps.OnCoordinates := {$ifdef FPC}@{$endif}CoordinatesCB;
+	  { Register coordinates callback to procedure CoordinatesCB }
+	  oBricklet.OnCoordinates := {$ifdef FPC}@{$endif}CoordinatesCB;
 
-  { Set period for coordinates callback to 1s (1000ms)
-    Note: The coordinates callback is only called every second
-          if the coordinates has changed since the last call! }
-  gps.SetCoordinatesCallbackPeriod(1000);
+	  { Set period for coordinates callback to 1s (1000ms)
+		Note: The coordinates callback is only called every second
+			  if the coordinates has changed since the last call! }
+	  oBricklet.SetCoordinatesCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

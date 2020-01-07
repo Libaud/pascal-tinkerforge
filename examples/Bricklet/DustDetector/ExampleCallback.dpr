@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dd: TBrickletDustDetector;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDustDetector;
   public
     procedure DustDensityCB(sender: TBrickletDustDetector; const dustDensity: word);
     procedure Execute;
@@ -32,27 +32,33 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  dd := TBrickletDustDetector.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletDustDetector.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register dust density callback to procedure DustDensityCB }
-  dd.OnDustDensity := {$ifdef FPC}@{$endif}DustDensityCB;
+	  { Register dust density callback to procedure DustDensityCB }
+	  oBricklet.OnDustDensity := {$ifdef FPC}@{$endif}DustDensityCB;
 
-  { Set period for dust density callback to 1s (1000ms)
-    Note: The dust density callback is only called every second
-          if the dust density has changed since the last call! }
-  dd.SetDustDensityCallbackPeriod(1000);
+	  { Set period for dust density callback to 1s (1000ms)
+		Note: The dust density callback is only called every second
+			  if the dust density has changed since the last call! }
+	  oBricklet.SetDustDensityCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

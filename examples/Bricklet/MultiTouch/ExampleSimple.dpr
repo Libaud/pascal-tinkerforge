@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mt: TBrickletMultiTouch;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMultiTouch;
   public
     procedure Execute;
   end;
@@ -26,40 +26,46 @@ var
 procedure TExample.Execute;
 var state: word; i: integer;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  mt := TBrickletMultiTouch.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletMultiTouch.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current touch state }
-  state := mt.GetTouchState;
+	  { Get current touch state }
+	  state := oBricklet.GetTouchState;
 
-  if (state And (1 Shl 12)) = (1 Shl 12) then begin
-    Write('In proximity, ');
+	  if (state And (1 Shl 12)) = (1 Shl 12) then begin
+		Write('In proximity, ');
+	  end;
+
+	  if (state And $fff) = 0 then begin
+		WriteLn('No electrodes touched');
+	  end
+	  else begin
+		Write('Electrodes ');
+		for i := 0 to 11 do begin
+		  if (state And (1 Shl i)) = (1 Shl i) then begin
+			Write(IntToStr(i) + ' ');
+		  end;
+		end;
+		WriteLn('touched');
+	  end;
+	  WriteLn('');
+
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  if (state And $fff) = 0 then begin
-    WriteLn('No electrodes touched');
-  end
-  else begin
-    Write('Electrodes ');
-    for i := 0 to 11 do begin
-      if (state And (1 Shl i)) = (1 Shl i) then begin
-        Write(IntToStr(i) + ' ');
-      end;
-    end;
-    WriteLn('touched');
-  end;
-  WriteLn('');
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    tir: TBrickletTemperatureIRV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletTemperatureIRV2;
   public
     procedure Execute;
   end;
@@ -26,27 +26,33 @@ var
 procedure TExample.Execute;
 var ambientTemperature, objectTemperature: smallint;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  tir := TBrickletTemperatureIRV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletTemperatureIRV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current ambient temperature }
-  ambientTemperature := tir.GetAmbientTemperature;
-  WriteLn(Format('Ambient Temperature: %f °C', [ambientTemperature/10.0]));
+	  { Get current ambient temperature }
+	  ambientTemperature := oBricklet.GetAmbientTemperature;
+	  WriteLn(Format('Ambient Temperature: %f °C', [ambientTemperature/10.0]));
 
-  { Get current object temperature }
-  objectTemperature := tir.GetObjectTemperature;
-  WriteLn(Format('Object Temperature: %f °C', [objectTemperature/10.0]));
+	  { Get current object temperature }
+	  objectTemperature := oBricklet.GetObjectTemperature;
+	  WriteLn(Format('Object Temperature: %f °C', [objectTemperature/10.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

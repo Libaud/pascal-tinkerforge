@@ -34,27 +34,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletThermalImaging.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletThermalImaging.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register high contrast image callback to procedure HighContrastImageCB }
-  oBricklet.OnHighContrastImage := {$ifdef FPC}@{$endif}HighContrastImageCB;
+	  { Register high contrast image callback to procedure HighContrastImageCB }
+	  oBricklet.OnHighContrastImage := {$ifdef FPC}@{$endif}HighContrastImageCB;
 
-  { Enable high contrast image transfer for callback }
-  oBricklet.SetImageTransferConfig(BRICKLET_THERMAL_IMAGING_IMAGE_TRANSFER_CALLBACK_HIGH_CONTRAST_IMAGE);
+	  { Enable high contrast image transfer for callback }
+	  oBricklet.SetImageTransferConfig(BRICKLET_THERMAL_IMAGING_IMAGE_TRANSFER_CALLBACK_HIGH_CONTRAST_IMAGE);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

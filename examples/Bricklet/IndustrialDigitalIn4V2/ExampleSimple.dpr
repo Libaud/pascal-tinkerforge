@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    idi4: TBrickletIndustrialDigitalIn4V2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIndustrialDigitalIn4V2;
   public
     procedure Execute;
   end;
@@ -26,27 +26,33 @@ var
 procedure TExample.Execute;
 var value: TArray0To3OfBoolean;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  idi4 := TBrickletIndustrialDigitalIn4V2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIndustrialDigitalIn4V2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current value }
-  value := idi4.GetValue;
+	  { Get current value }
+	  value := oBricklet.GetValue;
 
-  WriteLn(Format('Channel 0: %d', [value[0]]));
-  WriteLn(Format('Channel 1: %d', [value[1]]));
-  WriteLn(Format('Channel 2: %d', [value[2]]));
-  WriteLn(Format('Channel 3: %d', [value[3]]));
+	  WriteLn(Format('Channel 0: %d', [value[0]]));
+	  WriteLn(Format('Channel 1: %d', [value[1]]));
+	  WriteLn(Format('Channel 2: %d', [value[2]]));
+	  WriteLn(Format('Channel 3: %d', [value[3]]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

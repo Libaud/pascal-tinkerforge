@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    nfc: TBrickletNFC;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletNFC;
   public
     procedure ReaderStateChangedCB(sender: TBrickletNFC; const state: byte;
                                    const idle: boolean);
@@ -60,25 +60,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  nfc := TBrickletNFC.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletNFC.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register reader state changed callback to procedure ReaderStateChangedCB }
-  nfc.OnReaderStateChanged := {$ifdef FPC}@{$endif}ReaderStateChangedCB;
+	  { Register reader state changed callback to procedure ReaderStateChangedCB }
+	  oBricklet.OnReaderStateChanged := {$ifdef FPC}@{$endif}ReaderStateChangedCB;
 
-  { Enable reader mode }
-  nfc.SetMode(BRICKLET_NFC_MODE_READER);
+	  { Enable reader mode }
+	  oBricklet.SetMode(BRICKLET_NFC_MODE_READER);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

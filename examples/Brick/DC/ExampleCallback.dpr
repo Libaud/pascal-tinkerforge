@@ -43,34 +43,38 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickDC.Create(nil);
-  oBrick.IPConnection:= oIPConnection;
-  oBrick.UIDString:= UID;
+	  { Create device object }
+	  oBrick := TBrickDC.Create(nil);
+	  oBrick.IPConnection:= oIPConnection;
+	  oBrick.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { The acceleration has to be smaller or equal to the maximum
-    acceleration of the DC motor, otherwise the velocity reached
-    callback will be called too early }
-  oBrick.SetAcceleration(5000); { Slow acceleration }
-  oBrick.SetVelocity(32767); { Full speed forward }
+	  { The acceleration has to be smaller or equal to the maximum
+		acceleration of the DC motor, otherwise the velocity reached
+		callback will be called too early }
+	  oBrick.SetAcceleration(5000); { Slow acceleration }
+	  oBrick.SetVelocity(32767); { Full speed forward }
 
-  { Register velocity reached callback to procedure VelocityReachedCB }
-  oBrick.OnVelocityReached := {$ifdef FPC}@{$endif}VelocityReachedCB;
+	  { Register velocity reached callback to procedure VelocityReachedCB }
+	  oBrick.OnVelocityReached := {$ifdef FPC}@{$endif}VelocityReachedCB;
 
-  { Enable motor power }
-  oBrick.Enable;
+	  { Enable motor power }
+	  oBrick.Enable;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oBrick.Disable; { Disable motor power }
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBrick.Disable; { Disable motor power }
+	  oBrick.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

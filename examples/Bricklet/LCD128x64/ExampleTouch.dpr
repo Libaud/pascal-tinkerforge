@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    oBrick: TBrickletLCD128x64;
+    oBricklet: TBrickletLCD128x64;
   public
     procedure TouchPositionCB(sender: TBrickletLCD128x64; const pressure: word;
                               const x: word; const y: word; const age: longword);
@@ -72,31 +72,37 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickletLCD128x64.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickletLCD128x64.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register touch position callback to procedure TouchPositionCB }
-  oBrick.OnTouchPosition := {$ifdef FPC}@{$endif}TouchPositionCB;
+	  { Register touch position callback to procedure TouchPositionCB }
+	  oBricklet.OnTouchPosition := {$ifdef FPC}@{$endif}TouchPositionCB;
 
-  { Register touch gesture callback to procedure TouchGestureCB }
-  oBrick.OnTouchGesture := {$ifdef FPC}@{$endif}TouchGestureCB;
+	  { Register touch gesture callback to procedure TouchGestureCB }
+	  oBricklet.OnTouchGesture := {$ifdef FPC}@{$endif}TouchGestureCB;
 
-  { Set period for touch position callback to 0.1s (100ms) }
-  oBrick.SetTouchPositionCallbackConfiguration(100, true);
+	  { Set period for touch position callback to 0.1s (100ms) }
+	  oBricklet.SetTouchPositionCallbackConfiguration(100, true);
 
-  { Set period for touch gesture callback to 0.1s (100ms) }
-  oBrick.SetTouchGestureCallbackConfiguration(100, true);
+	  { Set period for touch gesture callback to 0.1s (100ms) }
+	  oBricklet.SetTouchGestureCallbackConfiguration(100, true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

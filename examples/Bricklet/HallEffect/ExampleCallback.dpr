@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    he: TBrickletHallEffect;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletHallEffect;
   public
     procedure EdgeCountCB(sender: TBrickletHallEffect; const count: longword;
                           const value: boolean);
@@ -34,27 +34,33 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  he := TBrickletHallEffect.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletHallEffect.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register edge count callback to procedure EdgeCountCB }
-  he.OnEdgeCount := {$ifdef FPC}@{$endif}EdgeCountCB;
+	  { Register edge count callback to procedure EdgeCountCB }
+	  oBricklet.OnEdgeCount := {$ifdef FPC}@{$endif}EdgeCountCB;
 
-  { Set period for edge count callback to 0.05s (50ms)
-    Note: The edge count callback is only called every 0.05 seconds
-          if the edge count has changed since the last call! }
-  he.SetEdgeCountCallbackPeriod(50);
+	  { Set period for edge count callback to 0.05s (50ms)
+		Note: The edge count callback is only called every 0.05 seconds
+			  if the edge count has changed since the last call! }
+	  oBricklet.SetEdgeCountCallbackPeriod(50);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

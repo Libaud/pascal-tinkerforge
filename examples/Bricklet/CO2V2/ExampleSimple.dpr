@@ -26,28 +26,32 @@ var
 procedure TExample.Execute;
 var co2Concentration, humidity: word; temperature: smallint;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletCO2V2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletCO2V2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current all values }
-  oBricklet.GetAllValues(co2Concentration, temperature, humidity);
+	  { Get current all values }
+	  oBricklet.GetAllValues(co2Concentration, temperature, humidity);
 
-  WriteLn(Format('CO2 Concentration: %d ppm', [co2Concentration]));
-  WriteLn(Format('Temperature: %f °C', [temperature/100.0]));
-  WriteLn(Format('Humidity: %f %%RH', [humidity/100.0]));
+	  WriteLn(Format('CO2 Concentration: %d ppm', [co2Concentration]));
+	  WriteLn(Format('Temperature: %f °C', [temperature/100.0]));
+	  WriteLn(Format('Humidity: %f %%RH', [humidity/100.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

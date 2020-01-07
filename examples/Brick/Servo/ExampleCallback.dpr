@@ -44,35 +44,39 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickServo.Create(nil);
-  oBrick.UIDString := UID;
-  oBrick.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBrick := TBrickServo.Create(nil);
+	  oBrick.UIDString := UID;
+	  oBrick.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register position reached callback to procedure PositionReachedCB }
-  oBrick.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+	  { Register position reached callback to procedure PositionReachedCB }
+	  oBrick.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
-  { Enable position reached callback }
-  oBrick.EnablePositionReachedCallback;
+	  { Enable position reached callback }
+	  oBrick.EnablePositionReachedCallback;
 
-  { Set velocity to 100°/s. This has to be smaller or equal to the
-    maximum velocity of the servo you are using, otherwise the position
-    reached callback will be called too early }
-  oBrick.SetVelocity(0, 10000);
-  oBrick.SetPosition(0, 9000);
-  oBrick.Enable(0);
+	  { Set velocity to 100°/s. This has to be smaller or equal to the
+		maximum velocity of the servo you are using, otherwise the position
+		reached callback will be called too early }
+	  oBrick.SetVelocity(0, 10000);
+	  oBrick.SetPosition(0, 9000);
+	  oBrick.Enable(0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oBrick.Disable(0);
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBrick.Disable(0);
+	  oBrick.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

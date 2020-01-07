@@ -25,28 +25,34 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletEPaper296x128.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickletEPaper296x128.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Use black background }
-  oBricklet.FillDisplay(BRICKLET_E_PAPER_296X128_COLOR_BLACK);
+	  { Use black background }
+	  oBricklet.FillDisplay(BRICKLET_E_PAPER_296X128_COLOR_BLACK);
 
-  { Write big white "Hello World" in the middle of the screen }
-  oBricklet.DrawText(16, 48, BRICKLET_E_PAPER_296X128_FONT_24X32,
-              BRICKLET_E_PAPER_296X128_COLOR_WHITE,
-              BRICKLET_E_PAPER_296X128_ORIENTATION_HORIZONTAL, 'Hello World');
-  oBricklet.Draw;
+	  { Write big white "Hello World" in the middle of the screen }
+	  oBricklet.DrawText(16, 48, BRICKLET_E_PAPER_296X128_FONT_24X32,
+				  BRICKLET_E_PAPER_296X128_COLOR_WHITE,
+				  BRICKLET_E_PAPER_296X128_ORIENTATION_HORIZONTAL, 'Hello World');
+	  oBricklet.Draw;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

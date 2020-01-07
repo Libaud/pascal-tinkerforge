@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    dd: TBrickletDustDetector;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletDustDetector;
   public
     procedure Execute;
   end;
@@ -26,23 +26,29 @@ var
 procedure TExample.Execute;
 var dustDensity: word;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  dd := TBrickletDustDetector.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletDustDetector.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current dust density }
-  dustDensity := dd.GetDustDensity;
-  WriteLn(Format('Dust Density: %d µg/m³', [dustDensity]));
+	  { Get current dust density }
+	  dustDensity := oBricklet.GetDustDensity;
+	  WriteLn(Format('Dust Density: %d µg/m³', [dustDensity]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

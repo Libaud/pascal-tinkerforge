@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    ow: TBrickletOutdoorWeather;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletOutdoorWeather;
   public
     procedure StationDataCB(sender: TBrickletOutdoorWeather; const identifier: byte;
                             const temperature: smallint; const humidity: byte;
@@ -112,31 +112,37 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  ow := TBrickletOutdoorWeather.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletOutdoorWeather.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Enable station data callbacks }
-  ow.SetStationCallbackConfiguration(true);
+	  { Enable station data callbacks }
+	  oBricklet.SetStationCallbackConfiguration(true);
 
-  { Enable sensor data callbacks }
-  ow.SetSensorCallbackConfiguration(true);
+	  { Enable sensor data callbacks }
+	  oBricklet.SetSensorCallbackConfiguration(true);
 
-  { Register station data callback to procedure StationDataCB }
-  ow.OnStationData := {$ifdef FPC}@{$endif}StationDataCB;
+	  { Register station data callback to procedure StationDataCB }
+	  oBricklet.OnStationData := {$ifdef FPC}@{$endif}StationDataCB;
 
-  { Register sensor data callback to procedure SensorDataCB }
-  ow.OnSensorData := {$ifdef FPC}@{$endif}SensorDataCB;
+	  { Register sensor data callback to procedure SensorDataCB }
+	  oBricklet.OnSensorData := {$ifdef FPC}@{$endif}SensorDataCB;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

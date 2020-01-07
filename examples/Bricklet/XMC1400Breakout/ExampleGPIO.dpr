@@ -26,31 +26,35 @@ var
 procedure TExample.Execute;
 var i: integer;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletXMC1400Breakout.Create(nil);
-  oBricklet.IPConnection:= oIPConnection;
-  oBricklet.UIDString:= UID;
+	  { Create device object }
+	  oBricklet := TBrickletXMC1400Breakout.Create(nil);
+	  oBricklet.IPConnection:= oIPConnection;
+	  oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Set Port 1, Pin 0 alternating high/low for 5 times with 1s delay }
-  for i := 0 to 4 do begin
-    Sleep(1000);
-    oBricklet.SetGPIOConfig(1, 0, BRICKLET_XMC1400_BREAKOUT_GPIO_MODE_OUTPUT_PUSH_PULL, 0,
-                     false);
-    Sleep(1000);
-    oBricklet.SetGPIOConfig(1, 0, BRICKLET_XMC1400_BREAKOUT_GPIO_MODE_OUTPUT_PUSH_PULL, 0,
-                     true);
+	  { Set Port 1, Pin 0 alternating high/low for 5 times with 1s delay }
+	  for i := 0 to 4 do begin
+		Sleep(1000);
+		oBricklet.SetGPIOConfig(1, 0, BRICKLET_XMC1400_BREAKOUT_GPIO_MODE_OUTPUT_PUSH_PULL, 0,
+						 false);
+		Sleep(1000);
+		oBricklet.SetGPIOConfig(1, 0, BRICKLET_XMC1400_BREAKOUT_GPIO_MODE_OUTPUT_PUSH_PULL, 0,
+						 true);
+	  end;
+
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mt: TBrickletMultiTouchV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMultiTouchV2;
   public
     procedure TouchStateCB(sender: TBrickletMultiTouchV2;
                            const state: TArray0To12OfBoolean);
@@ -47,25 +47,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  mt := TBrickletMultiTouchV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletMultiTouchV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register touch state callback to procedure TouchStateCB }
-  mt.OnTouchState := {$ifdef FPC}@{$endif}TouchStateCB;
+	  { Register touch state callback to procedure TouchStateCB }
+	  oBricklet.OnTouchState := {$ifdef FPC}@{$endif}TouchStateCB;
 
-  { Set period for touch state callback to 0.01s (10ms) }
-  mt.SetTouchStateCallbackConfiguration(10, true);
+	  { Set period for touch state callback to 0.01s (10ms) }
+	  oBricklet.SetTouchStateCallbackConfiguration(10, true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

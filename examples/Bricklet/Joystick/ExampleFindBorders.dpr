@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    j: TBrickletJoystick;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletJoystick;
   public
     procedure PositionReachedCB(sender: TBrickletJoystick; const x: smallint;
                                 const y: smallint);
@@ -46,28 +46,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  j := TBrickletJoystick.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletJoystick.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 0.2 seconds (200ms) }
-  j.SetDebouncePeriod(200);
+	  { Get threshold callbacks with a debounce time of 0.2 seconds (200ms) }
+	  oBricklet.SetDebouncePeriod(200);
 
-  { Register position reached callback to procedure PositionReachedCB }
-  j.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+	  { Register position reached callback to procedure PositionReachedCB }
+	  oBricklet.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
-  { Configure threshold for position "outside of -99, -99 to 99, 99" }
-  j.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
+	  { Configure threshold for position "outside of -99, -99 to 99, 99" }
+	  oBricklet.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

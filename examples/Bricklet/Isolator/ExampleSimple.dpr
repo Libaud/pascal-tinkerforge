@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    i: TBrickletIsolator;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIsolator;
   public
     procedure Execute;
   end;
@@ -27,28 +27,34 @@ procedure TExample.Execute;
 var messagesFromBrick, messagesFromBricklet: longword;
     connectedBrickletDeviceIdentifier: word; connectedBrickletUID: string;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  i := TBrickletIsolator.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIsolator.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current statistics }
-  i.GetStatistics(messagesFromBrick, messagesFromBricklet,
-                  connectedBrickletDeviceIdentifier, connectedBrickletUID);
+	  { Get current statistics }
+	  oBricklet.GetStatistics(messagesFromBrick, messagesFromBricklet,
+					  connectedBrickletDeviceIdentifier, connectedBrickletUID);
 
-  WriteLn(Format('Messages From Brick: %d', [messagesFromBrick]));
-  WriteLn(Format('Messages From Bricklet: %d', [messagesFromBricklet]));
-  WriteLn(Format('Connected Bricklet Device Identifier: %d', [connectedBrickletDeviceIdentifier]));
-  WriteLn(Format('Connected Bricklet UID: %s', [connectedBrickletUID]));
+	  WriteLn(Format('Messages From Brick: %d', [messagesFromBrick]));
+	  WriteLn(Format('Messages From Bricklet: %d', [messagesFromBricklet]));
+	  WriteLn(Format('Connected Bricklet Device Identifier: %d', [connectedBrickletDeviceIdentifier]));
+	  WriteLn(Format('Connected Bricklet UID: %s', [connectedBrickletUID]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

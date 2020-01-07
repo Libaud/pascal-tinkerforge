@@ -32,29 +32,33 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletCO2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletCO2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register CO2 concentration callback to procedure CO2ConcentrationCB }
-  oBricklet.OnCO2Concentration := {$ifdef FPC}@{$endif}CO2ConcentrationCB;
+	  { Register CO2 concentration callback to procedure CO2ConcentrationCB }
+	  oBricklet.OnCO2Concentration := {$ifdef FPC}@{$endif}CO2ConcentrationCB;
 
-  { Set period for CO2 concentration callback to 1s (1000ms)
-    Note: The CO2 concentration callback is only called every second
-          if the CO2 concentration has changed since the last call! }
-  oBricklet.SetCO2ConcentrationCallbackPeriod(1000);
+	  { Set period for CO2 concentration callback to 1s (1000ms)
+		Note: The CO2 concentration callback is only called every second
+			  if the CO2 concentration has changed since the last call! }
+	  oBricklet.SetCO2ConcentrationCallbackPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

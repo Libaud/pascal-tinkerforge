@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    m: TBrickletMoisture;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMoisture;
   public
     procedure Execute;
   end;
@@ -26,23 +26,29 @@ var
 procedure TExample.Execute;
 var moisture: word;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  m := TBrickletMoisture.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletMoisture.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current moisture value }
-  moisture := m.GetMoistureValue;
-  WriteLn(Format('Moisture Value: %d', [moisture]));
+	  { Get current moisture value }
+	  moisture := oBricklet.GetMoistureValue;
+	  WriteLn(Format('Moisture Value: %d', [moisture]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

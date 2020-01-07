@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    si: TBrickletSoundIntensity;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletSoundIntensity;
   public
     procedure Execute;
   end;
@@ -26,23 +26,29 @@ var
 procedure TExample.Execute;
 var intensity: word;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  si := TBrickletSoundIntensity.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletSoundIntensity.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current intensity }
-  intensity := si.GetIntensity;
-  WriteLn(Format('Intensity: %d', [intensity]));
+	  { Get current intensity }
+	  intensity := oBricklet.GetIntensity;
+	  WriteLn(Format('Intensity: %d', [intensity]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -38,27 +38,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickIMU.Create(nil);
-  oBrick.UIDString:= UID;
-  oBrick.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBrick := TBrickIMU.Create(nil);
+	  oBrick.UIDString:= UID;
+	  oBrick.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register quaternion callback to procedure QuaternionCB }
-  oBrick.OnQuaternion := {$ifdef FPC}@{$endif}QuaternionCB;
+	  { Register quaternion callback to procedure QuaternionCB }
+	  oBrick.OnQuaternion := {$ifdef FPC}@{$endif}QuaternionCB;
 
-  { Set period for quaternion callback to 1s (1000ms) }
-  oBrick.SetQuaternionPeriod(1000);
+	  { Set period for quaternion callback to 1s (1000ms) }
+	  oBrick.SetQuaternionPeriod(1000);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBrick.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

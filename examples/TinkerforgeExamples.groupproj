@@ -27,10 +27,10 @@
         <Projects Include="Brick\Servo\ExampleConfiguration.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SoundIntensity\ExampleCallback.dproj">
+        <Projects Include="Bricklet\LEDStrip\ExampleCallback.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SolidStateRelay\ExampleSimple.dproj">
+        <Projects Include="Bricklet\LEDStrip\ExampleSimple.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\PiezoSpeaker\ExampleMorseCode.dproj">
@@ -60,52 +60,16 @@
         <Projects Include="Bricklet\RS485\ExampleModbusSlave.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\RS232\ExampleLoopback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LEDStripV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LEDStrip\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LEDStrip\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LCD20x4\ExampleHelloWorld.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LCD20x4\ExampleButtonCallback.dproj">
+        <Projects Include="Bricklet\RS232V2\ExampleLoopback.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\LCD16x2\ExampleHelloWorld.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LCD16x2\ExampleButtonCallback.dproj">
+        <Projects Include="Bricklet\LCD20x4\ExampleButtonCallback.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\LCD128x64\ExamplePixelMatrix.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RotaryPoti\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RotaryPoti\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RotaryEncoderV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RotaryEncoderV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RotaryEncoder\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RotaryEncoder\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RGBLEDV2\ExampleSimple.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\RGBLEDButton\ExampleSimpleColor.dproj">
@@ -114,631 +78,295 @@
         <Projects Include="Bricklet\RGBLEDButton\ExampleSimpleButton.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\RGBLEDButton\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RGBLED\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Bricklet\RemoteSwitchV2\ExampleSwitchSocket.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\RemoteSwitchV2\ExampleRemoteCallback.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\RemoteSwitch\ExampleSwitchSocket.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RealTimeClockV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RealTimeClockV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RealTimeClock\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\RealTimeClock\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PTCV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PTCV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PTCV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PTC\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PTC\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PTC\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PiezoSpeakerV2\ExampleBeep.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PiezoSpeaker\ExampleBeep.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\PiezoBuzzer\ExampleBeep.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\ParticulateMatter\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\ParticulateMatter\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OutdoorWeather\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OLED64x48\ExamplePixelMatrix.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OLED64x48\ExampleHelloWorld.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OLED128x64V2\ExamplePixelMatrix.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OLED128x64V2\ExampleHelloWorld.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OLED128x64\ExamplePixelMatrix.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\OLED128x64\ExampleHelloWorld.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\NFCRFID\ExampleScanForTags.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\NFC\ExampleScanForTags.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\NFC\ExampleEmulateNDEF.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MultiTouchV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MultiTouchV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MultiTouch\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MultiTouch\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MotionDetectorV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MotionDetectorV2\ExampleIndicator.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\MotionDetector\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Moisture\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Moisture\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Moisture\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LoadCellV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LoadCellV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LoadCellV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LoadCell\ExampleSimple.dproj">
+        <Projects Include="Bricklet\Line\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\LoadCell\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LoadCell\ExampleCallback.dproj">
+        <Projects Include="Bricklet\LoadCellV2\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LinearPotiV2\ExampleSimple.dproj">
+        <Projects Include="Bricklet\Moisture\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LinearPotiV2\ExampleCallback.dproj">
+        <Projects Include="Bricklet\PTC\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LinearPoti\ExampleSimple.dproj">
+        <Projects Include="Bricklet\PTCV2\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LinearPoti\ExampleCallback.dproj">
+        <Projects Include="Bricklet\SoundPressureLevel\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Line\ExampleThreshold.dproj">
+        <Projects Include="Bricklet\Temperature\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Line\ExampleSimple.dproj">
+        <Projects Include="Bricklet\TemperatureV2\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Line\ExampleCallback.dproj">
+        <Projects Include="Bricklet\Thermocouple\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\LEDStripV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceIRV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceIR\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceIR\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceIR\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Current25\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Current25\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Current25\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Current12\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Current12\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Current12\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LCD128x64\ExampleHelloWorld.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LCD128x64\ExampleGUI.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LCD128x64\ExampleBigFont.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LaserRangeFinder\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LaserRangeFinder\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LaserRangeFinder\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\JoystickV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\JoystickV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Joystick\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Joystick\ExampleFindBorders.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Joystick\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Isolator\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO4V2\ExampleInterrupt.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO4V2\ExampleOutput.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO4\ExampleOutput.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO4\ExampleInterrupt.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO4\ExampleInput.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO16V2\ExampleOutput.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO16V2\ExampleInterrupt.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO16\ExampleOutput.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO16\ExampleInput.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IO16\ExampleInterrupt.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialQuadRelayV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialQuadRelay\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualRelay\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDual020mA\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDual020mA\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDual020mA\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalOut4V2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalOut4\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalIn4\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialCounter\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialAnalogOutV2\ExampleSimpleVoltage.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialAnalogOutV2\ExampleSimpleCurrent.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HumidityV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HumidityV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HumidityV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Humidity\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Humidity\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Humidity\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HallEffectV2\ExampleCounterCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HallEffectV2\ExampleCounter.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HallEffect\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\HallEffect\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\GPSV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\GPSV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\GPS\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\GPS\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\EPaper296x128\ExampleHelloWorld.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\EnergyMonitor\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\EnergyMonitor\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DustDetector\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DustDetector\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DustDetector\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DualButtonV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DualRelay\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DualButton\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DMX\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceUSV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceUSV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceUSV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceUS\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceUS\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceUS\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceIRV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\DistanceIRV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Compass\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Compass\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\ColorV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\ColorV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Color\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Color\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Color\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CO2V2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CO2V2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CO2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CO2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CO2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CAN\ExampleLoopback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\CANV2\ExampleLoopback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\BarometerV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\BarometerV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\BarometerV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Barometer\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Barometer\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Barometer\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogOutV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogOutV3\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogOut\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogInV3\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogInV3\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogInV3\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogInV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogInV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogInV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogIn\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogIn\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AnalogIn\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLightV3\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLightV3\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLightV3\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLightV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLightV2\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLightV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLight\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLight\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AirQuality\ExampleCallback.dproj">
+        <Projects Include="Bricklet\ThermocoupleV2\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\UVLight\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SoundIntensity\ExampleSimple.dproj">
+        <Projects Include="Bricklet\UVLightV2\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SoundPressureLevel\ExampleSimple.dproj">
+        <Projects Include="Bricklet\Voltage\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Temperature\ExampleSimple.dproj">
+        <Projects Include="Bricklet\VoltageCurrent\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\TemperatureIR\ExampleSimple.dproj">
+        <Projects Include="Bricklet\VoltageCurrentV2\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\TemperatureIRV2\ExampleSimple.dproj">
+        <Projects Include="Bricklet\LCD20x4\ExampleUnicode.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\TemperatureV2\ExampleSimple.dproj">
+        <Projects Include="Bricklet\TemperatureIRV2\ExampleWaterBoiling.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Thermocouple\ExampleSimple.dproj">
+        <Projects Include="Bricklet\NFCRFID\ExampleWriteReadType2.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\ThermocoupleV2\ExampleSimple.dproj">
+        <Projects Include="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Tilt\ExampleSimple.dproj">
+        <Projects Include="ExampleAuthenticate.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\UVLight\ExampleSimple.dproj">
+        <Projects Include="Bricklet\PiezoBuzzer\ExampleBeep.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\UVLightV2\ExampleSimple.dproj">
+        <Projects Include="Bricklet\PiezoSpeaker\ExampleBeep.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Voltage\ExampleSimple.dproj">
+        <Projects Include="Bricklet\PiezoSpeakerV2\ExampleBeep.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\VoltageCurrent\ExampleSimple.dproj">
+        <Projects Include="Bricklet\LCD128x64\ExampleBigFont.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\VoltageCurrentV2\ExampleSimple.dproj">
+        <Projects Include="Bricklet\LCD16x2\ExampleButtonCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Brick\DC\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Brick\IMU\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Brick\IMUV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Brick\Servo\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Brick\SilentStepper\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Brick\Stepper\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Accelerometer\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AccelerometerV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AirQuality\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLight\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV3\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogIn\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV3\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Barometer\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\BarometerV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CO2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CO2V2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Color\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\ColorV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Compass\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Current12\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Current25\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIR\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIRV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUS\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUSV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DualButton\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DualButtonV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DustDetector\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\EnergyMonitor\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\GPS\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\GPSV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HallEffect\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Humidity\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HumidityV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mA\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Joystick\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\JoystickV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LaserRangeFinder\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LEDStripV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Line\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LinearPoti\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LinearPotiV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LoadCell\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LoadCellV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Moisture\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MotionDetector\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MotionDetectorV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouch\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouchV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OutdoorWeather\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\ParticulateMatter\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\PTC\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\PTCV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClock\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClockV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RGBLEDButton\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoder\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoderV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPoti\ExampleCallback.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\RotaryPotiV2\ExampleCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\SoundIntensity\ExampleCallback.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\SoundPressureLevel\ExampleCallback.dproj">
@@ -783,85 +411,499 @@
         <Projects Include="Bricklet\VoltageCurrentV2\ExampleCallback.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\RS232V2\ExampleLoopback.dproj">
+        <Projects Include="Brick\DC\ExampleConfiguration.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\RS485\ExampleLoopback.dproj">
+        <Projects Include="Brick\SilentStepper\ExampleConfiguration.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj">
+        <Projects Include="Brick\Stepper\ExampleConfiguration.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HallEffectV2\ExampleCounter.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HallEffectV2\ExampleCounterCallback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\NFC\ExampleEmulateNDEF.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ExampleEnumerate.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Joystick\ExampleFindBorders.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\XMC1400Breakout\ExampleGPIO.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExampleGUI.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\EPaper296x128\ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LCD20x4\ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LCD128x64\ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OLED64x48\ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64\ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64V2\ExampleHelloWorld.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MotionDetectorV2\ExampleIndicator.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO4\ExampleInput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO16\ExampleInput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO4\ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO4V2\ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO16\ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO16V2\ExampleInterrupt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CAN\ExampleLoopback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CANV2\ExampleLoopback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RS232\ExampleLoopback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RS485\ExampleLoopback.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO4\ExampleOutput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO4V2\ExampleOutput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO16\ExampleOutput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IO16V2\ExampleOutput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OLED64x48\ExamplePixelMatrix.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64\ExamplePixelMatrix.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OLED128x64V2\ExamplePixelMatrix.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\NFC\ExampleScanForTags.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\NFCRFID\ExampleScanForTags.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SegmentDisplay4x7\ExampleSimple.dproj">
+        <Projects Include="Brick\HATZero\ExampleSimple.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\RotaryPotiV2\ExampleSimple.dproj">
+        <Projects Include="Brick\IMU\ExampleSimple.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\SoundPressureLevel\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Temperature\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\TemperatureV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Thermocouple\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\ThermocoupleV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\UVLightV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\Voltage\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\VoltageCurrent\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\VoltageCurrentV2\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\LCD20x4\ExampleUnicode.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AccelerometerV2\ExampleCallback.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AirQuality\ExampleSimple.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\TemperatureIRV2\ExampleWaterBoiling.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\NFCRFID\ExampleWriteReadType2.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AmbientLight\ExampleThreshold.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="Bricklet\AccelerometerV2\ExampleSimple.dproj">
+        <Projects Include="Brick\IMUV2\ExampleSimple.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\Accelerometer\ExampleSimple.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Bricklet\AccelerometerV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AirQuality\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLight\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV3\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogIn\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV3\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogOut\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogOutV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogOutV3\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Barometer\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\BarometerV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CO2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CO2V2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Color\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\ColorV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Compass\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Current12\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Current25\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIR\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIRV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUS\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUSV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DMX\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DualRelay\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DustDetector\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\EnergyMonitor\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\GPS\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\GPSV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HallEffect\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Humidity\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HumidityV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialCounter\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalIn4V2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalOut4\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDigitalOut4V2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mA\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualRelay\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialQuadRelay\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialQuadRelayV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Isolator\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Joystick\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\JoystickV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LaserRangeFinder\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LEDStripV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Line\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LinearPoti\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LinearPotiV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LoadCell\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LoadCellV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Moisture\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MotorizedLinearPoti\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouch\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\MultiTouchV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\ParticulateMatter\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\PTC\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\PTCV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClock\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RealTimeClockV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RGBLED\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RGBLEDV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoder\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryEncoderV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPoti\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RotaryPotiV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\SegmentDisplay4x7\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\SolidStateRelay\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="Bricklet\SolidStateRelayV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\SoundIntensity\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\SoundPressureLevel\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Temperature\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIR\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureIRV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\TemperatureV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Thermocouple\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\ThermocoupleV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Tilt\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\UVLight\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\UVLightV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Voltage\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrent\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\VoltageCurrentV2\ExampleSimple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOutV2\ExampleSimpleCurrent.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialAnalogOutV2\ExampleSimpleVoltage.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\RemoteSwitch\ExampleSwitchSocket.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Bricklet\Accelerometer\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Bricklet\Accelerometer\ExampleCallback.dproj">
+        <Projects Include="Bricklet\AmbientLight\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AmbientLightV3\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogIn\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\AnalogInV3\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Barometer\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\BarometerV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\CO2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Color\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Current12\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Current25\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIR\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceIRV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUS\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DistanceUSV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\DustDetector\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\Humidity\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\HumidityV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mA\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDual020mAV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogIn\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\IndustrialDualAnalogInV2\ExampleThreshold.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Bricklet\LaserRangeFinder\ExampleThreshold.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -936,31 +978,31 @@
         <MSBuild Projects="Brick\Master\ExampleStackStatus.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleConfiguration">
-        <MSBuild Projects="Brick\Servo\ExampleConfiguration.dproj"/>
+        <MSBuild Projects="Brick\Stepper\ExampleConfiguration.dproj"/>
     </Target>
     <Target Name="ExampleConfiguration:Clean">
-        <MSBuild Projects="Brick\Servo\ExampleConfiguration.dproj" Targets="Clean"/>
+        <MSBuild Projects="Brick\Stepper\ExampleConfiguration.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExampleConfiguration:Make">
-        <MSBuild Projects="Brick\Servo\ExampleConfiguration.dproj" Targets="Make"/>
+        <MSBuild Projects="Brick\Stepper\ExampleConfiguration.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleCallback">
-        <MSBuild Projects="Bricklet\Accelerometer\ExampleCallback.dproj"/>
+        <MSBuild Projects="Bricklet\VoltageCurrentV2\ExampleCallback.dproj"/>
     </Target>
     <Target Name="ExampleCallback:Clean">
-        <MSBuild Projects="Bricklet\Accelerometer\ExampleCallback.dproj" Targets="Clean"/>
+        <MSBuild Projects="Bricklet\VoltageCurrentV2\ExampleCallback.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExampleCallback:Make">
-        <MSBuild Projects="Bricklet\Accelerometer\ExampleCallback.dproj" Targets="Make"/>
+        <MSBuild Projects="Bricklet\VoltageCurrentV2\ExampleCallback.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleSimple">
-        <MSBuild Projects="Bricklet\SolidStateRelayV2\ExampleSimple.dproj"/>
+        <MSBuild Projects="Bricklet\VoltageCurrentV2\ExampleSimple.dproj"/>
     </Target>
     <Target Name="ExampleSimple:Clean">
-        <MSBuild Projects="Bricklet\SolidStateRelayV2\ExampleSimple.dproj" Targets="Clean"/>
+        <MSBuild Projects="Bricklet\VoltageCurrentV2\ExampleSimple.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExampleSimple:Make">
-        <MSBuild Projects="Bricklet\SolidStateRelayV2\ExampleSimple.dproj" Targets="Make"/>
+        <MSBuild Projects="Bricklet\VoltageCurrentV2\ExampleSimple.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleMorseCode">
         <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleMorseCode.dproj"/>
@@ -999,13 +1041,13 @@
         <MSBuild Projects="Bricklet\NFCRFID\ExampleWriteReadType2.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleThreshold">
-        <MSBuild Projects="Bricklet\Accelerometer\ExampleThreshold.dproj"/>
+        <MSBuild Projects="Bricklet\LaserRangeFinder\ExampleThreshold.dproj"/>
     </Target>
     <Target Name="ExampleThreshold:Clean">
-        <MSBuild Projects="Bricklet\Accelerometer\ExampleThreshold.dproj" Targets="Clean"/>
+        <MSBuild Projects="Bricklet\LaserRangeFinder\ExampleThreshold.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExampleThreshold:Make">
-        <MSBuild Projects="Bricklet\Accelerometer\ExampleThreshold.dproj" Targets="Make"/>
+        <MSBuild Projects="Bricklet\LaserRangeFinder\ExampleThreshold.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleTouch">
         <MSBuild Projects="Bricklet\LCD128x64\ExampleTouch.dproj"/>
@@ -1053,13 +1095,13 @@
         <MSBuild Projects="Bricklet\RS485\ExampleLoopback.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleHelloWorld">
-        <MSBuild Projects="Bricklet\EPaper296x128\ExampleHelloWorld.dproj"/>
+        <MSBuild Projects="Bricklet\OLED128x64V2\ExampleHelloWorld.dproj"/>
     </Target>
     <Target Name="ExampleHelloWorld:Clean">
-        <MSBuild Projects="Bricklet\EPaper296x128\ExampleHelloWorld.dproj" Targets="Clean"/>
+        <MSBuild Projects="Bricklet\OLED128x64V2\ExampleHelloWorld.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExampleHelloWorld:Make">
-        <MSBuild Projects="Bricklet\EPaper296x128\ExampleHelloWorld.dproj" Targets="Make"/>
+        <MSBuild Projects="Bricklet\OLED128x64V2\ExampleHelloWorld.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleButtonCallback">
         <MSBuild Projects="Bricklet\LCD16x2\ExampleButtonCallback.dproj"/>
@@ -1071,13 +1113,13 @@
         <MSBuild Projects="Bricklet\LCD16x2\ExampleButtonCallback.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExamplePixelMatrix">
-        <MSBuild Projects="Bricklet\OLED128x64\ExamplePixelMatrix.dproj"/>
+        <MSBuild Projects="Bricklet\OLED128x64V2\ExamplePixelMatrix.dproj"/>
     </Target>
     <Target Name="ExamplePixelMatrix:Clean">
-        <MSBuild Projects="Bricklet\OLED128x64\ExamplePixelMatrix.dproj" Targets="Clean"/>
+        <MSBuild Projects="Bricklet\OLED128x64V2\ExamplePixelMatrix.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExamplePixelMatrix:Make">
-        <MSBuild Projects="Bricklet\OLED128x64\ExamplePixelMatrix.dproj" Targets="Make"/>
+        <MSBuild Projects="Bricklet\OLED128x64V2\ExamplePixelMatrix.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleSimpleColor">
         <MSBuild Projects="Bricklet\RGBLEDButton\ExampleSimpleColor.dproj"/>
@@ -1115,15 +1157,6 @@
     <Target Name="ExampleRemoteCallback:Make">
         <MSBuild Projects="Bricklet\RemoteSwitchV2\ExampleRemoteCallback.dproj" Targets="Make"/>
     </Target>
-    <Target Name="ExampleBeep">
-        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleBeep.dproj"/>
-    </Target>
-    <Target Name="ExampleBeep:Clean">
-        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleBeep.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleBeep:Make">
-        <MSBuild Projects="Bricklet\PiezoBuzzer\ExampleBeep.dproj" Targets="Make"/>
-    </Target>
     <Target Name="ExampleAlarm">
         <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj"/>
     </Target>
@@ -1132,6 +1165,168 @@
     </Target>
     <Target Name="ExampleAlarm:Make">
         <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleAlarm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleAuthenticate">
+        <MSBuild Projects="ExampleAuthenticate.dproj"/>
+    </Target>
+    <Target Name="ExampleAuthenticate:Clean">
+        <MSBuild Projects="ExampleAuthenticate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleAuthenticate:Make">
+        <MSBuild Projects="ExampleAuthenticate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBeep">
+        <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleBeep.dproj"/>
+    </Target>
+    <Target Name="ExampleBeep:Clean">
+        <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleBeep.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBeep:Make">
+        <MSBuild Projects="Bricklet\PiezoSpeakerV2\ExampleBeep.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleBigFont">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj"/>
+    </Target>
+    <Target Name="ExampleBigFont:Clean">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleBigFont:Make">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCounter">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj"/>
+    </Target>
+    <Target Name="ExampleCounter:Clean">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCounter:Make">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleCounterCallback">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj"/>
+    </Target>
+    <Target Name="ExampleCounterCallback:Clean">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleCounterCallback:Make">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEdgeCount">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj"/>
+    </Target>
+    <Target Name="ExampleEdgeCount:Clean">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEdgeCount:Make">
+        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF">
+        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF:Clean">
+        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEmulateNDEF:Make">
+        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleEnumerate">
+        <MSBuild Projects="ExampleEnumerate.dproj"/>
+    </Target>
+    <Target Name="ExampleEnumerate:Clean">
+        <MSBuild Projects="ExampleEnumerate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleEnumerate:Make">
+        <MSBuild Projects="ExampleEnumerate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleFindBorders">
+        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj"/>
+    </Target>
+    <Target Name="ExampleFindBorders:Clean">
+        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleFindBorders:Make">
+        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleGPIO">
+        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj"/>
+    </Target>
+    <Target Name="ExampleGPIO:Clean">
+        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleGPIO:Make">
+        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleGUI">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj"/>
+    </Target>
+    <Target Name="ExampleGUI:Clean">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleGUI:Make">
+        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleIndicator">
+        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj"/>
+    </Target>
+    <Target Name="ExampleIndicator:Clean">
+        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleIndicator:Make">
+        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleInput">
+        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj"/>
+    </Target>
+    <Target Name="ExampleInput:Clean">
+        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInput:Make">
+        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleInterrupt">
+        <MSBuild Projects="Bricklet\IO16V2\ExampleInterrupt.dproj"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Clean">
+        <MSBuild Projects="Bricklet\IO16V2\ExampleInterrupt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleInterrupt:Make">
+        <MSBuild Projects="Bricklet\IO16V2\ExampleInterrupt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity:Clean">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMagneticFluxDensity:Make">
+        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleMotor">
+        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj"/>
+    </Target>
+    <Target Name="ExampleMotor:Clean">
+        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleMotor:Make">
+        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleNumericValue">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj"/>
+    </Target>
+    <Target Name="ExampleNumericValue:Clean">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleNumericValue:Make">
+        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleOutput">
+        <MSBuild Projects="Bricklet\IO16V2\ExampleOutput.dproj"/>
+    </Target>
+    <Target Name="ExampleOutput:Clean">
+        <MSBuild Projects="Bricklet\IO16V2\ExampleOutput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleOutput:Make">
+        <MSBuild Projects="Bricklet\IO16V2\ExampleOutput.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleReadDS18B20Temperature">
         <MSBuild Projects="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj"/>
@@ -1143,166 +1338,13 @@
         <MSBuild Projects="Bricklet\OneWire\ExampleReadDS18B20Temperature.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleScanForTags">
-        <MSBuild Projects="Bricklet\NFC\ExampleScanForTags.dproj"/>
+        <MSBuild Projects="Bricklet\NFCRFID\ExampleScanForTags.dproj"/>
     </Target>
     <Target Name="ExampleScanForTags:Clean">
-        <MSBuild Projects="Bricklet\NFC\ExampleScanForTags.dproj" Targets="Clean"/>
+        <MSBuild Projects="Bricklet\NFCRFID\ExampleScanForTags.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ExampleScanForTags:Make">
-        <MSBuild Projects="Bricklet\NFC\ExampleScanForTags.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleEmulateNDEF">
-        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj"/>
-    </Target>
-    <Target Name="ExampleEmulateNDEF:Clean">
-        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleEmulateNDEF:Make">
-        <MSBuild Projects="Bricklet\NFC\ExampleEmulateNDEF.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleMotor">
-        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj"/>
-    </Target>
-    <Target Name="ExampleMotor:Clean">
-        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleMotor:Make">
-        <MSBuild Projects="Bricklet\MotorizedLinearPoti\ExampleMotor.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleIndicator">
-        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj"/>
-    </Target>
-    <Target Name="ExampleIndicator:Clean">
-        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleIndicator:Make">
-        <MSBuild Projects="Bricklet\MotionDetectorV2\ExampleIndicator.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleGUI">
-        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj"/>
-    </Target>
-    <Target Name="ExampleGUI:Clean">
-        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleGUI:Make">
-        <MSBuild Projects="Bricklet\LCD128x64\ExampleGUI.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleBigFont">
-        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj"/>
-    </Target>
-    <Target Name="ExampleBigFont:Clean">
-        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleBigFont:Make">
-        <MSBuild Projects="Bricklet\LCD128x64\ExampleBigFont.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleFindBorders">
-        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj"/>
-    </Target>
-    <Target Name="ExampleFindBorders:Clean">
-        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleFindBorders:Make">
-        <MSBuild Projects="Bricklet\Joystick\ExampleFindBorders.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleInterrupt">
-        <MSBuild Projects="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj"/>
-    </Target>
-    <Target Name="ExampleInterrupt:Clean">
-        <MSBuild Projects="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleInterrupt:Make">
-        <MSBuild Projects="Bricklet\IndustrialDigitalIn4\ExampleInterrupt.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleOutput">
-        <MSBuild Projects="Bricklet\IO16\ExampleOutput.dproj"/>
-    </Target>
-    <Target Name="ExampleOutput:Clean">
-        <MSBuild Projects="Bricklet\IO16\ExampleOutput.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleOutput:Make">
-        <MSBuild Projects="Bricklet\IO16\ExampleOutput.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleInput">
-        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj"/>
-    </Target>
-    <Target Name="ExampleInput:Clean">
-        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleInput:Make">
-        <MSBuild Projects="Bricklet\IO16\ExampleInput.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleEdgeCount">
-        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj"/>
-    </Target>
-    <Target Name="ExampleEdgeCount:Clean">
-        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleEdgeCount:Make">
-        <MSBuild Projects="Bricklet\IndustrialDigitalIn4V2\ExampleEdgeCount.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleSimpleVoltage">
-        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj"/>
-    </Target>
-    <Target Name="ExampleSimpleVoltage:Clean">
-        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleSimpleVoltage:Make">
-        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleVoltage.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleSimpleCurrent">
-        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj"/>
-    </Target>
-    <Target Name="ExampleSimpleCurrent:Clean">
-        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleSimpleCurrent:Make">
-        <MSBuild Projects="Bricklet\IndustrialAnalogOut\ExampleSimpleCurrent.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleMagneticFluxDensity">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj"/>
-    </Target>
-    <Target Name="ExampleMagneticFluxDensity:Clean">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleMagneticFluxDensity:Make">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleMagneticFluxDensity.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleCounterCallback">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj"/>
-    </Target>
-    <Target Name="ExampleCounterCallback:Clean">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleCounterCallback:Make">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounterCallback.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleCounter">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj"/>
-    </Target>
-    <Target Name="ExampleCounter:Clean">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleCounter:Make">
-        <MSBuild Projects="Bricklet\HallEffectV2\ExampleCounter.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleNumericValue">
-        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj"/>
-    </Target>
-    <Target Name="ExampleNumericValue:Clean">
-        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleNumericValue:Make">
-        <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleNumericValue.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="ExampleGPIO">
-        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj"/>
-    </Target>
-    <Target Name="ExampleGPIO:Clean">
-        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ExampleGPIO:Make">
-        <MSBuild Projects="Bricklet\XMC1400Breakout\ExampleGPIO.dproj" Targets="Make"/>
+        <MSBuild Projects="Bricklet\NFCRFID\ExampleScanForTags.dproj" Targets="Make"/>
     </Target>
     <Target Name="ExampleSetSegments">
         <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj"/>
@@ -1313,14 +1355,32 @@
     <Target Name="ExampleSetSegments:Make">
         <MSBuild Projects="Bricklet\SegmentDisplay4x7V2\ExampleSetSegments.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ExampleSimpleCurrent">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOutV2\ExampleSimpleCurrent.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent:Clean">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOutV2\ExampleSimpleCurrent.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleCurrent:Make">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOutV2\ExampleSimpleCurrent.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOutV2\ExampleSimpleVoltage.dproj"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage:Clean">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOutV2\ExampleSimpleVoltage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ExampleSimpleVoltage:Make">
+        <MSBuild Projects="Bricklet\IndustrialAnalogOutV2\ExampleSimpleVoltage.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Tinkerforge;ExampleAllData;ExamplePrintVoltages;ExampleReadFile;ExampleSleep;ExampleWriteFile;ExampleStackStatus;ExampleConfiguration;ExampleCallback;ExampleSimple;ExampleMorseCode;ExampleUnicode;ExampleWaterBoiling;ExampleWriteReadType2;ExampleThreshold;ExampleTouch;ExampleBlinkColon;ExampleModbusMaster;ExampleModbusSlave;ExampleLoopback;ExampleCallback;ExampleSimple;ExampleCallback;ExampleHelloWorld;ExampleButtonCallback;ExampleHelloWorld;ExampleButtonCallback;ExamplePixelMatrix;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleSimpleColor;ExampleSimpleButton;ExampleCallback;ExampleSimple;ExampleSwitchSocket;ExampleRemoteCallback;ExampleSwitchSocket;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleBeep;ExampleAlarm;ExampleBeep;ExampleMorseCode;ExampleBeep;ExampleSimple;ExampleCallback;ExampleCallback;ExampleReadDS18B20Temperature;ExamplePixelMatrix;ExampleHelloWorld;ExamplePixelMatrix;ExampleHelloWorld;ExamplePixelMatrix;ExampleHelloWorld;ExampleScanForTags;ExampleScanForTags;ExampleEmulateNDEF;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleMotor;ExampleCallback;ExampleCallback;ExampleIndicator;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleHelloWorld;ExampleGUI;ExampleBigFont;ExampleThreshold;ExampleCallback;ExampleSimple;ExampleSimple;ExampleCallback;ExampleSimple;ExampleFindBorders;ExampleCallback;ExampleSimple;ExampleInterrupt;ExampleOutput;ExampleOutput;ExampleInterrupt;ExampleInput;ExampleOutput;ExampleInterrupt;ExampleOutput;ExampleInput;ExampleInterrupt;ExampleSimple;ExampleSimple;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleSimple;ExampleSimple;ExampleSimple;ExampleEdgeCount;ExampleCallback;ExampleSimple;ExampleInterrupt;ExampleSimple;ExampleSimpleVoltage;ExampleSimpleCurrent;ExampleSimpleVoltage;ExampleSimpleCurrent;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleMagneticFluxDensity;ExampleCounterCallback;ExampleCounter;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleHelloWorld;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleCallback;ExampleSimple;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleSimple;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleLoopback;ExampleLoopback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleSimple;ExampleSimple;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleCallback;ExampleSimple;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleCallback;ExampleSimple;ExampleCallback;ExampleCallback;ExampleThreshold;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleLoopback;ExampleLoopback;ExampleNumericValue;ExampleGPIO;ExampleSetSegments;ExampleSimple;ExampleSimple;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleUnicode;ExampleCallback;ExampleSimple;ExampleWaterBoiling;ExampleWriteReadType2;ExampleThreshold;ExampleSimple;ExampleSimple;ExampleSimple;ExampleThreshold;ExampleCallback"/>
+        <CallTarget Targets="Tinkerforge;ExampleAllData;ExamplePrintVoltages;ExampleReadFile;ExampleSleep;ExampleWriteFile;ExampleStackStatus;ExampleConfiguration;ExampleCallback;ExampleSimple;ExampleMorseCode;ExampleUnicode;ExampleWaterBoiling;ExampleWriteReadType2;ExampleThreshold;ExampleTouch;ExampleBlinkColon;ExampleModbusMaster;ExampleModbusSlave;ExampleLoopback;ExampleHelloWorld;ExampleButtonCallback;ExamplePixelMatrix;ExampleSimpleColor;ExampleSimpleButton;ExampleSwitchSocket;ExampleRemoteCallback;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleUnicode;ExampleWaterBoiling;ExampleWriteReadType2;ExampleAlarm;ExampleAuthenticate;ExampleBeep;ExampleBeep;ExampleBeep;ExampleBigFont;ExampleButtonCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleCallback;ExampleConfiguration;ExampleConfiguration;ExampleConfiguration;ExampleCounter;ExampleCounterCallback;ExampleEdgeCount;ExampleEmulateNDEF;ExampleEnumerate;ExampleFindBorders;ExampleGPIO;ExampleGUI;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleHelloWorld;ExampleIndicator;ExampleInput;ExampleInput;ExampleInterrupt;ExampleInterrupt;ExampleInterrupt;ExampleInterrupt;ExampleInterrupt;ExampleLoopback;ExampleLoopback;ExampleLoopback;ExampleLoopback;ExampleMagneticFluxDensity;ExampleMorseCode;ExampleMotor;ExampleNumericValue;ExampleOutput;ExampleOutput;ExampleOutput;ExampleOutput;ExamplePixelMatrix;ExamplePixelMatrix;ExamplePixelMatrix;ExampleReadDS18B20Temperature;ExampleScanForTags;ExampleScanForTags;ExampleSetSegments;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimple;ExampleSimpleCurrent;ExampleSimpleCurrent;ExampleSimpleVoltage;ExampleSimpleVoltage;ExampleSwitchSocket;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold;ExampleThreshold"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Tinkerforge:Clean;ExampleAllData:Clean;ExamplePrintVoltages:Clean;ExampleReadFile:Clean;ExampleSleep:Clean;ExampleWriteFile:Clean;ExampleStackStatus:Clean;ExampleConfiguration:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleMorseCode:Clean;ExampleUnicode:Clean;ExampleWaterBoiling:Clean;ExampleWriteReadType2:Clean;ExampleThreshold:Clean;ExampleTouch:Clean;ExampleBlinkColon:Clean;ExampleModbusMaster:Clean;ExampleModbusSlave:Clean;ExampleLoopback:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleHelloWorld:Clean;ExampleButtonCallback:Clean;ExampleHelloWorld:Clean;ExampleButtonCallback:Clean;ExamplePixelMatrix:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleSimpleColor:Clean;ExampleSimpleButton:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleSwitchSocket:Clean;ExampleRemoteCallback:Clean;ExampleSwitchSocket:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleBeep:Clean;ExampleAlarm:Clean;ExampleBeep:Clean;ExampleMorseCode:Clean;ExampleBeep:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleReadDS18B20Temperature:Clean;ExamplePixelMatrix:Clean;ExampleHelloWorld:Clean;ExamplePixelMatrix:Clean;ExampleHelloWorld:Clean;ExamplePixelMatrix:Clean;ExampleHelloWorld:Clean;ExampleScanForTags:Clean;ExampleScanForTags:Clean;ExampleEmulateNDEF:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleMotor:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleIndicator:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleHelloWorld:Clean;ExampleGUI:Clean;ExampleBigFont:Clean;ExampleThreshold:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleFindBorders:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleInterrupt:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExampleInterrupt:Clean;ExampleInput:Clean;ExampleOutput:Clean;ExampleInterrupt:Clean;ExampleOutput:Clean;ExampleInput:Clean;ExampleInterrupt:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleEdgeCount:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleInterrupt:Clean;ExampleSimple:Clean;ExampleSimpleVoltage:Clean;ExampleSimpleCurrent:Clean;ExampleSimpleVoltage:Clean;ExampleSimpleCurrent:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleMagneticFluxDensity:Clean;ExampleCounterCallback:Clean;ExampleCounter:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleHelloWorld:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleNumericValue:Clean;ExampleGPIO:Clean;ExampleSetSegments:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleUnicode:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleWaterBoiling:Clean;ExampleWriteReadType2:Clean;ExampleThreshold:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleThreshold:Clean;ExampleCallback:Clean"/>
+        <CallTarget Targets="Tinkerforge:Clean;ExampleAllData:Clean;ExamplePrintVoltages:Clean;ExampleReadFile:Clean;ExampleSleep:Clean;ExampleWriteFile:Clean;ExampleStackStatus:Clean;ExampleConfiguration:Clean;ExampleCallback:Clean;ExampleSimple:Clean;ExampleMorseCode:Clean;ExampleUnicode:Clean;ExampleWaterBoiling:Clean;ExampleWriteReadType2:Clean;ExampleThreshold:Clean;ExampleTouch:Clean;ExampleBlinkColon:Clean;ExampleModbusMaster:Clean;ExampleModbusSlave:Clean;ExampleLoopback:Clean;ExampleHelloWorld:Clean;ExampleButtonCallback:Clean;ExamplePixelMatrix:Clean;ExampleSimpleColor:Clean;ExampleSimpleButton:Clean;ExampleSwitchSocket:Clean;ExampleRemoteCallback:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleUnicode:Clean;ExampleWaterBoiling:Clean;ExampleWriteReadType2:Clean;ExampleAlarm:Clean;ExampleAuthenticate:Clean;ExampleBeep:Clean;ExampleBeep:Clean;ExampleBeep:Clean;ExampleBigFont:Clean;ExampleButtonCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleCallback:Clean;ExampleConfiguration:Clean;ExampleConfiguration:Clean;ExampleConfiguration:Clean;ExampleCounter:Clean;ExampleCounterCallback:Clean;ExampleEdgeCount:Clean;ExampleEmulateNDEF:Clean;ExampleEnumerate:Clean;ExampleFindBorders:Clean;ExampleGPIO:Clean;ExampleGUI:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleHelloWorld:Clean;ExampleIndicator:Clean;ExampleInput:Clean;ExampleInput:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleInterrupt:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleLoopback:Clean;ExampleMagneticFluxDensity:Clean;ExampleMorseCode:Clean;ExampleMotor:Clean;ExampleNumericValue:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExampleOutput:Clean;ExamplePixelMatrix:Clean;ExamplePixelMatrix:Clean;ExamplePixelMatrix:Clean;ExampleReadDS18B20Temperature:Clean;ExampleScanForTags:Clean;ExampleScanForTags:Clean;ExampleSetSegments:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimple:Clean;ExampleSimpleCurrent:Clean;ExampleSimpleCurrent:Clean;ExampleSimpleVoltage:Clean;ExampleSimpleVoltage:Clean;ExampleSwitchSocket:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean;ExampleThreshold:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Tinkerforge:Make;ExampleAllData:Make;ExamplePrintVoltages:Make;ExampleReadFile:Make;ExampleSleep:Make;ExampleWriteFile:Make;ExampleStackStatus:Make;ExampleConfiguration:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleMorseCode:Make;ExampleUnicode:Make;ExampleWaterBoiling:Make;ExampleWriteReadType2:Make;ExampleThreshold:Make;ExampleTouch:Make;ExampleBlinkColon:Make;ExampleModbusMaster:Make;ExampleModbusSlave:Make;ExampleLoopback:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleHelloWorld:Make;ExampleButtonCallback:Make;ExampleHelloWorld:Make;ExampleButtonCallback:Make;ExamplePixelMatrix:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleSimpleColor:Make;ExampleSimpleButton:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleSwitchSocket:Make;ExampleRemoteCallback:Make;ExampleSwitchSocket:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleBeep:Make;ExampleAlarm:Make;ExampleBeep:Make;ExampleMorseCode:Make;ExampleBeep:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleReadDS18B20Temperature:Make;ExamplePixelMatrix:Make;ExampleHelloWorld:Make;ExamplePixelMatrix:Make;ExampleHelloWorld:Make;ExamplePixelMatrix:Make;ExampleHelloWorld:Make;ExampleScanForTags:Make;ExampleScanForTags:Make;ExampleEmulateNDEF:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleMotor:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleIndicator:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleHelloWorld:Make;ExampleGUI:Make;ExampleBigFont:Make;ExampleThreshold:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleFindBorders:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleInterrupt:Make;ExampleOutput:Make;ExampleOutput:Make;ExampleInterrupt:Make;ExampleInput:Make;ExampleOutput:Make;ExampleInterrupt:Make;ExampleOutput:Make;ExampleInput:Make;ExampleInterrupt:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleEdgeCount:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleInterrupt:Make;ExampleSimple:Make;ExampleSimpleVoltage:Make;ExampleSimpleCurrent:Make;ExampleSimpleVoltage:Make;ExampleSimpleCurrent:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleMagneticFluxDensity:Make;ExampleCounterCallback:Make;ExampleCounter:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleHelloWorld:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleNumericValue:Make;ExampleGPIO:Make;ExampleSetSegments:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleUnicode:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleWaterBoiling:Make;ExampleWriteReadType2:Make;ExampleThreshold:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleThreshold:Make;ExampleCallback:Make"/>
+        <CallTarget Targets="Tinkerforge:Make;ExampleAllData:Make;ExamplePrintVoltages:Make;ExampleReadFile:Make;ExampleSleep:Make;ExampleWriteFile:Make;ExampleStackStatus:Make;ExampleConfiguration:Make;ExampleCallback:Make;ExampleSimple:Make;ExampleMorseCode:Make;ExampleUnicode:Make;ExampleWaterBoiling:Make;ExampleWriteReadType2:Make;ExampleThreshold:Make;ExampleTouch:Make;ExampleBlinkColon:Make;ExampleModbusMaster:Make;ExampleModbusSlave:Make;ExampleLoopback:Make;ExampleHelloWorld:Make;ExampleButtonCallback:Make;ExamplePixelMatrix:Make;ExampleSimpleColor:Make;ExampleSimpleButton:Make;ExampleSwitchSocket:Make;ExampleRemoteCallback:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleUnicode:Make;ExampleWaterBoiling:Make;ExampleWriteReadType2:Make;ExampleAlarm:Make;ExampleAuthenticate:Make;ExampleBeep:Make;ExampleBeep:Make;ExampleBeep:Make;ExampleBigFont:Make;ExampleButtonCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleCallback:Make;ExampleConfiguration:Make;ExampleConfiguration:Make;ExampleConfiguration:Make;ExampleCounter:Make;ExampleCounterCallback:Make;ExampleEdgeCount:Make;ExampleEmulateNDEF:Make;ExampleEnumerate:Make;ExampleFindBorders:Make;ExampleGPIO:Make;ExampleGUI:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleHelloWorld:Make;ExampleIndicator:Make;ExampleInput:Make;ExampleInput:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleInterrupt:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleLoopback:Make;ExampleMagneticFluxDensity:Make;ExampleMorseCode:Make;ExampleMotor:Make;ExampleNumericValue:Make;ExampleOutput:Make;ExampleOutput:Make;ExampleOutput:Make;ExampleOutput:Make;ExamplePixelMatrix:Make;ExamplePixelMatrix:Make;ExamplePixelMatrix:Make;ExampleReadDS18B20Temperature:Make;ExampleScanForTags:Make;ExampleScanForTags:Make;ExampleSetSegments:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimple:Make;ExampleSimpleCurrent:Make;ExampleSimpleCurrent:Make;ExampleSimpleVoltage:Make;ExampleSimpleVoltage:Make;ExampleSwitchSocket:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make;ExampleThreshold:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

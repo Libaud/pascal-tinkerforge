@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    io: TBrickletIO16;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIO16;
   public
     procedure Execute;
   end;
@@ -25,25 +25,31 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  io := TBrickletIO16.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIO16.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Set pin 0 on port A to output low }
-  io.SetPortConfiguration('a', 1 shl 0, 'o', false);
+	  { Set pin 0 on port A to output low }
+	  oBricklet.SetPortConfiguration('a', 1 shl 0, 'o', false);
 
-  { Set pin 0 and 7 on port B to output high }
-  io.SetPortConfiguration('b', (1 shl 0) or (1 shl 7), 'o', true);
+	  { Set pin 0 and 7 on port B to output high }
+	  oBricklet.SetPortConfiguration('b', (1 shl 0) or (1 shl 7), 'o', true);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

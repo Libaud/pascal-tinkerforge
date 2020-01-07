@@ -38,30 +38,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+	try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletColor.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletColor.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  oBricklet.SetDebouncePeriod(10000);
+	  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+	  oBricklet.SetDebouncePeriod(10000);
 
-  { Register color reached callback to procedure ColorReachedCB }
-  oBricklet.OnColorReached := {$ifdef FPC}@{$endif}ColorReachedCB;
+	  { Register color reached callback to procedure ColorReachedCB }
+	  oBricklet.OnColorReached := {$ifdef FPC}@{$endif}ColorReachedCB;
 
-  { Configure threshold for color "greater than 100, 200, 300, 400" }
-  oBricklet.SetColorCallbackThreshold('>', 100, 0, 200, 0, 300, 0, 400, 0);
+	  { Configure threshold for color "greater than 100, 200, 300, 400" }
+	  oBricklet.SetColorCallbackThreshold('>', 100, 0, 200, 0, 300, 0, 400, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+	finally
+	  oBricklet.Destroy;
+		oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+	end;
 end;
 
 begin

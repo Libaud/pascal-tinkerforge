@@ -38,30 +38,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+	try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletAccelerometer.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletAccelerometer.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  oBricklet.SetDebouncePeriod(10000);
+	  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+	  oBricklet.SetDebouncePeriod(10000);
 
-  { Register acceleration reached callback to procedure AccelerationReachedCB }
-  oBricklet.OnAccelerationReached := {$ifdef FPC}@{$endif}AccelerationReachedCB;
+	  { Register acceleration reached callback to procedure AccelerationReachedCB }
+	  oBricklet.OnAccelerationReached := {$ifdef FPC}@{$endif}AccelerationReachedCB;
 
-  { Configure threshold for acceleration "greater than 2 g, 2 g, 2 g" }
-  oBricklet.SetAccelerationCallbackThreshold('>', 2*1000, 0, 2*1000, 0, 2*1000, 0);
+	  { Configure threshold for acceleration "greater than 2 g, 2 g, 2 g" }
+	  oBricklet.SetAccelerationCallbackThreshold('>', 2*1000, 0, 2*1000, 0, 2*1000, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+	finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+	end;
 end;
 
 begin

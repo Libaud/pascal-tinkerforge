@@ -96,24 +96,28 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	{ Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickRED.Create(nil);
-  oBrick.IPConnection:= oIPConnection;
-  oBrick.UIDString:= UID;
+	  { Create device object }
+	  oBrick := TBrickRED.Create(nil);
+	  oBrick.IPConnection:= oIPConnection;
+	  oBrick.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Read /home/tf/foobar.txt on RED Brick and write it locally to foobar.txt }
-  ReadFile('/home/tf/foobar.txt', 'foobar.txt');
+	  { Read /home/tf/foobar.txt on RED Brick and write it locally to foobar.txt }
+	  ReadFile('/home/tf/foobar.txt', 'foobar.txt');
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBrick.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

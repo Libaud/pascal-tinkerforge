@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    gps: TBrickletGPSV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletGPSV2;
   public
     procedure Execute;
   end;
@@ -26,27 +26,33 @@ var
 procedure TExample.Execute;
 var latitude, longitude: longword; ns, ew: char;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  gps := TBrickletGPSV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletGPSV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current coordinates }
-  gps.GetCoordinates(latitude, ns, longitude, ew);
+	  { Get current coordinates }
+	  oBricklet.GetCoordinates(latitude, ns, longitude, ew);
 
-  WriteLn(Format('Latitude: %f °', [latitude/1000000.0]));
-  WriteLn(Format('N/S: %s', [ns]));
-  WriteLn(Format('Longitude: %f °', [longitude/1000000.0]));
-  WriteLn(Format('E/W: %s', [ew]));
+	  WriteLn(Format('Latitude: %f °', [latitude/1000000.0]));
+	  WriteLn(Format('N/S: %s', [ns]));
+	  WriteLn(Format('Longitude: %f °', [longitude/1000000.0]));
+	  WriteLn(Format('E/W: %s', [ew]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

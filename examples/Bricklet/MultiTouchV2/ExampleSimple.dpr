@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mt: TBrickletMultiTouchV2;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMultiTouchV2;
   public
     procedure Execute;
   end;
@@ -26,36 +26,42 @@ var
 procedure TExample.Execute;
 var state: TArray0To12OfBoolean;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  mt := TBrickletMultiTouchV2.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletMultiTouchV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current touch state }
-  state := mt.GetTouchState;
+	  { Get current touch state }
+	  state := oBricklet.GetTouchState;
 
-  WriteLn(Format('Electrode 0: %d', [state[0]]));
-  WriteLn(Format('Electrode 1: %d', [state[1]]));
-  WriteLn(Format('Electrode 2: %d', [state[2]]));
-  WriteLn(Format('Electrode 3: %d', [state[3]]));
-  WriteLn(Format('Electrode 4: %d', [state[4]]));
-  WriteLn(Format('Electrode 5: %d', [state[5]]));
-  WriteLn(Format('Electrode 6: %d', [state[6]]));
-  WriteLn(Format('Electrode 7: %d', [state[7]]));
-  WriteLn(Format('Electrode 8: %d', [state[8]]));
-  WriteLn(Format('Electrode 9: %d', [state[9]]));
-  WriteLn(Format('Electrode 10: %d', [state[10]]));
-  WriteLn(Format('Electrode 11: %d', [state[11]]));
-  WriteLn(Format('Proximity: %d', [state[12]]));
+	  WriteLn(Format('Electrode 0: %d', [state[0]]));
+	  WriteLn(Format('Electrode 1: %d', [state[1]]));
+	  WriteLn(Format('Electrode 2: %d', [state[2]]));
+	  WriteLn(Format('Electrode 3: %d', [state[3]]));
+	  WriteLn(Format('Electrode 4: %d', [state[4]]));
+	  WriteLn(Format('Electrode 5: %d', [state[5]]));
+	  WriteLn(Format('Electrode 6: %d', [state[6]]));
+	  WriteLn(Format('Electrode 7: %d', [state[7]]));
+	  WriteLn(Format('Electrode 8: %d', [state[8]]));
+	  WriteLn(Format('Electrode 9: %d', [state[9]]));
+	  WriteLn(Format('Electrode 10: %d', [state[10]]));
+	  WriteLn(Format('Electrode 11: %d', [state[11]]));
+	  WriteLn(Format('Proximity: %d', [state[12]]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    idai: TBrickletIndustrialDualAnalogIn;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIndustrialDualAnalogIn;
   public
     procedure Execute;
   end;
@@ -26,23 +26,29 @@ var
 procedure TExample.Execute;
 var voltage: longint;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  idai := TBrickletIndustrialDualAnalogIn.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIndustrialDualAnalogIn.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current voltage from channel 1 }
-  voltage := idai.GetVoltage(1);
-  WriteLn(Format('Voltage (Channel 1): %f V', [voltage/1000.0]));
+	  { Get current voltage from channel 1 }
+	  voltage := oBricklet.GetVoltage(1);
+	  WriteLn(Format('Voltage (Channel 1): %f V', [voltage/1000.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

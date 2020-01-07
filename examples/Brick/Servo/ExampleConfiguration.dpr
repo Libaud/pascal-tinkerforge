@@ -25,47 +25,53 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickServo.Create(nil);
+	  { Create device object }
+	  oBrick := TBrickServo.Create(nil);
+	  oBrick.UIDString:= UID;
+	  oBrick.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Configure two servos with voltage 5.5V
-    Servo 1: Connected to port 0, period of 19.5ms, pulse width of 1 to 2ms
-             and operating angle -100 to 100°
+	  { Configure two servos with voltage 5.5V
+		Servo 1: Connected to port 0, period of 19.5ms, pulse width of 1 to 2ms
+				 and operating angle -100 to 100°
 
-    Servo 2: Connected to port 5, period of 20ms, pulse width of 0.95
-             to 1.95ms and operating angle -90 to 90° }
-  oBrick.SetOutputVoltage(5500);
+		Servo 2: Connected to port 5, period of 20ms, pulse width of 0.95
+				 to 1.95ms and operating angle -90 to 90° }
+	  oBrick.SetOutputVoltage(5500);
 
-  oBrick.SetDegree(0, -10000, 10000);
-  oBrick.SetPulseWidth(0, 1000, 2000);
-  oBrick.SetPeriod(0, 19500);
-  oBrick.SetAcceleration(0, 1000); { Slow acceleration }
-  oBrick.SetVelocity(0, 65535); { Full speed }
+	  oBrick.SetDegree(0, -10000, 10000);
+	  oBrick.SetPulseWidth(0, 1000, 2000);
+	  oBrick.SetPeriod(0, 19500);
+	  oBrick.SetAcceleration(0, 1000); { Slow acceleration }
+	  oBrick.SetVelocity(0, 65535); { Full speed }
 
-  oBrick.SetDegree(5, -9000, 9000);
-  oBrick.SetPulseWidth(5, 950, 1950);
-  oBrick.SetPeriod(5, 20000);
-  oBrick.SetAcceleration(5, 65535); { Full acceleration }
-  oBrick.SetVelocity(5, 65535); { Full speed }
+	  oBrick.SetDegree(5, -9000, 9000);
+	  oBrick.SetPulseWidth(5, 950, 1950);
+	  oBrick.SetPeriod(5, 20000);
+	  oBrick.SetAcceleration(5, 65535); { Full acceleration }
+	  oBrick.SetVelocity(5, 65535); { Full speed }
 
-  oBrick.SetPosition(0, 10000); { Set to most right position }
-  oBrick.Enable(0);
+	  oBrick.SetPosition(0, 10000); { Set to most right position }
+	  oBrick.Enable(0);
 
-  oBrick.SetPosition(5, -9000); { Set to most left position }
-  oBrick.Enable(5);
+	  oBrick.SetPosition(5, -9000); { Set to most left position }
+	  oBrick.Enable(5);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oBrick.Disable(0);
-  oBrick.Disable(5);
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBrick.Disable(0);
+	  oBrick.Disable(5);
+	  oBrick.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

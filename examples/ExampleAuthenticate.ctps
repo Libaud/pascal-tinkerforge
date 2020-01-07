@@ -7,10 +7,11 @@
       <Unit>
         <Filename Value="ExampleAuthenticate.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="25"/>
         <CursorPos X="3" Y="44"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/LCD128x64/ExamplePixelMatrix.pas"/>
@@ -354,10 +355,11 @@
       <Unit>
         <Filename Value="Bricklet/OneWire/ExampleReadDS18B20Temperature.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="3" Y="31"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="36"/>
+        <CursorPos X="42" Y="61"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/IO16V2/ExampleInterrupt.pas"/>
@@ -800,10 +802,11 @@
       <Unit>
         <Filename Value="Bricklet/OLED64x48/ExamplePixelMatrix.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="44"/>
-        <CursorPos X="3" Y="54"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="25"/>
+        <CursorPos X="60" Y="40"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/OLED64x48/ExampleHelloWorld.pas"/>
@@ -1320,10 +1323,11 @@
       <Unit>
         <Filename Value="Bricklet/OLED128x64/ExamplePixelMatrix.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="57"/>
-        <CursorPos X="3" Y="67"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="30"/>
+        <CursorPos Y="43"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="Bricklet/OLED128x64/ExampleHelloWorld.pas"/>
@@ -1999,7 +2003,6 @@
       <Unit>
         <Filename Value="Bricklet/LinearPoti/ExampleCallback.pas"/>
         <FRMtype Value="0"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="23" Y="57"/>
@@ -2374,7 +2377,20 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="ExampleAuthenticate.pas"/>
+        <Caret Line="44" Column="3" TopLine="25"/>
+      </Position1>
+      <Position2>
+        <Filename Value="Bricklet/OneWire/ExampleReadDS18B20Temperature.pas"/>
+        <Caret Line="60" Column="39" TopLine="36"/>
+      </Position2>
+      <Position3>
+        <Filename Value="Bricklet/OLED64x48/ExamplePixelMatrix.pas"/>
+        <Caret Line="40" Column="60" TopLine="25"/>
+      </Position3>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode=""/>

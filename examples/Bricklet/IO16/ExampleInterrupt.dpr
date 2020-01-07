@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    io: TBrickletIO16;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIO16;
   public
     procedure InterruptCB(sender: TBrickletIO16; const port: char;
                           const interruptMask: byte; const valueMask: byte);
@@ -37,25 +37,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  io := TBrickletIO16.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIO16.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register interrupt callback to procedure InterruptCB }
-  io.OnInterrupt := {$ifdef FPC}@{$endif}InterruptCB;
+	  { Register interrupt callback to procedure InterruptCB }
+	  oBricklet.OnInterrupt := {$ifdef FPC}@{$endif}InterruptCB;
 
-  { Enable interrupt on pin 2 of port A }
-  io.SetPortInterrupt('a', 1 shl 2);
+	  { Enable interrupt on pin 2 of port A }
+	  oBricklet.SetPortInterrupt('a', 1 shl 2);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

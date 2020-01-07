@@ -26,37 +26,41 @@ var
 procedure TExample.Execute;
 var i: integer;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	{ Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletSegmentDisplay4x7V2.Create(nil);
-  oBricklet.IPConnection:= oIPConnection;
-  oBricklet.UIDString:= UID;
+	  { Create device object }
+	  oBricklet := TBrickletSegmentDisplay4x7V2.Create(nil);
+	  oBricklet.IPConnection:= oIPConnection;
+	  oBricklet.UIDString:= UID;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  oBricklet.SetBrightness(7); { Set to full brightness }
+	  oBricklet.SetBrightness(7); { Set to full brightness }
 
-  { Blink colon 10 times }
-  for i := 0 to 9 do begin
+	  { Blink colon 10 times }
+	  for i := 0 to 9 do begin
 
-    { Activate segments of colon }
-    oBricklet.SetSelectedSegment(32, true);
-    oBricklet.SetSelectedSegment(33, true);
+		{ Activate segments of colon }
+		oBricklet.SetSelectedSegment(32, true);
+		oBricklet.SetSelectedSegment(33, true);
 
-    Sleep(250);
+		Sleep(250);
 
-    { Deactivate segments of colon }
-    oBricklet.SetSelectedSegment(32, false);
-    oBricklet.SetSelectedSegment(33, false);
+		{ Deactivate segments of colon }
+		oBricklet.SetSelectedSegment(32, false);
+		oBricklet.SetSelectedSegment(33, false);
+	  end;
+
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

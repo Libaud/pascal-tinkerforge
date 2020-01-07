@@ -26,29 +26,33 @@ var
 procedure TExample.Execute;
 var airPressure, altitude: longint;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletBarometer.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletBarometer.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current air pressure }
-  airPressure := oBricklet.GetAirPressure;
-  WriteLn(Format('Air Pressure: %f hPa', [airPressure/1000.0]));
+	  { Get current air pressure }
+	  airPressure := oBricklet.GetAirPressure;
+	  WriteLn(Format('Air Pressure: %f hPa', [airPressure/1000.0]));
 
-  { Get current altitude }
-  altitude := oBricklet.GetAltitude;
-  WriteLn(Format('Altitude: %f m', [altitude/100.0]));
+	  { Get current altitude }
+	  altitude := oBricklet.GetAltitude;
+	  WriteLn(Format('Altitude: %f m', [altitude/100.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

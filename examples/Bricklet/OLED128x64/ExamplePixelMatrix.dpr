@@ -40,11 +40,7 @@ begin
       for bit := 0 to 7 do begin
         if (pixels[(row * 8) + bit, column]) then
         begin
-          {$ifdef FPC}
-          pages[row][column] := pages[row][column] or (1 << bit);
-          {$else}
           pages[row][column] := pages[row][column] or (1 Shl bit);
-          {$endif}
         end;
       end;
     end;
@@ -65,31 +61,37 @@ end;
 procedure TExample.Execute;
 var row, column: integer; pixels: TPixels;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletOLED128x64.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickletOLED128x64.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Clear display }
-  oBricklet.ClearDisplay;
+	  { Clear display }
+	  oBricklet.ClearDisplay;
 
-  { Draw checkerboard pattern }
-  for row := 0 to HEIGHT - 1 do begin
-    for column := 0 to WIDTH - 1 do begin
-      pixels[row, column] := (row div 8) mod 2 = (column div 8) mod 2;
-    end;
+	  { Draw checkerboard pattern }
+	  for row := 0 to HEIGHT - 1 do begin
+		for column := 0 to WIDTH - 1 do begin
+		  pixels[row, column] := (row div 8) mod 2 = (column div 8) mod 2;
+		end;
+	  end;
+
+	  e.DrawMatrix(pixels);
+
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  e.DrawMatrix(pixels);
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

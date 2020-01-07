@@ -51,19 +51,22 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create connection and connect to brickd }
-  oIPConnection := TIPConnection.Create(Self);
-  oIPConnection.Connect(HOST, PORT);
+  try
+	  { Create connection and connect to brickd }
+	  oIPConnection := TIPConnection.Create(Self);
+	  oIPConnection.Connect(HOST, PORT);
 
-  { Register enumerate callback to "EnumerateCB" }
-  oIPConnection.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
+	  { Register enumerate callback to "EnumerateCB" }
+	  oIPConnection.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
 
-  { Trigger enumerate }
-  oIPConnection.Enumerate;
+	  { Trigger enumerate }
+	  oIPConnection.Enumerate;
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

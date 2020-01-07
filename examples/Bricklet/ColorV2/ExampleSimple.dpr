@@ -26,29 +26,33 @@ var
 procedure TExample.Execute;
 var r, g, b, c_: word;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletColorV2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletColorV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current color }
-  oBricklet.GetColor(r, g, b, c_);
+	  { Get current color }
+	  oBricklet.GetColor(r, g, b, c_);
 
-  WriteLn(Format('Color [R]: %d', [r]));
-  WriteLn(Format('Color [G]: %d', [g]));
-  WriteLn(Format('Color [B]: %d', [b]));
-  WriteLn(Format('Color [C]: %d', [c_]));
+	  WriteLn(Format('Color [R]: %d', [r]));
+	  WriteLn(Format('Color [G]: %d', [g]));
+	  WriteLn(Format('Color [B]: %d', [b]));
+	  WriteLn(Format('Color [C]: %d', [c_]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

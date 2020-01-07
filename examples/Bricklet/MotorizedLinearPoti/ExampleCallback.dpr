@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mlp: TBrickletMotorizedLinearPoti;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMotorizedLinearPoti;
   public
     procedure PositionCB(sender: TBrickletMotorizedLinearPoti; const position: word);
     procedure Execute;
@@ -32,25 +32,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  mlp := TBrickletMotorizedLinearPoti.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletMotorizedLinearPoti.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register position callback to procedure PositionCB }
-  mlp.OnPosition := {$ifdef FPC}@{$endif}PositionCB;
+	  { Register position callback to procedure PositionCB }
+	  oBricklet.OnPosition := {$ifdef FPC}@{$endif}PositionCB;
 
-  { Set period for position callback to 0.05s (50ms) without a threshold }
-  mlp.SetPositionCallbackConfiguration(50, false, 'x', 0, 0);
+	  { Set period for position callback to 0.05s (50ms) without a threshold }
+	  oBricklet.SetPositionCallbackConfiguration(50, false, 'x', 0, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

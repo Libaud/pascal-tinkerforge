@@ -10,7 +10,7 @@ type
   TExample = class
   private
     oIPConnection: TIPConnection;
-    dc: TBrickDC;
+    oBricklet: TBrickDC;
   public
     procedure Execute;
   end;
@@ -25,26 +25,32 @@ var
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  dc := TBrickDC.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickDC.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  dc.SetDriveMode(BRICK_DC_DRIVE_MODE_DRIVE_COAST);
-  dc.SetPWMFrequency(10000); { Use PWM frequency of 10kHz }
-  dc.SetAcceleration(5000); { Slow acceleration }
-  dc.SetVelocity(32767); { Full speed forward }
-  dc.Enable; { Enable motor power }
+	  oBricklet.SetDriveMode(BRICK_DC_DRIVE_MODE_DRIVE_COAST);
+	  oBricklet.SetPWMFrequency(10000); { Use PWM frequency of 10kHz }
+	  oBricklet.SetAcceleration(5000); { Slow acceleration }
+	  oBricklet.SetVelocity(32767); { Full speed forward }
+	  oBricklet.Enable; { Enable motor power }
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  dc.Disable; { Disable motor power }
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Disable; { Disable motor power }
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -35,30 +35,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  	try
+	{ Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletAmbientLightV2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletAmbientLightV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  oBricklet.SetDebouncePeriod(10000);
+	  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+	  oBricklet.SetDebouncePeriod(10000);
 
-  { Register illuminance reached callback to procedure IlluminanceReachedCB }
-  oBricklet.OnIlluminanceReached := {$ifdef FPC}@{$endif}IlluminanceReachedCB;
+	  { Register illuminance reached callback to procedure IlluminanceReachedCB }
+	  oBricklet.OnIlluminanceReached := {$ifdef FPC}@{$endif}IlluminanceReachedCB;
 
-  { Configure threshold for illuminance "greater than 500 lx" }
-  oBricklet.SetIlluminanceCallbackThreshold('>', 500*100, 0);
+	  { Configure threshold for illuminance "greater than 500 lx" }
+	  oBricklet.SetIlluminanceCallbackThreshold('>', 500*100, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+	finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+	end;
 end;
 
 begin

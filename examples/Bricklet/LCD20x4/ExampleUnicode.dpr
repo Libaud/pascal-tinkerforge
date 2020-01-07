@@ -106,31 +106,37 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletLCD20x4.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickletLCD20x4.Create(nil);
+		  oBricklet.UIDString:= UID;
+		  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Turn backlight on }
-  oBricklet.BacklightOn;
+	  { Turn backlight on }
+	  oBricklet.BacklightOn;
 
-  { Write a string using the WideStringToKS0066U function to map to the LCD charset }
-  { Note: For the Free Pascal Compiler (and Lazarus) UTF8Decode is used to create a
-          WideString. It assumes that your source file is UTF-8 encoded }
-  oBricklet.WriteLine(0, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Stromstärke: 17µA')));
-  oBricklet.WriteLine(1, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Temperatur:  23°C')));
+	  { Write a string using the WideStringToKS0066U function to map to the LCD charset }
+	  { Note: For the Free Pascal Compiler (and Lazarus) UTF8Decode is used to create a
+			  WideString. It assumes that your source file is UTF-8 encoded }
+	  oBricklet.WriteLine(0, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Stromstärke: 17µA')));
+	  oBricklet.WriteLine(1, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Temperatur:  23°C')));
 
-  { Write a string directly including characters from the LCD charset }
-  oBricklet.WriteLine(2, 0, 'Drehzahl:   750min' + char($E9));
+	  { Write a string directly including characters from the LCD charset }
+	  oBricklet.WriteLine(2, 0, 'Drehzahl:   750min' + char($E9));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

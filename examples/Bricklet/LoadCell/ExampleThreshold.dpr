@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    lc: TBrickletLoadCell;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletLoadCell;
   public
     procedure WeightReachedCB(sender: TBrickletLoadCell; const weight: longint);
     procedure Execute;
@@ -32,28 +32,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  lc := TBrickletLoadCell.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletLoadCell.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 1 second (1000ms) }
-  lc.SetDebouncePeriod(1000);
+	  { Get threshold callbacks with a debounce time of 1 second (1000ms) }
+	  oBricklet.SetDebouncePeriod(1000);
 
-  { Register weight reached callback to procedure WeightReachedCB }
-  lc.OnWeightReached := {$ifdef FPC}@{$endif}WeightReachedCB;
+	  { Register weight reached callback to procedure WeightReachedCB }
+	  oBricklet.OnWeightReached := {$ifdef FPC}@{$endif}WeightReachedCB;
 
-  { Configure threshold for weight "greater than 200 g" }
-  lc.SetWeightCallbackThreshold('>', 200, 0);
+	  { Configure threshold for weight "greater than 200 g" }
+	  oBricklet.SetWeightCallbackThreshold('>', 200, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

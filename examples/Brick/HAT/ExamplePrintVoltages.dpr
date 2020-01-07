@@ -26,25 +26,31 @@ var
 procedure TExample.Execute;
 var voltageUSB, voltageDC: word;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBrick := TBrickHAT.Create(nil);
+	  { Create device object }
+	  oBrick := TBrickHAT.Create(nil);
+	  oBrick.UIDString:= UID;
+	  oBrick.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current get voltages }
-  oBrick.GetVoltages(voltageUSB, voltageDC);
+	  { Get current get voltages }
+	  oBrick.GetVoltages(voltageUSB, voltageDC);
 
-  WriteLn(Format('Voltage USB: %f V', [voltageUSB/1000.0]));
-  WriteLn(Format('Voltage DC: %f V', [voltageDC/1000.0]));
+	  WriteLn(Format('Voltage USB: %f V', [voltageUSB/1000.0]));
+	  WriteLn(Format('Voltage DC: %f V', [voltageDC/1000.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBrick.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

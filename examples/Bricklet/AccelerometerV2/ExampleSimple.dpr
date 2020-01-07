@@ -26,28 +26,32 @@ var
 procedure TExample.Execute;
 var x, y, z: longint;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletAccelerometerV2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletAccelerometerV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current acceleration }
-  oBricklet.GetAcceleration(x, y, z);
+	  { Get current acceleration }
+	  oBricklet.GetAcceleration(x, y, z);
 
-  WriteLn(Format('Acceleration [X]: %f g', [x/10000.0]));
-  WriteLn(Format('Acceleration [Y]: %f g', [y/10000.0]));
-  WriteLn(Format('Acceleration [Z]: %f g', [z/10000.0]));
+	  WriteLn(Format('Acceleration [X]: %f g', [x/10000.0]));
+	  WriteLn(Format('Acceleration [Y]: %f g', [y/10000.0]));
+	  WriteLn(Format('Acceleration [Z]: %f g', [z/10000.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

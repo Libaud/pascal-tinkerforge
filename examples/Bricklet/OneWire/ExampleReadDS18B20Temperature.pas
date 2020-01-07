@@ -56,8 +56,9 @@ begin
       temperature:= t_low or (t_high shl 8);
 
       { Negative 12-bit values are sign-extended to 16-bit two's complement }
-      if (temperature > 1 << 12) then begin
-        temperature:= temperature - 1 << 16;
+      if (temperature > 1 shl 12) then
+      begin
+        temperature:= temperature - 1 shl 16;
       end;
 
       { 12-bit mode measures in units of 1/16°C }

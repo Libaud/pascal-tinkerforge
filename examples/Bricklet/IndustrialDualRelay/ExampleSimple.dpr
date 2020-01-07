@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    idr: TBrickletIndustrialDualRelay;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIndustrialDualRelay;
   public
     procedure Execute;
   end;
@@ -26,27 +26,33 @@ var
 procedure TExample.Execute;
 var i: integer;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  idr := TBrickletIndustrialDualRelay.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIndustrialDualRelay.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Turn relays alternating on/off 10 times with 1 second delay }
-  for i := 0 to 4 do begin
-    Sleep(1000);
-    idr.SetValue(true, false);
-    Sleep(1000);
-    idr.SetValue(false, true);
+	  { Turn relays alternating on/off 10 times with 1 second delay }
+	  for i := 0 to 4 do begin
+		Sleep(1000);
+		oBricklet.SetValue(true, false);
+		Sleep(1000);
+		oBricklet.SetValue(false, true);
+	  end;
+
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

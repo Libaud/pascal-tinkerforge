@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    lrf: TBrickletLaserRangeFinder;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletLaserRangeFinder;
   public
     procedure Execute;
   end;
@@ -26,28 +26,34 @@ var
 procedure TExample.Execute;
 var distance: word;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  lrf := TBrickletLaserRangeFinder.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletLaserRangeFinder.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Turn laser on and wait 250ms for very first measurement to be ready }
-  lrf.EnableLaser;
-  Sleep(250);
+	  { Turn laser on and wait 250ms for very first measurement to be ready }
+	  oBricklet.EnableLaser;
+	  Sleep(250);
 
-  { Get current distance }
-  distance := lrf.GetDistance;
-  WriteLn(Format('Distance: %d cm', [distance]));
+	  { Get current distance }
+	  distance := oBricklet.GetDistance;
+	  WriteLn(Format('Distance: %d cm', [distance]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  lrf.DisableLaser; { Turn laser off }
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+	  oBricklet.DisableLaser; { Turn laser off }
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

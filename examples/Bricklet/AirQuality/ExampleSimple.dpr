@@ -26,43 +26,47 @@ var
 procedure TExample.Execute;
 var iaqIndex, temperature, humidity, airPressure: longint; iaqIndexAccuracy: byte;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletAirQuality.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletAirQuality.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current all values }
-  oBricklet.GetAllValues(iaqIndex, iaqIndexAccuracy, temperature, humidity, airPressure);
+	  { Get current all values }
+	  oBricklet.GetAllValues(iaqIndex, iaqIndexAccuracy, temperature, humidity, airPressure);
 
-  WriteLn(Format('IAQ Index: %d', [iaqIndex]));
+	  WriteLn(Format('IAQ Index: %d', [iaqIndex]));
 
-  if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_UNRELIABLE) then begin
-    WriteLn('IAQ Index Accuracy: Unreliable');
-  end
-  else if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_LOW) then begin
-    WriteLn('IAQ Index Accuracy: Low');
-  end
-  else if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_MEDIUM) then begin
-    WriteLn('IAQ Index Accuracy: Medium');
-  end
-  else if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_HIGH) then begin
-    WriteLn('IAQ Index Accuracy: High');
-  end;
+	  if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_UNRELIABLE) then begin
+		WriteLn('IAQ Index Accuracy: Unreliable');
+	  end
+	  else if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_LOW) then begin
+		WriteLn('IAQ Index Accuracy: Low');
+	  end
+	  else if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_MEDIUM) then begin
+		WriteLn('IAQ Index Accuracy: Medium');
+	  end
+	  else if (iaqIndexAccuracy = BRICKLET_AIR_QUALITY_ACCURACY_HIGH) then begin
+		WriteLn('IAQ Index Accuracy: High');
+	  end;
 
-  WriteLn(Format('Temperature: %f °C', [temperature/100.0]));
-  WriteLn(Format('Humidity: %f %%RH', [humidity/100.0]));
-  WriteLn(Format('Air Pressure: %f hPa', [airPressure/100.0]));
+	  WriteLn(Format('Temperature: %f °C', [temperature/100.0]));
+	  WriteLn(Format('Humidity: %f %%RH', [humidity/100.0]));
+	  WriteLn(Format('Air Pressure: %f hPa', [airPressure/100.0]));
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+	finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+	end;
 end;
 
 begin

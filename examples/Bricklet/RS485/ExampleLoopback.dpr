@@ -39,33 +39,39 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletRS485.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickletRS485.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Enable full-duplex mode }
-  oBricklet.SetRS485Configuration(115200, BRICKLET_RS485_PARITY_NONE,
-                              BRICKLET_RS485_STOPBITS_1, BRICKLET_RS485_WORDLENGTH_8,
-                              BRICKLET_RS485_DUPLEX_FULL);
+	  { Enable full-duplex mode }
+	  oBricklet.SetRS485Configuration(115200, BRICKLET_RS485_PARITY_NONE,
+								  BRICKLET_RS485_STOPBITS_1, BRICKLET_RS485_WORDLENGTH_8,
+								  BRICKLET_RS485_DUPLEX_FULL);
 
-  { Register read callback to procedure ReadCB }
-  oBricklet.OnRead := {$ifdef FPC}@{$endif}ReadCB;
+	  { Register read callback to procedure ReadCB }
+	  oBricklet.OnRead := {$ifdef FPC}@{$endif}ReadCB;
 
-  { Enable read callback }
-  oBricklet.EnableReadCallback;
+	  { Enable read callback }
+	  oBricklet.EnableReadCallback;
 
-  { Write "test" string }
-  oBricklet.Write(['t', 'e', 's', 't']);
+	  { Write "test" string }
+	  oBricklet.Write(['t', 'e', 's', 't']);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    mlp: TBrickletMotorizedLinearPoti;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletMotorizedLinearPoti;
   public
     procedure PositionReachedCB(sender: TBrickletMotorizedLinearPoti;
                                 const position: word);
@@ -34,25 +34,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  mlp := TBrickletMotorizedLinearPoti.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletMotorizedLinearPoti.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register position reached callback to procedure PositionReachedCB }
-  mlp.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
+	  { Register position reached callback to procedure PositionReachedCB }
+	  oBricklet.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
-  { Move slider smooth to the middle }
-  mlp.SetMotorPosition(50, BRICKLET_MOTORIZED_LINEAR_POTI_DRIVE_MODE_SMOOTH, false);
+	  { Move slider smooth to the middle }
+	  oBricklet.SetMotorPosition(50, BRICKLET_MOTORIZED_LINEAR_POTI_DRIVE_MODE_SMOOTH, false);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

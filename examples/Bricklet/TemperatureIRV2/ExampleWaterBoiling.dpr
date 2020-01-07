@@ -35,29 +35,35 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletTemperatureIRV2.Create(nil);
+	  { Create device object }
+	  oBricklet := TBrickletTemperatureIRV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
-  oBricklet.SetEmissivity(64224);
+	  { Set emissivity to 0.98 (emissivity of water, 65535 * 0.98 = 64224.299) }
+	  oBricklet.SetEmissivity(64224);
 
-  { Register object temperature reached callback to procedure ObjectTemperatureCB }
-  oBricklet.OnObjectTemperature := {$ifdef FPC}@{$endif}ObjectTemperatureCB;
+	  { Register object temperature reached callback to procedure ObjectTemperatureCB }
+	  oBricklet.OnObjectTemperature := {$ifdef FPC}@{$endif}ObjectTemperatureCB;
 
-  { Configure threshold for object temperature "greater than 100 °C"
-    with a debounce period of 10s (10000ms) }
-  oBricklet.SetObjectTemperatureCallbackConfiguration(10000, false, '>', 100*10, 0);
+	  { Configure threshold for object temperature "greater than 100 °C"
+		with a debounce period of 10s (10000ms) }
+	  oBricklet.SetObjectTemperatureCallbackConfiguration(10000, false, '>', 100*10, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

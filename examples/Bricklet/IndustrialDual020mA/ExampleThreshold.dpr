@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    id020: TBrickletIndustrialDual020mA;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletIndustrialDual020mA;
   public
     procedure CurrentReachedCB(sender: TBrickletIndustrialDual020mA; const sensor: byte;
                                const current: longint);
@@ -36,28 +36,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  id020 := TBrickletIndustrialDual020mA.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletIndustrialDual020mA.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  id020.SetDebouncePeriod(10000);
+	  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+	  oBricklet.SetDebouncePeriod(10000);
 
-  { Register current reached callback to procedure CurrentReachedCB }
-  id020.OnCurrentReached := {$ifdef FPC}@{$endif}CurrentReachedCB;
+	  { Register current reached callback to procedure CurrentReachedCB }
+	  oBricklet.OnCurrentReached := {$ifdef FPC}@{$endif}CurrentReachedCB;
 
-  { Configure threshold for current (sensor 1) "greater than 10 mA" }
-  id020.SetCurrentCallbackThreshold(1, '>', 10*1000000, 0);
+	  { Configure threshold for current (sensor 1) "greater than 10 mA" }
+	  oBricklet.SetCurrentCallbackThreshold(1, '>', 10*1000000, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

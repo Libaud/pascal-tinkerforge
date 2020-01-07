@@ -37,7 +37,7 @@ begin
       pages[row][column]:= 0;
       for bit:= 0 to 7 do begin
         if (pixels[(row * 8) + bit, column]) then begin
-          pages[row][column]:= pages[row][column] or (1 << bit);
+          pages[row][column]:= pages[row][column] or (1 shl bit);
         end;
       end;
     end;

@@ -67,25 +67,28 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP Connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP Connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Disable auto reconnect mechanism, in case we have the wrong secret.
-    If the authentication is successful, reenable it. }
-  oIPConnection.SetAutoReconnect(false);
+	  { Disable auto reconnect mechanism, in case we have the wrong secret.
+		If the authentication is successful, reenable it. }
+	  oIPConnection.SetAutoReconnect(false);
 
-  { Register connected callback to "ConnectedCB" }
-  oIPConnection.OnConnected := {$ifdef FPC}@{$endif}ConnectedCB;
+	  { Register connected callback to "ConnectedCB" }
+	  oIPConnection.OnConnected := {$ifdef FPC}@{$endif}ConnectedCB;
 
-  { Register enumerate callback to "EnumerateCB" }
-  oIPConnection.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
+	  { Register enumerate callback to "EnumerateCB" }
+	  oIPConnection.OnEnumerate := {$ifdef FPC}@{$endif}EnumerateCB;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

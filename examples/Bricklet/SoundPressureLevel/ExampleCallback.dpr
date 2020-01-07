@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    spl: TBrickletSoundPressureLevel;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletSoundPressureLevel;
   public
     procedure DecibelCB(sender: TBrickletSoundPressureLevel; const decibel: word);
     procedure Execute;
@@ -32,25 +32,31 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  spl := TBrickletSoundPressureLevel.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletSoundPressureLevel.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register decibel callback to procedure DecibelCB }
-  spl.OnDecibel := {$ifdef FPC}@{$endif}DecibelCB;
+	  { Register decibel callback to procedure DecibelCB }
+	  oBricklet.OnDecibel := {$ifdef FPC}@{$endif}DecibelCB;
 
-  { Set period for decibel callback to 1s (1000ms) without a threshold }
-  spl.SetDecibelCallbackConfiguration(1000, false, 'x', 0, 0);
+	  { Set period for decibel callback to 1s (1000ms) without a threshold }
+	  oBricklet.SetDecibelCallbackConfiguration(1000, false, 'x', 0, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

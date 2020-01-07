@@ -26,34 +26,38 @@ var
 procedure TExample.Execute;
 var state: byte;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletTilt.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletTilt.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get current tilt state }
-  state := oBricklet.GetTiltState;
+	  { Get current tilt state }
+	  state := oBricklet.GetTiltState;
 
-  if (state = BRICKLET_TILT_TILT_STATE_CLOSED) then begin
-    WriteLn('Tilt State: Closed');
-  end
-  else if (state = BRICKLET_TILT_TILT_STATE_OPEN) then begin
-    WriteLn('Tilt State: Open');
-  end
-  else if (state = BRICKLET_TILT_TILT_STATE_CLOSED_VIBRATING) then begin
-    WriteLn('Tilt State: Closed Vibrating');
+	  if (state = BRICKLET_TILT_TILT_STATE_CLOSED) then begin
+		WriteLn('Tilt State: Closed');
+	  end
+	  else if (state = BRICKLET_TILT_TILT_STATE_OPEN) then begin
+		WriteLn('Tilt State: Open');
+	  end
+	  else if (state = BRICKLET_TILT_TILT_STATE_CLOSED_VIBRATING) then begin
+		WriteLn('Tilt State: Closed Vibrating');
+	  end;
+
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
   end;
-
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
 end;
 
 begin

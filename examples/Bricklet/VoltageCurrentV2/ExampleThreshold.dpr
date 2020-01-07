@@ -32,28 +32,32 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  oIPConnection := TIPConnection.Create(nil);
+  try
+	  { Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  oBricklet := TBrickletVoltageCurrentV2.Create(nil);
-  oBricklet.UIDString:= UID;
-  oBricklet.IPConnection:= oIPConnection;
+	  { Create device object }
+	  oBricklet := TBrickletVoltageCurrentV2.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  oIPConnection.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Register power callback to procedure PowerCB }
-  oBricklet.OnPower := {$ifdef FPC}@{$endif}PowerCB;
+	  { Register power callback to procedure PowerCB }
+	  oBricklet.OnPower := {$ifdef FPC}@{$endif}PowerCB;
 
-  { Configure threshold for power "greater than 10 W"
-    with a debounce period of 1s (1000ms) }
-  oBricklet.SetPowerCallbackConfiguration(1000, false, '>', 10*1000, 0);
+	  { Configure threshold for power "greater than 10 W"
+		with a debounce period of 1s (1000ms) }
+	  oBricklet.SetPowerCallbackConfiguration(1000, false, '>', 10*1000, 0);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  oIPConnection.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin

@@ -9,8 +9,8 @@ uses
 type
   TExample = class
   private
-    ipcon: TIPConnection;
-    h: TBrickletHumidity;
+    oIPConnection: TIPConnection;
+    oBricklet: TBrickletHumidity;
   public
     procedure HumidityReachedCB(sender: TBrickletHumidity; const humidity: word);
     procedure Execute;
@@ -33,28 +33,34 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection }
-  ipcon := TIPConnection.Createnil;
+  try
+	{ Create IP connection }
+	  oIPConnection := TIPConnection.Create(nil);
 
-  { Create device object }
-  h := TBrickletHumidity.Create(UID, ipcon);
+	  { Create device object }
+	  oBricklet := TBrickletHumidity.Create(nil);
+	  oBricklet.UIDString:= UID;
+	  oBricklet.IPConnection:= oIPConnection;
 
-  { Connect to brickd }
-  ipcon.Connect(HOST, PORT);
-  { Don't use device before ipcon is connected }
+	  { Connect to brickd }
+	  oIPConnection.Connect(HOST, PORT);
+	  { Don't use device before oIPConnection is connected }
 
-  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
-  h.SetDebouncePeriod(10000);
+	  { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
+	  oBricklet.SetDebouncePeriod(10000);
 
-  { Register humidity reached callback to procedure HumidityReachedCB }
-  h.OnHumidityReached := {$ifdef FPC}@{$endif}HumidityReachedCB;
+	  { Register humidity reached callback to procedure HumidityReachedCB }
+	  oBricklet.OnHumidityReached := {$ifdef FPC}@{$endif}HumidityReachedCB;
 
-  { Configure threshold for humidity "outside of 30 to 60 %RH" }
-  h.SetHumidityCallbackThreshold('o', 30*10, 60*10);
+	  { Configure threshold for humidity "outside of 30 to 60 %RH" }
+	  oBricklet.SetHumidityCallbackThreshold('o', 30*10, 60*10);
 
-  WriteLn('Press key to exit');
-  ReadLn;
-  ipcon.Destroy; { Calls ipcon.Disconnect internally }
+	  WriteLn('Press key to exit');
+	  ReadLn;
+  finally
+	  oBricklet.Destroy;
+	  oIPConnection.Destroy; { Calls oIPConnection.Disconnect internally }
+  end;
 end;
 
 begin
